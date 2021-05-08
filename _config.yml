@@ -1,0 +1,11 @@
+# set repo for use by github-metadata
+# https://github.com/mmistakes/mm-github-pages-starter/pull/2
+repository: "cahamo/cahamo.github.io"
+
+# inhibit github-pages from gerating unwanted style sheet
+# see https://github.com/jekyll/jekyll/issues/7478
+theme: null
+
+baseurl: ""
+
+exclude: [README.md, LICENSE.md, Gemfile, Gemfile.lock]
