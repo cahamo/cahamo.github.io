@@ -1,0 +1,56 @@
+// Bootstrap defaults
+
+$white:                         #ffffff;
+$gray-100:                      #f8f9fa;
+$gray-200:                      #e9ecef;
+$gray-300:                      #dee2e6;
+$gray-400:                      #ced4da;
+$gray-500:                      #adb5bd;
+$gray-600:                      #6c757d;
+$gray-700:                      #495057;
+$gray-800:                      #343a40;
+$gray-900:                      #212529;
+$black:                         #000000;
+
+// Palette URL: http://paletton.com/#uid=64k0T0kDlvWjksnr9uTNstFVlri */
+
+$color-primary:                 #1D2AC6;	// Main Primary color */
+$color-primary-lighter:         #333FDC;
+$color-primary-light:           #1D2AC6;
+$color-primary-dark:            #595B78;
+$color-primary-darker:          #2D2E3B;
+$color-primary-pale:            #D6D7E8;
+
+$color-secondary-1:             #A906C0;	// Main Secondary color (1) */
+$color-secondary-1-lighter:     #C01BD7;
+$color-secondary-1-light:       #A906C0;
+$color-secondary-1-dark:        #6D5071;
+$color-secondary-1-darker:      #362938;
+$color-secondary-1-pale:        #E3D1E5;
+
+$color-secondary-2:             #02C864;	// Main Secondary color (2) */
+$color-secondary-2-lighter:     #18DD79;
+$color-secondary-2-light:       #02C864;
+$color-secondary-2-dark:        #557967;
+$color-secondary-2-darker:      #2C3C34;
+$color-secondary-2-pale:        #D4E9DE;
+
+$color-complement:              #FFBC03;	// Main Complement color */
+$color-complement-lighter:      #FFC21B;
+$color-complement-light:        #FFBC03;
+$color-complement-dark:         #AD9F79;
+$color-complement-darker:       #554F3E;
+$color-complement-pale:         #FFF9E8;
+
+// Custom
+
+$color-grey-lighter:            $gray-100;
+$color-grey-light:              $gray-300;
+$color-grey:                    $gray-500;
+$color-grey-dark:               $gray-700;
+$color-grey-darker:             $gray-900;
+
+$body-bg:                       lighten($color-primary-pale, 25%);
+$body-color:                    $gray-800;
+
+$header-border-color:           lighten($color-primary-lighter, 30%);
