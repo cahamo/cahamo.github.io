@@ -28,23 +28,22 @@ b {
     border-radius: 0;
 }
 
-header.page-header {
-    h1 {
+h1.page-header {
+    color: $body-color;
+    padding-top: 2px;
+    padding-right: 1rem;
+    font-size: 24px;
+
+    .name {
+        font-weight: bold;
+    }
+    .maker {
+        color: $color-primary;
+    }
+
+    a, a:hover, a:visited, a:active {
         color: $body-color;
-        padding-bottom: 8px;
-        border-bottom: 2px $header-border-color solid;
-
-        .name {
-            font-weight: bold;
-        }
-        .maker {
-            color: $color-primary;
-        }
-
-        a, a:hover, a:visited, a:active {
-            color: $body-color;
-            text-decoration: none;
-        }
+        text-decoration: none;
     }
 }
 
