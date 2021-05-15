@@ -28,6 +28,20 @@ b {
     border-radius: 0;
 }
 
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: $color-secondary-2;
+    width: 2rem;
+    height: 2rem;
+}
+
+.carousel-indicators {
+    background-color: rgba($color-secondary-2, 0.75);
+    height: 2rem;
+    padding: 0.45rem;
+}
+
+
 .page-title {
     color: $body-color;
     padding-bottom: 4px;
