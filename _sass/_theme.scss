@@ -100,56 +100,6 @@ b {
     }
 }
 
-.nav-btn {
-    // background-color: darken($color-grey, 15%);
-    background-color: lighten($color-secondary-2-dark, 10%);
-    border: none;
-    border-radius: 10px;
-    color: $white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    &:hover {
-        background-color: $color-secondary-2-darker;
-        text-decoration: none;
-    }
-    a {
-        color: $white;
-        text-decoration: none;
-    }
-  }
-
-ul.nav-list {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    li {
-        margin: 0 auto;
-        padding: 0;
-        display: block;
-        text-align: center;
-        font-weight: bold;
-        &.nav-2 {
-            margin: 8px 0;
-        }
-    }
-
-    @media (min-width: 600px) {
-        li {
-            display: inline-block;
-            &.nav-1 {
-                margin: 0 0 8px 0;
-            }
-            &.nav-2 {
-                float: right;
-                margin: 0 0 8px 0;
-            }
-           }
-    }
-}
-
 footer {
     font-size: 80%;
     color: $color-grey-dark;
