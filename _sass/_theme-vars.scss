@@ -1,4 +1,4 @@
-// Bootstrap defaults
+// Greys
 
 $white:                         #ffffff;
 $gray-100:                      #f8f9fa;
@@ -11,6 +11,12 @@ $gray-700:                      #495057;
 $gray-800:                      #343a40;
 $gray-900:                      #212529;
 $black:                         #000000;
+
+$color-grey-lighter:            $gray-100;
+$color-grey-light:              $gray-300;
+$color-grey:                    $gray-500;
+$color-grey-dark:               $gray-700;
+$color-grey-darker:             $gray-900;
 
 // Palette
 
@@ -42,13 +48,7 @@ $color-complement-dark:         #AD9F79;
 $color-complement-darker:       #554F3E;
 $color-complement-pale:         #FFF9E8;
 
-// Custom
-
-$color-grey-lighter:            $gray-100;
-$color-grey-light:              $gray-300;
-$color-grey:                    $gray-500;
-$color-grey-dark:               $gray-700;
-$color-grey-darker:             $gray-900;
+// Elements
 
 $body-bg:                       lighten($color-primary-pale, 25%);
 $body-color:                    $gray-800;
