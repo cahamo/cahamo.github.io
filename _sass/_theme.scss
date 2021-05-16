@@ -47,14 +47,22 @@ h6, .h6 {
     font-style: italic;
 }
 
-b {
-    color: $color-primary;
-    font-weight: bold;
-}
-
 .list-group {
     border: $color-grey-light 2px solid;
     border-radius: 0;
+
+    h3, .h3 {
+        font-size: 1rem;
+    }
+
+    a:visited {
+        color: $body-color;
+    }
+}
+
+b {
+    color: $color-primary;
+    font-weight: bold;
 }
 
 .carousel-control-next-icon,
