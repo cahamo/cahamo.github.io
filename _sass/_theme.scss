@@ -3,7 +3,7 @@
 body {
     background-color: $body-bg;
     color: $body-color;
-    //font-family: $font-family-main;
+    font-family: $font-family-main;
 }
 
 code {
@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
     color: $color-primary;
     font-weight: normal;
     font-style: normal;
-    //font-family: $font-family-heading;
+    font-family: $font-family-heading;
 }
 
 h1, .h1 {
@@ -80,7 +80,7 @@ b {
 
 
 .page-title {
-    //font-family: $font-family-heading;
+    font-family: $font-family-heading;
     color: $body-color;
     padding-bottom: 4px;
     padding-right: 1rem;
