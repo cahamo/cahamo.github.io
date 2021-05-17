@@ -13,8 +13,6 @@ layout: default
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-sensor_480x353.png" width="480" height="353" alt="Photo of tin foil sensor with attached wire."></p>
 
-<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
-
 <h2>Circuit</h2>
 
 <p>The circuit used in <a href="./experiment-1.html">experiment 1</a> was adapted slightly for this sensor. The only change was that a 1k&ohm; resistor was placed in series with the sensor. This was done to minimise the risk to the micro-processor from any static discharge from a finger through the tin foil.</p>
@@ -22,7 +20,6 @@ layout: default
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/circuit_800x313.jpg" width="800" height="313" alt="Photograph of circuit showing the Uno, breadboard and sensor with all wiring"></p>
 
 <p>The circuit was as follows:</p>
-
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/test-circuit-diagram_680x280.png" width="680" height="280" alt="Circuit schematic"></p>
 
@@ -38,17 +35,77 @@ layout: default
 
 <h2>Methodology</h2>
 
-<p>The code was again run multiple times, with different sample rates of 1, 10, 20, 50, 100, 150, 200 and 255. The following tests were attempted:</p>
+<p>In the first run of the tests the aim was to see how quickly the sensor code responded to quick taps at different sample rates. Therefoe the code was run multiple times, with different sample rates of 1, 10, 25, 50, 75, 100, 125, 150, 200 and 255 and the e same test rhythm was tapped out each time. This was:</p>
 
-<ul>
-    <li>A finger was tapped on the sensor at a steady rate.</li>
-    <li>A finger was tapped more rapidly.</li>
-    <li>A finger was moved slowly towards the sensor before finally touching it.</li>
-    <li>Different fingers were used to tap the sensor.</li>
-</ul>
+<ol>
+    <li>A long tap, with the finger held down.</li>
+    <li>The rhythm of a single verse of &ldquo;Happy Birthday&rdquo; with the finger released quickly after each tap.</li>
+    <li>A long tap, with the finger held down.</li>
+</ol>
 
 <p>The output was displayed on the Arduino IDE's serial plotter and screenshots were taken of the results.</p>
 
+<p>Each time an attempt was made to have the same length of long tap and the same tempo when tapping out the tune. However, in order to fit all the results onto a single screen of the serial plotter, the taps were speeded up slightly at the lower samples rates.</p>
+
 <h2>Results</h2>
 
-<p><strong>** TO DO **</strong></p>
+<p>There was a readable response at all sample rates, but the sensor code responded much slower at high sample rates. This can bee seen in the following sequence of graphs. Note that the X-axis represents the number of readings taken, <em>not</em> time. Consequently fact that the length of the test across the x axis reduces with incresing samples shows that there were less samples taken in a roughly fixed amount of time.</p>
+
+<p>The various screen shots are displayed in the in incresing order of the number of samples in the carousel below.</p>
+
+<div id="carouselIndicators" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselIndicators" data-slide-to="4"></li>
+      <li data-target="#carouselIndicators" data-slide-to="5"></li>
+      <li data-target="#carouselIndicators" data-slide-to="6"></li>
+      <li data-target="#carouselIndicators" data-slide-to="7"></li>
+      <li data-target="#carouselIndicators" data-slide-to="8"></li>
+      <li data-target="#carouselIndicators" data-slide-to="9"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-1.png" alt="Plot of sensor readings using 1 sample">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-10.png" alt="Plot of sensor readings using 10 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-25.png" alt="Plot of sensor readings using 25 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-50.png" alt="Plot of sensor readings using 50 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-75.png" alt="Plot of sensor readings using 75 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-100.png" alt="Plot of sensor readings using 100 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-125.png" alt="Plot of sensor readings using 125 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-150.png" alt="Plot of sensor readings using 150 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-200.png" alt="Plot of sensor readings using 200 samples">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-samples-255.png" alt="Plot of sensor readings using 255 samples">
+      </div>
+     <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
