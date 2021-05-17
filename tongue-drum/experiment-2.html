@@ -3,6 +3,52 @@ layout: default
 ---
 <h1>Experiment #2: Tin Foil Sensor</h1>
 
-<p><strong>** IN PROGRESS **</strong></p>
+<p><strong>** This exeriment is a work in progress **</strong></p>
+
+<p>Some examples of metal based sensors were found online. Noticing how much more responsive the results from the CapacitiveSensor library were when the paper clip was accidentally touched suggested that metal sensors would be better. So the obvious next iteration in the design of the instrument's keys was to try a metalic sensor.</p>
+
+<h2>Sesnor</h2>
+
+<p>For this sensor an approximately 4.7&times;7.5cm rectangle of cheap kitchen foil was used. This was attached, along it's shorter side, to a slightly larger piece of card using copper tape. The copper tape has conductive adhesive. One pin of a piece of breadboard jumper cable was soldered to the copper tape. The remaining edges of the tin foil were attached to the card using masking tape.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-sensor_480x353.png" width="480" height="353" alt="Photo of tin foil sensor with attached wire."></p>
 
 <p class="text-center"><b><a href="./">Back to main project page</a></b></p>
+
+<h2>Circuit</h2>
+
+<p>The circuit used in <a href="./experiment-1.html">experiment 1</a> was adapted slightly for this sensor. The only change was that a 1k&ohm; resistor was placed in series with the sensor. This was done to minimise the risk to the micro-processor from any static discharge from a finger through the tin foil.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/circuit_800x313.jpg" width="800" height="313" alt="Photograph of circuit showing the Uno, breadboard and sensor with all wiring"></p>
+
+<p>The circuit was as follows:</p>
+
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/test-circuit-diagram_680x280.png" width="680" height="280" alt="Circuit schematic"></p>
+
+<p>Once again, the Uno was supplied with 5V from the PC via it's USB port. The breadboard and other components were connected in a logically similar way to the following diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/test-circuit_703x812.png" width="703" height="812" alt="Circuit layout diagram, created using TinkerCAD"></p>
+
+<p>Pin 2 of the Uno is configured as an output pin and is connected, via a 1M&ohm; resistor to input pin 3 <em>and</em> the 1k&ohm; resistor protecting the sensor.</p>
+
+<h2>Code</h2>
+
+<p>The code used is the same as that used in <a href="./experiment-1.html">experiment 1</a>: <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/SingleSensorRawDataLogger"><code>SingleSensorRawDataLogger</code></a>. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Uno's serial port.</p>
+
+<h2>Methodology</h2>
+
+<p>The code was again run multiple times, with different sample rates of 1, 10, 20, 50, 100, 150, 200 and 255. The following tests were attempted:</p>
+
+<ul>
+    <li>A finger was tapped on the sensor at a steady rate.</li>
+    <li>A finger was tapped more rapidly.</li>
+    <li>A finger was moved slowly towards the sensor before finally touching it.</li>
+    <li>Different fingers were used to tap the sensor.</li>
+</ul>
+
+<p>The output was displayed on the Arduino IDE's serial plotter and screenshots were taken of the results.</p>
+
+<h2>Results</h2>
+
+<p><strong>** TO DO **</strong></p>
