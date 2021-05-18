@@ -115,3 +115,8 @@ pre {
     overflow-x: auto;
   }
 
+.navbar-light {
+    background-color: lighten($color-primary-lighter, 42%) !important;
+    border-bottom: 1px lighten($color-primary-lighter, 38%) solid;
+    margin-bottom: 1rem;
+}
