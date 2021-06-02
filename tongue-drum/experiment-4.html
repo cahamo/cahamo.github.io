@@ -1,0 +1,279 @@
+---
+layout: default
+---
+<h1>Experiment #4: Comparison of different sensor coverings</h1>
+
+<p>The finished project will have a covering over the touch sensors used for the tongue drum tongues (keys). Having established the best of two different tin foil types in the <a href="./experiment-3">previous experiment</a> it is necessary now to investigate the effect on sensor readings of covering the sensor in different materials.</p>
+
+<h2>Sensors</h2>
+
+<p>Initially, six test sensors were created. All were identical beneath the covering. Each was constructed using Tesco Strong Kitchen Foil as described in <a href="./experiment-3">experiment #3</a>:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/6-foil-sensors-pre-covering_423x427.jpg" width="423" height="427" alt="Photo of 6 tin foil sensors before covering."></p>
+
+<p>After completing some initial tests, two further sensors were added with different coverings. The tests were all re-run.</p>
+
+<p>The following coverings were used:</p>
+
+<ol>
+    <li>1.5mm thick corrugated cardboard (from Amazon delivery boxes).</li>
+    <li>0.5mm thick plain card (from a cereal packet).</li>
+    <li>0.5mm thick white plastic card (used in modelling).</li>
+    <li>Extremely thin clear plastic sheet (from a window envelope).</li>
+    <li>3 coats of grey car primer paint.</li>
+    <li>2 coats of artists acrylic paint over 2 coats of grey car primer.</li>
+    <li>46mm wide brown adhesive parcel tape.</li>
+    <li>47mm wide thick white adhesive tape.</li>
+</ol>
+
+<p>The materials used to cover sensors 1 to 4 were glued in place with UHU glue. The primer paint used with sensors 5 and 6 was applied directly to the foil. The self-adhesive tapes used for sensors 7 and 8 were also applied directly to the foil. A marker pen was used to draw target circle on each sensor to indicate where they should be pressed. The ink would not adhere to sensor 8 so a ring was impressed using a ball pint pen instead.</p>
+
+<p>The Strong Foil sensor from <a href="./experiment-3">experiment #3</a> was used a control sensor, with no covering. All the sensors, including the control, are pictured below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/8-covered-sensors-plus-control_736x427.jpg" width="736" height="427" alt="Photo of 6 tin foil sensors after covering plus the bare control sensor."></p>
+
+<p>The resistance each of the underlying foil sensors was calculated as before, using an attached DuPont cable. The results were all very similar:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">Sensor</th>
+            <th scope="col">Resistance</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <td>#1</td>
+            <td>1.0&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#2</td>
+            <td>0.9&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#3</td>
+            <td>0.7&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#4</td>
+            <td>1.0&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#5</td>
+            <td>0.8&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#6</td>
+            <td>0.9&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#7</td>
+            <td>0.7&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>#8</td>
+            <td>0.9&ohm;</td>
+        </tr>
+        <tr class="text-center">
+            <td>Control</td>
+            <td>1.9&ohm;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Methodology</h2>
+
+<p>An Arduino Uno was once again used to test capacitance. 36 sets of tests were run in total. There were nine sensors and each was tested at rates of 25, 50, 75 and 100 samples per reading.</p>
+
+<p>In each test the right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The resulting sensor readings were written to the Uno's serial port and captured to text files using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
+
+<p>In order to make the tests as similar to each other a circuit for the Uno and an associated sketch were created that output beeps on a buzzer that was intended to guide the timing of the key presses.</p>
+
+<p>The contents of the text files were copied and pasted into a spreadsheet and tabulated in two different ways. Firstly the sensor readings at each sample rate were collected together, analysed and graphed. Secondly the results for each sensor were grouped by samples rate and again analysed and graphed.</p>
+
+<h2>Circuit</h2>
+
+<p>The circuit used is as shown in the following circuit diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit-diagram_856x240.png" width="856" height="240" alt="Generic circuit schematic"></p>
+
+<p>Once again a 1k&ohm; resistor was placed between the sensor and the Uno's pin 3 to reduce the likelihood of static damage when the bare foil &ldquo;control&rdquo; sensor is used. The buzzer attached to PWM pin D11 and to ground is used to guide the finger taps. The components were laid out similarly to the following schematic diagram, except that a passive buzzer was used that was mounted directly on the breadboard.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit-schematic_716x422.png" width="716" height="422" alt="Generic circuit layout diagram, created using TinkerCAD"></p>
+
+<p>The following photo shows the circuit in use with painted sensor #6:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit+800x376.jpg" width="800" height="376" alt="Photo of actual circuit with one of the sensors attached"></p>
+
+<h2>Code</h2>
+
+<p>The code used is an Adruino IDE project named <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a>. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Uno's serial port while indicating when the user should touch the sensor by means of tones emitted though a speaker or buzzer.</p>
+
+<h2>Results</h2>
+
+<p>The data from the text files generated during the tests were imported into an open document format spreadsheet using Libre Office Calc.</p>
+
+<p>The results were analysed in two ways:</p>
+
+<ol>
+    <li>For each sample rate the individual sensors were compared against each other.</li>
+    <li>For each sensor the results of running it with different numbers of samples per reading were compared against each other.</li>
+</ol>
+
+<p>In each case the following statistics were determined:</p>
+
+<ol>
+    <li>The maximum reading</li>
+    <li>The average of all readings</li>
+    <li>The <em>lower average</em>, i.e. the average of the lower readings, where &ldquo;lower&rdquo; is taken to be values between 0 and the average of all readings, inclusive.</li>
+    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;higher&rdquo; is taken to be values greater than the average of all readings.</li>
+</ol>
+
+<p>The results were also graphed.</p>
+
+<p>For full details, <a href="/downloads/electro-tongue-drum-experiment-4-data.zip">download the spreadsheet (zipped)</a>.</p>
+
+<h3>Comparison of sensors to each other</h3>
+
+<p>The following image carousel shows four graphs: one graph for each sample rate showing the relative performance of each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
+
+<div id="carouselIndicatorsA1" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsA1" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsA1" data-slide-to="1"></li>
+        <li data-target="#carouselIndicatorsA1" data-slide-to="2"></li>
+        <li data-target="#carouselIndicatorsA1" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-25-samples-raw-graph.png" alt="Graph comparing raw readings for all sensors using 25 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-50-samples-raw-graph.png" alt="Graph comparing raw readings for all sensors using 50 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-75-samples-raw-graph.png" alt="Graph comparing raw readings for all sensors using 75 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-100-samples-raw-graph.png" alt="Graph comparing raw readings for all sensors using 100 samples per reading">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicatorsA1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicatorsA1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<p>The next image carousel also contains an image for each sample rate but this time plots the maximum, average, lower average and upper average for each sensor. The y-axis is the sensor reading while the different sensors are represented on the x-axis:</p>
+
+<div id="carouselIndicatorsA2" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsA2" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsA2" data-slide-to="1"></li>
+        <li data-target="#carouselIndicatorsA2" data-slide-to="2"></li>
+        <li data-target="#carouselIndicatorsA2" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-25-samples-stats-graph.png" alt="Graph comparing statistics for all sensors using 25 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-50-samples-stats-graph.png" alt="Graph comparing statistics for all sensors using 50 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-75-samples-stats-graph.png" alt="Graph comparing statistics for all sensors using 75 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/all-sensors-100-samples-stats-graph.png" alt="Graph comparing statistics for all sensors using 100 samples per reading">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicatorsA2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicatorsA2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<h3>Comparison of samples per reading for each sensor</h3>
+
+<p>The following image carousel shows nine graphs: one graph for each sensor showing the readings at different sample rates:</p>
+
+<div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsB" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="1"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="2"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="3"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="4"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="5"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="6"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="7"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="8"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-1-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 1">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-2-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 2">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-3-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 3">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-4-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 4">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-5-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 5">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-6-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 6">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-7-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 7">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/sensor-8-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Sensor 8">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-4/control-sensor-graph.png" alt="Graph comparing 25, 50, 75 &amp; 100 samples per reading for Control Sensor">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicatorsB" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicatorsB" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<h2>Conclusions</h2>
+
+<p>The first thing to notice when comparing the performance of the sensors when measured about each other is that the relative ordering from worst to best performing changes very little regardless of the number of samples.</p>
+
+<p>It is also worth noting that, in most cases, the <em>upper</em> average of every sensor is closer to the maximum sensor reading than the average reading. Also the <em>lower</em> average reading for every sensor if approximately constant at a given sample rate, and closer to zero than the average reading, implying that the sensor covering has no effect on the sensor's <em>off</em> state. This clustering of values towards zero and the maximum reading is what was hoped for in order to make it easy to define an arbitrary point at which a sensor is judged to be on. A sensible cut-off point between on and off states may be found close to the average reading.</p>
+
+<p>Perhaps unsurprisingly the worst performing sensors are those with card and plastic sheet coverings. The worst is sensor #1 with its relatively thick card covering, while the thin card sensor #2 and equivalent thickness of plastic card that covers sensor #3 perform about the same. These are closely followed by the slightly better performing sensor #8 with its thick white tape covering.</p>
+
+<p>It may seem surprising that the next &ldquo;worst&rdquo; performing sensor is #4 with its extremely thin plastic covering. However this may be due to the fact that the material is glued down with UHU rather than the thin glue layer used by the self adhesive tapes.</p>
+
+<p>Less surprising again are the top three performers, which from worst to best, are sensor #7, with its thin parcel tape covering; sensor #6, with two thin and two thicker coats of paint; and sensor #5 with its three thin coats of primer.</p>
+
+<p>The best performing covered sensor performs between about 65% and 75% as well as the uncovered control sensor.</p>
+
+<p>These results would seem to rule out all but painted sensors #5 &amp; #6 and parcel tape covered sensor #7. However it is possible that the painted sensors would not stand up well to wear and tear and may be difficult to make look acceptable. Furthermore it may be that a thin plastic tape covered sensor may also have durability issues, so sensor #3 with its thicker plastic covering may <em>have</em> to be considered despite its poor performance.</p>
+
+<p>In general, the difference in performance of sensors at various samples per reading seems to vary roughly in proportion to the change in sample rate. The only noticable exception is that the proportions break down for some sensors when they are tapped quickly.</p>
+
+<p>It would seem that the gratest accuracy in detecting the difference between a sensor being touched and not touched comes with higher sample rates. It remains to be investigated whether the highest tested rate of 100 samples per reading is feasible when numerous sensors are to be processed at the same time. Further experiments are needed.</p>
+
+<p class="lead">Taking the above into account it is proposed to continue further testing using only sensors #3 (plastic card), #6 (primer + top coat) and #7 (parcel tape) and to use the highest feasible number of samples per reading.</p>
