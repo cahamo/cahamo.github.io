@@ -67,3 +67,76 @@ layout: default
         <p class="mb-1">Compares the impact on sensor readings of various resistances between the detector&rsquo;s send pin and the sensor.</p>
     </a>
 </div>
+
+<h2>Design Decisions</h2>
+
+<h3>Number of tongues</h3>
+
+<p>Research has indicated that both eight and nine key tongue drums are popular, so it has been decided to make the electro-tongue drum a nine key instrument.</p>
+
+<p>The nine key tongue drum has a central tongue and eight outer tongues around the circumference of the instrument. The following image illustrates the layout:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/tongue-drum-layout.png" width="418" height="418" alt="Proposed tongue drum layout"></p>
+
+<p>The eight key tongue drum has the same layout as the nine key version, except that the centre tongue is omitted. In a later version it is proposed to offer an option to switch the instrument into eight key mode by disabling the centre tongue.</p>
+
+<h3>Note order</h3>
+
+<p>The notes will be laid out in accordance with standard practice.</p>
+
+<p>To illustrate let us label the outer tongues according to their compass positions. The lowest note is on the centre tongue, then the notes increase in pitch is this order: south, south-west, south-east, west, east, north-west, north-east and finally north.</p>
+
+<p>The following diagram show the notes labelled in ascending pitch order from 1 to 9.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/tongue-drum-layout-note-numbers.png" width="418" height="418" alt="Proposed tongue drum layout with note numbers as just described in text."></p>
+
+<p>Notice that no scale has been specified here, only the order in which pitch ascends (and by inference descends) across the tongues. The matter of scale and tuning will be addressed next.</p>
+
+<h3>Tunings</h3>
+
+<p>Acoustic tongue drums are tuned to a pre-determined key. Some manufacturers offer their instruments in a choice of keys. Some tongue drums can be re-tuned.</p>
+
+<p>Since the electro-tongue drum will generate its notes artificially, there is no reason why a number of scales can't be supported.</p>
+
+<p>Here's a possible roadmap identifying how such a feature may be added, depending on mode:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">Stage&nbsp;&dagger;</th>
+            <th scope="col">Audio Mode</th>
+            <th scope="col">MIDI Mode</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>A single scale will be provided.</td>
+            <td>A fixed scale of MIDI notes will be provided, for example C major&nbsp;&Dagger;.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td colspan="2">A choice of up to 8 pre-determined scales will be provided, along with a means of selecting the required scale. The first scale will be the same as the fixed scale provided at stage 1.</td>
+        </tr>
+        <tr>
+            <td rowspan="2">3</td>
+            <td colspan="2">The user will be given the option of defining their own scales. These will be uploaded to the instrument either by SD card or USB. It is likely that there will be a limit of uploading no more than eight scales at a time.</td>
+        </tr>
+        <tr>
+            <td>The notes available for use will be restricted by the number of samples available.</td>
+            <td>The notes available will be un-restricted. However, the user will need to limit the scales to those that can be realistically played by on the available virtual instruments.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="alert alert-info">
+
+    <p class="mb-2"><small>&dagger; &ndash; The different modes may not reach the same stage of development at the same time. For example it is looking likely that a MIDI instrument will be created before <em>Audio Mode</em> is developed.</small></p>
+
+    <p class="mb-0"><small>&Dagger; &ndash; This is not as restrictive as it first appears since some Digital Audio Workstations can translate inputted MIDI notes into other notes, meaning a scale can be translated into another scale before arriving at the virtual instrument. Relevant mappings may be provided here.</small></p>
+
+</div>
+
+<p>It is proposed that the first version of the instrument that has an <em>Audio Mode</em> (see above) will provide a choice of up to eight pre-defined scales. A later version may offer the ability for the user to define their own scales, possibly via an SSD card or USB port. An accompanying app may be made available to assist with creating such scales.</p>
+
+<p>When considering MIDI mode, it is easy for the instrument to be used to generate <em>any</em> eight or nine note scale. In the first version to have <em>MIDI Mode</em>> it is proposed to output arbitrary MIDI note numbers, for example C major. Many DAWs will have the ability to transpose incoming MIDI notes into any sequence desired by the user, so that the notes be sent by the electro-tongue drum can be interpreted as any scale. Later versions may provide the the user with ability to select certain scales and output the correct MIDI notes for them, thus saving the user from having to set up a translation in their DAW. As with <em>Audio Mode</em>, the facility to upload different scales may be provided.</p>
