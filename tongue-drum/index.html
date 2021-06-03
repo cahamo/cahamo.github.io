@@ -11,39 +11,41 @@ layout: default
 
 <h2>Project Brief</h2>
 
-<p>The main features of the electro-tongue drum are:</p>
+<p>The main features of the electro-tongue drum should be:</p>
 
 <ul>
-    <li class="my-2">The shape of the instrument will echo that of the acoustic instrument, but will not copy it slavishly. Think of the difference between an acoustic and electric guitar. This intention is that the instrument will be circular or polygonal in cross section, but will be relatively flat. It is not desirable to introduce a large chamber that could amplify the percusive sound of fingers hitting keys.</li>
+    <li class="my-2">The shape of the instrument will echo that of the acoustic instrument, but will not copy it slavishly. Think of the difference between an acoustic and electric guitar. This intention is that the instrument will be circular or polygonal in plan view, but will be relatively flat. It is not desirable to introduce a large chamber that could amplify the percusive sound of fingers hitting the &ldquo;tongues&rdquo;&nbsp;*.</li>
 
-    <li class="my-2">The instrument will be operated by means of touch sensitve keys, laid out in a similar pattern to a tongue drum. This is advisable to make the transition between the acoustic instrument and this electronic version as seemless as possible. IUnfortunatley tongue drums come with varying numbers of keys, so a decision needs to be taken how many the project instrument will have.</li>
+    <li class="my-2">The instrument will be operated by means of touch sensitve pads, rather than mechanical keys, laid out in a similar pattern to a tongue drum&rsquo;s tongues. This layout to make the transition between the acoustic instrument and this electronic version as seemless as possible. Unfortunatley tongue drums come with varying numbers of tongues, so a decision needs to be taken how many the project instrument will have.</li>
 
-    <li class="my-2">There should be two modes of operation:
+    <li class="my-2">Ideally there should be two modes of operation:
 
         <ol class="my-2">
-            <li class="my-1">Audio mode where the instrument produces sound when a key is pressed. The sound may be reproduced via an internal speaker and/or it may be output via a line level audio output or to headphones. A decision is required as to whether the sound is synthesised or is made by triggering samples of an aoustic instrument.</li>
+            <li class="my-1"><em>Audio Mode</em> where the instrument produces sound when a key is pressed. The sound may be reproduced via an internal speaker and/or it may be output via a line level audio output or to headphones. A decision is required as to whether the sound is synthesised or is made by triggering samples of an aoustic instrument.</li>
 
-            <li class="my-1">MIDI mode where the instrument output MIDI note on and off messages is response to key hits. Such messages will be sent to suitable software that can use the notes to drive MIDI instruments. In particular the notes should be compatible with tongue drum virtual instruments.</li>
+            <li class="my-1"><em>MIDI Mode</em> where the instrument outputs suitable MIDI messages is response to tongue hits. Such messages will be interprested by software that can use the notes to drive MIDI instruments. In particular, the notes should be compatible with tongue drum virtual instruments. Such compatibility may require that several different user configurable MIDI note mappings are provided.</li>
         </ol>
 
     </li>
 
     <li class="my-2">
-        The instrument should be capabable of stand alone operation which implies at least an option for battery power.
+        The instrument should be capabable of stand alone operation, which implies that it must have <em>Audio Mode</em> and be able to be powered usuing batteries.
     </li>
 </ul>
+
+<p class="alert alert-info"><small>* &ndash; A &ldquo;tongue&rdquo; on a tongue drum is the area that the player strikes to create a note. This is analgous to a key on a keyboard.</small></p>
 
 <h2>Progress</h2>
 
 <p>At present this is a very new project and I am very inexperienced, having just begun to learn electronics in April of 2021.</p>
 
-<p>The project is very much in the experimental phase. Having determined that the touch sensitive keys are to use capacitive sensing, early experiments are being conducted to learn about suitable material and software.</p>
+<p>The project is very much in the experimental phase. Having determined that the touch sensitive &ldquo;tongues&rdquo; are to use capacitive sensing, early experiments are being conducted to learn about suitable material and software.</p>
 
 <h2>Experiments</h2>
 
 <p>To date, these are the experiments that have been conducted:</p>
 
-<div class="list-group">
+<div class="list-group mb-3">
     <a href="./experiment-1" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#1: Graphite sensor</h3>
         <p class="mb-1">Tests the responsiveness of a single graphite sensor using the CapacitiveSensor library with various sample sizes.</p>
