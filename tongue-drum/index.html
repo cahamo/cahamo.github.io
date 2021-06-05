@@ -5,7 +5,7 @@ layout: default
 
 <h2>Introduction</h2>
 
-<p>This is a project to build an electronic emulation of a <a href="https://en.m.wikipedia.org/wiki/Steel_tongue_drum">Tongue Drum</a>, also known as the tank drum or a hank drum.</p>
+<p>This is a project to build an electronic emulation of a <a href="https://en.m.wikipedia.org/wiki/Steel_tongue_drum">Tongue Drum</a>, also known as a tank drum or a hank drum.</p>
 
 <p>I've described elsewhere what my motivation is to build this project. See my post &ldquo;<a href="https://cahamo.blogspot.com/2021/05/my-1st-project-say-hello-to-electro.html">My 1st Project - Say Hello to the &lsquo;Electro Tongue Drum&rsquo;</a>&rdquo; in my <a href="https://cahamo.blogspot.com">blog</a> for more information.</p>
 
@@ -14,32 +14,33 @@ layout: default
 <p>The main features of the electro-tongue drum should be:</p>
 
 <ul>
-    <li class="my-2">The shape of the instrument will echo that of the acoustic instrument, but will not copy it slavishly. Think of the difference between an acoustic and electric guitar. This intention is that the instrument will be circular or polygonal in plan view, but will be relatively flat. It is not desirable to introduce a large chamber that could amplify the percusive sound of fingers hitting the &ldquo;tongues&rdquo;&nbsp;*.</li>
+    <li class="my-2">The shape of the instrument should echo that of the acoustic instrument, but should not copy it slavishly. Think of the difference between acoustic and solid body electric guitars: the electric guitar replaces the acoustic's hollow body with a solid piece of wood. A similar approach should be taken for the electro-tongue drum. The instrument should be circular or polygonal in plan view, but should be relatively flat and solid. It is not desirable to introduce a large chamber that could amplify the percusive sound of fingers tapping the &ldquo;tongues&rdquo;&nbsp;*.</li>
 
-    <li class="my-2">The instrument will be operated by means of touch sensitve pads, rather than mechanical keys, laid out in a similar pattern to a tongue drum&rsquo;s tongues. This layout to make the transition between the acoustic instrument and this electronic version as seemless as possible. Unfortunatley tongue drums come with varying numbers of tongues, so a decision needs to be taken how many the project instrument will have.</li>
+    <li class="my-2">The instrument should be operated by means of touch sensitve pads, rather than mechanical keys, laid out in a similar pattern to the real instrument&rsquo;s tongues. This layout should make the transition between the acoustic instrument and this electronic version as seemless as possible.</li>
 
     <li class="my-2">Ideally there should be two modes of operation:
 
         <ol class="my-2">
-            <li class="my-1"><em>Audio Mode</em> where the instrument produces sound when a key is pressed. The sound may be reproduced via an internal speaker and/or it may be output via a line level audio output or to headphones. A decision is required as to whether the sound is synthesised or is made by triggering samples of an aoustic instrument.</li>
+            <li class="my-1">
+                <p class="my-1"><em>Audio Mode</em> where the instrument produces sound when a tongue is touched. The sound may be reproduced via an internal speaker and/or sent to a line level audio jack for external amplification. A headphone output may also be provided.</p>
+                <p class="alert alert-warning my-1">A decision is required as to whether the sound should be synthesised or created by triggering samples of a real acoustic instrument.</p>
+            </li>
 
-            <li class="my-1"><em>MIDI Mode</em> where the instrument outputs suitable MIDI messages is response to tongue hits. Such messages will be interprested by software that can use the notes to drive MIDI instruments. In particular, the notes should be compatible with tongue drum virtual instruments. Such compatibility may require that several different user configurable MIDI note mappings are provided.</li>
+            <li class="my-1"><em>MIDI Mode</em> where the instrument outputs MIDI messages in response to tongue hits. Such messages should be suitable for interpretation by any physical or virtual instrument capable of being driven by MIDI, It is desirable that the generated MIDI should be compatible with as many tongue drum virtual instruments as possible.</li>
         </ol>
 
     </li>
 
-    <li class="my-2">
-        The instrument should be capabable of stand alone operation, which implies that it must have <em>Audio Mode</em> and be able to be powered usuing batteries.
-    </li>
+    <li class="my-2">The instrument should be capabable of stand alone operation.</li>
 </ul>
 
 <p class="alert alert-info"><small>* &ndash; A &ldquo;tongue&rdquo; on a tongue drum is the area that the player strikes to create a note. This is analgous to a key on a keyboard.</small></p>
 
 <h2>Progress</h2>
 
-<p>At present this is a very new project and I am very inexperienced, having just begun to learn electronics in April of 2021.</p>
+<p>This is a long term project and I am very inexperienced, having just begun to learn electronics in April of 2021. Progress is expected to be slow.</p>
 
-<p>The project is very much in the experimental phase. Having determined that the touch sensitive &ldquo;tongues&rdquo; are to use capacitive sensing, early experiments are being conducted to learn about suitable material and software.</p>
+<p>The project is very much in the experimental phase. Having determined that the touch sensitive &ldquo;tongues&rdquo; are to use capacitive sensing, experiments are being conducted to learn about suitable material and software.</p>
 
 <h2>Experiments</h2>
 
@@ -60,7 +61,7 @@ layout: default
     </a>
     <a href="./experiment-4" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#4: Comparison of different sensor coverings</h3>
-        <p class="mb-1">Compares the impact on sensor readings by covering a tin foil snesor with various materials.</p>
+        <p class="mb-1">Compares the impact on sensor readings by covering a tin foil sensor with various materials.</p>
     </a>
     <a href="./experiment-5" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#5: Comparison of different send pin resistances</h3>
@@ -72,9 +73,9 @@ layout: default
 
 <h3>Number of tongues</h3>
 
-<p>Research has indicated that both eight and nine key tongue drums are popular, so it has been decided to make the electro-tongue drum a nine key instrument.</p>
+<p>Research has indicated that both eight and nine key tongue drums are popular, so it has been decided to construct the electro-tongue drum as a nine key instrument.</p>
 
-<p>The nine key tongue drum has a central tongue and eight outer tongues around the circumference of the instrument. The following image illustrates the layout:</p>
+<p>A nine key tongue drum has a central tongue and eight outer tongues around the circumference of the instrument. The following image illustrates the layout:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/tongue-drum-layout.png" width="418" height="418" alt="Proposed tongue drum layout"></p>
 
@@ -82,11 +83,11 @@ layout: default
 
 <h3>Note order</h3>
 
-<p>The notes will be laid out in accordance with standard practice.</p>
+<p>The notes will be laid out in accordance with standard tongue drum practice.</p>
 
 <p>To illustrate let us label the outer tongues according to their compass positions. The lowest note is on the centre tongue, then the notes increase in pitch is this order: south, south-west, south-east, west, east, north-west, north-east and finally north.</p>
 
-<p>The following diagram show the notes labelled in ascending pitch order from 1 to 9.</p>
+<p>The following diagram shows the notes labelled in ascending pitch order from 1 to 9.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/tongue-drum-layout-note-numbers.png" width="418" height="418" alt="Proposed tongue drum layout with note numbers as just described in text."></p>
 
@@ -94,7 +95,14 @@ layout: default
 
 <h3>Tunings</h3>
 
-<p>Acoustic tongue drums are tuned to a pre-determined key. Some manufacturers offer their instruments in a choice of keys. Some tongue drums can be re-tuned.</p>
+<p>First some facts about the tuning of acoustic tongue drums:</p>
+
+<ul>
+    <li>Acoustic tongue drums are tuned to a pre-determined scale.</li>
+    <li>Some manufacturers offer their instruments in a choice of scales.</li>
+    <li>Some tongue drums can be re-tuned.</li>
+    <li>Some notes from the scale may be omitted, particularly when the notes span more than an octave. For example, all five notes of a pentatonic scale may be present in one octave but maybe only the tonic, 3rd and 5th may be present in a higher octave.</li>
+</ul>
 
 <p>Since the electro-tongue drum will generate its notes artificially, there is no reason why a number of scales can't be supported.</p>
 
@@ -116,11 +124,11 @@ layout: default
         </tr>
         <tr>
             <td>2</td>
-            <td colspan="2">A choice of up to 8 pre-determined scales will be provided, along with a means of selecting the required scale. The first scale will be the same as the fixed scale provided at stage 1.</td>
+            <td colspan="2">A choice of up to 8 pre-determined scales will be provided, along with a means of selecting the required scale. The default scale will be the same as the fixed scale provided at stage 1.</td>
         </tr>
         <tr>
             <td rowspan="2">3</td>
-            <td colspan="2">The user will be given the option of defining their own scales. These will be uploaded to the instrument either by SD card or USB. It is likely that there will be a limit of uploading no more than eight scales at a time.</td>
+            <td colspan="2">The user will be given the option of defining their own scales. These will be uploaded to the instrument either by SD card or USB. It is likely that a maximum of 8 scales will be able to be uploaded at a time.</td>
         </tr>
         <tr>
             <td>The notes available for use will be restricted by the number of samples available.</td>
@@ -131,8 +139,8 @@ layout: default
 
 <div class="alert alert-info">
 
-    <p class="mb-2"><small>&dagger; &ndash; The different modes may not reach the same stage of development at the same time. For example it is looking likely that a MIDI instrument will be created before <em>Audio Mode</em> is developed.</small></p>
+    <p class="mb-2"><small>&dagger; &ndash; The different modes may not reach the same stage of development at the same time. For example, it is looking likely that a MIDI instrument will be created before <em>Audio Mode</em> is developed.</small></p>
 
-    <p class="mb-0"><small>&Dagger; &ndash; This is not as restrictive as it first appears since some Digital Audio Workstations can translate inputted MIDI notes into other notes, meaning a scale can be translated into another scale before arriving at the virtual instrument. Relevant mappings may be provided here.</small></p>
+    <p class="mb-0"><small>&Dagger; &ndash; This is not as restrictive as it first appears since some Digital Audio Workstations can translate received MIDI notes into other MIDI note values before sending them on to a virtual instrument, This means that any scale can be translated into different one.</small></p>
 
 </div>
