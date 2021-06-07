@@ -8,3 +8,5 @@ https://cahamo.github.io/tongue-drum/experiment-2
 https://cahamo.github.io/tongue-drum/experiment-3
 https://cahamo.github.io/tongue-drum/experiment-4
 https://cahamo.github.io/tongue-drum/experiment-5
+https://cahamo.github.io/diorama/
+https://cahamo.github.io/diorama/experiment-1
