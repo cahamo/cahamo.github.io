@@ -1,0 +1,135 @@
+---
+layout: default
+---
+<h1>Experiment#1: Infra-red remote controller</h1>
+
+<h2>Introduction</h2>
+
+<p>Since the diorama&rsquo;s electronics are to be operated by menas of an infra-red remote, it makes sense to test that component first.</p>
+
+<The>A kit was purchased that comprised a remote control handset, an infra-red sensor, an infra-red LED and some DuPont cables. Only the handset and the IR are required for the project. The handset is quite basic, but sufficient for the task in hand:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/ir-remote-handset_160x327.jpg" width="160" height="327" alt="Remote control handset"></p>
+
+<p>The test was performed using an <em>Elegoo Uno R3</em> using the <a href="https://github.com/Arduino-IRremote/Arduino-IRremote"><em>Arduino-IRremote</em></a> library.</p>
+
+<h2>Circuit</h2>
+
+<p>A test circuit was built on a breadboard using the infra-red sensor and a LED that was set to flash whenever a single was received from the remote. This LED very nearly duplicates duplicates the sensor's built in LED but has been included because it is unlikely the built in LED will be visible when the sensor is incorporated into the diorama. Furthermore, the final circuit design will most likely only flash the LED when a valid signal is received: it will filter out spurious signals.</p>
+
+<p>The breadboard circuit schematic is show below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/irsensor-library-test-circuit_1072x388.png" width="1072" height="388" alt="Test circuit breadboard schematic."></p>
+
+<p>And here's a photo of the cicuit as built:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/irsensor-library-test-circuit-photo_900x461.jpg" width="900" height="461" alt="Photo of test circuit."></p>
+
+<h2>Code</h2>
+
+<p>The code is available on GitHub in the <a href=""><code>cahamo/diorama</code></a> repository.</p>
+
+<p>Two different sketches that were used:</p>
+
+<ol>
+
+    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-sensor-analyser/ir-sensor-analyser.ino"><code>ir-sensor-analyser.ino</code></a> &ndash; Sends full details of the recevied code to the serial monitor. This sketch was used to determine the type of handset and to work out which codes are emitted by each button. </li>
+
+    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/handset-test/handset-test.ino"><code>handset-test.ino</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.ino</code> this script reports actual button pressed on the remote controller being used for this project. It detects whether the key is being repeated and als reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
+</ol>
+
+<h2>Methodology</h2>
+
+<p>The circuit was built as described above.</p>
+
+<p>The <code>ir-sensor-analyser.ino</code> script was uploaded to the Uno. The handset's buttons were pressed in order from left to right, top to bottom and the serial output that was generated was captured to a text file using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
+
+<p>Next the <code>handset-test.ino</code> script was uploaded to the Uno. Once again the handset's buttons were pressed in the same order as before and the serial output was captured to a second text file using CoolTerm.</p>
+
+<h2>Results</h2>
+
+<p>The text file created when the <code>ir-sensor-analyser.ino</code> sketch was run was examined to find which type of unit the remote handset emulates. This was reported as a <strong>NEC</strong> type. Here's an extract from the text file <code>ir-remote-raw-readings.txt</code> that makes this clear:</p>
+
+<pre>&vellip;
+Protocol=NEC Address=0x0 Command=0x45 Raw-Data=0xBA45FF00 32 bits LSB first
+Protocol=NEC Address=0x0 Command=0x45 Repeat gap=39600us
+&vellip;</pre>
+
+<p>Examination of the text file shows that some buttons repeated while others did not. The above extract demonstrates the different output that shows a line generated when a button was first pressed, along with the line showing a repeat.</p>
+
+<p>Because the order in which the buttons were pressed was known it became a simple matter to analyse the text file to find the codes of each button: each time the value <code>Command</code> entry changes we have a new key. A copy of the text file named <code>ir-remote-annotated-readings.txt</code> was annotated to make this clearer. Here are extract from that file for number key 1 and the OK key:</p>
+
+<pre>&vellip;
+# Number key 1
+Protocol=NEC Address=0x0 Command=0x45 Raw-Data=0xBA45FF00 32 bits LSB first
+Protocol=NEC Address=0x0 Command=0x45 Repeat gap=39600us
+Protocol=NEC Address=0x0 Command=0x45 Repeat gap=95300us
+&vellip;
+# OK key
+Protocol=NEC Address=0x0 Command=0x1C Raw-Data=0xE31CFF00 32 bits LSB first
+Protocol=NEC Address=0x0 Command=0x1C Repeat gap=39600us
+&vellip;</pre>
+
+<p>The values gleaned from this file are summarised below. The were used to create a C header file that provides a <code>#define</code> statement for each key giving a descriptive name to the key values:</p>
+
+<pre><code class="language-c">// Number keys
+#define REMOTE_KEY_0      0x19
+#define REMOTE_KEY_1      0x45
+#define REMOTE_KEY_2      0x46
+#define REMOTE_KEY_3      0x47
+#define REMOTE_KEY_4      0x44
+#define REMOTE_KEY_5      0x40
+#define REMOTE_KEY_6      0x43
+#define REMOTE_KEY_7      0x07
+#define REMOTE_KEY_8      0x15
+#define REMOTE_KEY_9      0x09
+
+// Hash and star keys
+#define REMOTE_KEY_STAR   0x16
+#define REMOTE_KEY_HASH   0x0D
+
+// Arrow / cursor keys
+#define REMOTE_KEY_UP     0x18
+#define REMOTE_KEY_DOWN   0x52
+#define REMOTE_KEY_LEFT   0x08
+#define REMOTE_KEY_RIGHT  0x5A
+
+// OK key
+#define REMOTE_KEY_OK     0x1C</code></pre>
+
+<p><code>handset-test.ino</code> includes this header file. It can be found in the <code>cahamo/diorama</code> repository as <code><a href="https://github.com/cahamo/diorama/blob/main/research/handset-test/handset-test.h">handset-test.h</a></code>.</p>
+
+<p>The test file <code>handset-test.txt</code>, produced by running <code>handset-test.ino</code>, confirmed that the key mapping was correct. Here's a copy of the file:</p>
+
+<pre class="pre-scrollable">START D:\Dev\Projects\diorama\research\handset-test\handset-test.ino from Jun  6 2021
+Using IRemote library version 3.3.0
+Key pressed: 1
+Key pressed: 2
+Key pressed: 2 - repeat
+Key pressed: 3
+Key pressed: 3 - repeat
+Key pressed: 4
+Key pressed: 4 - repeat
+Key pressed: 5
+Key pressed: 6
+Key pressed: 6 - repeat
+Key pressed: 7
+Key pressed: 8
+Key pressed: 9
+Key pressed: *
+Key pressed: * - repeat
+Key pressed: 0
+Key pressed: #
+Key pressed: Up-Arrow
+Key pressed: Up-Arrow - repeat
+Key pressed: Left-Arrow
+Key pressed: OK
+Key pressed: Right-Arrow
+Key pressed: Right-Arrow - repeat
+Key pressed: Down-Arrow</pre>
+
+<p>The text files referred to above have been zipped up and can be <a href="/downloads/diorama-experiment-1-results.zip">downloaded here</a>.</p>
+
+<h2>Conclusions</h2>
+
+<p>The tests have proved that the handset works and the output can be interpreted. The next step is to determine what key sequences will be used to control the various LEDs, motors and sequences in the diorama and to write code to trigger such events.</p>

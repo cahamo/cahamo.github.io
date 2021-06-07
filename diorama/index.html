@@ -1,0 +1,114 @@
+---
+layout: default
+---
+<h1>Diorama project</h1>
+
+<h2>Introduction</h2>
+
+<p>This is a project to design and build the electronics needed to control the lighting, and possibly some mechanical gimmicks, on a scenic diorama that I'm building.</p>
+
+<p>For details of the motivation for this project see my blog pot &ldquo;<a href="https://cahamo.blogspot.com/2021/06/controlling-diorama-led-lighting.html">Total Overkill - Controlling Diorama Lighting With A Microcontroller</a>&rdquo;</p>
+
+<p class="alert alert-info">Details of the construction of the diorama itself are off topic for this website and will only be discussed in as much as they are relevant to the electronics.</p>
+
+<h2>Project Brief</h2>
+
+<p>The diorama will have several buildings that are to be lit by means of 3mm white LEDs. A model forge and a stove within one or more buildings will be emulated using flickering yellow LEDs. It is planned to enclose the finished model in a cabinet and use LED strips to emulate night and day. In addition, subject to testing, there may be some mechanical gimmicks that will be powered by electric motors.</p>
+
+<p>The brief for this project is to control the lights and any motorised items by means of an infra-red remote control. In addition a program to control a fixed sequence of events should be provided. This sequence should include day time and night time views.</p>
+
+<h2>Design Notes</h2>
+
+<p>It was originally planned to control the LEDs and any motors using simple electrical circuits, as shown in this original schematic:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/original-circuit-design_480x380.png" width="480" height="380" alt="Original LED circuit design"></p>
+
+<p>Following the decision to control the diorama using an infra-red controller such a simple circuit will no longer suffice. At a minimum the switches will be replaced by switching signals from the remote. A consequence of moving to infra-red control is that a microcontroller will be needed to interpret the infra-red signals and, at a minimum control the switching of the LEDs and motors.</p>
+
+<p class="alert alert-warning"><strong>Decision needed:</strong> Should LED brightness and motor speed control still be set using a potentiometer or should pulse width modulation be used instead? Or perhaps a combination of the two?</p>
+
+<p>The design falls into three parts:</p>
+
+<ol>
+    <li>Interpretation of the commands from the infra-red controller</li>
+    <li>Control of the on-scene lighting and mechanical features</li>
+    <li>Control of the day-night sequence</li>
+</ol>
+
+<h3>Infra-red sub-system</h3>
+
+<p>The infra-red sensor must be built into an enclosure suitable for mounting on the front of the diorama. A red LED should be built into the enclosure to provide feedback to the user to confirm that a signal from the remote handset is used has been received.</p>
+
+
+<h2>Implementation</h2>
+
+<h3>Part 1: Infra-red controller</h3>
+
+<p>An infra red sensor and remote controller have been obtained. The availability of suitable libraries for interpreting infra-red codes emitted by the remote pretty much mandates the use of an Arduino type controller. Testing is being undertaken using an Elegoo Uno R3, while the final implementation may use an Arduino Nano or clone.</p>
+
+<p>Tests have been conducted to prove that the infra-red controller can be used: see the <em><a href="#experiments">Experiments</em></a> section below.</p>
+
+<h3>Part 2: On-scene features</h3>
+
+<p>At present the only on-scene features requiring electronics are the LEDs. The are currently two buildings under construction and two more planned. The LEDs required are as follows:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">Building</th>
+            <th scope="col">Description</th>
+            <th scope="col">White LEDs</th>
+            <th scope="col">Flicker LEDs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Two bay shed</em></td>
+            <td>This building is mainly complete. It is currently wired with 2 &times; 3mm white LEDs. It is planned to add a 3mm amber flickering LED to represent a stove.</td>
+            <td class="text-right">2</td>
+            <td class="text-right">1</td>
+        </tr>
+        <tr>
+            <td><em>Barn (converted to workshop)</em></td>
+            <td>This building is under construction. There is a rear lean-to that has been fitted with 2 &times; 3mm white LEDs. An office that will be fitted in the main building has a single 3mm white LED. The main structure will be lit with 2 &times; 3mm white LEDs (that will switch on and off together) and there will be two forges, each lit with 3mm amber flicker LEDs.</td>
+            <td class="text-right">5</td>
+            <td class="text-right">2</td>
+        </tr>
+        <tr>
+            <td><em>Small shed</em></td>
+            <td>Not started. The shed will likely be a small lean-to building set against a high wall. It will have a single light.</td>
+            <td class="text-right">1</td>
+            <td class="text-right">0</td>
+        </tr>
+        <tr>
+            <td><em>Large shed / workshop</em></td>
+            <td>Not started. This building will probably have a single light and a stove.</td>
+            <td class="text-right">1</td>
+            <td class="text-right">1</td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="2">Total LEDs</th>
+            <td class="text-right"><strong>9</strong></td>
+            <td class="text-right"><strong>4</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Subject to tests there may be one or two mechanical automatons: a dog wagging its tail and a rabbit popping in and out of its hole. These features will each utilise an electric motoer of a type yet to be determined.</p>
+
+<p>Regardless of whether any automatons are used, the number of LEDs to be controlled excedes the number of PWM pins on an Uno or Nano: in fact if each LED is assigned its own pin it will limit the number of pins available for other tasks. This implies that either some form of multiplexing will be necessary or that more than one microcontroller will be required.</p>
+
+<h3>Part 3: Day and night sequence</h3>
+
+<p><strong>TODO:</strong> not started.</p>
+
+<h2 id="experiments">Experiments</h2>
+
+<p>The following experiments have been carried out:</p>
+
+<div class="list-group mb-3">
+    <a href="./experiment-1" class="list-group-item list-group-item-action flex-column align-items-start">
+        <h3 class="mb-1">#1: Infra-red remote controller</h3>
+        <p class="mb-1">Tests code and circuit needed to interpret the encoded infra-red signals sent by the remote control being used to operate the diorama.</p>
+    </a>
+</div>
