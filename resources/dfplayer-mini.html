@@ -1,0 +1,713 @@
+---
+layout: default
+---
+<h1>DFPlayer Mini</h1>
+
+<p>Reliable information about this player is hard to come by. According to several people the official docs and data
+    sheet are not entirely accurate. There's also a lot of posts provide partial information. So I've tried to gather
+    together the best of the info I've found online in one place.</p>
+
+<p class="alert alert-warning">If you find any errors in the following please leave a bug report on this site's GitHub
+    page <small>(GitHub account required)</small></p>
+
+<p>To date, the main info I've found has been in a post by <em>Ype Brada (Yerke?)</em> on 6 April 2015 that was formerly
+    on the <em>banggood</em> forums, but has now disappeared. It has now been re-posted on PasteBin as <a
+        href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>.</p>
+
+<p>So I've formatted and and lightly tweaked that a part of that post and re-published it below.</p>
+
+<hr>
+
+<h2>DF Player Mini Commands (after Ype Brada)</h2>
+
+<div class="alert alert-info">
+
+    <p class="lead"><strong>The main content of this section is entirely the work of <em>Ype Brada</em>.</strong></p>
+    <p>The information was all taken from the second post on the PasteBin page, i.e. the one from 04 April 2015.</p>
+    <p>Edits have been largely confined to those needed for readability &nbsp; formatting into tables and lists &ndash;
+        along with some clarifications and spelling etc. corrections. All the content from here in comes from the
+        comments in the source code that accompanied the code, followed by the source code itself</p>
+    <p>Why post it here? Two reasons. Firstly, as mentioned the lack of formatting on Paste Bin makes the content hard
+        to read. Secondly, one post has already been taken down &ndash; I don't want to risk this valuable info
+        disappearing again.</p>
+
+</div>
+
+<h3>DF Player mini command discovery</h3>
+
+<p>Program is meant to discover all the possibilities of the command structure of the DFPlayer mini. No special
+    libraries are needed. Program is very easy to understand and can be the basis for your own mp3 player sketch.</p>
+
+<p>Note: Commands are not always correct described in the manual. I tried to fix it, but there is still something to do.
+    The commands recoverd so far are listed below.</p>
+
+<p>Use of sketch: Enter three (separated) decimal numbers in the Serial Monitor with no end of line character.</p>
+
+<ul>
+    <li>First number : Command</li>
+    <li>Second number: First (High Byte) parameter</li>
+    <li>Third number : Second (Low Byte) parameter</li>
+</ul>
+
+<p>E.g.: <kbd>3,0,1</kbd> will play the first track on the TF card</p>
+
+<p><strong>Very important:</strong> Use serial 1K resistors or a level shifter between module RX and TX and Arduino to
+    suppress noise</p>
+
+<ul>
+    <li>Connect Sound module board RX to Arduino pin 11 (via 1K resistor)</li>
+    <li>Connect Sound module board TX to Arduino pin 10 (via 1K resistor)</li>
+    <li>Connect Sound module board Vcc to Arduino Vin when powered via USB (preferably 3.0) else use seperate 5V power
+        supply</li>
+    <li>Connect Sound module board GND to Arduino GND</li>
+</ul>
+
+<h3>General DF Player mini command structure</h3>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr>
+            <th>Byte&nbsp;#</th>
+            <th>Function</th>
+            <th>Value</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td>Start Byte</td>
+            <td>0x7E</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Version Info</td>
+            <td>0xFF</td>
+            <td>Don't know why it's called Version Info</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Number of bytes</td>
+            <td>0x06</td>
+            <td>Always 6 bytes</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Command</td>
+            <td>0x__</td>
+            <td>See below for list of commands</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Command feedback</td>
+            <td>0x00 or 0x01</td>
+            <td>Value 0x00 &rArr; no feedback;<br>Value 0x01 &rArr; feedback required: returns info with command 0x41
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Parameter 1 [DH]</td>
+            <td>0x__</td>
+            <td>Value depends on Command</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Parameter 2 [DL]</td>
+            <td>0x__</td>
+            <td>Value depends on Command</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Checksum high</td>
+            <td>0x__</td>
+            <td>See explanation below and function <code>execute_CMD</code> in following source code</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Checksum low</td>
+            <td>0x__</td>
+            <td>See explanation below and function <code>execute_CMD</code> in following source code</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>End command</td>
+            <td>0xEF</td>&nbsp<td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Checksum calculation: <code>Checksum = -Sum(byte(1..6))</code> (2 bytes, notice minus sign!)</p>
+
+<h4>Commands</h4>
+
+<p>Key to following tables:</p>
+
+<ul>
+    <li><em>Status</em> column: * &rArr; Confirmed command ? &rArr; Unknown, not clear or not validated</li>
+    <li><em>Parameters</em> columns: X &rArr; Value not used (set to zero?)</li>
+</ul>
+
+<h5>Commands without returned parameters</h5>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr>
+            <th colspan="2" scope="col" class="text-center">CMD</th>
+            <th rowspan="2" scope="col" class="align-middle">Function</th>
+            <th rowspan="2" scope="col" class="align-middle">Status</th>
+            <th colspan="2" scope="col" class="text-center">Parameters (2 x 8 bit)</th>
+            <th rowspan="2" scope="col" class="align-middle">Description</th>
+        </tr>
+        <tr>
+            <th scope="col">Hex</th>
+            <th scope="col">Dec</th>
+            <th scope="col">Hi Byte [DH]</th>
+            <th scope="col">Lo Byte [DL]</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0x01</td>
+            <td>1</td>
+            <td>Next</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Next file in current folder. Loops when last file played</td>
+        </tr>
+        <tr>
+            <td>0x02</td>
+            <td>2</td>
+            <td>Previous</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Previous file in current folder. Loops when last file played</td>
+        </tr>
+        <tr>
+            <td>0x03</td>
+            <td>3</td>
+            <td>Specify track to play back</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Track number must be in range 1~2999 Playing order is order in which the numbers are stored. File name
+                and folder name are arbitrary, but when named starting with an increasing number and in one folder,
+                files are played in that order and with correct track number. e.g. <tt>0001-Joe Jackson.mp3</tt>
+                &hellip; <tt>0348-Lets dance.mp3</tt></td>
+        </tr>
+        <tr>
+            <td>0x04</td>
+            <td>4</td>
+            <td>Increase volume</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Increase volume by 1</td>
+        </tr>
+        <tr>
+            <td>0x05</td>
+            <td>5</td>
+            <td>Decrease volume</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Decrease volume by 1</td>
+        </tr>
+        <tr>
+            <td>0x06</td>
+            <td>6</td>
+            <td>Specify volume</td>
+            <td>*</td>
+            <td>X</td>
+            <td>volume</td>
+            <td>Valid values for volume are 0-0x30. The default is 0x30</td>
+        </tr>
+        <tr>
+            <td>0x07</td>
+            <td>7</td>
+            <td>Specify Equalizer</td>
+            <td>*</td>
+            <td>X</td>
+            <td>eq-code</td>
+            <td>Valid values for eq-code are 0..5 where 0 &rArr; Normal, 1 &rArr; Pop, 2 &rArr; Rock, 3 &rArr; Jazz, 4
+                &rArr; Classic, 5 &rArr; Base</td>
+        </tr>
+        <tr>
+            <td>0x08</td>
+            <td>8</td>
+            <td>Specify repeat</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Repeat the specified track number</td>
+        </tr>
+        <tr>
+            <td>0x09</td>
+            <td>9</td>
+            <td>Specify playback source</td>
+            <td>?</td>
+            <td>X</td>
+            <td>source-id</td>
+            <td>Unknown. Seems to be overrided by automatic detection. According to datasheet valid values for source-id
+                are 0..4 where 0 &rArr; U, 1 &rArr; TF, 2 &rArr; AUX, 3 &rArr; SLEEP, 4 &rArr; FLASH</td>
+        </tr>
+        <tr>
+            <td>0x0A</td>
+            <td>10</td>
+            <td>Enter into standby &ndash; low power loss</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Works, but no command found yet to end standby (insert TF-card again will end standby mode)</td>
+        </tr>
+        <tr>
+            <td>0x0B</td>
+            <td>11</td>
+            <td>Normal working (per datasheet)</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>No error code, but no function found</td>
+        </tr>
+        <tr>
+            <td>0x0C</td>
+            <td>12</td>
+            <td>Reset module</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Resets all (Track set to 0x01, Volume set to 0x30) Will return 0x3F initialization parameter (0x02 for
+                TF-card). &quot;Clap&quot; sound after excecuting command (no solution found)
+        </tr>
+        <tr>
+            <td>0x0D</td>
+            <td>13</td>
+            <td>Play</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Play current selected track</td>
+        </tr>
+        <tr>
+            <td>0x0E</td>
+            <td>14</td>
+            <td>Pause</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Pause track</td>
+        </tr>
+        <tr>
+            <td>0x0F</td>
+            <td>15</td>
+            <td>Specify folder and file to playback</td>
+            <td>*</td>
+            <td>folder-number</td>
+            <td>file-number</td>
+            <td>Important: Folders must be named 01~99, files must be named 001~255</td>
+        </tr>
+        <tr>
+            <td>0x10</td>
+            <td>16</td>
+            <td>Volume adjust set (per datasheet)</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>No error code. Does not change the volume gain.</td>
+        </tr>
+        <tr>
+            <td>0x11</td>
+            <td>17</td>
+            <td>Loop play</td>
+            <td>*</td>
+            <td>X</td>
+            <td>0x01:play<br>0x00:stop</td>
+            <td>Loop play all the tracks. Start at track 1.</td>
+        </tr>
+        <tr>
+            <td>0x12</td>
+            <td>18</td>
+            <td>Play mp3 file specified by number in <tt>/mp3</tt> folder</td>
+            <td>*</td>
+            <td>highByte(file-number)</td>
+            <td>lowByte(file-number)</td>
+            <td>Play mp3 file in folder named <tt>/mp3</tt> in your TF-card. File format exact 4-digit number
+                (0001~2999) e.g. <tt>0235.mp3</tt>
+        </tr>
+        <tr>
+            <td>0x13</td>
+            <td>19</td>
+            <td>Unknown</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>Returns error code 0x07</td>
+        </tr>
+        <tr>
+            <td>0x14</td>
+            <td>20</td>
+            <td>Unknown</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>Returns error code 0x06</td>
+        </tr>
+        <tr>
+            <td>0x15</td>
+            <td>21</td>
+            <td>Unknown</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>Returns no error code, but no function found</td>
+        </tr>
+        <tr>
+            <td>0x16</td>
+            <td>22</td>
+            <td>Stop</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Stop playing current track</td>
+        </tr>
+        <tr>
+            <td>0x17</td>
+            <td>23</td>
+            <td>Loop Folder 01</td>
+            <td>*</td>
+            <td>X</td>
+            <td>1~255</td>
+            <td>Loops all tracks in folder named <tt>tt</tt>.<br>(Cahamo's query: if we're looping <em>all</em> tracks
+                in folder <tt>01</tt> then what is the purpose of the lo parameter?)</td>
+        </tr>
+        <tr>
+            <td>0x18</td>
+            <td>24</td>
+            <td>Random play</td>
+            <td>*</td>
+            <td>X</td>
+            <td>X</td>
+            <td>Random play all tracks, always starts at track 1</td>
+        </tr>
+        <tr>
+            <td>0x19</td>
+            <td>25</td>
+            <td>Single loop</td>
+            <td>*</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Loops the track that is playing.</td>
+        </tr>
+        <tr>
+            <td>0x1A</td>
+            <td>26</td>
+            <td>Pause</td>
+            <td>*</td>
+            <td>X</td>
+            <td>0x01:pause<br>0x00:release&nbsp;pause</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h5>Commands with returned parameters</h5>
+
+<table class="table table-responsive">
+    <thead class="thead-light">
+        <tr>
+            <th colspan="2" scope="col" class="text-center">CMD</th>
+            <th rowspan="2" scope="col" class="align-middle">Function</th>
+            <th rowspan="2" scope="col" class="align-middle">Status</th>
+            <th colspan="2" scope="col" class="text-center">Parameters (2 x 8 bit)</th>
+            <th rowspan="2" scope="col" class="align-middle">Description</th>
+        </tr>
+        <tr>
+            <th scope="col">Hex</th>
+            <th scope="col">Dec</th>
+            <th scope="col">Hi Byte [DH]</th>
+            <th scope="col">Lo Byte [DL]</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0x3A</td>
+            <td>58</td>
+            <td>Medium inserted</td>
+            <td>*</td>
+            <td>0</td>
+            <td>1:U-disk<br> 2:TF-card</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>0x3B</td>
+            <td>59</td>
+            <td>Medium ejected</td>
+            <td>*</td>
+            <td>0</td>
+            <td>1:U-disk<br> 2:TF-card</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>0x3C</td>
+            <td>60</td>
+            <td>Finished track on U-disk</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td> Not validated. Returns track number when song is finished on U-Disk</td>
+        </tr>
+        <tr>
+            <td>0x3D</td>
+            <td>61</td>
+            <td>Finished track on TF-card</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Returns track number when song is finished on TF</td>
+        </tr>
+        <tr>
+            <td>0x3E</td>
+            <td>62</td>
+            <td>Finished track on Flash</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Not validated. Returns track number when song is finished on Flash</td>
+        </tr>
+        <tr>
+            <td>0x3F</td>
+            <td>63</td>
+            <td>Initialization parameters</td>
+            <td>*</td>
+            <td>0</td>
+            <td>0 ~ 0x0F.</td>
+            <td>Returned code when Reset (0x12) is used. Each bit represents one device of the low-four bits (see
+                datasheet: 0x02 is TF-card). Error 0x01 when no medium is inserted.</td>
+        </tr>
+        <tr>
+            <td>0x40</td>
+            <td>64</td>
+            <td>Error</td>
+            <td>?</td>
+            <td>0</td>
+            <td>0~7</td>
+            <td>Error code (returned codes not yet analyzed)</td>
+        </tr>
+        <tr>
+            <td>0x41</td>
+            <td>65</td>
+            <td>Reply</td>
+            <td>?</td>
+            <td>0</td>
+            <td>0~?</td>
+            <td>Return code when command feedback is high. 0x00 &rArr; No error. Other returned codes not known.</td>
+        </tr>
+        <tr>
+            <td>0x42</td>
+            <td>66</td>
+            <td>The current status</td>
+            <td>*</td>
+            <td>device-number</td>
+            <td>0:no&nbsp;play<br>1:play</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>0x43</td>
+            <td>67</td>
+            <td>The current volume</td>
+            <td>*</td>
+            <td>0</td>
+            <td>volume</td>
+            <td>volume is in the range 0..30</td>
+        </tr>
+        <tr>
+            <td>0x44</td>
+            <td>68</td>
+            <td>The current EQ</td>
+            <td>*</td>
+            <td>0</td>
+            <td>eq-code</td>
+            <td>Values for eq-code are 0..5 where 0 &rArr; Normal, 1 &rArr; Pop, 2 &rArr; Rock, 3 &rArr; Jazz, 4 &rArr;
+                Classic, 5 &rArr; Base</td>
+        </tr>
+        <tr>
+            <td>0x45</td>
+            <td>69</td>
+            <td>The current playback mode</td>
+            <td>*</td>
+            <td>0</td>
+            <td>0x00:CMD 0x08 not used<br>0x02: CMD 0x08 used</td>
+            <td>Not useful</td>
+        </tr>
+        <tr>
+            <td>0x46</td>
+            <td>70</td>
+            <td>The current software version</td>
+            <td>*</td>
+            <td>0</td>
+            <td>version-number</td>
+            <td>Yerke's version was 5</td>
+        </tr>
+        <tr>
+            <td>0x47</td>
+            <td>71</td>
+            <td>The total number of U-disk files</td>
+            <td>*</td>
+            <td>highByte(number-of-files)</td>
+            <td>lowByte(number-of-files)</td>
+            <td>Not validated</td>
+        </tr>
+        <tr>
+            <td>0x48</td>
+            <td>72</td>
+            <td>The total number of TF-card files</td>
+            <td>*</td>
+            <td>highByte(number-of-files)</td>
+            <td>lowByte(number-of-files)</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>0x49</td>
+            <td>73</td>
+            <td>The total number of flash files</td>
+            <td>*</td>
+            <td>highByte(number-of-files)</td>
+            <td>lowByte(number-of-files)</td>
+            <td>Not validated</td>
+        </tr>
+        <tr>
+            <td>0x4A</td>
+            <td>74</td>
+            <td>Keep on</td>
+            <td>?</td>
+            <td>?</td>
+            <td>?</td>
+            <td>Unknown - see datasheet. No returned parameter.</td>
+        </tr>
+        <tr>
+            <td>0x4B</td>
+            <td>75</td>
+            <td>The current track of U-Disk</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Current track on all media</td>
+        </tr>
+        <tr>
+            <td>0x4D</td>
+            <td>77</td>
+            <td>The current track of Flash</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Current track on all media</td>
+        </tr>
+        <tr>
+            <td>0x4C</td>
+            <td>76</td>
+            <td>The current track of TF card</td>
+            <td>*</td>
+            <td>highByte(track-number)</td>
+            <td>lowByte(track-number)</td>
+            <td>Current track on all media</td>
+        </tr>
+        <tr>
+            <td>0x4E</td>
+            <td>78</td>
+            <td>Folder &quot;01&quot; [DH]=x, [DL]=1</td>
+            <td>*</td>
+            <td>0</td>
+            <td>number-of-files</td>
+            <td>Change to first track in folder &quot;01&quot; Returns number of files in folder
+                &quot;01&quot;<br>(Cahamo's query: if we're querying only track &quot;01&quot; then what is the purpose
+                of the lo parameter?)</td>
+        </tr>
+        <tr>
+            <td>0x4F</td>
+            <td>79</td>
+            <td>The total number of folders</td>
+            <td>*</td>
+            <td>0</td>
+            <td>number-of-folders</td>
+            <td>Total number of folders, including root directory</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Additional info can be found on DFRobot site, but is not very reliable. <strike title="Broken link">Additional info:
+        http://www.dfrobot.com/index.php?route=product/product&product;_id=1121</strike></p>
+
+<h4>Source Code</h4>
+
+<pre><code class="language-c">#include &quot;SoftwareSerial.h&quot;
+# define Start_Byte 0x7E
+# define Version_Byte 0xFF
+# define Command_Length 0x06
+# define End_Byte 0xEF
+# define Acknowledge 0x00 //Returns info with command 0x41 [0x01: info, 0x00: no info]
+
+SoftwareSerial mySerial(10, 11);
+
+void setup () {
+  Serial.begin(9600);
+  mySerial.begin (9600);
+  execute_CMD(0x3F, 0, 0); // Send request for initialization parameters
+  while (mySerial.available()&lt;10) // Wait until initialization parameters are received (10 bytes)
+  delay(30); // Pretty long delays between succesive commands needed (not always the same)
+  // Initialize sound to very low volume. Adept according used speaker and wanted volume
+  execute_CMD(0x06, 0, 5); // Set the volume (0x00~0x30)
+}
+
+void loop () {
+  if (Serial.available())
+  {
+    // Input Serial monitor: Command and the two parameters in decimal numbers (NOT HEX)
+    // E.g. 3,0,1 (or 3 0 1 or 3;0;1) will play first track on the TF-card
+    byte Command = Serial.parseInt();
+    byte Parameter1 = Serial.parseInt();
+    byte Parameter2 = Serial.parseInt();
+    // Write the input at the screen
+    Serial.print(&quot;Command : 0x&quot;);if (Command &lt; 16) Serial.print(&quot;0&quot;); Serial.print(Command, HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Command, DEC);
+    Serial.print(&quot;); Parameter: 0x&quot;);if (Parameter1 &lt; 16) Serial.print(&quot;0&quot;);Serial.print(Parameter1, HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Parameter1, DEC);
+    Serial.print(&quot;), 0x&quot;);if (Parameter2 &lt; 16) Serial.print(&quot;0&quot;);Serial.print(Parameter2, HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Parameter2, DEC);Serial.println(&quot;)&quot;);
+    // Excecute the entered command and parameters
+    execute_CMD(Command, Parameter1, Parameter2);
+  }
+
+  if (mySerial.available()&gt;=10)
+  {
+    // There is at least 1 returned message (10 bytes each)
+
+    // Read the returned code
+    byte Returned[10];
+    for (byte k=0; k&lt;10; k++)
+      Returned[k] = mySerial.read();
+    // Wtite the returned code at the screen
+    Serial.print(&quot;Returned: 0x&quot;); if (Returned[3] &lt; 16) Serial.print(&quot;0&quot;); Serial.print(Returned[3],HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Returned[3], DEC);
+    Serial.print(&quot;); Parameter: 0x&quot;); if (Returned[5] &lt; 16) Serial.print(&quot;0&quot;); Serial.print(Returned[5],HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Returned[5], DEC);
+    Serial.print(&quot;), 0x&quot;); if (Returned[6] &lt; 16) Serial.print(&quot;0&quot;); Serial.print(Returned[6],HEX);
+    Serial.print(&quot;(&quot;); Serial.print(Returned[6], DEC); Serial.println(&quot;)&quot;);
+  }
+}
+
+void execute_CMD(byte CMD, byte Par1, byte Par2)
+  // Excecute the command and parameters
+{
+  // Calculate the checksum (2 bytes)
+  word checksum = -(Version_Byte + Command_Length + CMD + Acknowledge + Par1 + Par2);
+  // Build the command line
+  byte Command_line[10] = { Start_Byte, Version_Byte, Command_Length, CMD, Acknowledge,
+      Par1, Par2, highByte(checksum), lowByte(checksum), End_Byte};
+  //Send the command line to the module
+  for (byte k=0; k&lt;10; k++)
+  {
+    mySerial.write( Command_line[k]);
+  }
+}</code></pre>
