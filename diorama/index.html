@@ -13,31 +13,56 @@ layout: default
 
 <h2>Project Brief</h2>
 
-<p>The diorama will have several buildings that are to be lit by means of 3mm white LEDs. A model forge and a stove within one or more buildings will be emulated using flickering yellow LEDs. It is planned to enclose the finished model in a cabinet and use LED strips to emulate night and day. In addition, subject to testing, there may be some mechanical gimmicks that will be powered by electric motors.</p>
+<p>The diorama will have several buildings that are to be lit and some will contain stoves and a forge that will need to be simulated. In addition there may be some mechanical gimmicks that will be powered by electric motors.</p>
 
 <p>The brief for this project is to control the lights and any motorised items by means of an infra-red remote control. In addition a program to control a fixed sequence of events should be provided. This sequence should include day time and night time views.</p>
 
+
 <h2>Design Notes</h2>
 
-<p>It was originally planned to control the LEDs and any motors using simple electrical circuits, as shown in this original schematic:</p>
-
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/original-circuit-design_480x380.png" width="480" height="380" alt="Original LED circuit design"></p>
-
-<p>Following the decision to control the diorama using an infra-red controller such a simple circuit will no longer suffice. At a minimum the switches will be replaced by switching signals from the remote. A consequence of moving to infra-red control is that a microcontroller will be needed to interpret the infra-red signals and, at a minimum control the switching of the LEDs and motors.</p>
-
-<p class="alert alert-warning"><strong>Decision needed:</strong> Should LED brightness and motor speed control still be set using a potentiometer or should pulse width modulation be used instead? Or perhaps a combination of the two?</p>
-
-<p>The design falls into three parts:</p>
+<p>The design falls into five parts:</p>
 
 <ol>
     <li>Interpretation of the commands from the infra-red controller</li>
-    <li>Control of the on-scene lighting and mechanical features</li>
+    <li>Control of the on-scene lighting</li>
+    <li>Control of mechanical features</li>
     <li>Control of the day-night sequence</li>
+    <li>Power supply</li>
 </ol>
 
 <h3>Infra-red sub-system</h3>
 
-<p>The infra-red sensor must be built into an enclosure suitable for mounting on the front of the diorama. A red LED should be built into the enclosure to provide feedback to the user to confirm that a signal from the remote handset is used has been received.</p>
+<p>The infra-red sensor must be built into an enclosure suitable for mounting on the front of the diorama. A LED should be built into the enclosure to provide feedback to the user to confirm that a signal from the remote handset is used has been received.</p>
+
+<h3>On-scene lighting sub-system</h3>
+
+<p>There are to be four buildings, all of which will be lit:</p>
+
+<ol>
+    <li>A barn that has been converted to a metal working shop, containing a forge</li>
+    <li>A twin bay open fronted shed, with one bay converted to a store room or workshop that contains a stove./li>
+    <li>An enclosed workshop building containing a stove</li>
+    <li>A small shed, possibly a lean-to against a wall</li>
+</ol>
+
+<p>All lighting will use LEDs. Building lights will be emulated using 3mm white LEDs. Stoves and  will be emulated using flickering 3mm amber LEDs.</p>
+
+<h3>Mechanical sub-system</h3>
+
+<p>The design is not finalised. Two features are being considered:</p>
+
+<ol>
+    <li>A dog with a wagging tail</li>
+    <li>A rabbit popping in and out of a burrow</li>
+</ol>
+
+<h3>Day and night sequence</h3>
+
+<p>Design not finalised. A plan to enclose the diorama and to simulate day and night by means of a strip of LEDs hidden out of view above the model.</p>
+
+<h3>Power supply</h3>
+
+<p>Power will be provided by a 9V DC supply, with the voltage dropped as required by different components.</p>
 
 
 <h2>Implementation</h2>
@@ -48,9 +73,9 @@ layout: default
 
 <p>Tests have been conducted to prove that the infra-red controller can be used: see the <em><a href="#experiments">Experiments</em></a> section below.</p>
 
-<h3>Part 2: On-scene features</h3>
+<h3>Part 2: On-scene lighting</h3>
 
-<p>At present the only on-scene features requiring electronics are the LEDs. The are currently two buildings under construction and two more planned. The LEDs required are as follows:</p>
+<p>The are currently two buildings under construction and two more planned. The LEDs required are as follows:</p>
 
 <table class="table table-responsive">
     <thead class="thead-light">
@@ -94,13 +119,56 @@ layout: default
     </tbody>
 </table>
 
-<p>Subject to tests there may be one or two mechanical automatons: a dog wagging its tail and a rabbit popping in and out of its hole. These features will each utilise an electric motoer of a type yet to be determined.</p>
+<p>It was originally planned to control the LEDs and any motors using simple electrical circuits, as shown in this original schematic:</p>
 
-<p>Regardless of whether any automatons are used, the number of LEDs to be controlled excedes the number of PWM pins on an Uno or Nano: in fact if each LED is assigned its own pin it will limit the number of pins available for other tasks. This implies that either some form of multiplexing will be necessary or that more than one microcontroller will be required.</p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/original-circuit-design_480x380.png" width="480" height="380" alt="Original LED circuit design"></p>
 
-<h3>Part 3: Day and night sequence</h3>
+<p>Following the decision to control the diorama using an infra-red controller such a simple circuit will no longer suffice. An Arduino compatible microcontroller will now be used to switch the lights on and off as required. The number of LEDs to be controlled exceeds the available free output pins on most micro controllers, so some form of multiplexing will be used. Quite what form that will take is subject to experimentation.</p>
+
+<p>So as not to stress the Arduino's power limits, LEDs will be switched via transistors.</p>
+
+<h3>Part 3: Mechanical features</h3>
 
 <p><strong>TODO:</strong> not started.</p>
+
+<p class="alert alert-warning">How these devices will be controlled depends on the number of microcontroller pins available after the LED and Infra Red control circuits have been completed. Switching will utilise transistors to avoid breaching the microcontroller's power supply limits.</p>
+
+<h3>Part 4: Day and night sequence</h3>
+
+<p><strong>TODO:</strong> not started.</p>
+
+<h3>Part 5: Power supply</h3>
+
+<p>The main power supply circuit board has been completed following some <a href="./experiment-2">experimentation</a>). The supply is soldered to a piece of copper perf board and will be mounted on the back of the facia where the power supply is plugged in.</p>
+
+<p>Key features are that the power will enter the diorama via a 2.1mm &times; 5.5mm socket. A bridge rectifier is used to enable both centre positive and centre negative supplies to be used.</p>
+
+<p>The power supply drives a green LED that is mounted above the power socket.</p>
+
+<p>A voltage regulator is used to provide a 5V supply that will be used for the microcontroller and to power the LEDs. There are output pins making available 7.9V (voltage after the bridge rectifier) and 5V, along with associated ground pins.</p>
+
+<p>Here is a composite photo of both sides of power supply circuit board</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-2/power-supply-composite.png" width="1080" height="1214" alt="Composite photo of bottom and top of power supply circuit board"></p>
+
+<p>The following photo is a composite showing both sides of the power input panel, with the power supply circuit mounted on the rear (note ythat the power indicator LED is missing from the rear photo):</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-2/power-facia-composite.png" width="1080" height="423" alt="Composite photo of both sides of the power input panel"></p>
+
+<p>The pins shown in the rear photo are, from left to right:</p>
+
+<ol>
+    <li>A pair of polarity agnostic 9V input pins. The power supply socket above the circuit board will be wired to these pins in the finished version.</li>
+    <li>A pair of pins to connect the power indicator LED (7.8V and GND). The control panel LED will be wired to these. Note that the LED's current limiting resistor must be wired directly to the LED.</li>
+    <li>A pair of 7.8V power pins for connection to other circuit boards that may require this voltage. Note that 7.8V is the maximum available rectified voltage. (9V is dropped by 1.2V by the bridge rectifier diodes.)</li>
+    <li>A rank of five GND pins for connection to other circuit boards that may require them.</li>
+    <li>A bank of three 5V pins for connection to other circuit boards that may require them.</li>
+</ol>
+
+<p>The schematic diagram of the power supply is shown below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply_1060x400.png" width="1060" height="400" alt="Power supply schematic diagram"></p>
+
 
 <h2 id="experiments">Experiments</h2>
 
@@ -110,5 +178,9 @@ layout: default
     <a href="./experiment-1" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#1: Infra-red remote controller</h3>
         <p class="mb-1">Tests code and circuit needed to interpret the encoded infra-red signals sent by the remote control being used to operate the diorama.</p>
+    </a>
+    <a href="./experiment-2" class="list-group-item list-group-item-action flex-column align-items-start">
+        <h3 class="mb-1">#2: Power supply</h3>
+        <p class="mb-1">Breadboard test circuit to prove the power supply design</p>
     </a>
 </div>
