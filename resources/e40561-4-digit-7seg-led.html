@@ -1,0 +1,322 @@
+---
+layout: default
+---
+<h1>E40561-G-UR3-0-W 4 Digit 7 Segment LED Pinout</h1>
+
+<p>Information on the pinout of this 4 digit 7 segment common anode LED display (and other related common anode displays) is relatively hard to find and a little inpenetrable when you do. This page summarise the information that I have gleaned from several sources. I&rsquo;ve tested the information on a couple of examples of these displays.</p>
+
+<h2>Identifying the parts of the display</h2>
+
+<p>The image below shows the 4 digits &ndash; <em>1 to 4</em> &ndash; and the segments of each digit labelled <em>A..G</em> and <em>dp</em> (decimal point).</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-led-segments_633x275.png" width="633" height="275" alt="Labelling of LED segments"></p>
+
+<p> Using this information we can reference each segment of each digit as <code>XY</code> where <code>X</code> is the digit number and <code>Y</code> is the segment identifier. For example:</p>
+
+<ul>
+    <li><code>1A</code> is segment A of digit 1</li>
+    <li><code>4G</code> is segment G of digit 4</li>
+    <li><code>3dp</code> is the decimal point of digit 3</li>
+</ul>
+
+<h2>The display pinout</h2>
+
+<p>The display has 36 pins. Pins 1 to 18 are adjacent to the side that is labelled with the model number (i.e. the side &ldquo;below&rdquo; the digits) with pin 1 on the left and pin 18 on the right. Pins 19 to 36 are adjacent to the side &ldquo;above&rdquo; the digits with pin 19 on the right and pin 36 on the left, above pin 1. The figure below should clarify:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-pinout_458x230.png" width="458" height="230" alt="Pinout illustration"></p>
+
+<h2>Map of LED digits &amp; segments to pins</h2>
+
+<p>This section shows which pins control each segment of each digit. Since the display is common anode, there is only one anode pin per digit. These are as follows:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th scope="row" class="text-left">Digit</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <th scope="row" class="text-left">Pin #</th>
+            <td>32</td>
+            <td>31</td>
+            <td>23</td>
+            <td>22</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>There is a cathode, and a related pin, for every LED segment. These are as follows:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Segment</th>
+            <th scope="col" colspan="4">Digit</th>
+        </tr> 
+        <tr>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+        </tr>   
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <th scope="row">A</th>
+            <td>34</td>
+            <td>29</td>
+            <td>25</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <th scope="row">B</th>
+            <td>33</td>
+            <td>28</td>
+            <td>24</td>
+            <td>19</td>
+        </tr>
+        <tr>
+            <th scope="row">C</th>
+            <td>3</td>
+            <td>8</td>
+            <td>12</td>
+            <td>17</td>
+        </tr>
+        <tr>
+            <th scope="row">D</th>
+            <td>2</td>
+            <td>6</td>
+            <td>11</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <th scope="row">E</th>
+            <td>1</td>
+            <td>5</td>
+            <td>10</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <th scope="row">F</th>
+            <td>36</td>
+            <td>30</td>
+            <td>27</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <th scope="row">G</th>
+            <td>35</td>
+            <td>7</td>
+            <td>26</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <th scope="row">dp</th>
+            <td>4</td>
+            <td>9</td>
+            <td>13</td>
+            <td>18</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Map of pins to LED digits &amp; segments</h2>
+
+<p>This section details the function of each pin. Details are given in the following table:</p>
+
+<table class="table table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th scope="col" class="align-middle">Pin #</th>
+            <th scope="col" class="align-middle">Segment / Digit</th>
+            <th scope="col" class="align-middle">Anode or Cathode<br>(&CirclePlus; or &CircleMinus;)</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <td>1</td>
+            <td>1E</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1D</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1C</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1dp</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>2E</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>2D</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>2G</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>2C</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>2dp</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>3E</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>3D</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>3C</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>3dp</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>4E</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>4D</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>4G</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>4C</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>4dp</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>4B</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>4A</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>4F</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>4</td>
+            <td>&CirclePlus;</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>3</td>
+            <td>&CirclePlus;</td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>3B</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>25</td>
+            <td>3A</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>3G</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>27</td>
+            <td>3F</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>28</td>
+            <td>2B</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>2A</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>2F</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>31</td>
+            <td>2</td>
+            <td>&CirclePlus;</td>
+        </tr>
+        <tr>
+            <td>32</td>
+            <td>1</td>
+            <td>&CirclePlus;</td>
+        </tr>
+        <tr>
+            <td>33</td>
+            <td>1B</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>34</td>
+            <td>1A</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>35</td>
+            <td>1G</td>
+            <td>&CircleMinus;</td>
+        </tr>
+        <tr>
+            <td>36</td>
+            <td>1F</td>
+            <td>&CircleMinus;</td>
+        </tr>
+    </tbody>
+</table>
