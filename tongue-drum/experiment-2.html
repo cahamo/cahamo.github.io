@@ -3,17 +3,17 @@ layout: default
 ---
 <h1>Experiment #2: Tin Foil Sensor</h1>
 
-<p>Some examples of metal based sensors were found online. Noticing how much more responsive the results from the CapacitiveSensor library were when the paper clip was accidentally touched suggested that metal sensors would be better. So the obvious next iteration in the design of the instrument's keys was to try a metalic sensor.</p>
+<p>Noticing how much more responsive the results from the CapacitiveSensor library were when the paper clip was accidentally touched in <a href="./experiment-1">experiment #1</a> it was concluded that metal sensors may be superior to graphite. Furthermore some of the sensors found online were metal. So the obvious next iteration in the design of the instrument&rsquo;s keys was to try a metalic sensor.</p>
 
 <h2>Sensor</h2>
 
-<p>For this sensor an approximately 4.7&times;7.5cm rectangle of cheap kitchen foil was used. This was attached, along it's shorter side, to a slightly larger piece of card using copper tape. The copper tape has conductive adhesive. One pin of a piece of breadboard jumper cable was soldered to the copper tape. The remaining edges of the tin foil were attached to the card using masking tape.</p>
+<p>For this sensor an approximately 4.7&times;7.5cm rectangle of cheap kitchen foil was used. This was attached, along it's shorter side, to a slightly larger piece of card using copper tape. The copper tape has conductive adhesive. One pin of a piece of breadboard jumper cable was soldered to the copper tape, leaving the remaining end available to be plugged into a breadboard. The remaining edges of the tin foil were attached to the card using masking tape.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/tin-foil-sensor_480x353.png" width="480" height="353" alt="Photo of tin foil sensor with attached wire."></p>
 
 <h2>Circuit</h2>
 
-<p>The circuit used in <a href="./experiment-1">experiment 1</a> was adapted slightly for this sensor. The only change was that a 1k&ohm; resistor was placed in series with the sensor. This was done to minimise the risk to the micro-processor from any static discharge from a finger through the tin foil.</p>
+<p>The circuit used in <a href="./experiment-1">experiment #1</a> was adapted slightly for this sensor. The only change was that a 1k&ohm; resistor was placed in series with the sensor. This was done to minimise the risk to the micro-processor from any static discharge from a finger through the tin foil.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/circuit_800x313.jpg" width="800" height="313" alt="Photograph of circuit showing the Uno, breadboard and sensor with all wiring"></p>
 
@@ -21,7 +21,7 @@ layout: default
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/test-circuit-diagram_680x280.png" width="680" height="280" alt="Circuit schematic"></p>
 
-<p>Once again, the Uno was supplied with 5V from the PC via it's USB port. The breadboard and other components were connected in a logically similar way to the following diagram:</p>
+<p>Once again, the Uno was supplied with 5V from the PC via it&rsquo;s USB port. The breadboard and other components were connected in a logically similar way to the following diagram:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-2/test-circuit_703x812.png" width="703" height="812" alt="Circuit layout diagram, created using TinkerCAD"></p>
 
@@ -49,7 +49,7 @@ layout: default
     <li class="my-1">How quickly the sensor responded to taps at different rates.</li>
 </ol>
 
-<p>The code used is the same as that used in <a href="./experiment-1">experiment 1</a>: <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/SingleSensorRawDataLogger"><code>SingleSensorRawDataLogger</code></a>. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Uno's serial port.</p>
+<p>The code used is the same as that used in <a href="./experiment-1">experiment #1</a>: <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/SingleSensorRawDataLogger"><code>SingleSensorRawDataLogger</code></a>. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Uno&rsquo;s serial port.</p>
 
 <p>The test was run multiple times, each time with the code altered to use different rates. These were 1, 10, 25, 50, 75, 100, 125, 150, 200 and 255. The same test rhythm was tapped out each time. This was:</p>
 
@@ -132,7 +132,7 @@ layout: default
 
 <p>To this end the code used in test 1 was adapted to average a specified consecutive sensor readings and match that reading against the actual reading. This code has two parameters that can be varied: the number of samples used by the Capacitive Sensor library and the number of results from the library that are to be averaged. The code can be seen in the <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/SingleSensorAvgDataLogger"><code>SingleSensorAvgDataLogger</code></a> directory in the project's GitHub repository.</p>
 
-<p>The code was run using several combinations of sample and average size and the results of tapping the sensor were plotted together in the Arduino IDE's serial plotter. The results were analised to determine if averaging the results made a significant contribution to the accuracy of the sensor.</p>
+<p>The code was run using several combinations of sample and average size and the results of tapping the sensor were plotted together in the Arduino IDE&rsquo;s serial plotter. The results were analised to determine if averaging the results made a significant contribution to the accuracy of the sensor.</p>
 
 <p>The pattern used in test 1 was repeated.</p>
 
@@ -211,11 +211,11 @@ layout: default
 <p>Three things stand out:</p>
 
 <ol>
-  <li class="my-1">For average lengths > 2, the averaged results are significantly smaller than the raw results for quick taps, but on longer taps the average value approaches the raw value. This result lowers the differential between touched and untouched results.</li>
+  <li class="my-1">For average lengths &gt; 2, the averaged results are significantly smaller than the raw results for quick taps, but on longer taps the average value approaches the raw value. This result lowers the differential between touched and untouched results.</li>
   <li class="my-1">The averaged values lag behind the raw values meaning that the change from touched to untouched state and back again is apparent later. Again this is more pronounced for higher average lengths.</li>
   <li class="my-1">Raw values do not appear to vary significantly from one another. They certainly do not blur the differences between the touched and untouched results.</li>
 </ol>
 
-<p>In general it would appear that averaging readings has <em>no advantage</em> over using the raw readings. In fact. for higher average lengths, averaging could potentially mask the change from untouched to touched and vice versa. Consequently it is <em>not</em> proposed to incorporate such averaging in the final instrument design.</p>
+<p class="lead">In general it would appear that averaging readings has <em>no advantage</em> over using the raw readings. In fact. for higher average lengths, averaging could potentially mask the change from untouched to touched and vice versa. Consequently it is <em>not</em> proposed to incorporate such averaging in the final instrument design.</p>
 
 <p class="text-center"><b><a href="./">Back to main project page</a></b></p>
