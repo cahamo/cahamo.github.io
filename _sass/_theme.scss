@@ -124,3 +124,9 @@ pre {
     border-bottom: 1px lighten($color-primary-lighter, 38%) solid;
     margin-bottom: 1rem;
 }
+
+.caption {
+    font-style: italic;
+    font-size: 90%;
+    color: $color-grey-darker;
+}
