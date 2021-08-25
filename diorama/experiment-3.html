@@ -1,0 +1,128 @@
+---
+layout: default
+---
+<h1>Experiment#3: Optimum Microcontroller LED control</h1>
+
+<h2>Introduction</h2>
+
+<p>In order to minimise the number of microcontrollers required to control the diorama&rsquo;s lighting and mechanical features the most optimum use of microcontroller pins needs to be found when controlling LEDs. To this end various circuits were built on breadboards in an attempt to light various combinations of LEDs using as few microcontroller pins as possible.</p>
+
+<p>Two different methods were tried:</p>
+
+<ol>
+    <li class="my-2">A CD74HC4067 16 channel multiplexer was used to drive 16 LEDs. Two different sketches were tried on two very slightly different circuits.</li>
+    <li class="my-2">A pair of 75HC595 shift registers were used together to illuminate various combinations of 16 LEDs.</li>
+</ol>
+
+<h2>CD74HC4067 16 channel multiplexer</h2>
+
+<p>This multiplexer was connected to an Arduino Uno and to 16 LEDs. Two variations were tried.</p>
+
+<h3>Circuits</h3>
+
+<p>The two circuits are shown in the following image carousel:</p>
+
+<div id="carouselIndicators-1" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicators-1" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicators-1" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/diorama/exp-3/cd74hc4067-schematic-1.png" alt="Schematic for first CD74HC4067 test circuit">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/diorama/exp-3/cd74hc4067-schematic-2.png" alt="Schematic for first CD74HC4067 test circuit">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicators-1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicators-1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<p>These circuits differ only in two respects:</p>
+
+<ol>
+    <li class="my-2">The first circuit connects the CD74HC4067&rsquo;s EN pin to the Arduino so that the CD74HC4067 can be switched on and off. The second circuit leaves the EN pin disconnected.</li>
+    <li class="my-2">Different colour LEDs were used in each circuit!</li>
+</ol>
+
+<h3>Code</h3>
+
+<p>The sketches used to exercise these cicuits are available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. They are:</p>
+
+<ol>
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/cd74hc4067-mux-led-test-1/cd74hc4067-mux-led-test-1.ino">cd74hc4067-mux-led-test-1.ino</a></code>: A simple sketch that lights each of the 16 LEDs in turn. This sketch also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
+
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/cd74hc4067-mux-led-test-2/cd74hc4067-mux-led-test-2.ino">cd74hc4067-mux-led-test-2.ino</a></code>: A more complex sketch that lights various sequences of LEDs quickly in succession to attempt to display patterns where more than one LED is lit at once.</li>
+</ol>
+
+<h3>Results</h3>
+
+<p>See the following videos to see the results of running the two versions of the circuit and their associated code.</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/iXRpqv-flFA" title="YouTube video player: CD74HC4067 circuit #2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="caption">1st circuit with <code>cd74hc4067-mux-led-test-1.ino</code></p>
+</div>
+
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/SpB-l2CTg0Q" title="YouTube video player: CD74HC4067 circuit #2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="caption">2nd circuit with <code>cd74hc4067-mux-led-test-2.ino</code></p>
+</div>
+
+<p>The first test showed that the CD74HC4067 is useful for multiplexing LEDs when only one LED needs to be switched on at a time. However the second test, which is a more realistic scenario for the diorama, revealed that when several LEDs need to be lit simultaneously the circuit does not switch fast enough to eliminate flicker. The second video shows slow pulsing flickering when several LEDs are lit &ldquo;together&rdquo;, but in reality this flickering is fast and annoying.</p>
+
+<h2>75HC595 shift registers</h2>
+
+<p>Two 75HC595 shift registers were connected together and to an Arduino Uno and a sketch was used to light different combinations of LEDs.</p>
+
+<h3>Circuit</h3>
+
+<p>The circuit schematic is shown in the following diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-3/74hc595-x2-schematic.png" width="728" height="799" alt="Schematic for 75HC595 test circuit"></p>
+
+<p>The circuit test layout can be seen on the following breadboard diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-3/74hc595-x2-breadboard.png" width="795" height="698" alt="Breadboard layout of 75HC595 test circuit"></p>
+
+<p class="alert alert-warning">Note that the circuit seen in the video below was built on one breadboard, not two as shown above.</p>
+
+<h3>Code</h3>
+
+<p>The code runs through a sequence of patterns of 16 LEDs that are lit at the same time. It does this by loading 16 bits of data into the two shift registers where each bit determines whether the associated LED is switched on or off.</p>
+
+<p>The code is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub as <code><a href="https://github.com/cahamo/diorama/blob/main/research/74hc595-x2-led-test/74hc595-x2-led-test.ino">74hc595-x2-led-test.ino</a></code>.</p>
+
+<h3>Results</h3>
+
+<p>The following video shows the circuit in operation:</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Yd1aadBM1qA" title="YouTube video player: 74HC595 circuit" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="caption">75HC595 circuit with <code>74hc595-x2-led-test.ino</code></p>
+</div>
+
+<p>The video reveals no LED flicker, and indeed this is the case in real life.</p>
+
+<h2>Conclusions</h2>
+
+<p>The requirement for the diorama is that a variable number of LEDs will need to lit at the same time, without flicker.</p>
+
+<p>It is readily apparent that the CD74HC4067 multiplexer does not fit the bill due to the excessive flicker that is observed.</p>
+
+<p>The pair of 75HC595 shift registers do give the required results and an adaptation of this circuit is a more promising candidate for use on the diorama. The only downside is that the relative brightness of the LEDs will not be able to be changed using pulse width modulation, because only one PWM signal can be sent to all the currently lit LEDs. However, it does seem possible that overall brightness of all the LEDs could be changed together using this method, although this has not been tested.</p>
+
+<p class="lead">The final conclusion is that tests will continue with 75HC595 shift registers and the CD74HC4067 multiplexer will be abandoned.</p>
