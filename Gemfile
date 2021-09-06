@@ -4,6 +4,8 @@ gem "github-pages", "~> 215", group: :jekyll_plugins
 
 gem "activesupport", ">= 6.0.3.1" # fix security issue
 
+gem "jekyll-redirect-from"
+
 # If you have any plugins, put them here!
 #group :jekyll_plugins do
 #end

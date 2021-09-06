@@ -9,3 +9,9 @@ theme: null
 baseurl: ""
 
 exclude: [README.md, LICENSE.md, Gemfile, Gemfile.lock]
+
+plugins:
+  - jekyll-redirect-from
+
+redirect_from:
+  json: false
