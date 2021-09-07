@@ -8,9 +8,10 @@ title: Redirecting&hellip;
 <head>
 
 {% include head.html %}
-<link rel="canonical" href="{{ page.redirect.to }}">
-<script>location="{{ page.redirect.to }}"</script>
-<meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
+{% assign canonicalURL = page.redirect.to | remove: ".html" %}
+<link rel="canonical" href="{{ canonicalURL }}">
+<script>location="{{ canonicalURL }}"</script>
+<meta http-equiv="refresh" content="0; url={{ canonicalURL }}">
 <meta name="robots" content="noindex">
 <title>Redirecting&hellip;</title>
 
@@ -26,9 +27,9 @@ title: Redirecting&hellip;
 
     <h1 class="display-4">Redirecting&hellip;</h1>
 
-    <p class="my-4">This page has moved to <strong><a href="{{ page.redirect.to }}">{{ page.redirect.to }}</a></strong></p>
+    <p class="my-4">This page has moved to <strong><a href="{{ canonicalURL }}">{{ canonicalURL }}</a></strong></p>
 
-    <p class="my-4"><a href="{{ page.redirect.to }}">Click here</a> if you are not redirected soon, or choose another page from the menu at the top of this page.</p>
+    <p class="my-4"><a href="{{ canonicalURL }}">Click here</a> if you are not redirected soon, or choose another page from the menu at the top of this page.</p>
 
 </main>
 
