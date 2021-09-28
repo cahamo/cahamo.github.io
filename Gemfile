@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "github-pages", "~> 215", group: :jekyll_plugins
+gem "github-pages", "~> 219", group: :jekyll_plugins
 
 gem "activesupport", ">= 6.0.3.1" # fix security issue
 
@@ -22,3 +22,5 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 # Vulnerability issues
 gem "addressable", ">= 2.8.0"
+gem "nokogiri", ">= 1.12.5"
+
