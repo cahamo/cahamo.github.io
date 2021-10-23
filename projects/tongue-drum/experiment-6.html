@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-<h1>Experiment #4: Additional sensor covering comparison</h1>
+<h1>Experiment #6: Additional sensor covering comparison</h1>
 
-<p>Some time after various sensor coverings were tested in <a href="./experiment-4">experiment #4</a> some </p> Avery Self-Adhesive Signmaking Vinyl with a view to using that as a covering for the tongue drum. It was hoped it would be suitable to use as a sensor cover too. This experiment compares a sensor covered with the vinyl with the results obtained in <a href="./experiment-4">experiment #4</a> for sensors #3 (plastic card), #6 (primer + top coat), #7 (parcel tape) and the control sensor. This time just two different numbers of samples per reading were tested: 25 and 50.</p>
+<p>Some time after various sensor coverings were tested in <a href="./experiment-4">experiment #4</a>, some Avery Self-Adhesive Signmaking Vinyl was acquired with a view to using that as a covering for the tongue drum. It was hoped it would be suitable to use as a sensor cover too. This experiment compares a sensor covered with the vinyl with the results obtained in <a href="./experiment-4">experiment #4</a> for sensors #3 (plastic card), #6 (primer + top coat), #7 (parcel tape) and the control sensor.</p>
 
-<p>The new sensor was constructed in the same way as the other sensors except that a backing material was glued over the cardboard at the rear of sensor.</p>
+<p>The new sensor was constructed in the same way as the other sensors except that a backing material was glued over the cardboard at the rear of sensor. The backing material was the backing peeled from the vinyl sheet. The vinyl itself is self-adhesive and was stuck directly over the sensor foil.</p>
 
-<p>The resistances of the foil sensors as measured from the foil to the far end of an attached DuPont cables were as follows:</p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-6/vinyl-covered-sensor.jpg" width="200" height="324" alt="Photo of vinyl covered sensor #9"></p>
 
 <p>The resistance each of the underlying foil sensors was calculated as before, using an attached DuPont cable. The results were all very similar:</p>
 
@@ -46,11 +46,13 @@ layout: default
 
 <p>The new sensor (#9) was tested as in <a href="./experiment-4">experiment #4</a>: the right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The resulting sensor readings were written to the Uno's serial port and captured to text files using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
 
+<p>Unlike in <a href="./experiment-4">experiment #4</a>, tests were conducted at 25 only and 50 samples per reading this time.</p>
+
 <h2>Circuit</h2>
 
-<p>The circuit used is functionally the same as that used in <a href="./experiment-4">experiment #4</a>, although the layout on the breadboard was slightly different. The circuit daigram from <a href="./experiment-4">experiment #4</a> is repeated below:</p>
+<p>The circuit used is functionally the same as that used in <a href="./experiment-4">experiment #4</a>, although the layout on the breadboard was slightly different:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit-diagram_856x240.png" width="856" height="240" alt="Generic circuit schematic"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-6/circuit-diagram_940x280.png" width="940" height="280" alt="Generic circuit schematic"></p>
 
 <p>The following photo shows the circuit in use with the new vinyl sensor #9:</p>
 
@@ -62,7 +64,7 @@ layout: default
 
 <h2>Results</h2>
 
-<p>The contents of the text files containing results for sensor #9 were combined with the results from <a href="./experiment-4">experiment #4</a> and analysed in a Libre Office Calc spreadsheet. Results were tabulated in two different ways. Firstly the sensor readings at each sample rate (25 and 50 samples) were collected together, analysed and graphed. Secondly the results for each sensor were grouped by samples rate and again analysed and graphed.</p>
+<p>The contents of the text files containing results for sensor #9 were combined with relevant results from <a href="./experiment-4">experiment #4</a> and analysed in a Libre Office Calc spreadsheet. Results were tabulated in two different ways. Firstly the sensor readings at each sample rate were collected together, analysed and graphed. Secondly the results for each sensor were grouped by sample rate and again analysed and graphed.</p>
 
 <p>In each case the following statistics were determined, again as per <a href="./experiment-4">experiment #4</a>:</p>
 
@@ -70,12 +72,12 @@ layout: default
     <li>The maximum reading</li>
     <li>The average of all readings</li>
     <li>The <em>lower average</em>, i.e. the average of the lower readings, where &ldquo;lower&rdquo; is taken to be values between 0 and the average of all readings, inclusive.</li>
-    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;higher&rdquo; is taken to be values greater than the average of all readings.</li>
+    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;upper&rdquo; is taken to be values greater than the average of all readings.</li>
 </ol>
 
 <h3>Comparison of sensors to each other</h3>
 
-<p>The following image carousel shows two graphs: one graph for each sample rate showing the relative performance of each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
+<p>The following image carousel shows two graphs, one graph for each sample rate, that shows the relative performance of each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
 
 <div id="carouselIndicatorsA1" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -100,7 +102,7 @@ layout: default
     </div>
 </div>
 
-<p>The next image carousel also contains an image for each sample rate but this time plots the maximum, average, lower average and upper average for each sensor. The y-axis is the sensor reading while the different sensors are represented on the x-axis:</p>
+<p>The next image carousel also contains an image for each sample rate, but this time plots the maximum, average, lower average and upper average for each sensor. The y-axis is the sensor reading while the different sensors are represented on the x-axis:</p>
 
 <div id="carouselIndicatorsA2" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -127,7 +129,7 @@ layout: default
 
 <h3>Comparison of samples per reading for each sensor</h3>
 
-<p>The following image carousel shows five graphs: one graph for each sensor showing the readings at different sample rates:</p>
+<p>The following image carousel shows five graphs, one graph for each sensor, showing the readings at different sample rates:</p>
 
 <div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -170,7 +172,7 @@ layout: default
 
 <p>Secondly it is interesting that the results for the new sensor are relatively better, when compared to other sensors at 50 samples per reading than at 25 samples per reading. Could this be due to a poor performance of the test at 25 samples per reading?</p>
 
-<p>Thridly, there appears to be less variation in both touched and un-touched readings, at both sample rates, than for the other sensors.</p>
+<p>Thirdly, there appears to be less variation in both touched and un-touched readings, at both sample rates, than for the other sensors.</p>
 
 <p>Finally, there is sufficient gap between the upper average and lower average readings to make it easy to choose a trigger point that is unlikely to cause a mis-trigger. </p>
 

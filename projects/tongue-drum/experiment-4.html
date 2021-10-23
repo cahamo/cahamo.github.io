@@ -5,7 +5,7 @@ redirect_from:
 ---
 <h1>Experiment #4: Comparison of different sensor coverings</h1>
 
-<p>The finished project will have a covering over the touch sensors used for the tongue drum tongues (keys). Having established the best of two different tin foil types in the <a href="./experiment-3">previous experiment</a> it is necessary now to investigate the effect on sensor readings of covering the sensor in different materials.</p>
+<p>The finished project will have a covering over the touch sensors used for the tongue drum tongues (keys). Having established the best of two different tin foil types in the <a href="./experiment-3">previous experiment</a> it is now necessary to investigate the effect on sensor readings of covering the sensor in different materials.</p>
 
 <h2>Sensors</h2>
 
@@ -30,7 +30,7 @@ redirect_from:
 
 <p>The materials used to cover sensors 1 to 4 were glued in place with UHU glue. The primer paint used with sensors 5 and 6 was applied directly to the foil. The self-adhesive tapes used for sensors 7 and 8 were also applied directly to the foil. A marker pen was used to draw target circle on each sensor to indicate where they should be pressed. The ink would not adhere to sensor 8 so a ring was impressed using a ball pint pen instead.</p>
 
-<p>The Strong Foil sensor from <a href="./experiment-3">experiment #3</a> was used a control sensor, with no covering. All the sensors, including the control, are pictured below:</p>
+<p>The uncovered Strong Foil sensor from <a href="./experiment-3">experiment #3</a> was used a control sensor. All the sensors, including the control, are pictured below:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/8-covered-sensors-plus-control_736x427.jpg" width="736" height="427" alt="Photo of 6 tin foil sensors after covering plus the bare control sensor."></p>
 
@@ -85,13 +85,13 @@ redirect_from:
 
 <h2>Methodology</h2>
 
-<p>An Arduino Uno was once again used to test capacitance. 36 sets of tests were run in total. There were nine sensors and each was tested at rates of 25, 50, 75 and 100 samples per reading.</p>
+<p>An Arduino Uno was once again used to test capacitance. 36 sets of tests were run in total: each of the nine sensors was tested at rates of 25, 50, 75 and 100 samples per reading.</p>
 
 <p>In each test the right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The resulting sensor readings were written to the Uno's serial port and captured to text files using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
 
-<p>In order to make the tests as similar to each other a circuit for the Uno and an associated sketch were created that output beeps on a buzzer that was intended to guide the timing of the key presses.</p>
+<p>In order to make the tests as similar to each other as possible a circuit and an associated sketch were created that output beeps on a buzzer to guide the timing of the key presses.</p>
 
-<p>The contents of the text files were copied and pasted into a spreadsheet and tabulated in two different ways. Firstly the sensor readings at each sample rate were collected together, analysed and graphed. Secondly the results for each sensor were grouped by samples rate and again analysed and graphed.</p>
+<p>The contents of the text files were copied and pasted into a spreadsheet and tabulated in two different ways. Firstly the sensor readings at each sample rate were collected together, analysed and graphed. Secondly the results for each sensor were grouped by sample rate and again analysed and graphed.</p>
 
 <h2>Circuit</h2>
 
@@ -128,7 +128,7 @@ redirect_from:
     <li>The maximum reading</li>
     <li>The average of all readings</li>
     <li>The <em>lower average</em>, i.e. the average of the lower readings, where &ldquo;lower&rdquo; is taken to be values between 0 and the average of all readings, inclusive.</li>
-    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;higher&rdquo; is taken to be values greater than the average of all readings.</li>
+    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;upper&rdquo; is taken to be values greater than the average of all readings.</li>
 </ol>
 
 <p>The results were also graphed.</p>
@@ -137,7 +137,7 @@ redirect_from:
 
 <h3>Comparison of sensors to each other</h3>
 
-<p>The following image carousel shows four graphs: one graph for each sample rate showing the relative performance of each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
+<p>The following image carousel shows four graphs, one graph for each sample rate, showing the relative performance of each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
 
 <div id="carouselIndicatorsA1" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -205,7 +205,7 @@ redirect_from:
 
 <h3>Comparison of samples per reading for each sensor</h3>
 
-<p>The following image carousel shows nine graphs: one graph for each sensor showing the readings at different sample rates:</p>
+<p>The following image carousel shows nine graphs, one for each sensor, showing the readings at different sample rates:</p>
 
 <div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -260,23 +260,23 @@ redirect_from:
 
 <h2>Conclusions</h2>
 
-<p>The first thing to notice when comparing the performance of the sensors when measured about each other is that the relative ordering from worst to best performing changes very little regardless of the number of samples.</p>
+<p>The first thing to notice when comparing the performance of the sensors is that the relative ordering from worst performing to best performing changes very little when varying the number of samples per reading.</p>
 
-<p>It is also worth noting that, in most cases, the <em>upper</em> average of every sensor is closer to the maximum sensor reading than the average reading. Also the <em>lower</em> average reading for every sensor if approximately constant at a given sample rate, and closer to zero than the average reading, implying that the sensor covering has no effect on the sensor's <em>off</em> state. This clustering of values towards zero and the maximum reading is what was hoped for in order to make it easy to define an arbitrary point at which a sensor is judged to be on. A sensible cut-off point between on and off states may be found close to the average reading.</p>
+<p>It is also worth noting that, in most cases, the <em>upper</em> average of every sensor is closer to the maximum sensor reading than the average reading. Also the <em>lower</em> average reading for every sensor is approximately constant at a given sample rate, and closer to zero than the average reading, implying that the sensor covering has no effect on the sensor's <em>off</em> state. This clustering of values towards zero and the maximum reading is what was hoped for in order to make it easy to define an arbitrary point at which a sensor is judged to be on. A sensible cut-off point between on and off states may be found close to the average reading.</p>
 
-<p>Perhaps unsurprisingly the worst performing sensors are those with card and plastic sheet coverings. The worst is sensor #1 with its relatively thick card covering, while the thin card sensor #2 and equivalent thickness of plastic card that covers sensor #3 perform about the same. These are closely followed by the slightly better performing sensor #8 with its thick white tape covering.</p>
+<p>Perhaps unsurprisingly, the worst performing sensors are those with card and plastic sheet coverings. The worst is sensor #1 with its relatively thick card covering, while the thin card sensor #2 and equivalent thickness of plastic card that covers sensor #3 perform about the same. These are closely followed by the slightly better performing sensor #8 with its thick white tape covering.</p>
 
 <p>It may seem surprising that the next &ldquo;worst&rdquo; performing sensor is #4 with its extremely thin plastic covering. However this may be due to the fact that the material is glued down with UHU rather than the thin glue layer used by the self adhesive tapes.</p>
 
 <p>Less surprising again are the top three performers, which from worst to best, are sensor #7, with its thin parcel tape covering; sensor #6, with two thin and two thicker coats of paint; and sensor #5 with its three thin coats of primer.</p>
 
-<p>The best performing covered sensor performs between about 65% and 75% as well as the uncovered control sensor.</p>
+<p>The best performing covered sensor performs between 65% and 75% as well as the uncovered control sensor.</p>
 
 <p>These results would seem to rule out all but painted sensors #5 &amp; #6 and parcel tape covered sensor #7. However it is possible that the painted sensors would not stand up well to wear and tear and may be difficult to make look acceptable. Furthermore it may be that a thin plastic tape covered sensor may also have durability issues, so sensor #3 with its thicker plastic covering may <em>have</em> to be considered despite its poor performance.</p>
 
 <p>In general, the difference in performance of sensors at various samples per reading seems to vary roughly in proportion to the change in sample rate. The only noticable exception is that the proportions break down for some sensors when they are tapped quickly.</p>
 
-<p>It would seem that the gratest accuracy in detecting the difference between a sensor being touched and not touched comes with higher sample rates. It remains to be investigated whether the highest tested rate of 100 samples per reading is feasible when numerous sensors are to be processed at the same time. Further experiments are needed.</p>
+<p>It would seem that the greatest accuracy in detecting the difference between a sensor being touched and not touched comes with higher sample rates. It remains to be investigated whether the highest tested rate of 100 samples per reading is feasible when numerous sensors are to be processed at the same time. Further experiments are needed.</p>
 
 <p class="lead">Taking the above into account it is proposed to continue further testing using only sensors #3 (plastic card), #6 (primer + top coat) and #7 (parcel tape) and to use the highest feasible number of samples per reading.</p>
 
