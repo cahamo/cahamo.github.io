@@ -4,17 +4,16 @@ layout: default
 <h1>DFPlayer Mini</h1>
 
 <p>Reliable information about this player is hard to come by. According to several people the official docs and data
-    sheet are not entirely accurate. There's also a lot of posts provide partial information. So I've tried to gather
-    together the best of the info I've found online in one place.</p>
+    sheet are not entirely accurate. There's also a lot of posts that  provide partial information. So I've tried to gather
+    together the best of the info I've found online.</p>
 
-<p class="alert alert-warning">If you find any errors in the following please leave a bug report on this site's GitHub
-    page <small>(GitHub account required)</small></p>
+<p class="alert alert-warning">If you find any errors in the following please create an issue on this site's <a href="https://github.com/cahamo/cahamo.github.io/issues">GitHub page</a> <small>(GitHub account required)</small></p>
 
-<p>To date, the main info I've found has been in a post by <em>Ype Brada (Yerke?)</em> on 6 April 2015 that was formerly
+<p>To date, the main info I've found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly
     on the <em>banggood</em> forums, but has now disappeared. It has now been re-posted on PasteBin as <a
         href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>.</p>
 
-<p>So I've formatted and and lightly tweaked that a part of that post and re-published it below.</p>
+<p>I've formatted and and lightly tweaked that a part of that post and re-published it below.</p>
 
 <hr>
 
@@ -24,9 +23,9 @@ layout: default
 
     <p class="lead"><strong>The main content of this section is entirely the work of <em>Ype Brada</em>.</strong></p>
     <p>The information was all taken from the second post on the PasteBin page, i.e. the one from 04 April 2015.</p>
-    <p>Edits have been largely confined to those needed for readability &nbsp; formatting into tables and lists &ndash;
-        along with some clarifications and spelling etc. corrections. All the content from here in comes from the
-        comments in the source code that accompanied the code, followed by the source code itself</p>
+    <p>Edits have been largely confined to those needed for readability &ndash; formatting into tables and lists &ndash;
+        along with some clarifications and spelling etc. corrections. All the content from here on in comes from the
+        comments in the source code that accompanied the code, followed by the source code itself.</p>
     <p>Why post it here? Two reasons. Firstly, as mentioned the lack of formatting on Paste Bin makes the content hard
         to read. Secondly, one post has already been taken down &ndash; I don't want to risk this valuable info
         disappearing again.</p>
@@ -35,13 +34,13 @@ layout: default
 
 <h3>DF Player mini command discovery</h3>
 
-<p>Program is meant to discover all the possibilities of the command structure of the DFPlayer mini. No special
+<p>[This] program is meant to discover all the possibilities of the command structure of the DFPlayer mini. No special
     libraries are needed. Program is very easy to understand and can be the basis for your own mp3 player sketch.</p>
 
-<p>Note: Commands are not always correct described in the manual. I tried to fix it, but there is still something to do.
+<p>Note: Commands are not always correctly described in the manual. I tried to fix it, but there is still something to do.
     The commands recoverd so far are listed below.</p>
 
-<p>Use of sketch: Enter three (separated) decimal numbers in the Serial Monitor with no end of line character.</p>
+<p>Use of sketch: Enter three ([comma] separated) decimal numbers in the Serial Monitor with no end of line character.</p>
 
 <ul>
     <li>First number : Command</li>
@@ -51,12 +50,12 @@ layout: default
 
 <p>E.g.: <kbd>3,0,1</kbd> will play the first track on the TF card</p>
 
-<p><strong>Very important:</strong> Use serial 1K resistors or a level shifter between module RX and TX and Arduino to
+<p><strong>Very important:</strong> Use serial 1K&ohm; resistors or a level shifter between module RX and TX and Arduino to
     suppress noise</p>
 
 <ul>
-    <li>Connect Sound module board RX to Arduino pin 11 (via 1K resistor)</li>
-    <li>Connect Sound module board TX to Arduino pin 10 (via 1K resistor)</li>
+    <li>Connect Sound module board RX to Arduino pin 11 (via 1K&ohm; resistor)</li>
+    <li>Connect Sound module board TX to Arduino pin 10 (via 1K&ohm; resistor)</li>
     <li>Connect Sound module board Vcc to Arduino Vin when powered via USB (preferably 3.0) else use seperate 5V power
         supply</li>
     <li>Connect Sound module board GND to Arduino GND</li>
@@ -144,7 +143,7 @@ layout: default
 <p>Key to following tables:</p>
 
 <ul>
-    <li><em>Status</em> column: * &rArr; Confirmed command ? &rArr; Unknown, not clear or not validated</li>
+    <li><em>Status</em> column: * &rArr; Confirmed command; ? &rArr; Unknown, not clear or not validated</li>
     <li><em>Parameters</em> columns: X &rArr; Value not used (set to zero?)</li>
 </ul>
 
@@ -250,7 +249,7 @@ layout: default
             <td>?</td>
             <td>X</td>
             <td>source-id</td>
-            <td>Unknown. Seems to be overrided by automatic detection. According to datasheet valid values for source-id
+            <td>Unknown. Seems to be overridden by automatic detection. According to datasheet valid values for source-id
                 are 0..4 where 0 &rArr; U, 1 &rArr; TF, 2 &rArr; AUX, 3 &rArr; SLEEP, 4 &rArr; FLASH</td>
         </tr>
         <tr>
@@ -260,7 +259,7 @@ layout: default
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Works, but no command found yet to end standby (insert TF-card again will end standby mode)</td>
+            <td>Works, but no command found yet to end standby (inserting TF-card again will end standby mode)</td>
         </tr>
         <tr>
             <td>0x0B</td>
@@ -279,7 +278,7 @@ layout: default
             <td>X</td>
             <td>X</td>
             <td>Resets all (Track set to 0x01, Volume set to 0x30) Will return 0x3F initialization parameter (0x02 for
-                TF-card). &quot;Clap&quot; sound after excecuting command (no solution found)
+                TF-card). &quot;Clap&quot; sound after executing command (no solution found)
         </tr>
         <tr>
             <td>0x0D</td>
@@ -483,7 +482,7 @@ layout: default
             <td>*</td>
             <td>0</td>
             <td>0 ~ 0x0F.</td>
-            <td>Returned code when Reset (0x12) is used. Each bit represents one device of the low-four bits (see
+            <td>Returned code when Reset (0x12) is used. Each bit represents one device in the low-four bits (see
                 datasheet: 0x02 is TF-card). Error 0x01 when no medium is inserted.</td>
         </tr>
         <tr>
@@ -636,7 +635,7 @@ layout: default
     </tbody>
 </table>
 
-<p>Additional info can be found on DFRobot site, but is not very reliable. <strike title="Broken link">Additional info:
+<p>Additional info can be found on the DFRobot site, but is not very reliable. <strike title="Broken link">Additional info:
         http://www.dfrobot.com/index.php?route=product/product&product;_id=1121</strike></p>
 
 <h4>Source Code</h4>
