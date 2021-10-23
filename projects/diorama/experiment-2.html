@@ -7,13 +7,13 @@ redirect_from:
 
 <h2>Introduction</h2>
 
-<p>Following the decision to power the diorama using 9V DC the next step was to design a power supply with the following features:</p>
+<p>Following the decision to power the diorama using 9V DC, the next step was to design a power supply with the following features:</p>
 
 <ol>
-    <li>To enable either centre positive or centre negative power supplies to be used - implying the use of a bridge rectifier</li>
-    <li>To have an output for a &ldquo;power-on&rdquo; LED</li>
-    <li>To have a tap making available the full voltage after rectification</li>
-    <li>To have a tap for a 5V supply to power the microcontroller and (probably) the LEDs.</li>
+    <li>To enable either centre positive or centre negative power supplies to be used - implying the use of a bridge rectifier.</li>
+    <li>To have an output for a &ldquo;power-on&rdquo; LED.</li>
+    <li>To have a tap making available the full voltage after rectification.</li>
+    <li>To have a tap for a 5V supply to power the microcontroller(s) and (probably) the LEDs.</li>
 </ol>
 
 <p>Testing was done with both centre-positive and centre-negative 9V DC supplies. In fact the same centre negative supply was used for both tests using an adapter cable to swap polarity as required.</p>
@@ -31,10 +31,10 @@ redirect_from:
 <p>Since the voltages obtained were as expected, a trial circuit was constructed on perf board that replicated the breadboard design. A bank of 8 pins were provided for external connection, as follows:</p>
 
 <ul>
-    <li>2 pins for 9V input - polarity agnostic</li>
-    <li>7.8V and GND pins for the power-on indicator LED (the LED is mounted above the 9V socket, not on the perf board)</li>
-    <li>7.8V and GND pins made available for connection to other circuit boards</li>
-    <li>5V and GND pins made available for connection to other circuit boards</li>
+    <li>2 pins for 9V input - polarity agnostic.</li>
+    <li>7.8V and GND pins for the power-on indicator LED (the LED is mounted above the 9V socket, not on the perf board).</li>
+    <li>7.8V and GND pins made available for connection to other circuit boards.</li>
+    <li>5V and GND pins made available for connection to other circuit boards.</li>
 </ul>
 
 <p>Given that this was my first ever soldered circuit there were some problems and the circuit wasn't as tidy as it could be!</p>
@@ -44,17 +44,19 @@ redirect_from:
 <p>Evaluating the soldered circuit led to a redesign of the layout of the board along with some changes in functionality. These changes were incorporated in a second version of the board. The functional changes were:</p>
 
 <ul>
-    <li class="mb-1">The LED current limiting resistor was omitted from the circuit board &ndash; it was decided to solder the resistor directly to the LED, making it easier to change the value if necessary at a later date</li>
+    <li class="mb-1">The LED current limiting resistor was omitted from the circuit board &ndash; it was decided to solder the resistor directly to the LED, making it easier to change the value if necessary at a later date.</li>
     <li class="mb-1">
-        The number and layout of the output pins were changed. From left to right the pins were arranged as follows
+        The number and layout of the output pins were changed. From left to right the pins were arranged as follows:
         <ol>
-            <li>A pair of 9V input pins to be used to connected to the power input socket</li>
-            <li>A pair of pins for connecting to the power-on LED &ndash; these were 7.8V and GND respectively</li>
-            <li>A pair of 7.8V pins for connection to other circuit boards</li>
-            <li>A rank of five GND pins for connection with other circuit boards</li>
-            <li>A rank of three 5V pins for connection with other circuit boards</li>
+            <li>A pair of 9V input pins to be used to connected to the power input socket.</li>
+            <li>A pair of pins for connecting to the power-on LED &ndash; these were 7.8V and GND respectively.</li>
+            <li>A pair of 7.8V pins for connection to other circuit boards.</li>
+            <li>A rank of five GND pins for connection with other circuit boards.</li>
+            <li>A rank of three 5V pins for connection with other circuit boards.</li>
         </ol>
     </li>
 </ul>
 
 <p>This final version of the circuit board is pictured on the <a href="./">main project page</a>.</p>
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
