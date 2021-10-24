@@ -1,322 +1,587 @@
 ---
 layout: default
 ---
-<h1>E40561-G-UR3-0-W 4 Digit 7 Segment LED Pinout</h1>
+<h1>Using the E40561-G-UR3-0-W 4 Digit 7 Segment LED</h1>
 
-<p>Information on the pinout of this 4 digit 7 segment common anode LED display (and other related common anode displays) is relatively hard to find and a little inpenetrable when you do. This page summarise the information that I have gleaned from several sources. I&rsquo;ve tested the information on a couple of examples of these displays.</p>
+<p>This page contains information I've gethered to aid in using this 4 digit 7 segment common anode LED display (and
+    other related common anode displays). The information falls into two main sections:</p>
 
-<h2>Identifying the parts of the display</h2>
+<ol>
+    <li>Information about the <a href="#pin-out">pin-out</a> of the display.</li>
+    <li>A <a href="#circuit">circuit &amp; code</a> for multiplexing the display using a microcontroller - in this case
+        an Arduino Nano.</li>
+</ol>
 
-<p>The image below shows the 4 digits &ndash; <em>1 to 4</em> &ndash; and the segments of each digit labelled <em>A..G</em> and <em>dp</em> (decimal point).</p>
+<section id="pin-out">
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-led-segments_633x275.png" width="633" height="275" alt="Labelling of LED segments"></p>
+    <h2>Pin-out</h2>
 
-<p> Using this information we can reference each segment of each digit as <code>XY</code> where <code>X</code> is the digit number and <code>Y</code> is the segment identifier. For example:</p>
+    <p>Information on the pinout of is relatively hard to find and a little inpenetrable when you do. This page
+        summarise the information that I have gleaned from several sources. I&rsquo;ve tested some the information on a
+        couple of examples of these displays.</p>
+
+    <h3>Identifying the parts of the display</h3>
+
+    <p>The image below shows the 4 digits &ndash; <em>1 to 4</em> &ndash; and the segments of each digit labelled
+        <em>A..G</em> and <em>dp</em> (decimal point).</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-led-segments_633x275.png" width="633"
+            height="275" alt="Labelling of LED segments"></p>
+
+    <p> Using this information we can reference each segment of each digit as <code>XY</code> where <code>X</code> is
+        the digit number and <code>Y</code> is the segment identifier. For example:</p>
+
+    <ul>
+        <li><code>1A</code> is segment A of digit 1</li>
+        <li><code>4G</code> is segment G of digit 4</li>
+        <li><code>3dp</code> is the decimal point of digit 3</li>
+    </ul>
+
+    <h3>The display pinout</h3>
+
+    <p>The display has 36 pins. Pins 1 to 18 are adjacent to the side that is labelled with the model number (i.e. the
+        side &ldquo;below&rdquo; the digits) with pin 1 on the left and pin 18 on the right. Pins 19 to 36 are adjacent
+        to the side &ldquo;above&rdquo; the digits with pin 19 on the right and pin 36 on the left, above pin 1. The
+        figure below should clarify:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-pinout_458x230.png" width="458"
+            height="230" alt="Pinout illustration"></p>
+
+    <h3>Map of LED digits &amp; segments to pins</h3>
+
+    <p>This section shows which pins control each segment of each digit. Since the display is common anode, there is
+        only one anode pin per digit. These are as follows:</p>
+
+    <table class="table table-responsive">
+        <thead class="thead-light text-center">
+            <tr>
+                <th scope="row" class="text-left">Digit</th>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <th scope="row" class="text-left">Pin #</th>
+                <td>32</td>
+                <td>31</td>
+                <td>23</td>
+                <td>22</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>There is a cathode, and a related pin, for every LED segment. These are as follows:</p>
+
+    <table class="table table-responsive">
+        <thead class="thead-light text-center">
+            <tr>
+                <th scope="col" rowspan="2" class="align-middle">Segment</th>
+                <th scope="col" colspan="4">Digit</th>
+            </tr>
+            <tr>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <th scope="row">A</th>
+                <td>34</td>
+                <td>29</td>
+                <td>25</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <th scope="row">B</th>
+                <td>33</td>
+                <td>28</td>
+                <td>24</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <th scope="row">C</th>
+                <td>3</td>
+                <td>8</td>
+                <td>12</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <th scope="row">D</th>
+                <td>2</td>
+                <td>6</td>
+                <td>11</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <th scope="row">E</th>
+                <td>1</td>
+                <td>5</td>
+                <td>10</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <th scope="row">F</th>
+                <td>36</td>
+                <td>30</td>
+                <td>27</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <th scope="row">G</th>
+                <td>35</td>
+                <td>7</td>
+                <td>26</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <th scope="row">dp</th>
+                <td>4</td>
+                <td>9</td>
+                <td>13</td>
+                <td>18</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Map of pins to LED digits &amp; segments</h3>
+
+    <p>This section details the function of each pin. Details are given in the following table:</p>
+
+    <table class="table table-responsive">
+        <thead class="thead-light text-center">
+            <tr>
+                <th scope="col" class="align-middle">Pin #</th>
+                <th scope="col" class="align-middle">Segment / Digit</th>
+                <th scope="col" class="align-middle">Anode or Cathode<br>(&CirclePlus; or &CircleMinus;)</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>1</td>
+                <td>1E</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1D</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1C</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1dp</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2E</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2D</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>2G</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>2C</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>2dp</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>3E</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>3D</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>3C</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>3dp</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>4E</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>4D</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>4G</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>4C</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>4dp</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>4B</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>4A</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>4F</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>4</td>
+                <td>&CirclePlus;</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>3</td>
+                <td>&CirclePlus;</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>3B</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>3A</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>3G</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>27</td>
+                <td>3F</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>2B</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>2A</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>2F</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>2</td>
+                <td>&CirclePlus;</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>1</td>
+                <td>&CirclePlus;</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>1B</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>1A</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>35</td>
+                <td>1G</td>
+                <td>&CircleMinus;</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td>1F</td>
+                <td>&CircleMinus;</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section> <!-- /#pin-out -->
+
+<section id="circuit">
+
+    <h2>Circuit &amp; Code</h2>
+
+    <p>Of course, with 36 pins, it's unrealistic to expect to connect the display to a microcontroller directly. Some kind of multiplexing will be required.</p>
+
+    <h3>Circuit Design</h3>
+
+    <p>I've chosen to multiplex the cathode side of the display. This means that we common together the same segment for each digit. Using the information in the ables above the following pin connections can be made:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-common-segment-wiring.png" width="404"
+        height="303" alt="E40561 Common segment wiring diagram"></p>
+
+    <p>The digit pins 1 to 4, being anodes, require supplying with 5V DC (because this is a 5V device). To avoid placing too much load on the microcontroller, these pins will be fed via PNP transistors coupled to a suitable 5V supply. The transistor will be switched by digital output pins on the microcontroller.</p>
+
+    <p>The segment pins A to G and dp, being cathodes must be connected to low (0V) in order to be lit. This is done by connecting each commoned segment to a different pin of a 74HC595 shoft register, via a current limiting 470&ohm; resistor. The shift register is then controlled by three digital output pins of the microcontroller.</p>
+
+    <p>The following circuit implements this design:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-mux-circuit.png" width="1220"
+        height="920" alt="E40561 multiplex circuit"></p>
+
+<p>As can bee seen, the chosen microcontroller is an Arduino Nano. This is powered fro the 5V power supply and shares a common ground.</p>
+
+<h3>Code</h3>
+
+<p>The code is used to:</p>
+
+<ol>
+    <li>Define a set of digits to be displayed.</li>
+    <li>Sets the 4 digits currently being displayed.</li>
+    <li>Perform the multiplexing.</li>
+</ol>
+
+<p>Here's the code:</p>
+
+<pre class="pre-scrollable "><code class="language-c">// Pins used to control shift register
+#define LATCH_PIN 8
+#define CLOCK_PIN 12
+#define DATA_PIN 11
+
+// Number of digits
+#define DIGIT_COUNT 4
+
+// Pins used to switch each digit on or off
+// Note that LOW values on these pins turns the digit ON and HIGH values turn the
+// digit off this is because we're using PNP transistors which switch on when their
+// base is grounded
+const byte digitPins[DIGIT_COUNT] = {5, 4, 3, 2};
+
+byte flag = false;
+byte digit = 0;
+
+// Define a mask for each segment: storing this pattern in the shift register will
+// illuminate that segment alone.
+// NOTE: Because this is a common anode display, we must connect the segment
+//       cathodes to ground to illuminate them so we specify 1 (logic high) to
+//       disconnect the segment from ground and 0 (low) to connect it to ground
+#define SEGMENT_A   0b11111101
+#define SEGMENT_B   0b11111011
+#define SEGMENT_C   0b11110111
+#define SEGMENT_D   0b11101111
+#define SEGMENT_E   0b11011111
+#define SEGMENT_F   0b10111111
+#define SEGMENT_G   0b01111111
+#define SEGMENT_DP  0b11111110
+#define SEGMENT_OFF 0b11111111
+
+// ledChars[] specifies the segments to illuminate for each digit.
+// &quot;0&quot; is defined at index 0, &quot;1&quot; is defined at index 1 through to &quot;9&quot; being defined
+// at index 9. Index 10 stores the value required to switch all segments off
+// We AND the bitmasks of each required segment to create a &quot;character&quot; to display
+const byte ledChars[] = {
+    // Digit 0
+    SEGMENT_A &amp; SEGMENT_F &amp; SEGMENT_B &amp; SEGMENT_E &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 1 -&gt; &quot;1&quot;
+    SEGMENT_B &amp; SEGMENT_C,
+    // Index 2 -&gt; &quot;2&quot;
+    SEGMENT_A &amp; SEGMENT_B &amp; SEGMENT_G &amp; SEGMENT_E &amp; SEGMENT_D,
+    // Index 3 -&gt; &quot;3&quot;
+    SEGMENT_A &amp; SEGMENT_B &amp; SEGMENT_G &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 4 -&gt; &quot;4&quot;
+    SEGMENT_F &amp; SEGMENT_B &amp; SEGMENT_G &amp; SEGMENT_C,
+    // Index 5 -&gt; &quot;5&quot;
+    SEGMENT_A &amp; SEGMENT_F &amp; SEGMENT_G &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 6 -&gt; &quot;6&quot;
+    SEGMENT_A &amp; SEGMENT_F &amp; SEGMENT_G &amp; SEGMENT_E &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 7 -&gt; &quot;7&quot;
+    SEGMENT_A &amp; SEGMENT_B &amp; SEGMENT_C,
+    // Index 8 -&gt; &quot;8&quot;
+    SEGMENT_A &amp; SEGMENT_F &amp; SEGMENT_B &amp; SEGMENT_G &amp; SEGMENT_E &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 9 -&gt; &quot;9&quot;
+    SEGMENT_A &amp; SEGMENT_F &amp; SEGMENT_B &amp; SEGMENT_G &amp; SEGMENT_C &amp; SEGMENT_D,
+    // Index 10 -&gt; all segments off
+    SEGMENT_OFF
+};
+
+#define LEDCHAR_SPACE 10   // index of space character (i.e. all sgements off)
+
+// Add the decimal point to given bitmask v
+#define addDp(v) ( (v) &amp; SEGMENT_DP )
+// Remove the decimal point from given bitmask v
+#define removeDp(v) ( (v) | ~SEGMENT_DP)
+
+// digits[] stores the four digits to be display:
+// digits[n] stores digit n+1, e.g. digits[2] stores digit 3
+// initialised so that the outer digits are off  and the middle digits are hyphens
+byte digits[DIGIT_COUNT] = {SEGMENT_OFF, SEGMENT_G, SEGMENT_G, SEGMENT_OFF};
+
+// Number of patterns of digits to be displayed
+#define PATTERN_COUNT 4
+
+void setup() {
+    // Set up output pins for shift register
+    pinMode(LATCH_PIN, OUTPUT);
+    pinMode(CLOCK_PIN, OUTPUT);
+    pinMode(DATA_PIN, OUTPUT);
+    // Set up output pins for digits &amp; make sure they're all off
+    for (int i = 0; i &lt; DIGIT_COUNT; i++) {
+        pinMode(digitPins[i], OUTPUT);
+        digitalWrite(digitPins[i], HIGH);
+    }
+    // Intialise display: all off
+    updateDisplay();
+}
+
+void loop() {
+    // In the loop we set up and display a sequence of digits for time delta ms then
+    // change to another digit sequence. After PATTERN_COUNT different sequences have
+    // been displayed we start again
+    static long ticks = millis();
+    static long lastChange = 0;
+    const long delta = 2000;
+    static int index = 0;       // index of current pattern of digits
+
+    ticks = millis();
+    if (ticks - lastChange &gt;= delta) {
+        // Time's up: set required pattern
+        switch (index) {
+            case 0:
+                // Display &quot;0123&quot;,
+                digits[0] = ledChars[0];
+                digits[1] = ledChars[1];
+                digits[2] = ledChars[2];
+                digits[3] = ledChars[3];
+                break;
+            case 1:
+                // Display &quot;4567&quot;
+                digits[0] = ledChars[4];
+                digits[1] = ledChars[5];
+                digits[2] = ledChars[6];
+                digits[3] = ledChars[7];
+                break;
+            case 2:
+                // Display &quot;89&quot;
+                digits[0] = ledChars[8];
+                digits[1] = ledChars[9];
+                digits[2] = ledChars[LEDCHAR_SPACE];
+                digits[3] = ledChars[LEDCHAR_SPACE];
+                break;
+            case 3:
+                // Display &quot;3.142&quot;
+                digits[0] = addDp(ledChars[3]);
+                digits[1] = removeDp(addDp(ledChars[1]));  // checking removeDp() macro works!
+                digits[2] = ledChars[4];
+                digits[3] = ledChars[2];
+                break;
+        }
+        lastChange = ticks;
+        index = (index + 1) % PATTERN_COUNT;
+    }
+    updateDisplay();
+}
+
+void shiftOutByte(byte v) {
+    // Writes bit mask v required to shift register
+    digitalWrite(LATCH_PIN, LOW);
+    shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, v);
+    digitalWrite(LATCH_PIN, HIGH);
+}
+
+void updateDisplay() {
+    // Performs multiplexing
+    // Each time this function is called it switches on the next digit in turn
+    static byte curDigit = 0;   // digit to be lit up - starts at 0
+    // Turn off all digits
+    for (byte d = 0; d &lt; DIGIT_COUNT; d++) {
+        digitalWrite(digitPins[d], true);
+    }
+    // Display segments of current digit
+    shiftOutByte(digits[curDigit]);
+    digitalWrite(digitPins[curDigit], false);
+    // Record digit to be displayed on next call
+    curDigit = (curDigit + 1) % DIGIT_COUNT;
+    // Delay arrived at by experiment: compromise between brightness and flicker
+    // Adjust as required
+    delay(6);
+}</code></pre>
+
+<p>Here's an overview of what's going on:</p>
 
 <ul>
-    <li><code>1A</code> is segment A of digit 1</li>
-    <li><code>4G</code> is segment G of digit 4</li>
-    <li><code>3dp</code> is the decimal point of digit 3</li>
+    <li class="my-2">We start by defining which pins of the Arduino Nano to use for controlling the switch register and the display's digits.</li>
+    <li class="my-2">Next we define bitmasks for the display segments A..G &amp; dp. These bitmasks relate to the output from the shift register, with the least significant bit controlling Q0 through to the most significant bit controlling Q7. The bitmasks are all 1s except for a zero to switch on the segment. Remember we&rsquo;re grounding the segments we want to turn on.</li>
+    <li class="my-2">We now set up the <code>ledChars[]</code> array to store a bitmask for each of the characters we want to be able to display in a single display digit. Here <code>ledChars[0]</code> represents digit &quot;0&quot;, <code>ledChars[1]</code> represents &quot;1&quot; etc. <code>ledChars[10]</code> has all segments off. These character bitmasks are created by ANDing together the required segment bitmasks.</li>
+    <li class="my-2">There are a couple of macros <code>addDp()</code> and <code>removeDp()</code> that can be used to switch on or off the decimal point for a given digit. For example <code>addDp(ledChars[3])</code> returns the bitmask need to display digit &quot;3&quot; with the decimal point illuminated.</li>
+        <li class="my-2">We set up the <code>digits[]</code> array to store the bitmask of the character to be displayed in each digit. <code>digits[0]</code> stores digit 1 and so on. <code>digits[]</code> is intialised to display &quot;&nbsp;--&nbsp;&quot;</li>
+        <li class="my-2"><code>PATTERN_COUNT</code> records the number of different patterns of digits to display in the main loop sequence.</li>
+        <li class="my-2">In <code>setup()</code> we simply set all the pins we are using as output pins and ensure all digits are off: digits are turned off by setting them <code>HIGH</code>. Finally we call <code>updateDisplay()</code> to intialise the LED digits to &quot;&nbsp;--&nbsp;&quot;.</li>
+        <li class="my-2">In the main loop we display each of four patterns in turn, changing patterns every 2 seconds. Note though that we call <code>updateDisplay()</code> every time <code>loop()</code> is called.</li>
+        <li class="my-2"><code>shiftOutByte()</code> simply writes the given byte value to the shift register. A digit bitmask is always passed to this function.</li>
+        <li class="my-2">Finally, <code>updateDisplay()</code> performs the actual multiplexing. Each time it is called it displays one of the four digits, in sequence, turning the others off. There is a brief delay before returning. This is to give the LEDs time to switch on before being turned off again, ensuring they are bright enough. There is a balance to struck between getting this delay long enough to get the desired brightness and short enough to avoid flicker. Adjust as necessary.</li>
 </ul>
 
-<h2>The display pinout</h2>
+<h3>Breadboard test rig</h3>
 
-<p>The display has 36 pins. Pins 1 to 18 are adjacent to the side that is labelled with the model number (i.e. the side &ldquo;below&rdquo; the digits) with pin 1 on the left and pin 18 on the right. Pins 19 to 36 are adjacent to the side &ldquo;above&rdquo; the digits with pin 19 on the right and pin 36 on the left, above pin 1. The figure below should clarify:</p>
+<p>To make sure all this theory worked out in practise I built a breadboard test rig using the wiring diagram and code above. The code was uploaded to the Nano via USB and then the USB power was removed and the Nano was rewired to get its power from a 5V breadboard power supply.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-pinout_458x230.png" width="458" height="230" alt="Pinout illustration"></p>
+<p>The following brief video shows the circuit with the Nano running the above code:</p>
 
-<h2>Map of LED digits &amp; segments to pins</h2>
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/wNxJNIdPlEY" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="caption">Mulitplexing E40561 4 digit common anode LED display (simplified version)</p>
+</div>
 
-<p>This section shows which pins control each segment of each digit. Since the display is common anode, there is only one anode pin per digit. These are as follows:</p>
+<p>This second, longer, video shows the same circuit running enhanced code that defines and defines additional characters and displays a longer sequence.</p>
 
-<table class="table table-responsive">
-    <thead class="thead-light text-center">
-        <tr>
-            <th scope="row" class="text-left">Digit</th>
-            <th scope="col">1</th>
-            <th scope="col">2</th>
-            <th scope="col">3</th>
-            <th scope="col">4</th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        <tr>
-            <th scope="row" class="text-left">Pin #</th>
-            <td>32</td>
-            <td>31</td>
-            <td>23</td>
-            <td>22</td>
-        </tr>
-    </tbody>
-</table>
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/vH0rLT2s3HM" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="caption">Mulitplexing E40561 4 digit common anode LED display (enhanced version)</p>
+</div>
 
-<p>There is a cathode, and a related pin, for every LED segment. These are as follows:</p>
+<p class="alert alert-warning"><strong>Note:</strong> the circuit shown in these videos is the same as that in the circuit diagram above except that 1k&ohm; current limiting resistors are used with the LED segments instead of 470&ohm; resistors. This is a hang over from early development when power for the LEDs was being taken from the microcontroller. The high value resistors were used protect the microcontroller pins from excessive power draw.</p>
 
-<table class="table table-responsive">
-    <thead class="thead-light text-center">
-        <tr>
-            <th scope="col" rowspan="2" class="align-middle">Segment</th>
-            <th scope="col" colspan="4">Digit</th>
-        </tr> 
-        <tr>
-            <th scope="col">1</th>
-            <th scope="col">2</th>
-            <th scope="col">3</th>
-            <th scope="col">4</th>
-        </tr>   
-    </thead>
-    <tbody class="text-center">
-        <tr>
-            <th scope="row">A</th>
-            <td>34</td>
-            <td>29</td>
-            <td>25</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <th scope="row">B</th>
-            <td>33</td>
-            <td>28</td>
-            <td>24</td>
-            <td>19</td>
-        </tr>
-        <tr>
-            <th scope="row">C</th>
-            <td>3</td>
-            <td>8</td>
-            <td>12</td>
-            <td>17</td>
-        </tr>
-        <tr>
-            <th scope="row">D</th>
-            <td>2</td>
-            <td>6</td>
-            <td>11</td>
-            <td>15</td>
-        </tr>
-        <tr>
-            <th scope="row">E</th>
-            <td>1</td>
-            <td>5</td>
-            <td>10</td>
-            <td>14</td>
-        </tr>
-        <tr>
-            <th scope="row">F</th>
-            <td>36</td>
-            <td>30</td>
-            <td>27</td>
-            <td>21</td>
-        </tr>
-        <tr>
-            <th scope="row">G</th>
-            <td>35</td>
-            <td>7</td>
-            <td>26</td>
-            <td>16</td>
-        </tr>
-        <tr>
-            <th scope="row">dp</th>
-            <td>4</td>
-            <td>9</td>
-            <td>13</td>
-            <td>18</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Map of pins to LED digits &amp; segments</h2>
-
-<p>This section details the function of each pin. Details are given in the following table:</p>
-
-<table class="table table-responsive">
-    <thead class="thead-light text-center">
-        <tr>
-            <th scope="col" class="align-middle">Pin #</th>
-            <th scope="col" class="align-middle">Segment / Digit</th>
-            <th scope="col" class="align-middle">Anode or Cathode<br>(&CirclePlus; or &CircleMinus;)</th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        <tr>
-            <td>1</td>
-            <td>1E</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>1D</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1C</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>1dp</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>2E</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>2D</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>2G</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>2C</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>2dp</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>3E</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>3D</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>3C</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>3dp</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>4E</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>4D</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>4G</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>4C</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>18</td>
-            <td>4dp</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>19</td>
-            <td>4B</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>4A</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>21</td>
-            <td>4F</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>22</td>
-            <td>4</td>
-            <td>&CirclePlus;</td>
-        </tr>
-        <tr>
-            <td>23</td>
-            <td>3</td>
-            <td>&CirclePlus;</td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>3B</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>25</td>
-            <td>3A</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>26</td>
-            <td>3G</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>27</td>
-            <td>3F</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>28</td>
-            <td>2B</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>29</td>
-            <td>2A</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>30</td>
-            <td>2F</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>31</td>
-            <td>2</td>
-            <td>&CirclePlus;</td>
-        </tr>
-        <tr>
-            <td>32</td>
-            <td>1</td>
-            <td>&CirclePlus;</td>
-        </tr>
-        <tr>
-            <td>33</td>
-            <td>1B</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>34</td>
-            <td>1A</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>35</td>
-            <td>1G</td>
-            <td>&CircleMinus;</td>
-        </tr>
-        <tr>
-            <td>36</td>
-            <td>1F</td>
-            <td>&CircleMinus;</td>
-        </tr>
-    </tbody>
-</table>
+</section> <!-- /#circuit -->
