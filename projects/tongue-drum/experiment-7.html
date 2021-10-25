@@ -1,0 +1,237 @@
+---
+layout: default
+---
+<h1>#7: Comparison of grounded and un-grounded sensors</h1>
+
+<p>Some research had indicated that sensor readings may be more stable when the sensor has a grounding
+    &ldquo;plate&rdquo; connected to the
+    microcontroller ground. This experiment tests that hyphothesis by comparing the performance of two different
+    versions of the vinyl covered sensor: one grounded and the other not.</p>
+
+<p>The ungrounded sensor used in <a href="./experiment-6">experiment #6</a> was reused in this experiment. A
+    new sensor was created, similar to the ungrounded sensor, except that it has a second 6&times;4cm sheet of foil
+    glued to its rear. This grounding foil is attached with UHU glue. It has a piece of adhesive copper tape stuck to it
+    that, in turn, has a piece of single core wire soldered to it. This wire can be connected to a microcontroller
+    ground pin
+    via a DuPont cable. The foil was the same type as that used on the front of the sensor.</p>
+
+<p>The following photos illustrate the front and rear of both sensors. The rear view was photographed before the backing
+    material was applied:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/vinyl-sensors-front_400x322.jpg"
+        width="400" height="322" alt="Photo of grounded and ungrounded vinyl covered sensors, rear"></p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/vinyl-sensors-rear_400x322.jpg"
+        width="400" height="322" alt="Photo of grounded and ungrounded vinyl covered sensors, rear"></p>
+
+<p>The ungrounded sensor is labelled as sensor 9 and the grounded version is sensor 9G. The resistances between the
+    bottom of the (front) foil to the end of DuPont cables connected to the (front) pins of each sensor are 0.8&ohm;
+    and 0.9&ohm; respectively (including the multimeter&rsquo;s native resistance).</p>
+
+<h2>Methodology</h2>
+
+<p>Both sensors were tested as in <a href="./experiment-6">experiment #6</a>, at both 25 and 50 samples per reading. The
+    right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The
+    resulting sensor readings were written to an Arduino Uno&rsquo;s serial port and captured to text files using <a
+        href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
+
+<p class="alert alert-info">Note that, the uncovered control sensor used in <a href="./experiment-6">experiment #6</a>
+    was not used here.</p>
+
+<h2>Circuit</h2>
+
+<p>The circuit was based on that used in <a href="./experiment-6">experiment #6</a>, except that it has a
+    connection to the Arduino's ground pin that is attached when the grounded sensor is in circuit, and detached when
+    the ungrounded sensor is connected:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/circuit-diagram_954x253.png"
+        width="954" height="253" alt="Generic circuit schematic"></p>
+
+<p>The following photos shows the circuit adapted for use with the ungrounded and grounded vinyl sensors, 9 and 9G
+    respectively:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/circuit-photo-9_800x450.jpg"
+        width="800" height="450" alt="Photo of actual circuit with ungrounded sensor #9 attached"></p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/circuit-photo-9G_800x450.jpg"
+        width="800" height="450" alt="Photo of actual circuit with grounded sensor #9G attached"></p>
+
+<p class="alert alert-info">Note that the grey DuPont cable, connected to ground that is present in the second photo
+    is not present in the first photo.</p>
+
+<h2>Code</h2>
+
+<p>Once again the Arduino sketch <a
+        href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a>
+    is used. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over
+    the Arduino&rsquo;s serial port while indicating when the user should touch the sensor by means of tones emitted
+    though a
+    speaker or buzzer.</p>
+
+<h2>Results</h2>
+
+<p>The contents of the text files containing results for both sensors were analysed in a Libre Office Calc spreadsheet.
+    Results were tabulated in two different ways. Firstly, the sensor readings at each sample rate were collected
+    together, analysed and graphed. Secondly, the results for each sensor were grouped by sample rate and again analysed
+    and graphed.</p>
+
+<p>The following statistics were calculated, again as per <a href="./experiment-6">experiment #6</a>:</p>
+
+<ol>
+    <li>The maximum reading</li>
+    <li>The average of all readings</li>
+    <li>The <em>lower average</em>, i.e. the average of the lower readings, where &ldquo;lower&rdquo; is taken to be
+        values between 0 and the average of all readings, inclusive.</li>
+    <li>The <em>upper average</em>, i.e. the average of the higher readings, where &ldquo;upper&rdquo; is taken to be
+        values greater than the average of all readings.</li>
+</ol>
+
+<p>To see all the data and the analysis, <a href="/downloads/electro-tongue-drum-experiment-7-data.zip">download the
+        spreadsheet (zipped)</a>.</p>
+
+<h3>Comparison of sensors to each other</h3>
+
+<p>The following image carousel shows two graphs, one for each sample rate, that show the relative performance of
+    each sensor. The y-axis shows the sensor reading as raw data while the x-axis is time:</p>
+
+<div id="carouselIndicatorsA1" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsA1" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsA1" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-7/all-sensors-25-samples-raw-graph.png"
+                alt="Graph comparing raw readings for both sensors using 25 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-7/all-sensors-50-samples-raw-graph.png"
+                alt="Graph comparing raw readings for both sensors using 50 samples per reading">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicatorsA1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicatorsA1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<p>The next image carousel also contains an image for each sample rate, but this time plots the maximum, average, lower
+    average and upper average readings for each sensor. The y-axis is the sensor reading while the different sensors are
+    represented on the x-axis:</p>
+
+<div id="carouselIndicatorsA2" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsA2" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsA2" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100"
+                src="/assets/img/projects/tongue-drum/exp-7/all-sensors-25-samples-stats-graph.png"
+                alt="Graph comparing statistics for both sensors using 25 samples per reading">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100"
+                src="/assets/img/projects/tongue-drum/exp-7/all-sensors-50-samples-stats-graph.png"
+                alt="Graph comparing statistics for both sensors using 50 samples per reading">
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicatorsA2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicatorsA2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<p>The following table shows the ratio size of maximum, average, lower average and upper average readings for the
+    grounded sensor in relation to the ungrounded sensor, at the two different sample rates.</p>
+
+<table class="table table-responsive">
+    <caption>Ratio of statistics for grounded sensor against ungrounded sensor expressed as a percentage</caption>
+    <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col" class="text-left">Value</th>
+            <th scope="col">25 samples / reading</th>
+            <th scope="col">50 samples / reading</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <td class="text-left">Max reading</td>
+            <td>79%</td>
+            <td>85%</td>
+        </tr>
+        <tr class="text-center">
+            <td class="text-left">Avg of all readings</td>
+            <td>90%</td>
+            <td>85%</td>
+        </tr>
+        <tr class="text-center">
+            <td class="text-left">Avg of readings &gt; Avg reading</td>
+            <td>84%</td>
+            <td>88%</td>
+        </tr>
+        <tr class="text-center">
+            <td class="text-left">Avg of readings &lt;= Avg reading</td>
+            <td>184%</td>
+            <td>97%</td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="alert alert-warning">In the above table the readings on which the &quot;Avg of readings &lt;= Avg
+    reading&quot; entries are based are so small as to make the averages quite meaningless. (The raw data in this case
+    ranges from 24 to 44 at 25 samples per reading and 36 to 37 at 50 samples per reading). Other ratios in the tables
+    are based on a large enough range of values for the comparison to have some meaning.</p>
+
+<h3>Comparison of samples per reading for each sensor</h3>
+
+<p>The following image carousel shows two graphs, one graph for each sensor, comparing the readings at different sample
+    rates:</p>
+
+<div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselIndicatorsB" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselIndicatorsB" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-7/sensor-9-graph.png"
+                alt="Graph comparing 25 &amp; 50 samples per reading for ungrounded Sensor 9">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/assets/img/projects/tongue-drum/exp-7/sensor-9G-graph.png"
+                alt="Graph comparing 25 &amp; 50 samples per reading for grounded Sensor 9G">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselIndicatorsB" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselIndicatorsB" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<h2>Conclusions</h2>
+
+<p>The first thing to notice is that the highest readings for the grounded sensor are between 80% and 90% of the
+    equivalent readings for the ungrounded sensor. However, there is still sufficient difference between the higher and
+    lower average readings to make it easy to distinguish whether the sensor is or is not being touched.</p>
+
+<p>It is clear from the graphs that the readings for the grounded sensor are, in general, smoother than those for the
+    ungrounded sensor.</p>
+
+<p class="lead">Because of the smoother readings exhibited by grounded sensors, and the fact there is still a
+    significant difference between upper and lower average readings, it is recommended that sensors used in the
+    instrument should be grounded.</p>
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
