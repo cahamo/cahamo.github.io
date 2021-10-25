@@ -53,6 +53,14 @@ h6, .h6 {
     font-style: italic;
 }
 
+table caption {
+    caption-side: top;
+    font-weight: bold;
+    border-top: 1px solid $color-grey-light;
+    padding: 0.5rem;
+    text-align: center;
+}
+
 .list-group {
     border: $color-grey-light 2px solid;
     border-radius: 0;
