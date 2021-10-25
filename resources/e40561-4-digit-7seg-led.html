@@ -3,7 +3,7 @@ layout: default
 ---
 <h1>Using the E40561-G-UR3-0-W 4 Digit 7 Segment LED</h1>
 
-<p>This page contains information I've gethered to aid in using this 4 digit 7 segment common anode LED display (and
+<p>This page contains information I've gathered to aid in using this 4 digit 7 segment common anode LED display (and
     other related common anode displays). The information falls into two main sections:</p>
 
 <ol>
@@ -16,7 +16,7 @@ layout: default
 
     <h2>Pin-out</h2>
 
-    <p>Information on the pinout of is relatively hard to find and a little inpenetrable when you do. This page
+    <p>Information on the pinout of the E40561 is relatively hard to find, and a little inpenetrable when you do. This page
         summarise the information that I have gleaned from several sources. I&rsquo;ve tested some the information on a
         couple of examples of these displays.</p>
 
@@ -49,7 +49,7 @@ layout: default
 
     <h3>Map of LED digits &amp; segments to pins</h3>
 
-    <p>This section shows which pins control each segment of each digit. Since the display is common anode, there is
+    <p>This section describes which pins control each segment of each digit. Since the display is common anode, there is
         only one anode pin per digit. These are as follows:</p>
 
     <table class="table table-responsive">
@@ -351,38 +351,42 @@ layout: default
     <h2>Circuit &amp; Code</h2>
 
     <p>Of course, with 36 pins, it's unrealistic to expect to connect the display to a microcontroller directly. Some kind of multiplexing will be required.</p>
-
+    
+    <p>In this section I present a sample circuit and associated Arduino sketch that performs such multiplexing.</p>
+    
     <h3>Circuit Design</h3>
 
-    <p>I've chosen to multiplex the cathode side of the display. This means that we common together the same segment for each digit. Using the information in the ables above the following pin connections can be made:</p>
+    <p>I've chosen to multiplex the cathode side of the display. This means that we common together the pins controlling the same segment for each digit. Using the information in the tables above, the following pin connections can be made:</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-common-segment-wiring.png" width="404"
         height="303" alt="E40561 Common segment wiring diagram"></p>
 
-    <p>The digit pins 1 to 4, being anodes, require supplying with 5V DC (because this is a 5V device). To avoid placing too much load on the microcontroller, these pins will be fed via PNP transistors coupled to a suitable 5V supply. The transistor will be switched by digital output pins on the microcontroller.</p>
+    <p>The digit pins 1 to 4, being anodes, require supplying with 5V DC. To avoid placing too much load on the microcontroller, these pins should be fed via PNP transistors coupled to a suitable 5V supply. The transistors are then switched by coupling digital output pins of the microcontroller to the base of the transistors via suitable resistors.</p>
 
-    <p>The segment pins A to G and dp, being cathodes must be connected to low (0V) in order to be lit. This is done by connecting each commoned segment to a different pin of a 74HC595 shoft register, via a current limiting 470&ohm; resistor. The shift register is then controlled by three digital output pins of the microcontroller.</p>
+    <p>The segment pins A to G and dp, being cathodes, must be connected to 0V in order to be lit. This can be done by connecting each commoned segment to a different output pin of a 74HC595 shift register, via a current limiting resistor. The shift register is then controlled by three digital output pins of the microcontroller.</p>
 
     <p>The following circuit implements this design:</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-mux-circuit.png" width="1220"
         height="920" alt="E40561 multiplex circuit"></p>
 
-<p>As can bee seen, the chosen microcontroller is an Arduino Nano. This is powered fro the 5V power supply and shares a common ground.</p>
+    <p>As can bee seen, the chosen microcontroller is an Arduino Nano. This is powered from the 5V power supply via its 5V pin.</p>
+    
+    <p class="alert alert-warning">If you choose to power the Nano via its USB port then disconnect its 5V pin from the main power supply but ensure that the Nano's ground remains connected to the power supply's ground.</p>
 
-<h3>Code</h3>
+    <h3>Code</h3>
 
-<p>The code is used to:</p>
+    <p>The code is used to:</p>
 
-<ol>
-    <li>Define a set of digits to be displayed.</li>
-    <li>Sets the 4 digits currently being displayed.</li>
-    <li>Perform the multiplexing.</li>
-</ol>
+    <ol>
+        <li>Define a set of digit &amp; other characters to be displayed.</li>
+        <li>Record the 4 digits currently being displayed.</li>
+        <li>Perform the multiplexing.</li>
+    </ol>
 
-<p>Here's the code:</p>
+    <p>Here's the code:</p>
 
-<pre class="pre-scrollable "><code class="language-c">// Pins used to control shift register
+    <pre class="pre-scrollable "><code class="language-c">// Pins used to control shift register
 #define LATCH_PIN 8
 #define CLOCK_PIN 12
 #define DATA_PIN 11
@@ -545,43 +549,43 @@ void updateDisplay() {
     delay(6);
 }</code></pre>
 
-<p>Here's an overview of what's going on:</p>
+    <p>Here's an overview of what's going on:</p>
 
-<ul>
-    <li class="my-2">We start by defining which pins of the Arduino Nano to use for controlling the switch register and the display's digits.</li>
-    <li class="my-2">Next we define bitmasks for the display segments A..G &amp; dp. These bitmasks relate to the output from the shift register, with the least significant bit controlling Q0 through to the most significant bit controlling Q7. The bitmasks are all 1s except for a zero to switch on the segment. Remember we&rsquo;re grounding the segments we want to turn on.</li>
-    <li class="my-2">We now set up the <code>ledChars[]</code> array to store a bitmask for each of the characters we want to be able to display in a single display digit. Here <code>ledChars[0]</code> represents digit &quot;0&quot;, <code>ledChars[1]</code> represents &quot;1&quot; etc. <code>ledChars[10]</code> has all segments off. These character bitmasks are created by ANDing together the required segment bitmasks.</li>
-    <li class="my-2">There are a couple of macros <code>addDp()</code> and <code>removeDp()</code> that can be used to switch on or off the decimal point for a given digit. For example <code>addDp(ledChars[3])</code> returns the bitmask need to display digit &quot;3&quot; with the decimal point illuminated.</li>
-        <li class="my-2">We set up the <code>digits[]</code> array to store the bitmask of the character to be displayed in each digit. <code>digits[0]</code> stores digit 1 and so on. <code>digits[]</code> is intialised to display &quot;&nbsp;--&nbsp;&quot;</li>
-        <li class="my-2"><code>PATTERN_COUNT</code> records the number of different patterns of digits to display in the main loop sequence.</li>
-        <li class="my-2">In <code>setup()</code> we simply set all the pins we are using as output pins and ensure all digits are off: digits are turned off by setting them <code>HIGH</code>. Finally we call <code>updateDisplay()</code> to intialise the LED digits to &quot;&nbsp;--&nbsp;&quot;.</li>
-        <li class="my-2">In the main loop we display each of four patterns in turn, changing patterns every 2 seconds. Note though that we call <code>updateDisplay()</code> every time <code>loop()</code> is called.</li>
+    <ul>
+        <li class="my-2">We start by defining which pins of the Arduino Nano to use for controlling the shift register and the display's digits.</li>
+        <li class="my-2">Next we define bitmasks for the display segments A..G &amp; dp. These bitmasks relate to the output from the shift register, with the least significant bit controlling Q0 through to the most significant bit controlling Q7. The bitmasks are all ones except for a zeros to switch on the relevant segment.</li>
+        <li class="my-2">We now set up the <code>ledChars[]</code> array to store a bitmask for each of the characters we want to be able to display. <code>ledChars[0]</code> represents &quot;0&quot;, <code>ledChars[1]</code> represents &quot;1&quot; etc. <code>ledChars[10]</code> has all segments off. These character bitmasks are created by ANDing together the required segment bitmasks we defined above.</li>
+        <li class="my-2">There are a couple of macros, <code>addDp()</code> and <code>removeDp()</code>, that can be used to switch on or off the decimal point for a given digit. For example <code>addDp(ledChars[3])</code> returns the bitmask need to display digit &quot;3&quot; with the decimal point illuminated.</li>
+        <li class="my-2">We set up the <code>digits[]</code> array to store the bitmask of the characters to be displayed in each of the four digits. <code>digits[0]</code> stores digit 1 and so on. <code>digits[]</code> is intialised to display &quot;&nbsp;--&nbsp;&quot;, i.e. space, dash, dash, space.</li>
+        <li class="my-2"><code>PATTERN_COUNT</code> records the number of different patterns of digits to display in the main loop sequence (see below).</li>
+        <li class="my-2">In <code>setup()</code> we simply set all pins as output pins and ensure all digits are off. Digits are turned off by setting them <code>HIGH</code>. Finally we call <code>updateDisplay()</code> to intialise the digits to display &quot;&nbsp;--&nbsp;&quot;.</li>
+        <li class="my-2">In the main loop we display four different patterns of digits in turn, changing patterns every 2 seconds. We call <code>updateDisplay()</code> every time <code>loop()</code> is called.</li>
         <li class="my-2"><code>shiftOutByte()</code> simply writes the given byte value to the shift register. A digit bitmask is always passed to this function.</li>
-        <li class="my-2">Finally, <code>updateDisplay()</code> performs the actual multiplexing. Each time it is called it displays one of the four digits, in sequence, turning the others off. There is a brief delay before returning. This is to give the LEDs time to switch on before being turned off again, ensuring they are bright enough. There is a balance to struck between getting this delay long enough to get the desired brightness and short enough to avoid flicker. Adjust as necessary.</li>
-</ul>
+        <li class="my-2">Finally, <code>updateDisplay()</code> performs the actual multiplexing. Each time it is called the function displays one of the four digits, in sequence, turning the others off. There is a brief delay before returning. This is to give the LEDs time to switch on before being turned off again, ensuring they are bright enough. There is a balance to struck between making this delay long enough to achieve the desired brightness and short enough to avoid flicker. Adjust as necessary.</li>
+    </ul>
 
-<h3>Breadboard test rig</h3>
+    <h3>Breadboard test rig</h3>
 
-<p>To make sure all this theory worked out in practise I built a breadboard test rig using the wiring diagram and code above. The code was uploaded to the Nano via USB and then the USB power was removed and the Nano was rewired to get its power from a 5V breadboard power supply.</p>
+    <p>To make sure all this theory worked out in practise I built a breadboard test rig using the wiring diagram and code above.</p>
 
-<p>The following brief video shows the circuit with the Nano running the above code:</p>
+    <p>The following short video shows the circuit with the Nano running the above code:</p>
 
-<div class="text-center">
-    <div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/wNxJNIdPlEY" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="text-center">
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/wNxJNIdPlEY" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="caption">Mulitplexing E40561 4 digit common anode LED display (simplified version)</p>
     </div>
-    <p class="caption">Mulitplexing E40561 4 digit common anode LED display (simplified version)</p>
-</div>
 
-<p>This second, longer, video shows the same circuit running enhanced code that defines and defines additional characters and displays a longer sequence.</p>
+    <p>This second, longer, video shows the same circuit running enhanced code that defines additional characters and displays a longer sequence.</p>
 
-<div class="text-center">
-    <div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/vH0rLT2s3HM" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="text-center">
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/vH0rLT2s3HM" title="YouTube video player: Mulitplexing E40561 4 digit common anode LED display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="caption">Mulitplexing E40561 4 digit common anode LED display (enhanced version)</p>
     </div>
-    <p class="caption">Mulitplexing E40561 4 digit common anode LED display (enhanced version)</p>
-</div>
 
-<p class="alert alert-warning"><strong>Note:</strong> the circuit shown in these videos is the same as that in the circuit diagram above except that 1k&ohm; current limiting resistors are used with the LED segments instead of 470&ohm; resistors. This is a hang over from early development when power for the LEDs was being taken from the microcontroller. The high value resistors were used protect the microcontroller pins from excessive power draw.</p>
+    <p class="alert alert-warning"><strong>Note:</strong> the circuit shown in these videos is the same as that in the circuit diagram above except that 1k&ohm; current limiting resistors have been used with the LED segments instead of 470&ohm; resistors. This is a hang over from when I was testing the circuit and wanted to give the LED segments extra protection. I simply forgot to swap them for 470&ohm; resistors later!</p>
 
 </section> <!-- /#circuit -->
