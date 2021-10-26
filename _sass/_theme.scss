@@ -138,3 +138,23 @@ pre {
     font-size: 90%;
     color: $color-grey-darker;
 }
+
+.badge-primary {
+    background-color: $color-primary;
+    color: $white;
+}
+
+// Page specific
+
+.home-page-welcome {
+    padding: 1rem;
+    background-image: url('/assets/img/cahamo-electro-logo-faded.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    .sub-text {
+        background-color: rgba(255, 255, 255, 80%);
+        padding: 0.25rem;
+    }
+}
