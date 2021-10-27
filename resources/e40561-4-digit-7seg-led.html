@@ -1,29 +1,26 @@
 ---
 layout: default
 ---
-<h1>Using the E40561-G-UR3-0-W 4 Digit 7 Segment LED</h1>
+<h1>Using the E40561 4 digit 7 segment common anode LED display</h1>
 
-<p>This page contains information I've gathered to aid in using this 4 digit 7 segment common anode LED display (and
-    other related common anode displays). The information falls into two main sections:</p>
+<p>This page contains information that has been gathered together to aid in using the <em>common anode</em> version of the E40561 display. The information is grouped into two main sections:</p>
 
 <ol>
-    <li>Information about the <a href="#pin-out">pin-out</a> of the display.</li>
-    <li>A <a href="#circuit">circuit &amp; code</a> for multiplexing the display using a microcontroller - in this case
-        an Arduino Nano.</li>
+    <li><a href="#pin-out"><strong>Pin-out</strong></a>: Information about the organisation of the display&rsquo;s 36 pins.</li>
+    <li><a href="#circuit"><strong>Circuit &amp; Code</strong></a>: A circuit and associated C code that can be used to multiplex the display using a microcontroller.</li>
 </ol>
+
+<p class="alert alert-info">The display I used to test this information was the E40561-G-UR3-0-W. The information should also apply to other common anode dislays in this series.</p>
 
 <section id="pin-out">
 
     <h2>Pin-out</h2>
 
-    <p>Information on the pinout of the E40561 is relatively hard to find, and a little inpenetrable when you do. This page
-        summarise the information that I have gleaned from several sources. I&rsquo;ve tested some the information on a
-        couple of examples of these displays.</p>
+    <p>Information on the pinout of the E40561 is relatively hard to find, and a little inpenetrable when you do find it. This section summarises information that I have gleaned from several sources. It has been tested on two examples of the E40561-G-UR3-0-W display.</p>
 
     <h3>Identifying the parts of the display</h3>
 
-    <p>The image below shows the 4 digits &ndash; <em>1 to 4</em> &ndash; and the segments of each digit labelled
-        <em>A..G</em> and <em>dp</em> (decimal point).</p>
+    <p>The image below shows the 4 digits and the segments of each digit labelled <em>A..G</em> and <em>dp</em> (decimal point).</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-led-segments_633x275.png" width="633"
             height="275" alt="Labelling of LED segments"></p>
@@ -39,18 +36,20 @@ layout: default
 
     <h3>The display pinout</h3>
 
-    <p>The display has 36 pins. Pins 1 to 18 are adjacent to the side that is labelled with the model number (i.e. the
-        side &ldquo;below&rdquo; the digits) with pin 1 on the left and pin 18 on the right. Pins 19 to 36 are adjacent
-        to the side &ldquo;above&rdquo; the digits with pin 19 on the right and pin 36 on the left, above pin 1. The
-        figure below should clarify:</p>
+    <p>The display has 36 pins. We&rsquo;ll treat the <em>bottom</em> of the display to be the side adjacent to the decimal point segments and the <em>top</em> to be the opposite side.</p>
+
+    <p>Pins 1 to 18 are arranged in ascending order along the bottom edge, from left to right, so that pin 1 is on the left and pin 18 is on the right. Pins 19 to 36 are arranged in ascending order, from <em>right to left</em>, along the top edge, with pin 19 on the right (above pin 18) and pin 36 on the left (above pin 1). The figure below should clarify:</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-pinout_458x230.png" width="458"
             height="230" alt="Pinout illustration"></p>
 
+    <p class="alert alert-info">On the displays I have, the part number is printed on the bottom side of the display.</p>
+
     <h3>Map of LED digits &amp; segments to pins</h3>
 
-    <p>This section describes which pins control each segment of each digit. Since the display is common anode, there is
-        only one anode pin per digit. These are as follows:</p>
+    <p>This section describes which pins control each segment of each digit.</p>
+
+    <p>Since the display is common anode, there is only one anode pin per digit. These are as follows:</p>
 
     <table class="table table-responsive">
         <thead class="thead-light text-center">
@@ -73,7 +72,7 @@ layout: default
         </tbody>
     </table>
 
-    <p>There is a cathode, and a related pin, for every LED segment. These are as follows:</p>
+    <p>There is a cathode pin for every LED segment. These are as follows:</p>
 
     <table class="table table-responsive">
         <thead class="thead-light text-center">
@@ -150,7 +149,7 @@ layout: default
 
     <h3>Map of pins to LED digits &amp; segments</h3>
 
-    <p>This section details the function of each pin. Details are given in the following table:</p>
+    <p>The following table details the function of each pin:</p>
 
     <table class="table table-responsive">
         <thead class="thead-light text-center">
@@ -350,20 +349,75 @@ layout: default
 
     <h2>Circuit &amp; Code</h2>
 
-    <p>Of course, with 36 pins, it's unrealistic to expect to connect the display to a microcontroller directly. Some kind of multiplexing will be required.</p>
-    
-    <p>In this section I present a sample circuit and associated Arduino sketch that performs such multiplexing.</p>
-    
+    <p>With 36 pins it is unrealistic to expect to connect the display to a microcontroller directly. Some kind of multiplexing will be required.</p>
+
+    <p>In this section I present a sample circuit and associated source code that performs such multiplexing.</p>
+
     <h3>Circuit Design</h3>
 
-    <p>I've chosen to multiplex the cathode side of the display. This means that we common together the pins controlling the same segment for each digit. Using the information in the tables above, the following pin connections can be made:</p>
+    <p>So that we can multiplex each digit, we must common together the cathodes of the same segment of each digit. For example, segments 1A, 2A, 3A &amp; 4A are commoned. Using the information in the tables above, the following pin connections need to be made:</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-common-segment-wiring.png" width="404"
         height="303" alt="E40561 Common segment wiring diagram"></p>
 
-    <p>The digit pins 1 to 4, being anodes, require supplying with 5V DC. To avoid placing too much load on the microcontroller, these pins should be fed via PNP transistors coupled to a suitable 5V supply. The transistors are then switched by coupling digital output pins of the microcontroller to the base of the transistors via suitable resistors.</p>
+    <p>We multiplex the display by supplying 5V to each digit&rsquo;s anode in sequence. For each digit we must connected the required segment cathodes to ground (0V).</p>
 
-    <p>The segment pins A to G and dp, being cathodes, must be connected to 0V in order to be lit. This can be done by connecting each commoned segment to a different output pin of a 74HC595 shift register, via a current limiting resistor. The shift register is then controlled by three digital output pins of the microcontroller.</p>
+    <p>The microcontroller will be used to perform the above sequencing. We will use 4 digital output pins to switch on and off the digits in sequence. The pins should&rsquo;t be connected directly to the display because the current required may be more than microcontroller can provide. So, we connect each microcontroller pin to the base of a PNP transistor, via a resistor. The emitter of the transistor is connected to a suitably rated 5V supply and the collector is connected to the required pin on the display.</p>
+
+    <p class="alert alert-info">Note that, because we are using PNP transistors, we must set the microcontroller pin to LOW to turn on the transistor, and hence the digit. Conversely setting the pin HIGH turns off the digit.</p>
+
+    <p>Now, we <em>could</em> connect each commoned set of cathode pins to one of 8 digital input pins on the microcontroller and turn the segments on and off by setting the state of the pins as required. But we will save more pins by using a shift register and connecting the segment pins to its output.</p>
+
+    <p>The 8 commoned segments map nicely onto the 8 output pins of the commonly used 74HC595 shift register, so we will use that. The commoned segments will be connected to the 74HC595&rsquo;s pins as follows:</p>
+
+    <table class="table table-responsive">
+        <thead class="thead-light text-center">
+            <tr>
+                <th scope="col" class="align-middle">Commoned segment pin</th>
+                <th scope="col" class="align-middle">74HC595 pin</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>dp</td>
+                <td>Q0</td>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>Q1</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>Q2</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>Q3</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>Q4</td>
+            </tr>
+            <tr>
+                <td>E</td>
+                <td>Q5</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>Q6</td>
+            </tr>
+            <tr>
+                <td>G</td>
+                <td>Q7</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Because we are dealing with LEDs, current limiting resistors need to be placed between each display pin and the shift register.</p>
+
+    <p>3 microcontroller output pins will be connected to the shift register&rsquo;s DS, ST and SH pins.</p>
+
+    <p class="alert alert-info">Because we switch on segments by grounding them, zero bits in the byte sent to the shift register will switch on the related segments and one bits will switch related segments off. For example to switch on segment C (Q3) and the decimal point (Q0), we send <code>0b11110110</code> to the shift register.</p>
 
     <p>The following circuit implements this design:</p>
 
@@ -371,20 +425,20 @@ layout: default
         height="920" alt="E40561 multiplex circuit"></p>
 
     <p>As can bee seen, the chosen microcontroller is an Arduino Nano. This is powered from the 5V power supply via its 5V pin.</p>
-    
-    <p class="alert alert-warning">If you choose to power the Nano via its USB port then disconnect its 5V pin from the main power supply but ensure that the Nano's ground remains connected to the power supply's ground.</p>
+
+    <p class="alert alert-warning">If you choose to power the Nano via its USB port then disconnect its 5V pin from the main power supply, but ensure that the Nano&rsquo;s ground remains connected to the power supply&rsquo;s ground.</p>
 
     <h3>Code</h3>
 
     <p>The code is used to:</p>
 
     <ol>
-        <li>Define a set of digit &amp; other characters to be displayed.</li>
-        <li>Record the 4 digits currently being displayed.</li>
+        <li>Define a set of characters to be displayed.</li>
+        <li>Keep track of the 4 digits currently being displayed.</li>
         <li>Perform the multiplexing.</li>
     </ol>
 
-    <p>Here's the code:</p>
+    <p>Here&rsquo;s the code:</p>
 
     <pre class="pre-scrollable "><code class="language-c">// Pins used to control shift register
 #define LATCH_PIN 8
@@ -408,6 +462,7 @@ byte digit = 0;
 // NOTE: Because this is a common anode display, we must connect the segment
 //       cathodes to ground to illuminate them so we specify 1 (logic high) to
 //       disconnect the segment from ground and 0 (low) to connect it to ground
+#define SEGMENT_DP  0b11111110
 #define SEGMENT_A   0b11111101
 #define SEGMENT_B   0b11111011
 #define SEGMENT_C   0b11110111
@@ -415,7 +470,6 @@ byte digit = 0;
 #define SEGMENT_E   0b11011111
 #define SEGMENT_F   0b10111111
 #define SEGMENT_G   0b01111111
-#define SEGMENT_DP  0b11111110
 #define SEGMENT_OFF 0b11111111
 
 // ledChars[] specifies the segments to illuminate for each digit.
@@ -456,11 +510,11 @@ const byte ledChars[] = {
 
 // digits[] stores the four digits to be display:
 // digits[n] stores digit n+1, e.g. digits[2] stores digit 3
-// initialised so that the outer digits are off  and the middle digits are hyphens
-byte digits[DIGIT_COUNT] = {SEGMENT_OFF, SEGMENT_G, SEGMENT_G, SEGMENT_OFF};
+// initialised so that all digits are off
+byte digits[DIGIT_COUNT] = {SEGMENT_OFF, SEGMENT_OFF, SEGMENT_OFF, SEGMENT_OFF};
 
 // Number of patterns of digits to be displayed
-#define PATTERN_COUNT 4
+#define SEQUENCE_LENGTH 4
 
 void setup() {
     // Set up output pins for shift register
@@ -472,15 +526,13 @@ void setup() {
         pinMode(digitPins[i], OUTPUT);
         digitalWrite(digitPins[i], HIGH);
     }
-    // Intialise display: all off
-    updateDisplay();
 }
 
 void loop() {
     // In the loop we set up and display a sequence of digits for time delta ms then
-    // change to another digit sequence. After PATTERN_COUNT different sequences have
+    // change to another digit sequence. After SEQUENCE_LENGTH different sequences have
     // been displayed we start again
-    static long ticks = millis();
+    static long ticks;
     static long lastChange = 0;
     const long delta = 2000;
     static int index = 0;       // index of current pattern of digits
@@ -519,7 +571,7 @@ void loop() {
                 break;
         }
         lastChange = ticks;
-        index = (index + 1) % PATTERN_COUNT;
+        index = (index + 1) % SEQUENCE_LENGTH;
     }
     updateDisplay();
 }
@@ -549,26 +601,29 @@ void updateDisplay() {
     delay(6);
 }</code></pre>
 
-    <p>Here's an overview of what's going on:</p>
+    <p>Here&rsquo;s an overview of what&rsquo;s going on:</p>
 
     <ul>
-        <li class="my-2">We start by defining which pins of the Arduino Nano to use for controlling the shift register and the display's digits.</li>
-        <li class="my-2">Next we define bitmasks for the display segments A..G &amp; dp. These bitmasks relate to the output from the shift register, with the least significant bit controlling Q0 through to the most significant bit controlling Q7. The bitmasks are all ones except for a zeros to switch on the relevant segment.</li>
-        <li class="my-2">We now set up the <code>ledChars[]</code> array to store a bitmask for each of the characters we want to be able to display. <code>ledChars[0]</code> represents &quot;0&quot;, <code>ledChars[1]</code> represents &quot;1&quot; etc. <code>ledChars[10]</code> has all segments off. These character bitmasks are created by ANDing together the required segment bitmasks we defined above.</li>
+        <li class="my-2">We start by defining which pins of the Arduino Nano to use for controlling the shift register and the display&rsquo;s digits.</li>
+        <li class="my-2">Next we define bitmasks for the display segments A..G &amp; dp. These bitmasks relate to the output from the shift register, with the least significant bit controlling Q0 through to the most significant bit controlling Q7. The bitmasks are all ones except for a zero to switch on the required segment.</li>
+        <li class="my-2">We now set up the <code>ledChars</code> array to store a bitmask for each of the characters we want to be able to display. <code>ledChars[0]</code> represents &quot;0&quot;, <code>ledChars[1]</code> represents &quot;1&quot; etc. through to <code>ledChars[9]</code> representing &quot;9&quot;. <code>ledChars[10]</code> has all segments off. These character bitmasks are created by ANDing together the relevant segment bitmasks we defined above.</li>
         <li class="my-2">There are a couple of macros, <code>addDp()</code> and <code>removeDp()</code>, that can be used to switch on or off the decimal point for a given digit. For example <code>addDp(ledChars[3])</code> returns the bitmask need to display digit &quot;3&quot; with the decimal point illuminated.</li>
-        <li class="my-2">We set up the <code>digits[]</code> array to store the bitmask of the characters to be displayed in each of the four digits. <code>digits[0]</code> stores digit 1 and so on. <code>digits[]</code> is intialised to display &quot;&nbsp;--&nbsp;&quot;, i.e. space, dash, dash, space.</li>
-        <li class="my-2"><code>PATTERN_COUNT</code> records the number of different patterns of digits to display in the main loop sequence (see below).</li>
-        <li class="my-2">In <code>setup()</code> we simply set all pins as output pins and ensure all digits are off. Digits are turned off by setting them <code>HIGH</code>. Finally we call <code>updateDisplay()</code> to intialise the digits to display &quot;&nbsp;--&nbsp;&quot;.</li>
-        <li class="my-2">In the main loop we display four different patterns of digits in turn, changing patterns every 2 seconds. We call <code>updateDisplay()</code> every time <code>loop()</code> is called.</li>
-        <li class="my-2"><code>shiftOutByte()</code> simply writes the given byte value to the shift register. A digit bitmask is always passed to this function.</li>
+        <li class="my-2">We set up the <code>digits</code> array to store the bitmask of the characters to be displayed in each of the four digits. <code>digits[0]</code> stores digit 1 and so on. <code>digits</code> is intialised so that all digits are off.</li>
+        <li class="my-2"><code>SEQUENCE_LENGTH</code> stores the number of different sets of digits to display in the main loop sequence (see below).</li>
+        <li class="my-2">In <code>setup()</code> we simply set all the Nano&rsquo;s pins we&rsquo;re using as output pins and ensure all digits are off. Recall that digits are turned off by setting the associated pins <code>HIGH</code>.</li>
+        <li class="my-2">In the main loop we display a sequence of four different sets of digits in turn, changing sets every 2 seconds. The digit sets are <code>0123</code>, <code>4567</code>, <code>89</code> (digits 3 &amp; 4 off) and <code>3.142</code> (digit 1&rsquo;s decimal point on). We call <code>updateDisplay()</code> every time <code>loop()</code> is called.</li>
+        <li class="my-2"><code>shiftOutByte()</code> simply writes the given byte value to the shift register. This function is called to display the segments of the currently illuminated digit.</li>
         <li class="my-2">Finally, <code>updateDisplay()</code> performs the actual multiplexing. Each time it is called the function displays one of the four digits, in sequence, turning the others off. There is a brief delay before returning. This is to give the LEDs time to switch on before being turned off again, ensuring they are bright enough. There is a balance to struck between making this delay long enough to achieve the desired brightness and short enough to avoid flicker. Adjust as necessary.</li>
     </ul>
 
     <h3>Breadboard test rig</h3>
 
-    <p>To make sure all this theory worked out in practise I built a breadboard test rig using the wiring diagram and code above.</p>
+    <p>To make sure all this theory worked out in practise I built a breadboard test rig using the wiring diagram and code above. Here&rsquo;s an annotated photo of the circuit:</p>
 
-    <p>The following short video shows the circuit with the Nano running the above code:</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-mux-breadboard_800x460.png" width="800"
+        height="460" alt="E40561 breadboard circuit annotated photo"></p>
+
+    <p>The following short video shows the circuit with the Nano running the display sequence:</p>
 
     <div class="text-center">
         <div>
@@ -577,7 +632,7 @@ void updateDisplay() {
         <p class="caption">Mulitplexing E40561 4 digit common anode LED display (simplified version)</p>
     </div>
 
-    <p>This second, longer, video shows the same circuit running enhanced code that defines additional characters and displays a longer sequence.</p>
+    <p>This second, longer, video shows the same circuit running enhanced code (not included here) that defines additional characters and displays a longer sequence.</p>
 
     <div class="text-center">
         <div>
@@ -586,6 +641,6 @@ void updateDisplay() {
         <p class="caption">Mulitplexing E40561 4 digit common anode LED display (enhanced version)</p>
     </div>
 
-    <p class="alert alert-warning"><strong>Note:</strong> the circuit shown in these videos is the same as that in the circuit diagram above except that 1k&ohm; current limiting resistors have been used with the LED segments instead of 470&ohm; resistors. This is a hang over from when I was testing the circuit and wanted to give the LED segments extra protection. I simply forgot to swap them for 470&ohm; resistors later!</p>
+    <p class="alert alert-warning"><strong>Note:</strong> the circuit used in these videos is the same as that in the circuit diagram above except that 1k&ohm; current limiting resistors have been used with the LED segments instead of 470&ohm; resistors. This is a hang over from when I was testing the circuit and wanted to give the LED segments extra protection. I simply forgot to swap them for 470&ohm; resistors later!</p>
 
 </section> <!-- /#circuit -->
