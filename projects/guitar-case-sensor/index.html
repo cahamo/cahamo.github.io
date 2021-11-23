@@ -15,26 +15,26 @@ layout: default
 
 <h2>Specifications</h2>
 
-<ol>
+<ol type="1">
     <li class="mb-2">There must be no active electronics within the guitar cases. This is to prevent any overheating or battery leakage from damaging the rather valuable instruments they contain. Whatever circuits are contained in the cases need to be minimal and powered externally for as short a time as possible.</li>
 
     <li class="mb-2">There must be as few intrusions into the guitar case as possible to avoid scratching the instruments.</li>
 
     <li class="mb-2">More than one guitar case will be fitted with sensors: probably two or three.</li>
 
-    <li class="mb-2">Each guitar case must have some unique identifier to assist in logging results.</li>
+    <li class="mb-2">Each guitar case must have some unique identifier to be used when logging results.</li>
 
     <li class="mb-2">Connections to the guitar cases must be as airtight as possible.</li>
 
     <li class="mb-2">There must be one, portable, hand held device that can be plugged into each case that reads the humidity and temperature inside each guitar case.</li>
 
-    <li class="mb-2">The hand held device must have some kind of display to show readings for any case it is plugged into.</li>
+    <li class="mb-2">The hand held device must have some kind of display to show the readings for any case it is plugged into.</li>
 
-    <li class="mb-2">The hand device should be able to log the information read from each case in a form that can be anaylised in a spreadsheet or similar program.</li>
+    <li class="mb-2">The hand held device should be able to log the information read from each case in a format that can be analysed in a spreadsheet or similar program.</li>
 
     <li class="mb-2">For maximum portability, the hand-held device should be battery powered.</li>
 
-    <li class="mb-2">The must be some means of taking a reference humidity from the air in the room where the cases are stored for comparison purposes.</li>
+    <li class="mb-2">The must be some means of taking a reference humidity from the air in the room where the cases are stored, for comparison purposes.</li>
 </ol>
 
 <h2>Design</h2>
@@ -45,33 +45,33 @@ layout: default
 
 <p>As mentioned in the specifications above, these circuits have the following requirements:</p>
 
-<ol>
+<ol start="1" type="i">
     <li>be externally powered</li>
     <li>be sealed as well as possible</li>
     <li>be unobrusive</li>
     <li>have a unique identifier</li>
 </ol>
 
-<p>To help meet <strong>requirement #2</strong>, it was decided to fit each case with DIN sockets, because they are relatively well sealed as opposed to other sockets, such as jack sockets, as can bee seen below:</p>
+<p>To help meet <strong>requirement <em>ii</em></strong>, it was decided to fit each case with DIN sockets, because they are relatively well sealed when compared with other sockets, such as jack sockets, as can bee seen below:</p>
 
 <div class="my-3">
     <div><img class="img-fluid mx-auto d-block" src="/assets/img/projects/guitar-case-sensor/din-socket_360x358.png" width="360" height="358" alt="Picture of front and read of 5 pin DIN socket"></div>
     <div class="caption text-center">5 pin DIN socket</div>
 </div>
 
-<p><strong>Requirement #1</strong> can be met by supplying power and ground via two of the DIN socket pins.</p>
+<p><strong>Requirement <em>i</em></strong> can be met by supplying power and ground via two of the DIN socket pins.</p>
 
-<p>Dealing with <strong>requirement #3</strong>, we can place most of the electronics, and the DIN socket within the case's accessory box, thus keeping it away from the instrument. The only component that can't be located in the accessory box is the actual humidity sensor, which must be placed within the case proper to get the most accurate reading. The location of this sensor will need to be as far away from the guitar body as possible and will therefore vary between cases.</p>
+<p>Dealing with <strong>requirement <em>iii</em></strong>, we can place most of the electronics, and the DIN socket within the case's accessory box, thus keeping it away from the instrument. The only component that can't be located in the accessory box is the actual humidity sensor, which must be placed within the case proper to get the most accurate reading. The location of this sensor will need to be as far away from the guitar body as possible and will therefore vary between cases.</p>
 
-<p>Fitting the DIN socket within the accessory box also helps with <strong>requirement #2</strong> because accessory boxes have snug fitting lids that must be closed when the case is closed.</p>
+<p>Fitting the DIN socket within the accessory box also helps with <strong>requirement <em>ii</em></strong> because accessory boxes have snug fitting lids that must be closed when the case is closed.</p>
 
-<p><strong>Requirement #4</strong> can be met by fitting each case with a unique value of resistor, that will be coupled to ground and to the measuring device via one of the lines from the DIN plug. This resistor will then form one part of a voltage divider. The main unit can then determine the identifity of the case by mesuring the voltage from the voltage divider: it will be diferent for each case.</p>
+<p><strong>Requirement <em>iv</em></strong> can be met by fitting each case with a unique value of resistor, that will be coupled to ground and to the measuring device via one of the lines from the DIN plug. This resistor will then form one part of a voltage divider. The main unit can then determine the identifity of the case by mesuring the voltage from the voltage divider: it will be diferent for each case.</p>
 
 <p>The DHT22 / AM2302 temperature and humidity sensor will be used as the case sensor. This requires +3V&hellip;+5V, ground and sensor pin connections.</p>
 
 <p>From the forgoing it can be seen that the following lines will need to be connected to the external measuring device:</p>
 
-<ol>
+<ol type="1">
     <li>Power line (3V&hellip;5V)</li>
     <li>Ground</li>
     <li>Sensor line</li>
@@ -86,7 +86,7 @@ layout: default
 
 <p>According to the specifications, the hand-held device has the following requirements. It must:</p>
 
-<ol>
+<ol start="5" type="i">
     <li>be battery powered</li>
     <li>be portable</li>
     <li>provide power to guitar case electronics</li>
@@ -95,25 +95,25 @@ layout: default
     <li>be able to log data received from cases</li>
 </ol>
 
-<p>As mentioned above the device will use a voltage divider in order to detect which guitar case is plugged in, or when no case is plugged in. A microcontroller's analogue input will be used to detect the appropriate voltage. This satisfies <strong>requirement #4</strong>.</p>
+<p>As mentioned above the device will use a voltage divider in order to detect which guitar case is plugged in, or when no case is plugged in. A microcontroller's analogue input will be used to detect the appropriate voltage. This satisfies <strong>requirement <em>viii</em></strong>.</p>
 
-<p>There will be an internal battery that for powering the device (<strong>requirement #1</strong>) and that supplies power to guitar cases via a DIN socket and cable (<strong>requirement #3</strong>).</p>
+<p>There will be an internal battery or batteries for powering both the device itself (<strong>requirement <em>v</em></strong>) and the guitar cases via a DIN socket and cable (<strong>requirement <em>vii</em></strong>).</p>
 
-<p>Electronics and battery should be into a 10cm&times;6cm&times;2.5cm plastic case (because that's what I have in stock!). This satisfies <strong>requirement #2</strong>.</p>
+<p class="alert alert-info">Currently it is planned to use two 3V CR2032 batteries in series, providing 6V DC.</p>
 
-<p>A 0.96&quot; OLED display will be fitted to the device, satisfying <strong>requirement #5</strong>.</p>
+<p>Electronics and battery should be built into a 10cm&times;6cm&times;2.5cm plastic case (because that's what I have in stock!). This satisfies <strong>requirement <em>vi</em></strong>.</p>
 
-<p>The unit will be powered by two 3V CR2032 batteries in series, providing 6V DC (<strong>requirement #9).</strong></p>
+<p>A 0.96&quot; OLED display will be fitted to the device, satisfying <strong>requirement <em>ix</em></strong>.</p>
 
-<p><strong>Requirement #8</strong> will be satisfied by using a SD card writer mounted in the case. The data can then be transferred to a computer using an SD card.</p>
+<p><strong>Requirement <em>x</em></strong> will be satisfied by using a SD card writer mounted in the case. The data can then be transferred to a computer using an SD card.</p>
 
 <p class="alert alert-info">At some later stage the SD card method could be replaced by using a WiFi or Bluetooth equiped unit.</p>
 
 <h3>Reference humidity circuit</h3>
 
-<p>This circuit is required to satisfy <strong>requirement #10</strong>.</p>
+<p>This circuit is required to satisfy specification #10 above.</p>
 
-<p>A duplicate of the guitar case circuits constructed so that its humidity sensor is exposed to the room air should suffice.</p>
+<p>A duplicate of the guitar case circuit constructed so that its humidity sensor is exposed to the room air should suffice.</p>
 
 <p>One of the available unique resistor values (mentioned above) will be reserved to identify this circuit to the hand held unit.</p>
 
