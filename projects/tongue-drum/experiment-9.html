@@ -5,13 +5,13 @@ layout: default
 
 <p>Ever since it came to my notice that the ESP32 microcontroller has eight or nine built in touch pins (depending on the board), it struck me that I should check these pins out before committing to using the CapacitiveSensor library for the electro tongue drum.</p>
 
-<p>This experiment tests a single touch snesor with a single ESP32 touch sensor pin.</p>
+<p>This experiment tests a single touch sensor connected to a single ESP32 touch sensor pin.</p>
 
 <h2>Methodology</h2>
 
-<p>Sensor #9g, the vinyl covered, grounded, sensor was connected directly to an ESP32 touch sensor pin and the analogue value detected by the pin were graphed on a serial plotter. The output of the serial plotter was captured in screen shots.</p>
+<p>Sensor #9G, a vinyl covered, grounded, sensor was connected directly to an ESP32 touch sensor pin and the readings were graphed on a serial plotter. The output of the serial plotter was captured in screen shots.</p>
 
-<p>The output from the touch pin was recorded without touching the sensor and then after tapping the sensor three times slowly and then three times quickly. The experiment was repeated with the sensor grounded and ungrounded.</p>
+<p>The output from the touch pin was first recorded without touching the sensor and then after tapping the sensor three times slowly and then three times quickly. The experiment was repeated with the sensor grounded and ungrounded.</p>
 
 <h2>Circuit</h2>
 
@@ -22,7 +22,7 @@ layout: default
 
 <h2>Code</h2>
 
-<p>Firstly, the ESP32 boards were installed into the Arduino IDE as explained in the &ldquo;<a href="https://dronebotworkshop.com/esp32-intro/">Getting started with ESP32</a>&rdquo; article on the DroneBot Workshop website.</p>
+<p>Firstly, the ESP32 boards were installed into the Arduino IDE&rsquo;s Boards Manager as explained in the &ldquo;<a href="https://dronebotworkshop.com/esp32-intro/">Getting started with ESP32</a>&rdquo; article on the DroneBot Workshop website.</p>
 
 <p>Then a new sketch was written to read the input from the ESP32&rsquo;s touch sensor #0 and to write the readings to the serial port. This sketch is <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/ESP32SingleSensorRawDataLogger"><code>ESP32SingleSensorRawDataLogger.ino</code></a>.</p>
 
@@ -30,7 +30,7 @@ layout: default
 
 <h2>Results</h2>
 
-<p class="alert alert-info">It should be noted that the results obtained from the EPS32 touch pin are the inverse of those obtained with the CapacitiveSensor library. With the ESP32 a high value is returned when the sensor is not touched which <em>drops</em> when it is touched.</p>
+<p class="alert alert-info">It should be noted that the results obtained from the EPS32 touch pin are the inverse of those obtained with the CapacitiveSensor library. With the ESP32, a high value is returned when the sensor is not touched and the value <em>drops</em> when it is touched.</p>
 
 <p>The results of <em>not</em> touching the sensor, both with and without grounding, are shown in the following carousel. As can be seen, in both cases, the sensor reading was level.</p>
 
@@ -59,7 +59,7 @@ layout: default
     </div>
 </div>
 
-<p>However, re-running the &ldquo;Untouched&rdquo; tests revealed some apparent interference, as can be seen in the follwing image carousel:</p>
+<p>However, re-running the &ldquo;Untouched&rdquo; tests revealed some apparent interference, as can be seen in the following image carousel:</p>
 
 <div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -115,11 +115,11 @@ layout: default
 
 <h2>Conclusions</h2>
 
-<p>Higher readings for the ungrounded sensor are greater than those for the grounded sensor and the gap between lower and higher values is greater for the ungrounded sensor.</p>
+<p>The high readings for the ungrounded sensor are greater than those for the grounded sensor and the gap between lower and higher values is greater for the ungrounded sensor.</p>
 
-<p>The situation when the sensor is untouched is strange. Multiple runs were undertaken. In some runs the level results shown in the 1st image carousel above were found while in others the &ldquo;interference&rdquo; was apparent.</p>
+<p>The situation when the sensor is untouched is strange. Multiple runs were undertaken. In some runs the &ldquo;flat-line&rdquo; results shown in the 1st image carousel were found while in others the &ldquo;interference&rdquo; observed in the second carousel was apparent.</p>
 
-<p>Some of the spikes in values detected when interference is present and the sensor is not touched are large enough to mean that a false positive readings could be obtained. As a consequence some means of &ldquo;debouncing&rdquo; in software would be required in order to ignore such anomalies.</p>
+<p>Some of the spikes in values detected when interference is present and the sensor is not touched are large enough to mean that false positive readings could easily be registered. As a consequence some means of &ldquo;debouncing&rdquo; in software would be required in order to ignore such anomalies.</p>
 
 <p>Using the ESP32 instead of an Arduino and the CapacitiveSensor library would greatly simplify code and wiring.</p>
 
