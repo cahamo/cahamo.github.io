@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<h1>Plan A</h1>
+
+<p>It was originally planned to control the LEDs and any motors using simple electrical circuits, as shown in this original schematic:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/original-circuit-design_480x380.png" width="480" height="380" alt="Original LED circuit design"></p>
+
+<p>Power was planned to be taken from the 12V DC output of an ancient model railway controller.</p>
+
+<p>Each LED would have a 470&ohm; resistor in series to drop the current to a suitable value. In case that would lead to certain LEDs being too bright a variable resistor would be wired in series with each LED to enable its brightness to be adjusted. LEDs would be turned on and off using a mechanical switch mounted on a control panel.</p>
+
+<p>The motors driving gimmicks were to be simple, brushed, 12V DC motors that were to be switched on and off using a mechanical switch. Motors would have current regulated as necessary using variable resistors. Push-to-make switches would probably have been used to turn on each feature to prevent it from being left running.</p>
+
+<p>Once the decision had been made to control everything via an infra red controller this simple design was dropped. With hindsight the design wouldn't have been suitable anyway, for two reasons:</p>
+
+<ol>
+    <li>Some of the gimmicks would have been hard (or impossible) to control using manually operated switches and some would be much easier to implement if servo motors were used instead of simple DC motors.</li>
+    <li>The number of LEDs grew and grew as the design of the model progressed, meaning that the number of switches needed to control each LED expanded greatly. Consequently the control panel would need to be much larger than originally planned.</li>
+</ol>
+
+<p>So, this nice straightforward design was dropped in favour of a much more complex electronic system. Of course the decision to use microcontrollers meant that automation could also be considered.</p>
+
+<p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>

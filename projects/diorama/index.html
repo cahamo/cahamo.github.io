@@ -10,6 +10,8 @@ redirect_from:
 
 <p>This is a project to design and build the electronics needed to control the lighting, and possibly some mechanical gimmicks, on a scenic diorama that I'm building.</p>
 
+<p>The original plan was to turn each feature (lights, gimmicks etc.) on and off using simple mechanical switches, but I decided it would be more fun to use an infra-red handset to control everything. See the <a href="./legacy-plan">Plan A</a> page for a brief description of this original plan.</p>
+
 <p>For details of the motivation for this project see my blog post &ldquo;<a href="https://cahamo.blogspot.com/2021/06/controlling-diorama-led-lighting.html">Total Overkill - Controlling Diorama Lighting With A Microcontroller</a>&rdquo;</p>
 
 <p class="alert alert-info">Details of the construction of the diorama itself are off topic for this website and will only be discussed in as much as they are relevant to the electronics.</p>
@@ -130,12 +132,6 @@ redirect_from:
         </tr>
     </tbody>
 </table>
-
-<p>It was originally planned to control the LEDs and any motors using simple electrical circuits, as shown in this original schematic:</p>
-
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/original-circuit-design_480x380.png" width="480" height="380" alt="Original LED circuit design"></p>
-
-<p>Following the decision to control the diorama using an infra-red controller such a simple circuit will no longer suffice. A microcontroller will now be used to switch the lights on and off as required. The number of LEDs to be controlled exceeds the available free output pins on most microcontrollers, so some form of multiplexing will be used. Quite what form that will take is subject to experimentation.</p>
 
 <p>So as not to stress the microcontroller's power limits, LEDs will be switched via transistors.</p>
 
