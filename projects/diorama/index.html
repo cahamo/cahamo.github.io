@@ -38,25 +38,26 @@ redirect_from:
 
 <h3>On-scene lighting sub-system</h3>
 
-<p>There are to be four buildings, all of which will be lit:</p>
+<p>There are to be five buildings, all of which will be lit:</p>
 
 <ol>
     <li>A barn that has been converted to a metal-working shop, containing a forge.</li>
-    <li>A twin bay open fronted shed, with one bay converted to a store room or workshop that contains a stove.</li>
-    <li>An enclosed workshop building containing a stove (TBC).</li>
+    <li>A twin bay open fronted shed, with one bay converted to a store room or workshop that contains an open fire.</li>
+    <li>An enclosed workshop building containing an open fire (TBC).</li>
     <li>A small shed, possibly a lean-to against a wall (TBC).</li>
+    <li>A small &ldquo;site office&rdquo; that contains an open fire.</li>
 </ol>
 
-<p>LEDs will be used for all lighting. Building lights will be emulated using 3mm white LEDs. Stoves and the forge will be emulated using flickering 3mm amber LEDs.</p>
+<p>LEDs will be used for all lighting. Building lights will be emulated using 3mm white LEDs. Open fires and the forge will be emulated using flickering 3mm amber LEDs.</p>
 
 <h3>Mechanical sub-system</h3>
 
 <p>The design is not finalised. Three features are being considered:</p>
 
 <ol>
-    <li>A dog with a wagging tail.</li>
-    <li>A rabbit popping in and out of a burrow.</li>
-    <li>A dog chasing a squirrel up a tree.</li>
+    <li>A dog with a wagging tail (TBC).</li>
+    <li>A rabbit popping in and out of a burrow (TBC).</li>
+    <li>A dog chasing a squirrel up a tree (TBC).</li>
 </ol>
 
 <h3>Day and night sequence</h3>
@@ -72,7 +73,9 @@ redirect_from:
 
 <h3>Part 1: Infra-red controller</h3>
 
-<p>An infra red sensor and remote controller have been obtained. The availability of suitable libraries for interpreting infra-red codes emitted by the remote pretty much mandates the use of an Arduino type controller. Testing is being undertaken using an Elegoo Uno R3, while the final implementation may use an Arduino Nano or clone. Another possibility is to use an ATTiny micro-processor dedicated to controlling the infra red sub-system with another microcontroller controlling the diorama's lighting and mechanical features.</p>
+<p>An infra red sensor and remote controller have been obtained. The availability of suitable libraries for interpreting infra-red codes emitted by the remote pretty much mandates the use of an Arduino type controller. Testing is being undertaken using an Elegoo Uno R3, while the final implementation may use either an Arduino Nano clone or an ATTiny microcontroller dedicated to controlling the infra red sub-system with another microcontroller controlling the diorama's lighting and mechanical features.</p>
+
+<p>If the ATTiny route is taken then the ATTiny will probably communicate with the main microcontroller via a one way serial line. It will encode each command from the IR hand set as a single byte.</p>
 
 <p>Tests have been conducted to prove that the infra-red controller can be used: see the <em><a href="#experiments">Experiments</em></a> section below.</p>
 
@@ -92,18 +95,18 @@ redirect_from:
     <tbody>
         <tr>
             <td><em>Twin bay shed</em></td>
-            <td>This building is mainly complete. It is currently wired with 2 &times; 3mm white LEDs. It is planned to add a 3mm amber flickering LED to represent a stove.</td>
+            <td>This building is nearly complete, modified from a card kit. It is currently wired with 2 &times; 3mm white LEDs and a 3mm amber flicker LED inserted in a fireplace.</td>
             <td class="text-right">2</td>
             <td class="text-right">1</td>
         </tr>
         <tr>
             <td><em>Barn (converted to workshop)</em></td>
-            <td>This building is under construction. There is a rear lean-to that has been fitted with 2 &times; 3mm white LEDs. An office fitted in the main building has a single 3mm white LED. The main structure will be lit with 2 &times; 3mm white LEDs (that will switch on and off together) and there will be a forge, lit with a 3mm amber flicker LED.</td>
+            <td>This building is under construction from a card kit that will be modified. There is a rear lean-to that has been fitted with 2 &times; 3mm white LEDs. An office fitted in the main building has a single 3mm white LED. The main structure will be lit with 2 &times; 3mm white LEDs (that will switch on and off together) and there will be a forge, lit with a 3mm amber flicker LED.</td>
             <td class="text-right">5</td>
             <td class="text-right">1</td>
         </tr>
         <tr>
-            <td><em>Small shed</em> (TBC)</td>
+            <td><em>Lean-to shed</em> (TBC)</td>
             <td>Not started. The shed will likely be a small lean-to building set against a high wall. It will have a single light.</td>
             <td class="text-right">1</td>
             <td class="text-right">0</td>
@@ -115,9 +118,15 @@ redirect_from:
             <td class="text-right">1</td>
         </tr>
         <tr>
+            <td><em>Site office</em></td>
+            <td>A plastic kit has been obtained, but has not yet been built. The office will be lit with a single 3mm white LED and a 3mm amber flicker LED to represent the open fire.</td>
+            <td class="text-right">1</td>
+            <td class="text-right">1</td>
+        </tr>
+        <tr>
             <th scope="row" colspan="2">Total LEDs</th>
-            <td class="text-right"><strong>9</strong></td>
-            <td class="text-right"><strong>3</strong></td>
+            <td class="text-right"><strong>10</strong></td>
+            <td class="text-right"><strong>4</strong></td>
         </tr>
     </tbody>
 </table>
