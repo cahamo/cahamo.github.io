@@ -36,7 +36,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-    font-size: 1.2rem;
+    font-size: $h3-font-size;
 }
 
 h4, .h4 {
@@ -164,4 +164,17 @@ pre {
         background-color: rgba(255, 255, 255, 80%);
         padding: 0.25rem;
     }
+
+}
+
+.home-page-list {
+
+    h3 {
+        font-size: $h3-font-size;
+    }
+
+    a, a:hover, a:visited, a:active {
+        color: $color-secondary-1;
+    }
+
 }
