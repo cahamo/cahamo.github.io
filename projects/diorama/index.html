@@ -8,9 +8,9 @@ redirect_from:
 
 <h2>Introduction</h2>
 
-<p>This is a project to design and build the electronics needed to control the lighting, and possibly some mechanical gimmicks, on a scenic diorama that I'm building.</p>
+<p>This is a project to design and build the electronics needed to control various lighting and mechanical features of a diorama that I am building.</p>
 
-<p>The original plan was to turn each feature (lights, gimmicks etc.) on and off using simple mechanical switches, but I decided it would be more fun to use an infra-red handset to control everything. See the <a href="./legacy-plan">Plan A</a> page for a brief description of this original plan.</p>
+<p>The original plan was to turn each feature on and off using simple mechanical switches, but I decided it would be more fun to use an infra-red handset to control everything. See the <a href="./legacy-plan">Plan A</a> page for a brief description of this original plan.</p>
 
 <p>For details of the motivation for this project see my blog post &ldquo;<a href="https://cahamo.blogspot.com/2021/06/controlling-diorama-led-lighting.html">Total Overkill - Controlling Diorama Lighting With A Microcontroller</a>&rdquo;</p>
 
@@ -18,173 +18,60 @@ redirect_from:
 
 <h2>Project Brief</h2>
 
-<p>The diorama will have several buildings that are to be lit. Some buildings will contain stoves and a forge that will need to be simulated. In addition there may be some mechanical gimmicks that will be powered by electric motors.</p>
+<p>There will be several buildings that are to be lit. Some buildings will also contain fireplaces etc where flames should be simulated. Some mechanical gimmicks are also planned that will be powered by electric motors - either low voltage DC motors or servo motors. The diorama itself should also be lit by means of concealed LEDs to simulate day and night conditions.</p>
 
-<p>The brief for this project is to control the lights and any motorised items by means of an infra-red remote control. In addition, a program to control a fixed sequence of events should be provided. This sequence should include day time and night time views.</p>
+<p>The brief is therefore to control the lights and motorised items by electronic means, using one or more microcontrollers. Support should be added to enable operation via a an infra-red remote control. In addition, a program to control a fixed sequence of events should also be provided.</p>
 
-<h2>Design Notes</h2>
+<h2>Sub-projects</h2>
 
-<p>The design falls into six parts:</p>
+<p>The project falls neatly into 6 sub-projects, some of which are detailed on separate pages:</p>
 
-<ol>
-    <li>Interpretation of the commands from the infra-red controller</li>
-    <li>Control of the on-scene lighting</li>
-    <li>Control of mechanical features</li>
-    <li>Control of the day-night sequence</li>
-    <li>Automation (programmed events)</li>
-    <li>Power supply</li>
-</ol>
+<div class="list-group mb-3">
 
-<h3>Infra-red sub-system</h3>
+    <a href="./ir-control" class="list-group-item list-group-item-action flex-column align-items-start">
+        <h3 class="mb-2">Infra-red control </h3>
+        <p class="mb-2">The diorama is to be controlled using an infra-red handset that communicates with an infra-red receiver on the front of the layout.</p>
+        <p class="mb-2"><span class="badge badge-warning">In&nbsp;progress</span> <small><em>Click for more information.</em></small></p>
+    </a>
 
-<p>The infra-red sensor must be built into an enclosure suitable for mounting on the front of the diorama. A LED should be included to provide feedback to the user to confirm that a signal from the remote handset has been received.</p>
+    <a href="./lighting" class="list-group-item list-group-item-action flex-column align-items-start">
+        <h3 class="mb-2">Model Lighting</h3>
+        <p class="mb-2">All lighting on the model is contained within buildings and uses LEDs.</p>
+        <p class="mb-2"><span class="badge badge-warning">In&nbsp;progress</span> <small><em>Click for more information.</em></small></p>
+    </a>
 
-<h3>On-scene lighting sub-system</h3>
+    <div class="list-group-item flex-column align-items-start">
+        <h3 class="mb-2">Mechanical features</h3>
+        <p class="mb-2">Mechanical features must be able to be switched on or off individually. In addition there should be a master &ldquo;all off&rdquo; (panic) command. Each feature must be allowed to run to completion before being started again. Features being considered are:</p>
+        <ol class="mb-2">
+            <li>A dog with a wagging tail (TBC).</li>
+            <li>A rabbit popping in and out of a burrow (TBC).</li>
+            <li>A dog chasing a squirrel up a tree (TBC).</li>
+        </ol>
+        <p class="mb-2">Some features have <em>on</em> and <em>off</em> states while others don&lsquo;t have such a state. For example the dog is either wagging or not wagging its tail and the rabbits are either in or out of their burrows. But the dog chasing a squirrel is a feature that must be started and left to run to completion: there is no point in turning it off part way.</p>
+        <p class="mb-2"><span class="badge badge-danger">Not&nbsp;started</span> <small><em>No further information.</em></small></p>
+    </div>
 
-<p>There are to be five buildings, all of which will be lit:</p>
+    <div class="list-group-item flex-column align-items-start">
+        <h3 class="mb-2">Ambient Lighting</h3>
+        <p class="mb-2">Ambient lighting is to be used to emulate different times of day.The lights should be hidden out of view above the diorama. Lighting should be dimmable in discrete steps from full (bright daylight) to off (night).</p>
+        <p class="mb-2"><span class="badge badge-danger">Not&nbsp;started</span> <small><em>No further information.</em></small></p>
+    </div>
 
-<ol>
-    <li>A barn that has been converted to a metal-working shop, containing a forge.</li>
-    <li>A twin bay open fronted shed, with one bay converted to a store room or workshop that contains an open fire.</li>
-    <li>An enclosed workshop building containing an open fire (TBC).</li>
-    <li>A small shed, possibly a lean-to against a wall (TBC).</li>
-    <li>A small &ldquo;site office&rdquo; that contains an open fire.</li>
-</ol>
+    <div class="list-group-item flex-column align-items-start">
+        <h3 class="mb-2">Automation</h3>
+        <p class="mb-2">There should be one or more programmed sequences that switch on or off lighting and/or mechanical features and that can vary the intensity of the day-night lighting.</p>
+        <p class="mb-2">One special form of program should be provided that simply resets the diorama to it&lsquo;s off state: any running program halted, all lights turned off and all mechanical features reset to their starting state.</p>
+        <p class="mb-2"><span class="badge badge-danger">Not&nbsp;started</span> <small><em>No further information.</em></small></p>
+    </div>
 
-<p>LEDs will be used for all lighting. Building lights will be emulated using 3mm white LEDs. Open fires and the forge will be emulated using flickering 3mm amber LEDs.</p>
+    <a href="./power-supply" class="list-group-item list-group-item-action flex-column align-items-start">
+        <h3 class="mb-2">Power supply</h3>
+        <p class="mb-2">Power is provided by a 9V DC supply, with 7.8V and 9V taps available to drive other sub-systems. The power supply module requires an external 9V transformer delivering power via a 2.1mm &times; 5.5mm socket. Both centre +ve and centre -ve plugs are supported.</p>
+        <p class="mb-2"><span class="badge badge-success">Completed</span> <small><em>Click for more information.</em></small></p>
+    </a>
 
-<h3>Mechanical sub-system</h3>
-
-<p>The design is not finalised. Three features are being considered:</p>
-
-<ol>
-    <li>A dog with a wagging tail (TBC).</li>
-    <li>A rabbit popping in and out of a burrow (TBC).</li>
-    <li>A dog chasing a squirrel up a tree (TBC).</li>
-</ol>
-
-<h3>Day and night sequence</h3>
-
-<p>The design not finalised. The current plan is to enclose the diorama and to simulate day and night by means of a strip of LEDs hidden out of view above the model.</p>
-
-<h3>Automation</h3>
-
-<p>The design is not finalised. The plan is to enable the use to select one or more programmed sequences of events that will automate the on scene lighting, the mechanical gimmicks and the day and night sequence in some predetermined order.</p>
-
-<h3>Power supply</h3>
-
-<p>Power will be provided by a 9V DC supply, with the voltage dropped as required by different components.</p>
-
-
-<h2>Implementation</h2>
-
-<h3>Part 1: Infra-red controller</h3>
-
-<p>An infra red sensor and remote controller have been obtained. The availability of suitable libraries for interpreting infra-red codes emitted by the remote pretty much mandates the use of an Arduino type controller. Testing is being undertaken using an Elegoo Uno R3, while the final implementation may use either an Arduino Nano clone or an ATTiny microcontroller dedicated to controlling the infra red sub-system with another microcontroller controlling the diorama's lighting and mechanical features.</p>
-
-<p>If the ATTiny route is taken then the ATTiny will probably communicate with the main microcontroller via a one way serial line. It will encode each command from the IR hand set as a single byte.</p>
-
-<p>Tests have been conducted to prove that the infra-red controller can be used: see the <em><a href="#experiments">Experiments</em></a> section below.</p>
-
-<h3>Part 2: On-scene lighting</h3>
-
-<p>The are currently two buildings under construction and two more planned. The LEDs required are as follows:</p>
-
-<table class="table table-responsive">
-    <thead class="thead-light">
-        <tr class="text-center">
-            <th scope="col">Building</th>
-            <th scope="col">Description</th>
-            <th scope="col">White LEDs</th>
-            <th scope="col">Flicker LEDs</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><em>Twin bay shed</em></td>
-            <td>This building is nearly complete, modified from a card kit. It is currently wired with 2 &times; 3mm white LEDs and a 3mm amber flicker LED inserted in a fireplace.</td>
-            <td class="text-right">2</td>
-            <td class="text-right">1</td>
-        </tr>
-        <tr>
-            <td><em>Barn (converted to workshop)</em></td>
-            <td>This building is under construction from a card kit that will be modified. There is a rear lean-to that has been fitted with 2 &times; 3mm white LEDs. An office fitted in the main building has a single 3mm white LED. The main structure will be lit with 2 &times; 3mm white LEDs (that will switch on and off together) and there will be a forge, lit with a 3mm amber flicker LED.</td>
-            <td class="text-right">5</td>
-            <td class="text-right">1</td>
-        </tr>
-        <tr>
-            <td><em>Lean-to shed</em> (TBC)</td>
-            <td>Not started. The shed will likely be a small lean-to building set against a high wall. It will have a single light.</td>
-            <td class="text-right">1</td>
-            <td class="text-right">0</td>
-        </tr>
-        <tr>
-            <td><em>Large shed / workshop</em> (TBC)</td>
-            <td>Not started. This building will possibly have a single light and a stove.</td>
-            <td class="text-right">1</td>
-            <td class="text-right">1</td>
-        </tr>
-        <tr>
-            <td><em>Site office</em></td>
-            <td>A plastic kit has been obtained, but has not yet been built. The office will be lit with a single 3mm white LED and a 3mm amber flicker LED to represent the open fire.</td>
-            <td class="text-right">1</td>
-            <td class="text-right">1</td>
-        </tr>
-        <tr>
-            <th scope="row" colspan="2">Total LEDs</th>
-            <td class="text-right"><strong>10</strong></td>
-            <td class="text-right"><strong>4</strong></td>
-        </tr>
-    </tbody>
-</table>
-
-<p>So as not to stress the microcontroller's power limits, LEDs will be switched via transistors.</p>
-
-<h3>Part 3: Mechanical features</h3>
-
-<p><strong>TODO:</strong> not started.</p>
-
-<p class="alert alert-warning">How these devices will be controlled depends on the number of microcontroller pins available after the LED and Infra Red control circuits have been completed. Switching will utilise transistors to avoid breaching the microcontroller's power supply limits.</p>
-
-<h3>Part 4: Day and night sequence</h3>
-
-<p><strong>TODO:</strong> not started.</p>
-
-<h3>Part 5: Automation</h3>
-
-<p><strong>TODO:</strong> not started.</p>
-
-<h3>Part 6: Power supply</h3>
-
-<p>The main power supply circuit board has been completed, following some <a href="./experiment-2">experimentation</a>. The supply is soldered to a piece of copper perf board and will be mounted on the back of the facia where the power supply is plugged in.</p>
-
-<p>Key features are that the power will enter the diorama via a 2.1mm &times; 5.5mm power socket. A bridge rectifier is used to enable both centre positive and centre negative supplies to be used.</p>
-
-<p>The power supply drives a red LED that is mounted above the power socket.</p>
-
-<p>A voltage regulator is used to provide a 5V supply that will be used for the microcontroller and to power the LEDs. There are output pins making available 7.9V (voltage after the bridge rectifier) and 5V, along with associated ground pins.</p>
-
-<p>Here is a composite photo of both sides of power supply circuit board:</p>
-
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply-composite.png" width="800" height="899" alt="Composite photo of bottom and top of power supply circuit board"></p>
-
-<p>The following photo is a composite photo showing both sides of the power input panel, with the power supply circuit mounted on the rear. Note the panel wiring and the power supply board are not yet connected in this photo:</p>
-
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-facia-composite.png" width="800" height="900" alt="Composite photo of both sides of the power input panel"></p>
-
-<p>The pins shown in the rear photo are, from left to right:</p>
-
-<ol>
-    <li>A pair of polarity agnostic 9V input pins. The power supply socket above the circuit board will be wired to these pins in the finished version.</li>
-    <li>A pair of pins to connect the power indicator LED (7.8V and GND). The control panel LED will be wired to these. Note that the LED's current limiting resistor is wired directly to the LED. It is hidden under heat shrink.</li>
-    <li>A pair of 7.8V power pins for connection to other circuit boards that may require this voltage. Note that 7.8V is the maximum available rectified voltage. (9V is dropped by 1.2V by the bridge rectifier diodes.)</li>
-    <li>A rank of five GND pins for connection to other circuit boards that may require them.</li>
-    <li>A bank of three 5V pins for connection to other circuit boards that may require them.</li>
-</ol>
-
-<p>The schematic diagram of the power supply is shown below:</p>
-
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply_1060x400.png" width="1060" height="400" alt="Power supply schematic diagram"></p>
+</div>
 
 
 <h2 id="experiments">Experiments</h2>

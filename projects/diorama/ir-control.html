@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<h1>Diorama: Infra-red Control <span class="badge badge-warning">In&nbsp;progress</span></h1>
+
+<p>The infra-red control sub-system enables all the diorama&lsquo;s features to be controlled using an infra-red handset.</p>
+
+<h2>Requirements</h2>
+
+<ol>
+    <li>An infra-red receiver should be placed on the front of the diorama as unobtrusively as possible.</li>
+    <li>A simple infra-red handset should be used, with as few key presses as possible being used to enter the commands.</li>
+    <li>The IR sub-system should interpret and encode the commands for interpretation by the diorama's main microcontroller.</li>
+    <li>There should be some visible feedback given to the user as commands are entered. The following states need to be reported:
+        <ol>
+            <li>Waiting for a command</li>
+            <li>Valid command entered</li>
+            <li>Further input required</li>
+            <li>Erroneous command entered</li>
+        </ol>
+    </li>
+</ol>
+
+<p>The IR sub-system does not need to act upon any of the commands directly.</p>
+
+<!---
+<h2>Design</h2>
+-->
+
+<h2>Progress</h2>
+
+<p>An infra red sensor and remote controller have been obtained.</p>
+
+<p>Tests are underway to determine the best way to implement the sub-system and how to link it to the other sub-systems. A <a href="./experiment-1">proof-of-concept experiment</a> has been performed with an Arduino Uno using an Arduino IR sensor library to analyse the output of the IR handset.</p>
+
+<h2>Decisions required</h2>
+
+<p>One possible solution is for the IR sub-system to have its own dedicated microcontroller instead of placing the burden on a central microcontroller. An ATTiny microcontroller is being considered. This controller would read the IR input, interpret the input and check the input for validity. For valid input the data would be encoded and sent for action to another microcontroller. Data would probably be sent over a serial line. The ATTiny would also display feedback to the user. Tests are required to investigate the fesibility of using the ATTiny for this purpose.</p>
+
+<p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>
