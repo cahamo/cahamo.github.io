@@ -151,6 +151,10 @@ pre {
     color: $white;
 }
 
+.text-primary {
+    color: $color-primary !important;
+}
+
 // Page specific
 
 .home-page-welcome {
@@ -167,8 +171,7 @@ pre {
 
 }
 
-.home-page-list {
-
+.list-group-item {
     h3 {
         font-size: $h3-font-size;
     }
@@ -177,4 +180,31 @@ pre {
         color: $color-secondary-1;
     }
 
+    button {
+        a, a:hover, a:visited, a:active {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.small {
+    font-size: 80%;
+}
+
+.list-group {
+    h3 {
+        .badge {
+            font-weight: normal;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+h1 {
+    .badge {
+        font-weight: normal;
+        font-size: 1rem;
+        vertical-align: middle;
+    }
 }
