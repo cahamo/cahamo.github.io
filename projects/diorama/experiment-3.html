@@ -12,7 +12,7 @@ redirect_from:
 <p>Two different methods were tried:</p>
 
 <ol>
-    <li class="my-2">A CD74HC4067 16 channel multiplexer was used to drive 16 LEDs. Two different sketches were tried on two very slightly different circuits.</li>
+    <li class="my-2">A CD74HC4067 16 channel multiplexer was used to drive 16 LEDs. Two different versions of a test program were tried on two very slightly different circuits.</li>
     <li class="my-2">A pair of 75HC595 shift registers were used together to illuminate various combinations of 16 LEDs.</li>
 </ol>
 
@@ -56,12 +56,12 @@ redirect_from:
 
 <h3>Code</h3>
 
-<p>The sketches used to exercise these cicuits are available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. They are:</p>
+<p>The code used to exercise these cicuits are available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. They are:</p>
 
 <ol>
-    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/cd74hc4067-mux-led-test-1/cd74hc4067-mux-led-test-1.ino">cd74hc4067-mux-led-test-1.ino</a></code>: A simple sketch that lights each of the 16 LEDs in turn. This sketch also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-1/src/cd74hc4067-mux-led-test-1.cpp">cd74hc4067-mux-led-test-1.cpp</a></code>: A simple program that lights each of the 16 LEDs in turn. This program also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
 
-    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/cd74hc4067-mux-led-test-2/cd74hc4067-mux-led-test-2.ino">cd74hc4067-mux-led-test-2.ino</a></code>: A more complex sketch that lights various sequences of LEDs quickly in succession to attempt to display patterns where more than one LED is lit at once.</li>
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-2/src/cd74hc4067-mux-led-test-2.cpp">cd74hc4067-mux-led-test-2.cpp</a></code>: A more complex program that lights various sequences of LEDs quickly in succession to attempt to display patterns where more than one LED is lit at once.</li>
 </ol>
 
 <h3>Results</h3>
@@ -72,21 +72,21 @@ redirect_from:
     <div>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/iXRpqv-flFA" title="YouTube video player: CD74HC4067 circuit #2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <p class="caption">1st circuit with <code>cd74hc4067-mux-led-test-1.ino</code></p>
+    <p class="caption">1st circuit with <code>cd74hc4067-mux-led-test-1.cpp</code></p>
 </div>
 
 <div class="text-center">
     <div>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/SpB-l2CTg0Q" title="YouTube video player: CD74HC4067 circuit #2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <p class="caption">2nd circuit with <code>cd74hc4067-mux-led-test-2.ino</code></p>
+    <p class="caption">2nd circuit with <code>cd74hc4067-mux-led-test-2.cpp</code></p>
 </div>
 
 <p>The first test showed that the CD74HC4067 is useful for multiplexing LEDs when only one LED needs to be switched on at a time. However the second test, which is a more realistic scenario for the diorama, revealed that when several LEDs need to be lit simultaneously the circuit does not switch fast enough to eliminate flicker. The second video shows slow pulsing flickering when several LEDs are lit &ldquo;together&rdquo;, but in reality this flickering is fast and annoying.</p>
 
 <h2>75HC595 shift registers</h2>
 
-<p>Two 75HC595 shift registers were connected together and to an Arduino Uno. A sketch was used to light different combinations of LEDs.</p>
+<p>Two 75HC595 shift registers were connected together and to an Arduino Uno. A program was used to light different combinations of LEDs.</p>
 
 <h3>Circuit</h3>
 
@@ -102,7 +102,7 @@ redirect_from:
 
 <p>The code runs through a sequence of patterns where one or more of 16 LEDs are illuminated at the same time. This is done by loading 16 bits of data into the two shift registers, where each bit determines whether an associated LED is switched on or off.</p>
 
-<p>The code is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub as <code><a href="https://github.com/cahamo/diorama/blob/main/research/74hc595-x2-led-test/74hc595-x2-led-test.ino">74hc595-x2-led-test.ino</a></code>.</p>
+<p>The code is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub as <code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/74hc595-x2-led-test/src/74hc595-x2-led-test.cpp">74hc595-x2-led-test.cpp</a></code>.</p>
 
 <h3>Results</h3>
 
@@ -112,7 +112,7 @@ redirect_from:
     <div>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Yd1aadBM1qA" title="YouTube video player: 74HC595 circuit" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <p class="caption">75HC595 circuit with <code>74hc595-x2-led-test.ino</code></p>
+    <p class="caption">75HC595 circuit with <code>74hc595-x2-led-test.cpp</code></p>
 </div>
 
 <p class="alert alert-warning">Note that the circuit seen in the video was built on one breadboard, not two as shown in the above diagram.</p>
