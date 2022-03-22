@@ -71,7 +71,7 @@ layout: default
 
 <p>The code is based closely on that by Nicholas Zambetti. It uses the Arduino <code>Wire</code> library to implement the I&sup2;C slave code. An event is registered that is triggered evre time the slave receives data. That data is then written to the hardware serial port for display on a seril terminal. The I&sup2;C slave is registered with address 0x04.</p>
 
-<p>I&sup2;C Master</p>
+<h3>I&sup2;C Master</h3>
 
 <p>The Arduino Nano and the ATtiny that were tested as I&sup2;C masters each have their own code. They use different libraries to implement I&sup2;C, but they transmit the same data. The data is transmitted in a loop. A counter is incremented each time round the loop and the text &ldquo;<tt>x is </tt>&rdquo; followed by the counter value is transmitted over I&sup2;C. The loop repeats after a specified delay.</p>
 
