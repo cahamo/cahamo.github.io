@@ -1,0 +1,96 @@
+---
+layout: default
+---
+<h1>Experiment #5: Inter-Microcontroller I&sup2;C Communication</h1>
+
+<h2>Introduction</h2>
+
+<p>Following the disappointing results achieved in <a href="./experiment-4">Experiment #4</a> which invesitaged using serial communication between microcontrollers it was decided to look for alternatives. One such was to use an I&sup2;C bus, and this is what is being investigated here.</p>
+
+<p>As in <a href="./experiment-4">Experiment #4</a> an Arduino Uno was used to receive the data and  both an Arduino Nano and a ATtiny85 were used to as transmitters.</p>
+
+<p>On the diorama the transmitting microcontroller will be the infra-red subsystem. It will need to initiate data transfer when a command is to be sent, so it was decided to make the transmitting microcontroller the I&sup2;C master and the receiver the I&sup2;C slave.</p>
+
+<p>Each transmitter runs a loop that sends 6 bytes of data, including an incrementing counter, to the receiver. The receiver then copies this data to its serial port for viewing in a serial terminal.</p>
+
+<h2>Circuits</h2>
+
+<p>Each circuit is very similar and varies only in the pins used to manage the I&sup2;C bus. The Arduino Nano and Uno have I&sup2;C support built in and have dedicated pins to support it. While some versions of the microcontrolers have dedicated pins, some (like mine) use two of the analogue pins. A4 is used for the I&sup2;C SDA connection and A5 is used for SCL. The ATtiny does not support I&sup2;C natively, so a software implemtation was required. This implementation uses PB0 for SDA and PB2 for SCL.</p>
+
+<p>Connections are:</p>
+
+<table class="table table-responsive">
+    <thead class="text-center">
+        <tr>
+            <th scope="col" colspan="2">Transmitter</th>
+            <th scope="col" rowspan="2" class="align-middle">Attached to</th>
+            <th scope="col" rowspan="2" class="align-middle">Notes</th>
+        </tr>
+        <tr>
+            <th scope="col">ATtiny85 Pin</th>
+            <th scope="col">Nano Pin</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <td>PB0</td>
+            <td>A4</td>
+            <td>Uno pin A4</td>
+            <td>I&sup2;C SDA connection</td>
+        </tr>
+        <tr>
+            <td>PB2</td>
+            <td>A5</td>
+            <td>Uno pin A5</td>
+            <td>I&sup2;C SCL connection</td>
+        </tr>
+        <tr>
+            <td>GND</td>
+            <td>GND</td>
+            <td>Uno GND</td>
+            <td>Common ground connection</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The Nano and Uno were each powered via their USB connectors, which the Uno also used for serial output. The ATtiny was powered by an external 5V power supply. Two 4.7k&ohm; pull-up resistors were used to connect the SDA and SCL lines to 5V.</p>
+
+<p>The following image shows the breadboard connections for the Attiny85 circuit.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-5/i2c-uno-attiny85-breadboard.png" width="998" height="489" alt="I&sup2;C connections between Arduino Uno and ATtiny85 on breadboard"></p>
+
+<p class="alert alert-info">The version of the circuit using the Arduino Nano in place of the ATtiny85 has not been illustrated since it is so similar to the above.</p>
+
+<h2>Code</h2>
+
+<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/i2c-tests</code> directory. The code was developed in C++ using PlatformIO. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
+
+<h3>I&sup2;C Slave</h3>
+
+<p>The I&sup2;C slave code that runs on the Arduino Uno can be found in <a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-slave-read-uno/src/i2c-slave-read-uno.cpp"><code>i2c-slave-read-uno.cpp</code></a></p>
+
+<p>The code is based closely on that by Nicholas Zambetti. It uses the Arduino <code>Wire</code> library to implement the I&sup2;C slave code. An event is registered that is triggered evre time the slave receives data. That data is then written to the hardware serial port for display on a seril terminal. The I&sup2;C slave is registered with address 0x04.</p>
+
+<p>I&sup2;C Master</p>
+
+<p>The Arduino Nano and the ATtiny that were tested as I&sup2;C masters each have their own code. They use different libraries to implement I&sup2;C, but they transmit the same data. The data is transmitted in a loop. A counter is incremented each time round the loop and the text &ldquo;<tt>x is </tt>&rdquo; followed by the counter value is transmitted over I&sup2;C. The loop repeats after a specified delay.</p>
+
+<p>The code is:</p>
+
+<ul>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-master-write-nano/src/i2c-master-write-nano.cpp">i2c-master-write-nano.cpp</a></code> for the Arduino Nano. It uses the Arduino <code>Wire</code> library for I&sup2;C.</li>
+
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-master-write-attiny85/src/i2c-master-write-attiny85.cpp">i2c-master-write-attiny85.cpp</a></code> for the ATtiny85. It uses the Adafruit version of the <code>TinyWireM</code> library for I&sup2;C. This library works only for an I&sup2;C master device.</li>
+</ul>
+
+<h2>Results</h2>
+
+<p>The tests with both the Arduino Nano and the ATtiny85 concluded successfully, with no dropped dropped or corrupted bytes being detected over several iterations.</p>
+
+<h2>Conclusion</h2>
+
+<p>The use of I&sup2;C communication to send data from the IR control subsystem to the central control microcontroller looks promising. The only downside may be that in this arrangement the central microcontroller is acting as an I&sup2;C slave device, which means it can't initiate communication. This may become a problem if any I&sup2;C peripherals are attached to the central microcontroller. However, no such devices are planned at the moment.</p>
+
+<p class="lead">It is recommended that I&sup2;C is adopted as the means of communicating infra-red control data to the central microprocessor.</p>
+
+<p class="text-center"><b>Back to <a href="./controller">Central Control page</a> | <a href="./">Main project page</a></b></p>

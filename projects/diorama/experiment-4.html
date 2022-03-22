@@ -1,0 +1,126 @@
+---
+layout: default
+---
+<h1>Experiment #4: Inter-Microcontroller Serial Communication</h1>
+
+<h2>Introduction</h2>
+
+<p>Since the plan is to use one microcontroller to handle the infra-red command system and another to act as the central control unit, some method needs to be found to enable the microcontrollers to commuicate with each other.</p>
+
+<p>The first method considered was serial communication using software serial libraries. This experiment was used to investigate the viability of such a system. An Arduino Uno clone was chosen to stand in for the central control microprocessor while two different microcontrollers were tested as possible candidates for the infra-red command microcontroller:</p>
+
+<ol>
+    <li>An ATtiny85</li>
+    <li>An Arduino Nano clone</li>
+</ol>
+
+<p>Since the design envisaged that serial communication would be one way, from the infra-red command microcontroller to the central controller, the experiment only tested communication in that direction. The sending microcontroller sends a start up message over serial and then flashes a LED in a loop, transmitting the state of the LED to the receiving microcontroller. The results were then sent from the receiver to a serial monitor and inspected visually.</p>
+
+<h2>Circuits</h2>
+
+<p>The circuits used for the different microcontrollers were slightly different and are described separately.</p>
+
+<h3>Circuit With ATtiny85</h3>
+
+<p>This circuit used a LED and current limiting resistor.</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr class="text-left">
+            <th scope="col">ATtiny85 Pin</th>
+            <th scope="col">Attached to</th>
+            <th scope="col">Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PB1</td>
+            <td>LED anode</td>
+            <td>Couple LED cathode to GND via 470&ohm; resistor</td>
+        </tr>
+        <tr>
+            <td>PB2</td>
+            <td>Uno pin 10</td>
+            <td>ATtiny's nominated serial TX pin to Uno's nominated RX pin</td>
+        </tr>
+        <tr>
+            <td>GND</td>
+            <td>Uno GND pin</td>
+            <td>Common ground</td>
+        </tr>
+        <tr>
+            <td>VCC</td>
+            <td>Uno 5V pin</td>
+            <td>Power for ATtiny taken from Uno</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Power was supplied to the Uno via its USB port.</p>
+
+<h3>Circuit With Arduino Nano</h3>
+
+<p>This circuit used the Nano's internal LED, so no physical connections were required for the LED.</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr class="text-left">
+            <th scope="col">Nano Pin</th>
+            <th scope="col">Attached to</th>
+            <th scope="col">Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>3</td>
+            <td>Uno pin 10</td>
+            <td>Nano' nominated serial TX pin to Uno's nominated RX pin</td>
+        </tr>
+        <tr>
+            <td>GND</td>
+            <td>Uno GND pin</td>
+            <td>Common ground</td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="alert alert-info">For completeness, the Nano's pin 2 (nominated as RX) could be coupled to the Uno's pin 11 (nominated as TX), which would enable the Uno to transmit to the Nano. Since the communication was one-way these pins were left un-connected.</p>
+
+<p>The microcontrollers were powered separately, each via their own USB ports.</p>
+
+<h2>Code</h2>
+
+<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/serial-tests</code> directory. The code was developed in C++ using PlatformIO. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
+
+<h3>Serial receiver</h3>
+
+<p>The code that stands in for the central controller can be found in <code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/copy-softserial-to-serial-uno/src/copy-softserial-to-serial-uno.cpp">copy-softserial-to-serial-uno.cpp</a></code>.</p>
+
+<p>This is the code to be run on Arduino Uno. It simply copies serial data received on pin 10 to its hardware serial port, for viewing on a serial terminal. The Arduino <code>Serial</code> library is used to send data to the terminal while the <code>SoftwareSerial</code> is used to receive data from the sending microcontroller.</p>
+
+<h3>Serial transmitters</h3>
+
+<p>The Arduino Nano and the ATtiny that were tested as transmitters each have their own code. They use different software serial libraries to achieve similar outcomes. The code is:</p>
+
+<ul>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/nano-serial-test/src/nano-serial-test.cpp">nano-serial-test.cpp</a></code> for the Arduino Nano. It uses the <code>SoftwareSerial</code> library.</li>
+
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/attiny-serial-test/src/attiny-serial-test.cpp">attiny-serial-test.cpp</a></code> for the ATtiny85. It uses the <code>ATtinySerialOut</code> library.</li>
+</ul>
+
+<h2>Results</h2>
+
+<ol>
+    <li class="mb-3">Using the Nano to transmit data was mostly successful. The data sent from the Nano was received cirrectly by the Uno. However, an occasional spurious character was displayed on the terminal immediately after the programs started.</li>
+    <li class="mb-3">When using the ATtiny85 all data received by the Uno was garbled beyond recognition. On researching the problem it was found that many ATtinys have clocking problems when transmitting over serial. At attempt was made to callibrate the ATtiny to overcome the problem, but this failed. Further investiagtion was not carried out.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>Although using the Nano to transmit was largely successful, the introduction of an occasional unexpected character in the received data means that any production system using serial to tranmit command data would need to include some significant error checking.</p>
+
+<p>However, the main problem is that the ATtiny85 proved unusable. This is unfortunate because the ATtiny is the preferred microcontroller to be used for the infra-red command subsytem.</p>
+
+<p class="lead">Consequenly it is not proposed to adopt serial as the means of communication between microcontrolers. Other options should be investigated.</p>
+
+<p class="text-center"><b>Back to <a href="./controller">Central Control page</a> | <a href="./">Main project page</a></b></p>
