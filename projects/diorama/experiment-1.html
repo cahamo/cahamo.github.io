@@ -9,7 +9,7 @@ redirect_from:
 
 <p>Since the diorama&rsquo;s electronics are to be operated by means of an infra-red remote, it makes sense to test that component first.</p>
 
-<The>A kit was purchased that comprised a remote control handset, an infra-red sensor, an infra-red LED and some DuPont cables. Only the handset and the infra-red sensor are required for the project. The handset is quite basic, but sufficient for the task in hand:</p>
+<The>A kit was purchased that included a remote control handset and an infra-red sensor. The handset was quite basic, but sufficient for the task in hand:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/ir-remote-handset_160x327.jpg" width="160" height="327" alt="Remote control handset"></p>
 
@@ -17,9 +17,9 @@ redirect_from:
 
 <h2>Circuit</h2>
 
-<p>A test circuit was built on a breadboard using the infra-red sensor and a LED that was set to flash whenever a single was received from the remote. This LED very nearly duplicates duplicates the sensor's built in LED but has been included because it is unlikely the built in LED will be visible when the sensor is incorporated into the diorama. Furthermore, the final circuit design will most likely only flash the LED when a valid signal is received: it will filter out spurious signals.</p>
+<p>A test circuit was built on a breadboard using the infra-red sensor and a LED that was set to flash whenever a signal was received from the remote. This LED very nearly duplicates duplicates the sensor's built in LED, but has been included because it is unlikely the built in LED will be visible when the sensor is incorporated into the diorama. Furthermore, the final circuit design will most likely only flash the LED when a valid signal is received: it will filter out spurious signals.</p>
 
-<p>The breadboard circuit schematic is show below:</p>
+<p>The breadboard circuit schematic is shown below:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/irsensor-library-test-circuit_1072x388.png" width="1072" height="388" alt="Test circuit breadboard schematic."></p>
 
@@ -35,18 +35,18 @@ redirect_from:
 
 <ol>
 
-    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the recevied code to the serial monitor. This code was used to determine the handset type and to work out which codes are emitted by each button. </li>
+    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the received code to the serial monitor. This code was used to determine the handset type and to work out which codes are emitted by each button. </li>
 
-    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/handset-test/src/handset-test.cpp"><code>handset-test.cpp</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.cpp</code> this script reports which button is being pressed on the remote controller being used for this project. It detects whether the key is being repeated and also reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
+    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/handset-test/src/handset-test.cpp"><code>handset-test.cpp</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.cpp</code> this script reports which button is being pressed on the remote control handset. It detects whether the key is being repeated and also reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
 </ol>
 
 <h2>Methodology</h2>
 
 <p>The circuit was built as described above.</p>
 
-<p><code>ir-sensor-analyser.cpp</code> code was compiled and uploaded to the Uno. The handset's buttons were pressed in order from left to right, top to bottom and the serial output that was generated was captured to a text file using <a href="https://freeware.the-meiers.org/">CoolTerm</a>. The information was used in the creation of <code>handset-test.cpp</code>.</p>
+<p><code>ir-sensor-analyser.cpp</code> code was compiled and uploaded to the Uno. The handset's buttons were pressed in order from left to right, top to bottom and the serial output that was generated was captured to a text file using <a href="https://freeware.the-meiers.org/">CoolTerm</a>. The information gathered was used in the creation of <code>handset-test.cpp</code>.</p>
 
-<p>Next <code>handset-test.cpp</code> was compiled and uploaded to the Uno. Once again the handset's buttons were pressed in the same order as before and the serial output was captured to a second text file using CoolTerm.</p>
+<p>Next <code>handset-test.cpp</code> was compiled and uploaded to the Uno. Once again the handset's buttons were pressed in the same order as before and the serial output was captured to a second text file.</p>
 
 <h2>Results</h2>
 
@@ -57,9 +57,9 @@ Protocol=NEC Address=0x0 Command=0x45 Raw-Data=0xBA45FF00 32 bits LSB first
 Protocol=NEC Address=0x0 Command=0x45 Repeat gap=39600us
 &vellip;</pre>
 
-<p>Examination of the text file shows that some buttons repeated while others did not. The above extract demonstrates the output generated when a button was first pressed and when the same button repeats.</p>
+<p>Examination of the text file shows that some buttons repeated while others did not. The above extract demonstrates the output generated when a button was first pressed and when it repeats.</p>
 
-<p>Because the order in which the buttons were pressed was known it became a simple matter to analyse the text file to find the codes of each button: each time the value of the <code>Command</code> entry changes we have a new key being pressed. A copy of the text file named <code>ir-remote-annotated-readings.txt</code> was annotated to make this clearer. Here are extract from that file for number key 1 and the OK key:</p>
+<p>Because the order in which the buttons were pressed was known it became a simple matter to analyse the text file to find the codes of each button: each time the value of the <code>Command</code> entry changes we have a new key being pressed. A copy of the text file named <code>ir-remote-annotated-readings.txt</code> was annotated to make this clearer. Here are extracts from that file for number 1 and OK keys:</p>
 
 <pre>&vellip;
 # Number key 1
@@ -72,7 +72,7 @@ Protocol=NEC Address=0x0 Command=0x1C Raw-Data=0xE31CFF00 32 bits LSB first
 Protocol=NEC Address=0x0 Command=0x1C Repeat gap=39600us
 &vellip;</pre>
 
-<p>The values gleaned from this file are summarised below. They were used to create a C header file that provides a <code>#define</code> statement for each key, giving a descriptive name to the key values:</p>
+<p>The values gleaned from this file are summarised below. They were used to create a C header file that provides a <code>#define</code> statement for each key, providing a descriptive name for each kay value:</p>
 
 <pre><code class="language-c">// Number keys
 #define REMOTE_KEY_0      0x19
