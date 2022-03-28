@@ -4,18 +4,22 @@ layout: default
 <h1>DFPlayer Mini</h1>
 
 <p>Reliable information about this player is hard to come by. According to several people the official docs and data
-    sheet are not entirely accurate. There's also a lot of posts that  provide partial information. So I've tried to gather
-    together the best of the info I've found online.</p>
+    sheet are not entirely accurate. There&rsquo;s also a lot of posts that  provide partial information. So I&rsquo;ve tried to gather
+    together the best of the info I&rsquo;ve found online.</p>
 
-<p class="alert alert-warning">If you find any errors in the following please create an issue on this site's <a href="https://github.com/cahamo/cahamo.github.io/issues">GitHub page</a> <small>(GitHub account required)</small></p>
+<p class="alert alert-warning">If you find any errors in the following please create an issue on this site&rsquo;s <a href="https://github.com/cahamo/cahamo.github.io/issues">GitHub page</a> <small>(GitHub account required)</small></p>
 
-<p>To date, the main info I've found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly
+<p>To date, the main info I&rsquo;ve found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly
     on the <em>banggood</em> forums, but has now disappeared. It has now been re-posted on PasteBin as <a
         href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>.</p>
 
-<p>I've formatted and and lightly tweaked that a part of that post and re-published it below.</p>
+<p>I&rsquo;ve formatted and and lightly tweaked that a part of that post and <a href="#commands">re-published it below</a>.</p>
+
+<p>Opinions also seem to vary about how best to wire up the DFPlayer Mini. Having tried a few suggestions, I&rsquo;ve <a href="#wiring">published a diagram</a> of the circuit that works best me at the bottom of the page.</p>
 
 <hr>
+
+<section id="commands">
 
 <h2>DF Player Mini Commands (after Ype Brada)</h2>
 
@@ -27,7 +31,7 @@ layout: default
         along with some clarifications and spelling etc. corrections. All the content from here on in comes from the
         comments in the source code that accompanied the code, followed by the source code itself.</p>
     <p>Why post it here? Two reasons. Firstly, as mentioned the lack of formatting on Paste Bin makes the content hard
-        to read. Secondly, one post has already been taken down &ndash; I don't want to risk this valuable info
+        to read. Secondly, one post has already been taken down &ndash; I don&rsquo;t want to risk this valuable info
         disappearing again.</p>
 
 </div>
@@ -83,7 +87,7 @@ layout: default
             <td>1</td>
             <td>Version Info</td>
             <td>0xFF</td>
-            <td>Don't know why it's called Version Info</td>
+            <td>Don&rsquo;t know why it&rsquo;s called Version Info</td>
         </tr>
         <tr>
             <td>2</td>
@@ -278,7 +282,7 @@ layout: default
             <td>X</td>
             <td>X</td>
             <td>Resets all (Track set to 0x01, Volume set to 0x30) Will return 0x3F initialization parameter (0x02 for
-                TF-card). &quot;Clap&quot; sound after executing command (no solution found)
+                TF-card). &ldquo;Clap&rdquo; sound after executing command (no solution found)
         </tr>
         <tr>
             <td>0x0D</td>
@@ -378,7 +382,7 @@ layout: default
             <td>*</td>
             <td>X</td>
             <td>1~255</td>
-            <td>Loops all tracks in folder named <tt>tt</tt>.<br>(Cahamo's query: if we're looping <em>all</em> tracks
+            <td>Loops all tracks in folder named <tt>tt</tt>.<br>(Cahamo&rsquo;s query: if we&rsquo;re looping <em>all</em> tracks
                 in folder <tt>01</tt> then what is the purpose of the lo parameter?)</td>
         </tr>
         <tr>
@@ -547,7 +551,7 @@ layout: default
             <td>*</td>
             <td>0</td>
             <td>version-number</td>
-            <td>Yerke's version was 5</td>
+            <td>Yerke&rsquo;s version was 5</td>
         </tr>
         <tr>
             <td>0x47</td>
@@ -620,7 +624,7 @@ layout: default
             <td>0</td>
             <td>number-of-files</td>
             <td>Change to first track in folder &quot;01&quot; Returns number of files in folder
-                &quot;01&quot;<br>(Cahamo's query: if we're querying only track &quot;01&quot; then what is the purpose
+                &quot;01&quot;<br>(Cahamo&rsquo;s query: if we&rsquo;re querying only track &quot;01&quot; then what is the purpose
                 of the lo parameter?)</td>
         </tr>
         <tr>
@@ -647,7 +651,7 @@ layout: default
 # define End_Byte 0xEF
 # define Acknowledge 0x00 //Returns info with command 0x41 [0x01: info, 0x00: no info]
 
-SoftwareSerial mySerial(10, 11);
+SoftwareSerial mySerial(10, 11);    // RX pin = 10, TX pin = 11
 
 void setup () {
   Serial.begin(9600);
@@ -710,3 +714,42 @@ void execute_CMD(byte CMD, byte Par1, byte Par2)
     mySerial.write( Command_line[k]);
   }
 }</code></pre>
+
+<hr>
+
+<section id="wiring">
+
+<h2>DFPlayer Mini Wiring</h2>
+
+<p>Here&rsquo;s a possible circuit to drive the DFPlayer Mini from an Arduino Uno.</p>
+
+<p class="alert alert-info">I derived this circuit from one described in detail by <a href="https://markus-wobisch.blogspot.com/2016/09/arduino-sounds-dfplayer.html">Markus Wobisch</a>. My circuit assumes you can provide a regulated 5V to it, while while Markus&rsquo; circuit uses 6 &times; 1.2V rechargable AA batteries and voltage regulator, <strong>and</strong> provides an alternative for driving stereo speakers via a PAM8403 2&times;3W.</p>
+
+<p class="alert alert-danger">While I&rsquo;ve had success with this circuit, I&rsquo;m not claiming it&rsquo;s the best available. And there are absolutely no guarantees it won&rsquo;t damage your DFPlayer. <strong>Use at your own risk!</strong></p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/dfplayer-circuit-diagram.png" width="720" height="480" alt="Circuit diagram for DFPlayer Mini with Arduino Uno"></p>
+
+<p>Components are as follows:</p>
+
+<ul>
+    <li>5V DC regulated power supply</li>
+    <li>DFPlayer Mini</li>
+    <li>Arduino Uno or similar</li>
+    <li>2 &times; 1k&ohm; resistors (&frac14;W is sufficient)</li>
+    <li>470&micro;F electrolytic capacitor</li>
+    <li>Diode: any diode with &approx; 0.8V forward voltage (I used an IN4001)</li>
+    <li>8 &ohm; speaker</li>
+</ul>
+
+<h3>Notes</h3>
+
+<ol>
+    <li class="mb-2">The orientation of the DFPlayer Mini&rsquo;s pins as shown in the circuit diagram is correct when the module&rsquo;s &ldquo;dimple&rdquo; is at the top:
+        <p class="mb-2 mt-2"><img class="img-fluid mx-auto d-block" src="/assets/img/resources/dfplayer-mini-pinout.png" width="300" height="170" alt="DFPlayer Mini pinout"></p>
+    </li>
+    <li class="mb-2">The reason for the diode is to drop the voltage supplied to the DFPlayer Mini from 5V to about 4.2V. The theoretical voltage range for the DFPlay Mini is 3.3-5.0V, but there are reports that the component is happier at around 4.2V.</li>
+    <li class="mb-2">The Arduino has to send commands and receive responses from the DFPlayer Mini by means of serial communication. The circuit implies the use of the SoftwareSerial library configured with pin 10 as its RX pin and pin 11 as the TX pin. Pin 12 gets notifications from the DF Player Mini&rsquo;s BUSY pin. This has the advantage of leaving the Arduino&rsquo;s hardware serial pins 0 and 1 free.</li>
+    <li class="mb-2">You could try leaving out the smoothing capacitor - I got acceptable results without it.</li>
+</ol>
+
+</section>
