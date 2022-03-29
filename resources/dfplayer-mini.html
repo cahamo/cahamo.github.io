@@ -17,6 +17,8 @@ layout: default
 
 <p>Opinions also seem to vary about how best to wire up the DFPlayer Mini. Having tried a few suggestions, I&rsquo;ve <a href="#wiring">published a diagram</a> of the circuit that works best me at the bottom of the page.</p>
 
+<p>Finally, I've included <a href="#demo-code">some example source code</a> for the DFPlayer Mini published by DFRobot.</p>
+
 <hr>
 
 <section id="commands">
@@ -751,5 +753,17 @@ void execute_CMD(byte CMD, byte Par1, byte Par2)
     <li class="mb-2">The Arduino has to send commands and receive responses from the DFPlayer Mini by means of serial communication. The circuit implies the use of the SoftwareSerial library configured with pin 10 as its RX pin and pin 11 as the TX pin. Pin 12 gets notifications from the DF Player Mini&rsquo;s BUSY pin. This has the advantage of leaving the Arduino&rsquo;s hardware serial pins 0 and 1 free.</li>
     <li class="mb-2">You could try leaving out the smoothing capacitor - I got acceptable results without it.</li>
 </ol>
+
+</section>
+
+<hr>
+
+<section id="demo-code">
+
+<h2>DFRobot's Example Source Code</h2>
+
+<p>A copy of the entire exmaple source for the DFPlayer Mini is available from my Google Drive account as <a href="https://drive.google.com/file/d/1njl4_JaMN3cFe-CbBXXUYm1cCtXdae4D/view?usp=sharing">DFRobotDFPlayerMini-1.0.3</a>. It is released under the GNU Lesser General Public License.</p>
+
+<p>I can't recall where I found it and thought I'd make it available, like Ype Brada's notes, just to make sure it survives on the net.</p>
 
 </section>
