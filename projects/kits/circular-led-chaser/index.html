@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<h1>Circular LED Chaser kit bash <span class="badge badge-warning">In&nbsp;progress</span></h1>
+
+<p>I bought myself a bunch of kits from China to use as soldering practise and to try to work out how they work. The first one I attempted was this &ldquo;Colorful Voice Control Rotating LED Light Kit &hellip;&rdquo;:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--advert_600x416.png" width="600" height="416" alt="AliExpress page for 'Colorful Voice Control Rotating LED Light Kit'"></p>
+
+<p>After soldering everything together I discoered that nothing worked. I found I'd bridged two adjcent PCB holes with solder. On trying to remove the bridge I managed to cut through some tracks that were routed close to the holes.</p>
+
+<p>Instead of throwing the board away - I mean it cost me all of £1.22 - I decided to see if I could salvage something from the mess.</p>
+
+<p>After a lot of head scratching and poking around with wires and the multimeter I decided I wasn't going to be able to save the board as designed, but that I might be able to patch up the board so that at least the CD4017 decade timer could cycle through the LEDs.</p>
+
+<p>So, I de-soldered all the components that were part of the sound section of the circuit and went about soldering wires to the back of the board until all the problematic tracks had been bypassed. As you cn see in the following photo, there were a lot!</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--circular-board_800x400.png" width="800" height="400" alt="Rotating LED kit with sound components de-soldered and tracks patched"></p>
+
+<p>While doing the patching I soldered on a wire from the CLK pin of the CD4017 that I could plug into a breadboard to trigger the counter and so test that the counter would light all LEDs in sequence. It did &hellip; progress!</p>
+
+<p>Now the CD4017 and the LEDs were working I decided to use the kit as the basis for a circular LED chaser. For that I decided to use a 555 timer to trigger the CD4017. I breadboarded a circuit and messed arond with various resistor and capacitor values until I got the chaser running at a speed I liked. I included a trim pot so that I could adjust the trigger speed.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--555-test_800x400.png" width="800" height="400" alt="Breadboard circuit for testing a 555 timer as a trigger for the LED chaser"></p>
+
+<p>Here's the circuit I settled on:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--circuit_800x411.png" width="800" height="411" alt="LED chaser circuit diagram"></p>
+
+<p>Everything on the right of the above circuit (including the 4017 chip) was pre-determined by the remaining content of the circular PCB that came with the kit. Everything to the left of the 4017 was new.</p>
+
+<p>OK, I'd got a working circuit. But what to do with it? I'd recently bought a 6cm diameter perspex globe from the <a href="https://thepihut.com/products/diy-ornament-kit-6cm-diameter-perfect-for-circuit-playground">Pi Hut</a> so I decided to mount the chaser in that. This meant that the 555 timer circuit would have to piggy back over the CD4017 chip on a daughterboard. Out came the soldering iron again and I put together the required board, which was sized to fit in the globe.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--555-daughterboard_400x701.png" width="400" height="701" alt="555 timer daughterboard"></p>
+
+<p>Having tested things out I mounted the daughterboard on the back of the LED board using some scrap plastic offcuts using UHU glue and black electrical tape for insulation.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--conjoined-boards_800x400.png" width="800" height="400" alt="555 timer daughterboard mounted on back of LED chaser board"></p>
+
+<p>The next job was to make a gasket to hold the board inside the globe. I made two rings of the required internal and external diameters from cereal box card. These were laminated together with Roket card glue and then painted with bblack acrylic paint then glued to the round circuit board with super glue.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--board-with-ring_400x400.png" width="400" height="400" alt="Circuit board with gasket"></p>
+
+<p>The ring was such a good fit inside the globe there was no need for glue:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--boards-in-globe_800x400.png" width="800" height="400" alt="Circuit board fitted inside globe"></p>
+
+<p>As can be seen in the back view of the globe above, a hole was drilled in the globe to provide access to the trim pot. Unfortuately I caught the trim pot with the drill andbroke of the plastic fitting for the screwdriver. I couldn't mend that but luckily, the screwdrive can still be used to turn the trimpot.</p>
+
+<p>I first considered using batteries to power the circuit but decided instead to power by USB via a USB micro socket. This decision was made because I decided that the globe would be mounted on a stick, like a wand, so a USB socketcould be mounted at the end of the wand. Therefore two power leads were routed out of the globe through a hole drilled behind the loop from which the globe was intended to be hung. The plan was to insert this loop in the top of the wand.</p>
+
+<p class="alert alert-warning">And that's where things rest at present. I've constructed a shaft for the wand from an offcut from a metal curtain pole. I've also decided that the wand will now sit in a base. Right now that base is going to be made from an old glass lid with plastic seal taken from a discarded resealable jar. <strong>Watch this space!</strong></p>
