@@ -1,0 +1,136 @@
+---
+layout: default
+---
+<h1>Experiment #6: Infra-red receiver feedback RGB LED colour balance</h1>
+
+<h2>Introduction</h2>
+
+<p>It has been decided to use an RGB LED in the infra red receiver unit to provide feedback to the user when entering commands via the infra-red controller.</p>
+
+<p>Each of the elements of the RGB LED have different intensities when being driven via the same value resistors. The consequence is that, for the same PWM value each element of the LED has a different brightness level. This also means that any colours that require a mix of LED elements don&rsquo;t appear as expected. So it has been decided to use different value resistors for each of the elements. This experiment was to find what resistances gave the most balanced brightness level for each LED element.</p>
+
+<h2>Method</h2>
+
+<p>An RGB LED was tested displaying the following colours in a repeating sequence, using a pulse modulated 5V signal.</p>
+
+<ul>
+    <li>red</li>
+    <li>green</li>
+    <li>yellow</li>
+    <li>blue</li>
+    <li>white</li>
+</ul>
+
+<p>Resistors of different values were attached to each of the LED&rsquo;s red, green and blues pins until:</p>
+
+<ol>
+    <li>Each of the red, green and blue LED segment, when run at full intensity, were equally bright.elements off.</li>
+    <li>White appeared with as little colour cast as possible.</li>
+    <li>Yellow, which is a mix of red and green, appeared correctly and at a similar intensity to the red, green and blue segments on their own.</li>
+</ol>
+
+<p class="alert alert-warning">Note that it was important to calculate the minimum safe resistance for each of the LED&rsquo;s elements and never to use less than that resistance.</p>
+
+<h2>Circuit</h2>
+
+<p>The red, green and blue anodes of a common cathode RGB LED were connected to different PWM pins of an Arduino Nano clone, via resistors. The LED&rsquo;s cathode was connected to the Nano&rsquo;s GND pin.</p>
+
+<p>The values of the resistors were then changed until the required colour balance was achieved.</p>
+
+<p>The circuit diagram was as follows:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-6/rgbled-test-circuit-diagram.png" width="451" height="297" alt="RGB LED test circuit diagram."></p>
+
+<h2>Code</h2>
+
+<p>The code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research\ir-control-tests\rgb-led-colour-balance</code> directory. The code was developed in C++ using PlatformIO.</p>
+
+<p>There is just one program, <code><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/rgb-led-colour-balance/src/rgb-led-colour-balance.cpp">rgb-led-colour-balance.cpp</a></code> that cycles through each of the colours listed above and sends the required PWM signals to the RGB LED&rsquo;s red, green and blue anodes.</p>
+
+<p>When primary colours red, green and blue, a &ldquo;fully on&rdquo; value of 255 was sent to the associated anode, while the others were turned off. The PWM values sent to the RGB LED for the &ldquo;mixed&rdquo; colours yellow and white were modified in the code until the colours appeared with approximately the same intensity as the primary colours.</p>
+
+<h2>Results</h2>
+
+<p>The following resistances were found to (a) give the required overall intensity of the LED and (b) give the best balance between the red, green and blue elements:</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th scope="col" class="text-left">LED colour</th>
+            <th scope="col" class="text-center">Resistance</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <th scope="row" class="text-left">
+                Red
+            </th>
+            <td>
+                680&ohm;
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">
+                Green
+            </th>
+            <td>
+                5.1k&ohm;
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">
+                Blue
+            </th>
+            <td>
+                2k&ohm;
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The following values were used in the program for each colour:</p>
+
+<table class="table table-responsive">
+    <thead class="text-center">
+        <tr>
+            <th scope="col" class="text-left">Colour</th>
+            <th scope="col">Red PWM value</th>
+            <th scope="col">Green PWM value</td>
+            <th scope="col">Blue PWM value</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+            <th scope="row" class="text-left">Red</th>
+            <td>255</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">Green</th>
+            <td>0</td>
+            <td>255</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">Blue</th>
+            <td>0</td>
+            <td>0</td>
+            <td>255</td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">Yellow</th>
+            <td>192</td>
+            <td>192</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <th scope="row" class="text-left">White</th>
+            <td>192</td>
+            <td>192</td>
+            <td>192</td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="text-center"><b>Back to <a href="./controller">Central Control page</a> | <a href="./">Main project page</a></b></p>
