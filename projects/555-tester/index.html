@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<h1>555 Chip Tester</h1>
+
+<p>The motivation for this project came from the fortuitous coincidence of two events. Firstly I'd wasted some time tracking down a bug in a 555 timer circuit only to find the 555 itself was dead. Soon afterwards I came across a circuit on the <a href="https://www.elprocus.com/555-timer-pin-description-applications/">ElProCus</a> website that was designed to test a 555. So I tweaked the <em>ElProCus</em> circuit to better meet my needs. Here's the result:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--completed_480x500.png" width="480" height="500" alt="Composite photo of 2 shots of the completed 555 tester"></p>
+
+<p>The original circuit by <em>ElProCus</em> had no switch, you simply applied the required voltage and, if the 555 was OK the LED flashed. Simple. But I didn't like the idea of having no switch to protect the 555 while connecting power, so decided to add a momemtary contact switch that has to be held down to conduct the test. Then it struck me that a failed LED could imply that a 555 had failed the test. So I added another push button to test the LED. My circuit has two means of providing power: spade connectors to enable crocodile clips to be used and DuPont female connectors to enable power to be easily linked from breadboards. Here's the adapted circuit:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--circuit-design_594x516.png" width="594" height="516" alt="555 tester circuit design"></p>
+
+<p>A few of points to note:</p>
+
+<ol>
+    <li class="mb-2">The original circuit was designed for 9V, but experimenting with lower voltages found that the circuit operated reliably down to just over 4V.</li>
+    <li class="mb-2">I added a 10nF capacitor between pin 5 of the 555 timer and ground. This was missing on the original circuit.</li>
+    <li class="mb-2">I changed the recommended 500k&ohm; resistor with a 470k&ohm;, because that's the nearest value I had in stock.</li>
+    <li class="mb-2">I determined the value of the current limiting resistors for the LED by experiment. The pink 3mm LED I used was very bright and needed to be toned down!</li>
+    <li class="mb-2">I used two different current limiting resistors for the LED - 1 from the 555 timer output pin and the other from the LED test switch. At first I just used the one resistor but found that the LED pulsed in when the LED test switch was pressed. Doubling up the resistors fixed this.</li>
+</ol>
+
+<p>Here's the circuit as built:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--circuit-board_480x533.png" width="480" height="533" alt="Composite photo of 2 shots of the 555 tester circuit board"></p>
+
+<p>The only point to note is that I used two 100nF capacitors in parallel instead of a 200nF cap, simply because I didn't have one of those.</p>
+
+<p>I considered following <em>ElProCus&rsquo;</em> example and keeping the circuit board bare, but eventually decided to mount it in a scrap jewelry box I found. Holes were cut in the box lid where required. They were then filed to shape - yep I filed cardboard! A frame of 2mm greyboard was glued to the underside of the perfboard to raise it up to the required height within the box.</p>
+
+<p>It was difficult to measure the exact location of the controls directly because the lid is a different size to the base, but I resolved that by putting a dab of acrylic paint on the switch tops and then fitted and removed the lid. I then drilled the holes for the switches where the paint stuck to the lid. Everything else was measured from those holes. The box was touched up with black acrylic paint and the labels were printed on ink jet paper and glued to the box lid. Finally, holes were drilled through the side of the lid and box and tiny screws were used to keep the lid in place.</p>
+
+<p>Here's a montage of photos illustrating the process:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--box-mounting_480x661.png" width="480" height="661" alt="Composite photo of 54 shots of the the process of creating a case for the 555 timer"></p>
+
+<p>And that what that. Here's a video of the completed device being used:</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/iUZuhiwM1xQ" title="YouTube video player: 555 Chip Tester in use" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
