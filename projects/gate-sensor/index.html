@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<h1>Gate Open Sensor</h1>
+
+<h2>Whys and Wherefores</h2>
+
+<p>Every morning, before letting our dog out in the back garden, my wife or I go outside to check our garden gates are bolted properly. Apart from frequently getting cold and wet, we're also concerned about the increase in dog theft and so want to know if anyone opens the gates.</p>
+
+<p>The solution for one gate is simply to lock it. We can't do that with the other because occasional access is needed for deliveries.</p>
+
+<p>This project aims to solve the problem of the second gate by:</p>
+
+<ol>
+    <li>Fitting a sensor to the gate that detects it opening and closing.</li>
+    <li>Displaying an indicator that indicates whether the gate is open or closed.</li>
+    <li>Sounding an alarm when the gate is opened.</li>
+    <li>Permitting the alarm to be disabled when we need to use the gate or leave it open.</li>
+</ol>
+
+<h2>Design</h2>
+
+<p>My initial plan was to fit single magnetic reed switch to the gate post with a magnet on the gate immediately opposite to the switch. Thus the magnet would hold the switch closed, so that the circuit would be broken when the gate opens. This would then light the required light and sound the alarm.</p>
+
+<p>I rejected this plan for two reasons:</p>
+
+<ol>
+    <li>The detector circuit would normally be conducting electricity. I would prefer it if the circuit would normally be off.</li>
+    <li>I would be relying on a single reed switch which would be a single point of failure.</li>
+</ol>
+
+<p>After a rethink I decided to leave the magnet on the gate but to mount three reed switches side by side, offset from the gate post so that the switches remain open when the gate is closed. When the gate was opened the magnet would switch on each of the reed switches in sequence as it passed them. The switches would turn off again after the magnet passed. A microcontroller would detect these switches closing and deduce the direction the gate was travelling. When the gate was closed the switches would open and close in the reverse order and again the microcontroller could deduce the direction of travel. Such a circuit would still work if only two switches activated, so there's some redundancy in the system. The three switches would be mounted inside a plastic case and a magnet strong enough to close the switches through the case would be used.</p>
+
+<p>Here's a rough diagram of how the switch case and magnet would be mounted:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--gate-diagram_360x486.png" width="360" height="486" alt="Diagram of gate sensor case and magnet locations on gate"></p>
+
+<h2>Progress</h2>
+
+<h3>Sensor Unit &amp; Magnet</h3>
+
+<p>The three reed switches have been mounted inside an old 3 &times; AA battery box, modified to suit. The switches were soldered to perf board then mounted hard against one side of the case and held in place with hot glue. The switches were commoned at one end and the common wire and one additional wire per switch were brought out to header pins outside the case. Each connection was duplicated inside the case to provide some redundancy in case a wire breaks. All the electrical parts were then covered in hot glue, which was also used to seal on the case lid. A block of wood on which to mount the case was screwed to the gate post and the case was drilled in three places to permit it to be screwed to the mounting block. The following montage illustrates:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--sensor-case-construction_640x536.png" width="640" height="536" alt="Montage of photos showing construction of gate sensor unit"></p>
+
+<p>A redundant kitchen cupboard door magnet was chosen as the magnet to be attached to the gate. It was tested and found able to switch on the reed switches at the distance that was planned to be used.</p>
