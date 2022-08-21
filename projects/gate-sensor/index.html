@@ -20,6 +20,8 @@ layout: default
 
 <h2>Design</h2>
 
+<h3>Gate Sensor Unit</h3>
+
 <p>My initial plan was to fit single magnetic reed switch to the gate post with a magnet on the gate immediately opposite to the switch. Thus the magnet would hold the switch closed, so that the circuit would be broken when the gate opens. This would then light the required light and sound the alarm.</p>
 
 <p>I rejected this plan for two reasons:</p>
@@ -35,6 +37,18 @@ layout: default
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--gate-diagram_360x486.png" width="360" height="486" alt="Diagram of gate sensor case and magnet locations on gate"></p>
 
+<h3>Alarm Circuit</h3>
+
+<p>It was decided to use a 555 timer IC to send a square wave to a speaker. In order to make the alarm sound more annoying an additional 555 was added that turned the alarm on and off every couple of seconds.</p>
+
+<p>The following circuit was drawn up:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--alarm-circuit-diagram_906x389.png" width="906" height="389" alt="Gate sensor alram circuit diagram"></p>
+
+<p>555 timer IC2 generates the square wave that is sent to the speaker via capacitor C5. According calculations, IC2 generates a pulse of approximately 687Hz with a duty cycle &asymp;52.4%, which is as close as I could get to 50%. This means the speaker should generate a &ldquo;musical&rdquo; note somewhere between E5 and F5.</p>
+
+<p>Timer IC1 generates a slow pulse that turns IC3 on and off. The theoretical period of the oscillation is 1.857s, with a duty cycle of 62.687%, so that the alarm should sound for 1.164s in every cycle. In practise, of course, the actual period and duty cycle will differ from the theoretical values.</p>
+
 <h2>Progress</h2>
 
 <h3>Sensor Unit &amp; Magnet</h3>
@@ -44,3 +58,17 @@ layout: default
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--sensor-case-construction_640x536.png" width="640" height="536" alt="Montage of photos showing construction of gate sensor unit"></p>
 
 <p>A redundant kitchen cupboard door magnet was chosen as the magnet to be attached to the gate. It was tested and found able to switch on the reed switches at the distance that was planned to be used.</p>
+
+<h3>Alarm</h3>
+
+<p>The circuit shown above was constructed on two breadboards and has been tested. Here's a video of the (not very loud) alarm in action:</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4xNjwyfa7eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<p>The sound generating 555 chip is on the small breadboard and the 555 that pulses the sound on and off is on the larger breadboard.</p>
+
+<p>Testing the circuit on the breadboard revealed that the speaker produced its loudest sound at 4393Hz, much higher than the expected 687Hz. However it did produce a lower peak sound at 872Hz.</p>
