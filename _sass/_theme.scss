@@ -53,6 +53,28 @@ h6, .h6 {
     font-style: italic;
 }
 
+dt {
+    font-weight: normal;
+    font-style: italic;
+}
+
+dd {
+    margin-left: 2rem;
+}
+
+.well {
+    border: 1px $color-grey solid;
+    padding: 1rem;
+    background-color: $color-grey-lighter;
+
+    p:last-child,
+    ol:last-child,
+    ul:last-child,
+    dl:last-child {
+        margin-bottom: 0;
+    }
+}
+
 table caption {
     caption-side: top;
     font-weight: bold;
