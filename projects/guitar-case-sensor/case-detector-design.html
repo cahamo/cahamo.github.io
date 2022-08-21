@@ -1,0 +1,312 @@
+---
+layout: default
+---
+<h1>Guitar Case Detector Design</h1>
+
+<p>A guitar case detector circuit comprises a voltage divider with a 1K&ohm; resistor in series with a 100k&ohm; resistor on the circuit board with the junction between the two resistors being fed to an analogue input on an Arduino Nano.</p>
+
+<p>Plugging in a guitar case puts another resistor in parallel with the 100k&ohm; resistor, hence changing the resistance on the ground side of the voltage divider, as hence changing the voltage at the analogue pin.</p>
+
+<p>The circuit is arranged like this:</p>
+
+<div class="my-3">
+    <div><img class="img-fluid mx-auto d-block" src="/assets/img/projects/guitar-case-sensor/case-resistor-test-circuit_315x149.png" width="315" height="149" alt="Guitar case detector resistor circuit"></div>
+    <div class="caption text-center">Case Detector Circuit Design</div>
+</div>
+
+<p>By using a different value resistor in each guitar case we can detect which guitar case is plugged in.</p>
+
+<p>To help determine the resistors to use, an experiment was undertaken with all the values of resistors I have in stock. One resistor of each value was selected at random, connected into the above circuit, and tested with an Arduino Nano that read and output a range of values of the connected Nano analogue pin. The experiment was repeated with different selection of resistors, this time with an Arduino Uno.</p>
+
+<p class="alert alert-info">Note that the Nano experiment was conducted in 2021 using a sketch that output a list of all the read values and the range of values was detected by examining the list. The experiment using the Uno was conducted in August 2022 and used a sketch that read 200 values from the analogue pin and output the minimum and maximum values. The sketch was run multiple times and the results were combined. The latter sketch is <a href="https://github.com/cahamo/guitar-case-sensor/blob/main/research/case-resistor-values/src/main.cpp">available</a> from the project GitHub repository, but the former sketch was not saved.</p>
+
+<div class="well">
+
+    <p><strong>Key</strong></p>
+
+    <dl>
+        <dt>Parallel resistance</dt>
+        <dd>The value of the resistor coupled in parallel with the 100k&ohm; resistor.</dd>
+
+        <dt>Combined resistance</dt>
+        <dd>The resistance of parallel combination of the 100k&ohm; resistor and parallel resistor, rounded to 2 significant digits.</dd>
+
+        <dt>Analogue input reading range</dt>
+        <dd>Shows the range of readings read from the Arduino Nano &amp; Uno. Values fall in the range 0..1023, which is the maximum sensitivity of the microcontrollers&rsquo; ADC.</dd>
+    </dl>
+
+</div>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="align-middle">Parallel resistance</th>
+            <th scope="col" rowspan="2" class="align-middle">Combined resistance</th>
+            <th scope="col" colspan="2" class="text-center">Analogue input<br>reading range (0-1023)</th>
+        </tr>
+        <tr>
+            <th scope="col">Nano</th>
+            <th scope="col">Uno</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Short circuit (0&ohm;)</td>
+            <td>0&ohm;</td>
+            <td>0-2</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>10&ohm;</td>
+            <td>10&ohm;</td>
+            <td>8-10</td>
+            <td>8-10</td>
+        </tr>
+        <tr>
+            <td>22&ohm;</td>
+            <td>22&ohm;</td>
+            <td>20-22</td>
+            <td>20-21</td>
+        </tr>
+        <tr>
+            <td>47&ohm;</td>
+            <td>47&ohm;</td>
+            <td>43-48</td>
+            <td>44-46</td>
+        </tr>
+        <tr>
+            <td>100&ohm;</td>
+            <td>100&ohm;</td>
+            <td>91-94</td>
+            <td>91-92</td>
+        </tr>
+        <tr>
+            <td>150&ohm;</td>
+            <td>150&ohm;</td>
+            <td>130-135</td>
+            <td>131-133</td>
+        </tr>
+        <tr>
+            <td>200&ohm;</td>
+            <td>200&ohm;</td>
+            <td>168-169</td>
+            <td>169-171</td>
+        </tr>
+        <tr>
+            <td>220&ohm;</td>
+            <td>220&ohm;</td>
+            <td>180-184</td>
+            <td>183-188</td>
+        </tr>
+        <tr>
+            <td>270&ohm;</td>
+            <td>270&ohm;</td>
+            <td>214-217</td>
+            <td>214-215</td>
+        </tr>
+        <tr>
+            <td>330&ohm;</td>
+            <td>330&ohm;</td>
+            <td>251-253</td>
+            <td>251-254</td>
+        </tr>
+        <tr>
+            <td>470&ohm;</td>
+            <td>470&ohm;</td>
+            <td>323-325</td>
+            <td>324-325</td>
+        </tr>
+        <tr>
+            <td>510&ohm;</td>
+            <td>510&ohm;</td>
+            <td>345-347</td>
+            <td>344-345</td>
+        </tr>
+        <tr>
+            <td>680&ohm;</td>
+            <td>680&ohm;</td>
+            <td>410-411</td>
+            <td>410-412</td>
+        </tr>
+        <tr>
+            <td>1k&ohm;</td>
+            <td>990&ohm;</td>
+            <td>505</td>
+            <td>510-512</td>
+        </tr>
+        <tr>
+            <td>2k&ohm;</td>
+            <td>2.0k&ohm;</td>
+            <td>676-679</td>
+            <td>675-676</td>
+        </tr>
+        <tr>
+            <td>2.2k&ohm;</td>
+            <td>2.2k&ohm;</td>
+            <td>696-697</td>
+            <td>700-702</td>
+        </tr>
+        <tr>
+            <td>3.3k&ohm;</td>
+            <td>3.2k&ohm;</td>
+            <td>776-779</td>
+            <td>779-781</td>
+        </tr>
+        <tr>
+            <td>4.7k&ohm;</td>
+            <td>4.5k&ohm;</td>
+            <td>835-839</td>
+            <td>834-837</td>
+        </tr>
+        <tr>
+            <td>5.1k&ohm;</td>
+            <td>4.9k&ohm;</td>
+            <td>844-849</td>
+            <td>847-850</td>
+        </tr>
+        <tr>
+            <td>6.8k&ohm;</td>
+            <td>6.4k&ohm;</td>
+            <td>884-888</td>
+            <td>883-887</td>
+        </tr>
+        <tr>
+            <td>10k&ohm;</td>
+            <td>9.1k&ohm;</td>
+            <td>920-922</td>
+            <td>921-924</td>
+        </tr>
+        <tr>
+            <td>20k&ohm;</td>
+            <td>17k&ohm;</td>
+            <td>963-968</td>
+            <td>964-967</td>
+        </tr>
+        <tr>
+            <td>47k&ohm;</td>
+            <td>32k&ohm;</td>
+            <td>988-992</td>
+            <td>991-994</td>
+        </tr>
+        <tr>
+            <td>51k&ohm;</td>
+            <td>34k&ohm;</td>
+            <td>991-999</td>
+            <td>993-996</td>
+        </tr>
+        <tr>
+            <td>68k&ohm;</td>
+            <td>40k&ohm;</td>
+            <td>997-1003</td>
+            <td>996-998</td>
+        </tr>
+        <tr>
+            <td>100k&ohm;</td>
+            <td>50k&ohm;</td>
+            <td>999-1005</td>
+            <td>1002-1005</td>
+        </tr>
+        <tr>
+            <td>220k&ohm;</td>
+            <td>69k&ohm;</td>
+            <td>1008-1011</td>
+            <td>1008-1010</td>
+        </tr>
+        <tr>
+            <td>300k&ohm;</td>
+            <td>75k&ohm;</td>
+            <td>1006-1011</td>
+            <td>1005-1007</td>
+        </tr>
+        <tr>
+            <td>470k&ohm;</td>
+            <td>82k&ohm;</td>
+            <td>1009-1012</td>
+            <td>1010-1013</td>
+        </tr>
+        <tr>
+            <td>680k&ohm;</td>
+            <td>87k&ohm;</td>
+            <td>1011-1012</td>
+            <td>1011-1014</td>
+        </tr>
+        <tr>
+            <td>1M&ohm;</td>
+            <td>90k&ohm;</td>
+            <td>1009-1015</td>
+            <td>1012-1014</td>
+        </tr>
+        <tr>
+            <td>Open circuit (&infin;&ohm;)</td>
+            <td>100k&ohm;</td>
+            <td>1008-1020</td>
+            <td>1013-1014</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>It can be seen that:</p>
+
+<ul>
+    <li>There is a close correlation between the readings taken from the Nano and the Uno.</li>
+    <li>Parallel resistances over 20k&ohm; have overlapping readings.</li>
+</ul>
+
+<p>When there is no parallel resistance the resistance is 100k&ohm;. This is taken to mean no guitar case is plugged in.</p>
+
+<p>If we try to support up to six different guitar cases, we need to choose a range of resistances that are sufficiently wide apart to remain distinct, allowing for the normal variation in resistances of the same nominal value, with a generous safety margin added.</p>
+
+<p>The values chosen are:</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">Resistance</th>
+            <th scope="col">Purpose</th>
+            <th scope="col">Reading range</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>&infin;&ohm;</td>
+            <td>open circuit, no case connected</td>
+            <td>958..1023</td>
+        </tr>
+        <tr>
+            <td>4.7k&ohm;</td>
+            <td>case #1</td>
+            <td>785..885</td>
+        </tr>
+        <tr>
+            <td>2k&ohm;</td>
+            <td>case #2</td>
+            <td>626..726</td>
+        </tr>
+        <tr>
+            <td>1k&ohm;</td>
+            <td>case #3</td>
+            <td>455..555</td>
+        </tr>
+        <tr>
+            <td>510&ohm;</td>
+            <td>case #4</td>
+            <td>295..395</td>
+        </tr>
+        <tr>
+            <td>220&ohm;</td>
+            <td>case #5</td>
+            <td>130..230</td>
+        </tr>
+        <tr>
+            <td>22&ohm;</td>
+            <td>case #6</td>
+            <td>0..70</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Values that fall outside the reading range are consider invalid and an error should be reported.</p>
+
+<hr>
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
