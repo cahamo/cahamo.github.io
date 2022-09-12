@@ -1,4 +1,5 @@
 https://cahamo.delphidabbler.com/
+https://cahamo.delphidabbler.com/projects/555-tester/
 https://cahamo.delphidabbler.com/projects/tongue-drum/
 https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-1
 https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-2
@@ -10,10 +11,21 @@ https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-7
 https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-8
 https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-9
 https://cahamo.delphidabbler.com/projects/diorama/
+https://cahamo.delphidabbler.com/projects/diorama/ir-control
+https://cahamo.delphidabbler.com/projects/diorama/lighting
+https://cahamo.delphidabbler.com/projects/diorama/controller
+https://cahamo.delphidabbler.com/projects/diorama/power-supply
 https://cahamo.delphidabbler.com/projects/diorama/legacy-plan
 https://cahamo.delphidabbler.com/projects/diorama/experiment-1
 https://cahamo.delphidabbler.com/projects/diorama/experiment-2
 https://cahamo.delphidabbler.com/projects/diorama/experiment-3
+https://cahamo.delphidabbler.com/projects/diorama/experiment-4
+https://cahamo.delphidabbler.com/projects/diorama/experiment-5
+https://cahamo.delphidabbler.com/projects/diorama/experiment-6
+https://cahamo.delphidabbler.com/projects/gate-sensor/
+https://cahamo.delphidabbler.com/projects/guitar-case-sensor/
+https://cahamo.delphidabbler.com/projects/guitar-case-sensor/case-detector-design
+https://cahamo.delphidabbler.com/projects/kits/circular-led-chaser/
 https://cahamo.delphidabbler.com/pipeline
 https://cahamo.delphidabbler.com/resources/dfplayer-mini
 https://cahamo.delphidabbler.com/resources/e40561-4-digit-7seg-led
