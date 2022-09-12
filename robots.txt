@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cahamo.github.io/sitemap.txt
+Sitemap: https://cahamo.delphidabbler.com/sitemap.txt
