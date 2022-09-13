@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /assets/
+Disallow: /downloads/
 
 Sitemap: https://cahamo.delphidabbler.com/sitemap.txt
