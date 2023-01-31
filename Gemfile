@@ -2,8 +2,6 @@ source "https://rubygems.org"
 
 gem "github-pages", "~> 227", group: :jekyll_plugins
 
-gem "activesupport", ">= 6.0.3.1" # fix security issue
-
 gem "jekyll-redirect-from"
 
 # If you have any plugins, put them here!
@@ -24,3 +22,4 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 gem "addressable", ">= 2.8.0"
 gem "nokogiri", "~> 1.13.10"
 gem "commonmarker", ">= 0.23.7"    # Dependabot alert PR#38
+gem "activesupport", "~> 6.0.6.1"  # Dependabot alert PR#39
