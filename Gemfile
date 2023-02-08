@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "github-pages", "~> 227", group: :jekyll_plugins
+gem "github-pages", "~> 228", group: :jekyll_plugins
 
 gem "jekyll-redirect-from"
 
@@ -11,7 +11,7 @@ gem "jekyll-redirect-from"
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
-  gem "tzinfo", "~> 1.2.10"
+  gem "tzinfo", "~> 2.0.6"
   gem "tzinfo-data"
 end
 
@@ -22,4 +22,4 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 gem "addressable", ">= 2.8.0"
 gem "nokogiri", "~> 1.13.10"
 gem "commonmarker", ">= 0.23.7"    # Dependabot alert PR#38
-gem "activesupport", "~> 6.0.6.1"  # Dependabot alert PR#39
+gem "activesupport", "~> 7.0.4.2"  # Dependabot alert PR#39
