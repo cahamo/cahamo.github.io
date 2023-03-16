@@ -22,4 +22,4 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 gem "addressable", ">= 2.8.0"
 gem "nokogiri", "~> 1.13.10"
 gem "commonmarker", ">= 0.23.7"    # Dependabot alert PR#38
-gem "activesupport", "~> 7.0.4.2"  # Dependabot alert PR#39
+gem "activesupport", "~> 7.0.4.3"  # Dependabot alert PR#39
