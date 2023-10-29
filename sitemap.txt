@@ -26,6 +26,7 @@ https://cahamo.delphidabbler.com/projects/gate-sensor/
 https://cahamo.delphidabbler.com/projects/guitar-case-sensor/
 https://cahamo.delphidabbler.com/projects/guitar-case-sensor/case-detector-design
 https://cahamo.delphidabbler.com/projects/kits/circular-led-chaser/
+https://cahamo.delphidabbler.com/projects/kits/other/
 https://cahamo.delphidabbler.com/pipeline
 https://cahamo.delphidabbler.com/resources/dfplayer-mini
 https://cahamo.delphidabbler.com/resources/e40561-4-digit-7seg-led
