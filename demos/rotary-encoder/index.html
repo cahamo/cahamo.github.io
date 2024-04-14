@@ -16,7 +16,7 @@ title: "Rotary Encoder Demo"
     <li><em>GND</em> &ndash; ground connection.</li>
     <li><em>S1</em> &ndash; signal pin 1.</li>
     <li><em>S2</em> &ndash; signal pin 2.</li>
-    <li><em>KEY</em> &ndash; connected to the built in switch..</li>
+    <li><em>KEY</em> &ndash; connected to the built in switch.</li>
     <li><em>5V</em> &ndash; 5V input.</li>
 </ol>
 
@@ -24,7 +24,7 @@ title: "Rotary Encoder Demo"
 
 <p>The <em>KEY</em> pin is normally held high. When the encoder's built in switch is pressed the <em>KEY</em> pin is set low for as long as the switch is closed.</p>
 
-<p>The following diagram shows how the rotary encoder is connected to the Uno. LEDs are used to indicate which direction the shaft is being turned and when the built in switch is pressed. The cathode of each LED is connected to ground via a 470&ohm; resistor.</p>
+<p>The following diagram shows how the rotary encoder is connected to an Uno. LEDs are used to indicate which direction the shaft is being turned and when the built in switch is pressed. The cathode of each LED is connected to ground via a 470&ohm; resistor.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/rotary-encoder/circuit_800x721.png" width="800" height="721" alt="Rotary encoder  demo circuit"></p>
 
@@ -68,12 +68,12 @@ title: "Rotary Encoder Demo"
         </tr>
         <tr>
             <td>10</td>
-            <td>Anode of the LED illuminated with the switch is pressed</td>
+            <td>Anode of the LED illuminated when the switch is pressed</td>
         </tr>
     </tbody>
 </table>
 
-<p class="alert alert-info">Note that the Uno digital pin connections above are arbitrary: any digital pins can be used providing the demo code is changed accordingly.</p>
+<p class="alert alert-info">Note that the Uno digital pin connections used above are arbitrary: any digital pins can be used providing the demo code is changed accordingly.</p>
 
 <p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>rotary-encoder--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/rotary-encoder--uno/src/main.cpp"><code>rotary-encoder--uno/src/main.cpp</code></a>. The source is a modified version of <code>rot-encode-demo.ino</code> taken from the <a href="https://dronebotworkshop.com/rotary-encoders-arduino/">DroneBot Workshop website</a>. The changes made were to (a) rename some variables to match the names of the pins of the EC11 encoder and (b) to detect when the encoder's switch is pressed.</p>
 
