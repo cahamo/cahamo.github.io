@@ -1,0 +1,68 @@
+---
+layout: default
+title: "Information about the ESP32-C3 Super Mini"
+---
+<h1>Information about the ESP32-C3 Super Mini</h1>
+
+<section id="introduction">
+
+    <p>I've just bought an ESP32-C3 Super Mini. There seems to be some confusion out in webland as to how to use this with the Arduino IDE v2.x. This page pulls together what I've found out.</p>
+
+</section>
+
+<section id="board-manager">
+
+    <h2>Board Manager</h2>
+
+    <p>The old ESP32 board manager does not contain information about the newer ESP32 C3 and S3. So you need to install an up to date board manager.</p>
+
+    <p>To do that, open the preferences dialogue box (<em>File | Preferences</em> menu option). On the <em>Settings</em> tab look for the <em>Additional boards manager URLs</em> edit box. Add <code>https://dl.espressif.com/dl/package_esp32_index.json</code> to the list of board managers. Click <em>OK</em> to close the dialogue box. You may need to restart the IDE for the new board manager to be recognised.</p>
+
+    <h2>Choose A Board</h2>
+
+    <p>There is no dedicated board manager for the Super Mini but I've found that the <em>ESP32C3 Dev Module</em> board works, so select that from the board drop down list. The default options seem to work.</p>
+
+</section>
+
+<section id="blinky">
+
+    <h2>Blinky</h2>
+
+    <p>It's best to test the board with a blinky sketch. Load the standard Arduino Example Blink sketch.</p>
+
+    <p>Although this script will compile and upload it won't work as-is. This is because the built-in LED of the Super Mini is different to that defined for the ESP32C3 Dev Module.</p>
+
+    <p>The Super Mini's built in LED is on pin 8. Simply redefining <code>LED_BUILTIN</code> suffices. Here is the code of the revised sketch:</p>
+
+    <pre class="pre-scrollable "><code class="language-c">#define LED_BUILTIN 8
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+    // initialize digital pin LED_BUILTIN as an output.
+    pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+    digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+    delay(1000);                      // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+    delay(1000);                      // wait for a second
+}</code></pre>
+
+    <p>This script should now compile and upload.</p>
+
+</section>
+
+<section id="pinout">
+
+    <h2>Pinout</h2>
+
+    <p>There's a lot of confusion about the pinout of the Super Mini. There are two resources with conflicting advice:</p>
+
+    <ol>
+        <li>The ESP32-C3 Super Mini <a href="../downloads/esp32-c3--super-mini--manual.pdf.zip">manual</a> (PDF).</li>
+        <li>The Arduino forum post: &quot;<a href="https://forum.arduino.cc/t/esp32-c3-supermini-pinout/1189850">ESP32 C3 Supermini Pinout</a>&quot;.</li>
+    </ol>
+
+</section>
