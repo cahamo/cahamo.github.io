@@ -147,6 +147,11 @@ footer {
 
 pre {
     overflow-x: auto;
+
+    &.outlined {
+        border: 1px $color-grey solid;
+        background-color: transparent;
+    }
 }
 
 .navbar-light {
