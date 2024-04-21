@@ -11,7 +11,7 @@ title: "How to use a round GC9A01 TFT display"
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/round-tft-front+back_510x309.png" width="510"
         height="309" alt="Picture of front and rear of round TFT display"></p>
 
-    <p>All that remained to do was to figure out how to drive it using an Arduino MCU. This job was made much simply thanks to the marvellous <a href="https://dronebotworkshop.com/gc9a01/">DroneBot Workshop article</a> about how to use a similar display.</p>
+    <p>Now all I needed to do was to figure out how to drive it using an Arduino MCU. This job was made much simpler thanks to a marvellous <a href="https://dronebotworkshop.com/gc9a01/">DroneBot Workshop article</a> that described how to use a similar display.</p>
 
 </section>
 
@@ -19,7 +19,7 @@ title: "How to use a round GC9A01 TFT display"
 
     <h2>Pinout</h2>
 
-    <p>The display uses the SPI protocol - don't let the presence of SDA and SCL pins make you think it's I²C!. From left to right the pins have the following meaning:</p>
+    <p>The display uses the SPI protocol (don't let the presence of SDA and SCL pins make you think it's I²C!). From left to right the pins have the following meaning:</p>
 
     <table class="table table-responsive">
         <thead class="thead-light text-left">
@@ -60,7 +60,7 @@ title: "How to use a round GC9A01 TFT display"
         </tbody>
     </table>
 
-    <p>Note that there is no SPI Controller In, Peripheral Out (CIPO aka MISO) pin since the SPI traffic is all from the controller to the display peripheral. There also additional control pins: RST &amp; DC.</p>
+    <p>Note that there is no SPI Controller In, Peripheral Out (CIPO aka MISO) pin since the SPI traffic is all from the controller to the display. In addition to the SPI connections there are also two control pins: RST &amp; DC.</p>
 
 </section>
 
@@ -73,6 +73,8 @@ title: "How to use a round GC9A01 TFT display"
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/round-tft-uno-test-circuit_960x665.png" width="960"
         height="665" alt="Round TFT display test circuit with Arduino Uno"></p>
 
+    <p>The Uno is powered via its USB connection. An external 3.3V power source is provided for the display. It might be possible to power the display from the Uno's 3.3V output, but I prefer not to use the Uno to supply power.</p>
+
     <p>Because the Uno is 5V and the display is 3.3V, a logic level converter is required to convert the Uno's 5V signals to 3.3V for the display. Here a <a href="https://www.ti.com/lit/ds/symlink/txs0108e.pdf?ts=1712993089777">TXS0108E</a> 8 channel logic level converter is used. The &quot;A&quot; side <strong>must</strong> be used as the 3.3V side and the &quot;B&quot; side <strong>must</strong> be used as the 5V side.</p>
 
     <p>Here is a picture of the circuit as built and operating:</p>
@@ -84,9 +86,11 @@ title: "How to use a round GC9A01 TFT display"
 
 <section id="source-code">
 
-    <p>The Arduino IDE was used to compile and upload the code need to test the display.</p>
+    <h2>Source Code</h2>
 
-    <p>Here I simply copied the code used in the <a href="https://dronebotworkshop.com/gc9a01/">DroneBot Workshop article</a> mentioned above. There are six steps:</p>
+    <p>The demostration code was compiled and uploaded using the Arduino IDE v2.</p>
+
+    <p>The code is a slightly modified copy of that provided with the Adafruit GC9A01A library. This idea came from the <a href="https://dronebotworkshop.com/gc9a01/">DroneBot Workshop article</a> mentioned above. There are six steps to get the code running:</p>
 
     <ol>
         <li>
@@ -99,20 +103,20 @@ title: "How to use a round GC9A01 TFT display"
         </li>
         <li>
             <p>Look just below the line:</p>
-            <pre class="well">#else // ALL OTHER BOARDS - EDIT AS NEEDED</pre>
+            <pre class="outlined"><code class="language-c">#else // ALL OTHER BOARDS - EDIT AS NEEDED</code></pre>
             <p>to locate the line:</p>
-            <pre class="well">#define TFT_DC  7</pre>
+            <pre class="outlined"><code class="language-c">#define TFT_DC  7</code></pre>
             <p>and change this line to:</p>
-            <pre class="well">#define TFT_DC  9</pre>
+            <pre class="outlined"><code class="language-c">#define TFT_DC  9</code></pre>
             <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/round-tft-uno-arduino-ide_500x349.png" width="500"
                 height="349" alt="Round TFT display Arduino IDE source code changes"></p>
-            <p>This is needed because the display's <em>DC</em> pin is attached to the Uno's pin <em>9</em>, whereas the sketch assumes pin <em>9</em>.</p>
+            <p>This is needed because the display's <em>DC</em> pin is attached to the Uno's pin <em>9</em>, whereas the sketch assumes pin <em>7</em>.</p>
         </li>
         <li>
             <p>Turn on the 3.3V power supply.</p>
         </li>
         <li>
-            <p>Connect the Uno to a USB on the computer.</p>
+            <p>Connect the Uno to a USB port on the computer that is running the Arduino IDE.</p>
         </li>
         <li>
             <p>Compile and upload the sketch to Uno.</p>
