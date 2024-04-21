@@ -344,11 +344,15 @@ title: "Sensor to detect if a gate is open"
 
     <p>The piece of black electrical tape is used to prevent the electrolytic capacitor from shorting out against the bracket.</p>
 
+    <h4>Microcontroller </h4>
+
+    <p>The ultimate plan is to use a bare ATMega286P microcontroller chip to manage the system. However problems flashing code onto such chips mean that, at least in the interim, an Arduino Nano is to be used. This has been mounted on an expansion board that breaks the Nano's pins out to screw terminals. This should enable easy removal for flashing code and possible eventual replacement by the bare chip.</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--mcu-assembly_480x311.png" width="480" height="311" alt="Microcontroller assembly with Arduino Nano"></p>
+
     <h3>Software</h3>
 
     <p>The control software was developed using an Arduino Uno and the control circuit was mocked up on breadboards for testing.</p>
-
-    <p>The ultimate plan is to use a bare ATMega286P microcontroller chip to manage the system. However problems flashing code onto such chips mean that, at least in the interim, an Arduino Nano is to be used. This is to be mounted on an expansion board that breaks the Nano's pins out to screw terminals. This should enable easy removal for flashing code and possible eventual replacement by the bare chip.</p>
 
     <p class="alert alert-warning">Software is not yet finalised, but when v1 is completed it will be uploaded to the <a href="https://github.com/cahamo/gate-sensor"><code>cahamo/gate-sensor</code></a> GitHub repository.</p>
 
