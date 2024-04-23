@@ -1,0 +1,64 @@
+---
+layout: default
+title: "LED Matrix Demo"
+---
+<h1>LED Matrix Demo</h1>
+
+<p>This project demonstrates how to use a 32&times;8 LED matrix display. The display comprises four connected 8&times;8 panels, each of which is powered by a MAX7219 chip:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/led-matrix/component_480x250.png" width="480" height="250" alt="Front and rear view of LED matrix"></p>
+
+<p>The matrix is controlled via an SPI interface. It has the following pins: CLK, CS, DIN, GND &amp; VCC. 5V is required to operate the matrix. In this demo an Arduino Uno clone is used to control the matrix. A separate power supply is used to power the matrix to avoid overloading the Uno's built in power source.</p>
+
+<p>A breadboard was used to connect the Uno to the LED matrix as shown below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/led-matrix/breadboard_640x430.png" width="640" height="430" alt="Breadboard circuit with Uno and LED matrix"></p>
+
+<p>Power from my bench power supply comes from the left and is connected to the breadboard via crocodile clips. A second pair of smaller crocodile clips connects the power to the LED matrix. Note the electrolytic capacitor across the power rails to smooth the power. I think the capacitor should be between 470&mu;F and 1000&mu;F.</p>
+
+<p>The Uno is powered via its USB connection:</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr class="text-left">
+            <th scope="col">Arudino pin</th>
+            <th scope="col">Attached to</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GND</td>
+            <td>Ground rail of the breadboard and from there to the GND pin of the LED matrix and the power supply ground.</td>
+        </tr>
+        <tr>
+            <td>10 (SPI CS)</td>
+            <td>LED matrix CS pin.</td>
+        </tr>
+        <tr>
+            <td>11 (SPI COPI)</td>
+            <td>LED matrix DIN pin.</td>
+        </tr>
+        <tr>
+            <td>13 (SPI SCK)</td>
+            <td>LED matrix CLK pin.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Additionally, the matrix's VCC pin is connected to the breadboard's 5V rail.</p>
+
+<p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>max7219-led-matrix--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/max7219-led-matrix--uno/src/main.cpp"><code>max7219-led-matrix--uno/src/main.cpp</code></a>.</p>
+
+<p class="alert alert-warning">
+    This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>max7219-led-matrix--uno/src/main.cpp</code> into a new, blank Arduino API project and ensure that the <code>MD_MAX72XX</code> and <code>MD_Parola</code> libraries by <a href="https://github.com/MajicDesigns">MajicDesigns</a> are installed.</p>
+</p>
+
+<p>Once the code is compiled and uploaded to the Uno and the external power supply is switched on you should see the text <code>&lt;Hello&gt;</code> begin to scroll quickly down the display before pausing a while and then scrolling again. You can see the demo running in the following video.</p>
+
+<p>Finally, here is a video of the demo in action:</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="707" height="398" src="https://www.youtube.com/embed/pnNWr763CgQ" title="Demo of MAX7219 32x8 LED matrix display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+</div>
