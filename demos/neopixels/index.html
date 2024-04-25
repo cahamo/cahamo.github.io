@@ -1,0 +1,90 @@
+---
+layout: default
+title: "Neopixel Demos"
+---
+<h1>&quot;Neopixel&quot; Demos</h1>
+
+<p>I've accumulated a few addressable RGB LED rings and matrices (aka &quot;Neopixels&quot; - an Adafruit brand name). So I created a few demo programs to exercise them.</p>
+
+<h2>Neopixel rings</h2>
+
+<p>I've got a few of these rings in various sizes. These demos use a 12 pixel ring, but the principle is the same for all sizes. There are two demos:</p>
+
+<ol>
+    <li>Using an Arduino Uno with the <code>Adafruit_NeoPixel</code> library.</li>
+    <li>Using an ESP32-C3 Super Mini using the WLED software.</li>
+</ol>
+
+<h3>1. Neopixel rings with Arduino Uno</h3>
+
+<p>A circuit was built on a breadboard as follows:</p>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-breadboard-uno-design_480x475.png" width="480" height="475" alt="Neopixel ring breadboard circuit design with Uno"><br><em class="caption caption-small">Breadboard circuit design</em></p>
+</div>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-breadboard-uno-built_600x325.png" width="600" height="325" alt="Neopixel ring breadboard circuit as built with Uno"><br><em class="caption caption-small">Breadboard circuit as built</em></p>
+</div>
+
+<p class="alert alert-warning">To avoid overloading the Uno, the LED ring is powered using a breadboard power supply configured to supply 5V rather than from the Uno's 5V output. It is important that one of the Uno's GND pins is connected to the same ground as the power supply.</p>
+
+<p>The source code that exercises the LED ring is a greatly modified version of code by <a href="https://tinyurl.com/3bc2fbb6">&quot;Elon&quot; on Medium</a>. The code can be found in the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>neopixels/neopixel-ring--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-ring--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
+
+<p>The demo can be seen running in the following video:</p>
+
+<div class="text-center">
+    <p>
+        <iframe width="580" height="307" src="https://www.youtube.com/embed/_B1QWFeRxgo" title="Demo of 12 pixel Neopixel ring being controlled by an Arduino Uno" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </p>
+</div>
+
+<h3>2. Neopixel rings with ESP32-C3 Super Mini</h3>
+
+<p>I was curious wether my newly acquired ESP32-C3 Super Mini would run the WLED Neopixel control software. The answer is yes it can, although the processor chip gets a bit hot to the touch!</p>
+
+<p>Because Neopixels operate at 5V and ESP32s require 3.3V, we need to use a logic level shifter to convert the 3.3V output from the ESP32's data pin to the 5V required by the Neopixels. The following circuit was designed to accomplish this:</p>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-circuit-design-esp32_552x320.png" width="552" height="320" alt="Neopixel ring circuit design with ESP32-C3 Super Mini"><br><em class="caption caption-small">Circuit design</em></p>
+</div>
+
+<p>This circuit was built and tested on a breadboard, as follows:</p>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-breadboard-esp32-built_480x545.png" width="480" height="545" alt="Neopixel ring breadboard as built with ESP32-C3 Super Mini"><br><em class="caption caption-small">Breadboard as built</em></p>
+</div>
+
+<p class="alert alert-warning">To avoid stressing the ESP32 the Neopixels were powered from my bench power supply set to 5V. (No breadboard power supply this time - it died!)</p>
+
+<p>The WLED software was configured using the WLED website to drive the 12 pixel ring. It was uploaded to the ESP32-C3 from the website. Several different sequences were tested via the website.</p>
+
+<h2>Neopixel matrices</h2>
+
+<p>My matrices are 8&times;8 pixels, so that's what is demonstrated here. However the principle is the same for any size matrix. There are two demos. Both of them target an Arduino Uno and use the <code>Adafruit_NeoPixel</code> and <code>Adafruit_NeoMatrix</code> libraries.</p>
+
+<p>Both demos use the same circuit, which is in turn the same as that used for the Uno with the Neopixel ring as described in the section <em>Neopixel rings with Arduino Uno</em> above. Just replace the neopixel ring with the matrix: the connections are just the same. The following image shows the circuit as built:</p>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/matrix-breadboard-uno-built_600x443.png" width="600" height="443" alt="Neopixel matrix breadboard circuit as built with Uno"><br><em class="caption caption-small">Breadboard circuit as built</em></p>
+</div>
+
+<p class="alert alert-warning">As above, the neopixels are powered via an external power supply, <em>not</em> from the Uno. (This demo was built after the breadboard power supply died!)</p>
+
+<p>There are two software projects used to demonstrate the use of the Neopixel matrix:</p>
+
+<ol>
+    <li>The first project runs a snake of different coloured pixels from top left to bottom right of the matrix. This project is in the <code>neopixels/neopixel-matrix-1--uno</code> directory of the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub: the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-matrix-1--uno/src/main.cpp"><code>src/main.cpp</code></a>. This project was running when the above photo was taken.</li>
+
+    <li>The second project scrolls text across the matrix in a horizontal orientation. This project is in the above repository's <code>neopixels/neopixel-matrix-2--uno</code> directory: the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-matrix-2--uno/src/main.cpp"><code>src/main.cpp</code></a>.</li>
+</ol>
+
+<p>Both projects are modified versions of examples supplied with the <code>Adafruit_NeoMatrix</code> library.</p>
+
+<p>The following video shows <code>neopixel-matrix-1--uno</code> running:</p>
+
+<div class="text-center">
+    <p>
+        <iframe width="635" height="360" src="https://www.youtube.com/embed/eO3ZNGg5bo8" title="Demo of a 64 pixel Neopixel matrix running the snake demo code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </p>
+</div>
