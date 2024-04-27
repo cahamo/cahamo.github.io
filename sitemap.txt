@@ -3,6 +3,7 @@ https://cahamo.delphidabbler.com/demos/hall-effect-sensor
 https://cahamo.delphidabbler.com/demos/rotary-encoder
 https://cahamo.delphidabbler.com/demos/led-matrix
 https://cahamo.delphidabbler.com/demos/neopixels
+https://cahamo.delphidabbler.com/demos/lcd-display
 https://cahamo.delphidabbler.com/projects/555-tester/
 https://cahamo.delphidabbler.com/projects/tongue-drum/
 https://cahamo.delphidabbler.com/projects/tongue-drum/experiment-1
