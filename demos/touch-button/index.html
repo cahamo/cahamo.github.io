@@ -1,0 +1,43 @@
+---
+layout: default
+title: "Capactive Touch Button Demo"
+---
+<h1>Capacitive Touch Button Demo</h1>
+
+<p>This demo shows a TTP223 capacitive touch button module in use. The following image is a greatly enlarged view of both sides of the module:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/component_480x312.png" width="480" height="312" alt="A TTP223 capacitive touch button module (both sides shwn)"></p>
+
+<p>As can be seen in the above image, the TTP223 has three connections: GND, I/O and VCC. VCC is the power connection and requires 2.0V to 5.5V. GND is ground and the I/O connection signals high when the sensor is touched and low otherwise (by default - see below).</p>
+
+<p class="alert alert-info"><strong>NOTE:</strong> The signal on the I/O connection of the module can be altered by shorting the pads marked A and B. Furthermore, the sensitivity can be altered by soldering a capacitor to the vacant SMD solder pad. I'm not covering any of that here: you can find more information in the article <a href="https://www.hackster.io/najad/how-to-use-a-ttp223-based-touch-switch-a04f7d#:~:text=Sensitivity%20can%20adjust%20by%20adding,will%20gives%20the%20lowest%20sensitivity.">How to Use a TTP223-Based Touch Switch</a> on Hackster.io.</p>
+
+<p>The I/O connection can be used to directly control a circuit. The simplest example, that of switching a LED on and off, can be seen in the following circuit:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-no-mcu_400x272.png" width="400" height="272" alt="Capacitive touch button circuit design without microcontroller"></p>
+
+<p>The circuit can be seen operating in the following video:</p>
+
+<div class="text-center">
+    <p>
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/jcbQv_07Zew" title="TTP223 touch button module connected to a LED" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </p>
+</div>
+
+<p>The other option is to attach the TTP223 I/O connection to a microcontroller. Again taking a simplistic approach, the following circuit shows an Arduino Uno being used to read the state of the TTP223 on pin 2 and to switch an LED on and off using pin 4. Yes, the circuit has exactly the same outcome as the previous one, but this is a proof of concept not a practical circuit!</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-with-mcu_800x284.png" width="800" height="284" alt="Capacitive touch button circuit design with Arduino Uno"></p>
+
+<p>And here's another video showing this circuit working:</p>
+
+<div class="text-center">
+    <p>
+        <iframe width="695" height="394" src="https://www.youtube.com/embed/AWfvFjV-R9I" title="TTP223 touch button module connected to an Arduino Uno" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </p>
+</div>
+
+<p>The source code for the latter demo is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>ttp223-touch-button--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/ttp223-touch-button--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
+
+<p class="alert alert-warning">
+    This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>ttp223-touch-button--uno/src/main.cpp</code> into a new, blank Arduino API project. No library code is required.</p>
+</p>
