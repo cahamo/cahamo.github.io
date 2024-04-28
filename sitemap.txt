@@ -28,8 +28,8 @@ https://cahamo.delphidabbler.com/projects/diorama/experiment-3
 https://cahamo.delphidabbler.com/projects/diorama/experiment-4
 https://cahamo.delphidabbler.com/projects/diorama/experiment-5
 https://cahamo.delphidabbler.com/projects/diorama/experiment-6
-https://cahamo.delphidabbler.com/projects/gate-sensor/
-https://cahamo.delphidabbler.com/projects/gate-sensor/legacy-plan
+https://cahamo.delphidabbler.com/projects/gate-alarm/
+https://cahamo.delphidabbler.com/projects/gate-alarm/legacy-plan
 https://cahamo.delphidabbler.com/projects/guitar-case-sensor/
 https://cahamo.delphidabbler.com/projects/guitar-case-sensor/case-detector-design
 https://cahamo.delphidabbler.com/projects/kits/circular-led-chaser/

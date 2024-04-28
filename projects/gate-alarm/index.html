@@ -1,5 +1,7 @@
 ---
 layout: default
+redirect_from:
+    - /projects/gate-sensor
 title: "Sensor to detect if a gate is open"
 ---
 <h1>Gate Alarm</h1>
@@ -54,7 +56,7 @@ title: "Sensor to detect if a gate is open"
 
     <p>Here's a rough diagram of how the switch case and magnet are to be mounted:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--gate-diagram_360x486.png" width="360" height="486" alt="Diagram of gate sensor case and magnet locations on gate"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/gate-diagram_360x486.png" width="360" height="486" alt="Diagram of gate sensor case and magnet locations on gate"></p>
 
     <p>There are two reasons that the reed switches are offset from the gate when closed:</p>
 
@@ -79,7 +81,7 @@ title: "Sensor to detect if a gate is open"
     <h3>Control Unit</h3>
 
     <p>The control unit comprises the following:</p>
-    
+
     <ul>
         <li>
             <p>LCD screen to display the current state of the alarm and to prompt for input.</p>
@@ -107,7 +109,7 @@ title: "Sensor to detect if a gate is open"
                         <td>Suspends the alarm indefinitely.</td>
                     </tr>
                     <tr>
-                        <td><code>*</code></td>    
+                        <td><code>*</code></td>
                         <td>Resets any active or suspended alarm to indicate that the gate has been closed.</td>
                     </tr>
                 </tbody>
@@ -129,7 +131,7 @@ title: "Sensor to detect if a gate is open"
 
     <p>The complete circuit is described by the following diagram:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--circuit-diagram_1239x643.png" width="1239" height="643" alt="Gate alarm master circuit diagram"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/master-circuit-diagram_1239x643.png" width="1239" height="643" alt="Gate alarm master circuit diagram"></p>
 
     <p>The circuit is based around the Arduino Nano. The pinout is given in the following table:</p>
 
@@ -220,27 +222,27 @@ title: "Sensor to detect if a gate is open"
 
     <p>In the original build, the three reed switches were mounted inside an old 3 &times; AA battery box, modified to suit. The switches were soldered to perf board then mounted hard against one side of the case and held in place with hot glue. The switches were commoned at one end and the common wire and one additional wire per switch were brought out to four header pins outside the case. Each connection was duplicated inside the case to provide some redundancy in case a wire breaks. All the electrical parts were then covered in hot glue, which was also used to seal on the case lid. A block of wood on which to mount the case was screwed to the gate post and the case was drilled in three places to permit it to be screwed to the mounting block.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--sensor-case-v1-location_373x253.png" width="373" height="253" alt="Image showing the location of version 1 of the gate sensor unit"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-v1-location_373x253.png" width="373" height="253" alt="Image showing the location of version 1 of the gate sensor unit"></p>
 
-    <p>The unit was later modified by commoning the three switch terminals together so that all three switches operate in parallel:</p> 
+    <p>The unit was later modified by commoning the three switch terminals together so that all three switches operate in parallel:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--reed-switches-circuit-diagram_154x93.png" width="154" height="93" alt="Version 2 of the gate sensor unit reed switch circuit diagram"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/reed-switches-circuit-diagram_154x93.png" width="154" height="93" alt="Version 2 of the gate sensor unit reed switch circuit diagram"></p>
 
     <p>The modified terminals and wires were covered in red heat shrink tubing. The two output wires were then connected to 2 5A screw terminals as can be seen in the following image:.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--sensor-case-v2_480x300.png" width="480" height="300" alt="Image showing version 2 of the gate sensor unit"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-v2_480x300.png" width="480" height="300" alt="Image showing version 2 of the gate sensor unit"></p>
 
     <p>A redundant kitchen cupboard door magnet was tested on the gate and found to work. However some stronger neodymium magnets have now been acquired and may be used instead.</p>
 
     <h3>Control Unit &amp; Alarm</h3>
 
-    <p>The control unit and alarm are both being housed in the same box, along with the microcontroller and circuit boards.</p> 
+    <p>The control unit and alarm are both being housed in the same box, along with the microcontroller and circuit boards.</p>
 
     <p>Power will be provided by a 5V USB wall wart and will enter the unit via a micro USB socket.</p>
-    
+
     <p>A case has been designed using Inkscape and paper templates have been printed from the design. A prototype case has been made from mounting board and all externally mounted controls have been test fitted. Here is the design for the case looking from the top, with side mounted components shown in grey:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--box-design_564x580.png" width="564" height="580" alt="Gate alarm &amp; control unit box design (top only)"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/box-design_564x580.png" width="564" height="580" alt="Gate alarm &amp; control unit box design (top only)"></p>
 
     <p class="alert alert-warning">Once the prototype has been tested it is planned to build the box from plywood.</p>
 
@@ -249,36 +251,36 @@ title: "Sensor to detect if a gate is open"
     <p>Each of the externally mounted components illustrated above has been designed to be plugged in to the main circuit board, making it easier to disassemble the finished unit. The assemblies are:</p>
 
     <h4>USB micro power input board</h4>
-    
+
     <p>A USB micro socket has been soldered to a piece of perfboard and the 5V and GND pins have been taken out via leads terminated in a 2 pin JST PH 2.0 plug.</p>
-    
+
     <p>The leads are connected to the main circuit board from where power is distributed to other components.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--power-supply-assembly_480x399.png" width="480" height="399" alt="Power supply assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/power-supply-assembly_480x399.png" width="480" height="399" alt="Power supply assembly"></p>
 
     <h4>Input from gate sensor / Test switch</h4>
-            
+
     <p>The momentary contact push button test switch has been wired in parallel with the input from the gate sensor so that pressing the switch has exactly the same effect as the reed switches being closed. Input from the gate sensor is by means of a 5.5&times;2.1mm DC socket. The GND and MCU pin connections from both are taken out via leads terminated in a 2 pin JST PH 2.0 plug.</p>
 
     <p>The GND and MCU leads are connected to the main circuit board.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--gate-input--plus-test-switch-assembly_480x220.png" width="480" height="220" alt="Gate switch input / test switch assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/gate-input-plus-test-switch-assembly_480x220.png" width="480" height="220" alt="Gate switch input / test switch assembly"></p>
 
     <h4>LCD</h4>
 
     <p>The display is a 16&times;2 blue backlit display with a built in I²C interface.</p>
-    
+
     <p>The display's VCC, ground and I²C SDA &amp; SCL connections are brought out to four DuPont connector pins. 2 pairs of leads terminated in 2 pin JST PH 2.0 plugs have been connected to a 4 way DuPont socket that attaches to the display's connector pins. One pair of leads is for power (the 5V VCC and ground) connection, while the 2nd pair of leads carries the I²C SDA and SCL signals.</p>
 
     <p>The power leads are connected to the main circuit board while the I²C leads are connected to the microcontroller.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--lcd-assembly_600x502.png" width="600" height="502" alt="LCD assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/lcd-assembly_600x502.png" width="600" height="502" alt="LCD assembly"></p>
 
     <h4>Keypad</h4>
 
     <p>A 4&times;3 button membrane keypad is used. The membrane has 7 connections that are brought out in a ribbon cable that is terminated in a 7 way DuPont socket.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--keypad-unit_480x208.png" width="480" height="208" alt="Keypad unit"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/keypad-unit_480x208.png" width="480" height="208" alt="Keypad unit"></p>
 
     <p class="alert alert-warning">The keypad is to connected directly to the microcontroller. The method for doing this is yet to be determined.</p>
 
@@ -288,7 +290,7 @@ title: "Sensor to detect if a gate is open"
 
     <p>The leads are connected to the main circuit board.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--buzzer-assembly_480x307.png" width="480" height="307" alt="Buzzer assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/buzzer-assembly_480x307.png" width="480" height="307" alt="Buzzer assembly"></p>
 
     <h4>Buzzer isolation switch</h4>
 
@@ -296,23 +298,23 @@ title: "Sensor to detect if a gate is open"
 
     <p>The leads are connected to the main circuit board.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--buzzer-isolation-switch-assembly_480x254.png" width="480" height="254" alt="Buzzer isolation switch assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/buzzer-isolation-switch-assembly_480x254.png" width="480" height="254" alt="Buzzer isolation switch assembly"></p>
 
     <h4>LED assembly</h4>
 
     <p>The two LEDs have been mounted together on their own assembly. The assembly has been built on a single piece of perfboard that includes the LEDs, the transistors used to drive the LEDs and various resistors. Screw terminals have been provided for connecting 5V, ground and the inputs for the two LEDs. The screw terminal connections are shown on the following image:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--led-assembly-connections_480x274.png" width="480" height="274" alt="LED assembly output screw terminal identification. Left to right: 5V, red LED, yellow LED, ground"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly-connections_480x274.png" width="480" height="274" alt="LED assembly output screw terminal identification. Left to right: 5V, red LED, yellow LED, ground"></p>
 
     <p>The 5V and ground terminals are connected to the main circuit board via a lead that terminates in a 2 pin JST PH 2.0 plug. The two LED terminals are connected to the relavant LED control pins of the microcontroller.</p>
-    
+
     <p>The circuit diagram for the LED assembly is:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--led-assembly-circuit-diagram_475x302.png" width="475" height="302" alt="LED assembly circuit diagram"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly-circuit-diagram_475x302.png" width="475" height="302" alt="LED assembly circuit diagram"></p>
 
     <p>And the assembly as built is:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--led-assembly_600x633.png" width="600" height="633" alt="LED assembly"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly_600x633.png" width="600" height="633" alt="LED assembly"></p>
 
     <h4>Main circuit board</h4>
 
@@ -321,7 +323,7 @@ title: "Sensor to detect if a gate is open"
     <ol>
         <li>5V input from the USB micro power input board</li>
         <li>5V supply to the LED assembly</li>
-        <li>5V supply to the LCD</li>        
+        <li>5V supply to the LCD</li>
         <li>5V supply to the microcontroller</li>
         <li>Connection to the gate sensor / test switch</li>
         <li>Connection to the buzzer isolation switch</li>
@@ -337,12 +339,12 @@ title: "Sensor to detect if a gate is open"
     </ol>
 
     <p>The following image shows the front and back of the main circuit board as built:</p>
-    
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--main-circuit-board_640x721.jpg" width="640" height="721" alt="Front and rear of the main circuit board"></p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board_640x721.jpg" width="640" height="721" alt="Front and rear of the main circuit board"></p>
 
     <p>The circuit board is to be mounted vertically in the case, attached to one hole in the LCD display via an angle bracket. The bracket is attached to, and insulated from, the circuit board by means of M2.5 nylon nuts, screws and spacers. The following image shows the circuit board with the bracket attached.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--main-circuit-board+bracket_640x1025.png" width="640" height="1025" alt="Front and rear of the main circuit board with bracket attached"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board+bracket_640x1025.png" width="640" height="1025" alt="Front and rear of the main circuit board with bracket attached"></p>
 
     <p>The piece of black electrical tape is used to prevent the electrolytic capacitor from shorting out against the bracket.</p>
 
@@ -350,7 +352,7 @@ title: "Sensor to detect if a gate is open"
 
     <p>The ultimate plan is to use a bare ATMega286P microcontroller chip to manage the system. However problems flashing code onto such chips mean that, at least in the interim, an Arduino Nano is to be used. This has been mounted on an expansion board that breaks the Nano's pins out to screw terminals. This should enable easy removal for flashing code and possible eventual replacement by the bare chip.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-sensor/gate-sensor--mcu-assembly_480x311.png" width="480" height="311" alt="Microcontroller assembly with Arduino Nano"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/mcu-assembly_480x311.png" width="480" height="311" alt="Microcontroller assembly with Arduino Nano"></p>
 
     <h3>Software</h3>
 
