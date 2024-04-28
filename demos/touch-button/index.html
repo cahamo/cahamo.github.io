@@ -14,7 +14,13 @@ title: "Capactive Touch Button Demo"
 
 <p>The I/O connection can be used to directly control a circuit. The simplest example, that of switching a LED on and off, can be seen in the following circuit:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-no-mcu_400x272.png" width="400" height="272" alt="Capacitive touch button circuit design without microcontroller"></p>
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-no-mcu_400x272.png" width="400" height="272" alt="Capacitive touch button circuit design without microcontroller"><em class="caption caption-small">Breadboard circuit design</em></p>
+</div>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/breadboard-no-mcu_640x319.png" width="640" height="319" alt="Capacitive touch button circuit without microcontroller as built on breadboard"><em class="caption caption-small">Breadboard circuit as built</em></p>
+</div>
 
 <p>The circuit can be seen operating in the following video:</p>
 
@@ -26,14 +32,26 @@ title: "Capactive Touch Button Demo"
 
 <p>The other option is to attach the TTP223 I/O connection to a microcontroller. Again taking a simplistic approach, the following circuit shows an Arduino Uno being used to read the state of the TTP223 on pin 2 and to switch an LED on and off using pin 4. Yes, the circuit has exactly the same outcome as the previous one, but this is a proof of concept not a practical circuit!</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-with-mcu_800x284.png" width="800" height="284" alt="Capacitive touch button circuit design with Arduino Uno"></p>
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/circuit-with-mcu_800x284.png" width="800" height="284" alt="Capacitive touch button circuit design with Arduino Uno"><em class="caption caption-small">Breadboard circuit design</em></p>
+</div>
 
-<p>And here's another video showing this circuit working:</p>
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/breadboard-with-mcu_640x420.jpg" width="640" height="420" alt="Capacitive touch button circuit with Arduino Uno as built on breadboard"><em class="caption caption-small">Breadboard circuit as built</em></p>
+</div>
+
+<p>Here's another video showing this circuit working:</p>
 
 <div class="text-center">
     <p>
         <iframe width="695" height="394" src="https://www.youtube.com/embed/AWfvFjV-R9I" title="TTP223 touch button module connected to an Arduino Uno" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </p>
+</div>
+
+<p>And here's a sample of serial output:</p>
+
+<div class="text-center d-block">
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/touch-button/serial-output_480x256.png" width="480" height="256" alt="Serial ouput from capacitive touch button circuit running on Arduino Uno"></p>
 </div>
 
 <p>The source code for the latter demo is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>ttp223-touch-button--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/ttp223-touch-button--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
