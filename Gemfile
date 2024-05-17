@@ -21,6 +21,7 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 # Vulnerability issues
 gem "addressable", ">= 2.8.0"
 gem "nokogiri", "~> 1.16.5"
+gem "rexml", "~> 3.2.8"
 gem "commonmarker", ">= 0.23.10"
 gem "activesupport", "~> 7.0.7.1"
 
