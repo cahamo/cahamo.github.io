@@ -104,13 +104,10 @@ title: "How to use a round GC9A01 TFT display"
         <li>
             <p>Look just below the line:</p>
             <pre class="outlined"><code class="language-c">#else // ALL OTHER BOARDS - EDIT AS NEEDED</code></pre>
-            <p>to locate the line:</p>
+            <p>to locate the line that begins:</p>
+            <pre class="outlined"><code class="language-c">#define TFT_DC</code></pre>
+            <p>and ensure that <code>TFT_DC</code> is defined to be the Arduino pin that is connected to the display's DC pin. In our case we need pin 7:</p>
             <pre class="outlined"><code class="language-c">#define TFT_DC  7</code></pre>
-            <p>and change this line to:</p>
-            <pre class="outlined"><code class="language-c">#define TFT_DC  9</code></pre>
-            <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/round-tft-uno-arduino-ide_500x349.png" width="500"
-                height="349" alt="Round TFT display Arduino IDE source code changes"></p>
-            <p>This is needed because the display's <em>DC</em> pin is attached to the Uno's pin <em>9</em>, whereas the sketch assumes pin <em>7</em>.</p>
         </li>
         <li>
             <p>Turn on the 3.3V power supply.</p>
