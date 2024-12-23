@@ -1,0 +1,102 @@
+---
+layout: default
+title: "Rain measurement gauge sensor unit and circuit"
+---
+
+<h1>Rain Sensors: Gauge <span class="badge badge-warning">In&nbsp;progress</span></h1>
+
+<section id="Purpose">
+
+    <h2>Purpose</h2>
+
+    <p>The purpose of the project is to measure and record rainfall.</p>
+
+    <p>The project requirements are:</p>
+
+    <ol>
+        <li>To measure rainfall each day</li>
+        <li>To display rainfall to so far each day on a screen</li>
+        <li>To record each day's rainfall in a file on removable storage in a format suitable for importing into a spreadsheet</li>
+    </ol>
+
+</section>
+
+<section id="intro">
+
+    <h2>Overview</h2>
+
+    <aside>
+        <p class="alert alert-info">This project is closely based on the <a href="https://www.explainingcomputers.com/pi_pico_rain_gauge.html">Raspberry Pi Pico Rain Gauge</a> project by Christopher Barnett.</p>
+    </aside>
+
+    <p>This project comprises a 3D printed rain gauge coupled to a microcontroller, storage and display.</p>
+
+    <p>The gauge collects rain and funnels it down into a pivoted bucket assembly with attached magnet as illustrated below:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--bucket-model-render_400x263.png" width="400" height="263" alt="Rain gauge bucket illustration"></p>
+
+    <p>The assembly is pivoted about its centre point. The mechanism starts off angled so that one bucket is higher than the other. Rain coming in from above fills the raised bucket. When sufficient rain has gathered in the bucket it pivots and empties its contents, bringing the other bucket up under the water flow. The process then repeats.</p>
+
+    <p>Each time the assembly pivots the magnet moves past a reed switch. The microcontroller detects and counts the pulses from the reed switch. The number of these pulses, together with information about the capacity of each bucket and the catchment area of the funnel is used to calculate the quantity of rain that has fallen in a given time.</p>
+
+    <p>This information is displayed on a screen and recorded in memory. The data is written to an SD card periodically.</p>
+
+    <p>The microcontroller program must be calibrated before use. The amount of rain captured by the funnel and the volume of water needed to tip the pivoted buckets is required to do this. The catchment area of the funnel can be measured. The amount of water that is required to tip the bucket assembly must be arrived at by experiment.</p>
+
+</section>
+
+<section id="build">
+
+    <h2>Construction</h2>
+
+    <h3>Bill of materials</h3>
+
+    <p>The gauge is constructed from numerous parts. Many are 3D printed. They are:</p>
+
+    <ol>
+        <li>Funnel (3D print) <sup>&dagger;</sup></li>
+        <li>Bucket assembly / magnet holder (3D print) <sup>&Dagger;</sup></li>
+        <li>Bucket assembly pivot unit / reed switch holder (3D print) <sup>&dagger;</sup></li>
+        <li>Two caps to hold the pivot axle in place (3D print) <sup>&sect;</sup></li>
+        <li>A box that contains and protects the pivoting bucket assembly (3D print) <sup>&Dagger;</sup></li>
+        <li>Bracket that holds the pivot unit inside the main box (3D print) <sup>&sect;</sup></li>
+        <li>Mounting brackets that attach to the main unit to fasten it to a wooden baseboard (3D print) <sup>&Dagger;</sup></li>
+    </ol>
+
+    <p>The following image shows a rendering of all the 3D printed parts:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--all-components-render_600x518.png" width="600" height="512" alt="Rain gauge bucket illustration"></p>
+
+    <div class="alert alert-info">
+        <p class="mb-1"><strong>Key:</strong></p>
+        <p class="mb-1 ml-3"><sup>&dagger;</sup> Original design by Christopher Barnett</p>
+        <p class="mb-1 ml-3"><sup>&Dagger;</sup> Original design by Christopher Barnett, modified by cahamo</p>
+        <p class="mb-1 ml-3"><sup>&sect;</sup> Original design by cahamo</p>
+    </div>
+
+    <p>Additional components are also required. They are:</p>
+
+    <ol start="8">
+        <li>A mild steel pivot axle</li>
+        <li>Washers to space the bucket assembly correctly within the pivot unit</li>
+        <li>Neodymium magnet</li>
+        <li>Reed switch</li>
+        <li>Various nuts, bolts &amp; washers</li>
+    </ol>
+
+    <p class="alert alert-warning">To date all 3D printed components have been built and some assembly has been carried out, but the bucket assembly remains to be tested, callibration is still required and the code is yet to be written.</p>
+
+</section>
+
+<section id="stl">
+
+    <h2>STL files</h2>
+
+    <p>STL files that can be sliced to produce the 3D printed components can be downloaded from the <a href="https://github.com/cahamo/rain-sensors"><code>cahamo/rain-sensors</code></a> repository on GitHub.</p>
+
+    <p>All files are made available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons - Attribution - Share Alike</a> license v4.0. Files originally created by Christopher Barnett are copyright &copy; 2024 <a href="https://www.explainingcomputers.com/">Christopher Barnett</a> (the license has been updated from Creative Commons - Attribution - Share Alike license v3.0 to v4.0). Files created by <em>cahamo</em> are copyright &copy; 2024, <a href="https://gravatar.com/delphidabbler">Peter Johnson</a>.</p>
+
+</section>
+
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>

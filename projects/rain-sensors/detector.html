@@ -1,0 +1,66 @@
+---
+layout: default
+title: "Rain detector sensor unit and circuit"
+---
+
+<h1>Rain Sensors: Detector <span class="badge badge-warning">In&nbsp;progress</span></h1>
+
+<section id="requirements">
+
+    <h2>Requirements</h2>
+
+    <p>There are two requirements for the rain detector:</p>
+
+    <ol>
+        <li>An alarm is sounded when rain is detected.</li>
+        <li>The alarm must have an on/off switch so we can switch it on only when needed, for example, when there is washing drying outside.</li>
+    </ol>
+
+</section>
+
+<section id="design">
+
+    <h2>Design</h2>
+
+    <p>The rain detector comprises an off the shelf sensor pad containing two conductive tracks that are not connected to each other. Water falling on the plate bridges the tracks and lowers the resistance of the pad. A MH series interface module is connected to the sensor pad and produces both an analogue signal whose voltage depends on the resistance of the sensor pad and a digital signal that goes from high to low when the sensor pad resistance reaches a certain threshold value. A potentiometer is used to adjust the threshold. Both items were purchased as a single package along with a very short DuPont cable to connect them:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--detector+module_600x334.png" width="600" height="334" alt="Rain detector sensor pad and interface module"></p>
+
+    <p class="alert alert-warning">The output of the interface module will eventually be used to trigger an alarm. This has not yet been designed.</p>
+
+</section>
+
+<section id="construction">
+
+    <h2>Construction</h2>
+
+    <p>A housing for the rain detector was designed in TinkerCAD and 3D printed on a Bambu A1 using Amazon Basics orange PLA. The housing includes two lugs to enable the unit to be screwed to a wooden base. Brass M3 heat-set threaded inserts were fitted to each corner of the housing to enable the rain sensor to be screwed in place. A hole was included in the base of the housing to permit water to escape.</p>
+
+    <p>The following photo shows the housing after the heat-set inserts were added:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-heat-inserts_400x300.png" width="400" height="300" alt="Rain detector housing"></p>
+
+    <aside>
+        <p class="alert alert-info">The heat set inserts were pressed in place using a soldering iron with a specialised bit designed for this purpose.</p>
+
+        <p class="alert alert-danger">Confession time. The first time I attempted to fit the heat set inserts I got the soldering iron much to hot and trashed the housing. The one you see here is a reprint! <strong>Be warned</strong>: you need the soldering iron no more than about 100&deg;C hotter than the printing temperature of the PLA. In my case that's about 310&deg;C.</p>
+    </aside>
+
+    <p>The rain sensor pad was attached to the housing with nylon M3 crosshead bolts:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-detector_400x300.png" width="400" height="300" alt="Rain detector housing"></p>
+
+    <p class="alert alert-warning">That's as far as things have progressed so far.</p>
+</section>
+
+<section id="stl">
+
+    <h2>STL file</h2>
+
+    <p>An STL file that can be sliced to produce the 3D printed components can be downloaded from the <a href="https://github.com/cahamo/rain-sensors"><code>cahamo/rain-sensors</code></a> repository on GitHub.</p>
+
+    <p>The file is copyright &copy; 2024, <a href="https://gravatar.com/delphidabbler">Peter Johnson</a> and is made available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons - Attribution - Share Alike</a> license v4.0.</p>
+
+</section>
+
+<p class="text-center"><b><a href="./">Back to main project page</a></b></p>
