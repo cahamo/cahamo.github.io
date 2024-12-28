@@ -8,89 +8,133 @@ title: "Sensor to detect if a gate is open"
 ---
 <h1>Gate Alarm</h1>
 
-<section id="about">
+<section id="intro">
 
     <h2>Whys and Wherefores</h2>
 
-    <p>Every morning, before letting our dog out in the back garden, my wife or I go outside to check our garden gates are bolted properly. Apart from frequently getting cold and wet, we're also concerned about the increase in dog theft and so want to know if anyone opens the gates.</p>
+    <p>Every morning, before letting our dog out in the back garden, my wife or I go outside to check that our garden gate is bolted properly. Apart from frequently getting cold and wet, we're also concerned about the increase in dog theft and so want to know if anyone opens the gate.</p>
 
-    <p>The solution for one gate is simply to lock it. We can't do that with the other because occasional access is needed for deliveries.</p>
-
-    <p>This project aims to solve the problem of the second gate by providing a sensor that detects when the gate is open and sounds an alarm if so.</p>
+    <p>This project aims to solve the problem by providing a sensor that detects when the gate is opened and sounds an alarm.</p>
 
 </section>
 
 <section id="requirements">
 
-    <h3>Requirements</h3>
+    <h2>Requirements</h2>
 
     <p>The requirements for the alarm are:</p>
 
     <ol>
-        <li>The gate sensor should only detect an open gate and should trigger the alarm when this occurs. It should not attempt to detect the gate being closed: this is entrusted to the humans!</li>
-        <li>Related to 1, there must be a way of cancelling the alarm, effectively confirming that the gate has been closed.</li>
-        <li>Since there are times when the gate needs to be left open, there should be a way of suspending, and re-activating, the alarm. However, should the gate be detected as open during a suspension then the alarm must be activated after the period of suspension has ended.</li>
-        <li>There should be both audible and visual indications when the alarm is activated.</li>
-        <li>The audible alarm should be able to be switched off, for example at night.</li>
+        <li>When the gate is opened an audible alarm should sound.</li>
+        <li>No attempt is to be made to detect the gate being closed. This is entrusted to the humans! That's so we can be sure the gate has been properly secured and not just pushed closed without bolting it.</li>
+        <li>There must be a way of cancelling the alarm once the gate has been confirmed to be closed.</li>
+        <li>Since there are times when the gate needs to be left open, there should be a way of suspending, and then re-activating, the alarm.</li> <li>Should the gate be opened during a period of suspension then the alarm must be sounded after the period of suspension has ended unless the gate has been confirmed to be closed.</li>
+        <li>There should be a visual indication that the alarm is operational.</li>
     </ol>
 
 </section>
 
-<section id="design">
 
-    <h2>Design</h2>
+<section id="overview">
 
-    <p>The design has gone through a few iterations for deciding on the plan described here. Earlier plans are described on the <a href="./legacy-plan">Earlier Plans for the Gate Alarm</a>.</p>
+    <h2>Overview</h2>
 
-    <p>There are three main components of the alarm system:</p>
+    <p>The project is split into two distinct components:</p>
 
     <ol>
-        <li>A sensor mounted on the gate to detect when the gate opens.</li>
-        <li>An alarm.</li>
-        <li>A control unit.</li>
+        <li>The gate movement detector. This is attached to the gate and detects the gate being moved, which can only happen when it is open. It sends a signal to the control circuitry when this happens.</li>
+        <li>The control circuitry and alarm. This responds to a signal from the gate detector by sounding an alarm if necessary. It also manages alarm suspension and interaction with the user.</li>
     </ol>
 
-    <h3>Gate Sensor Unit</h3>
+    <p>The two components are described separately below.</p>
 
-    <p>The unit that senses the gate being opened is based on reed switches and magnets. A case containing three reed switches in parallel is to be mounted offset from the gate post. A magnet is to be placed on the gate at the same height as the reed switch case. When the gate is opened (or closed) the magnet passes the reed switches which close an emit a pulse that can be detected by a microcontroller.</p>
+</section>
 
-    <p><a href="./legacy-plan">Earlier plans</a> proposed using three reed switches to detect the direction of gate movement. This unit was built for testing. When that plan was rejected it was decided to re-purpose the unit with the reed switches wired in parallel to provide some redundancy in the sensor.</p>
+<section id="detector">
 
-    <p>Here's a rough diagram of how the switch case and magnet are to be mounted:</p>
+    <h2>Gate Movement Detector</h2>
+
+    <h3>Design</h3>
+
+    <p>The gate movement dectector uses normally open reed switches in association with a permanent magnet. It is comprised of two parts:</p>
+
+    <ol>
+        <li>A detector unit that is fastened to the gate post. This unit contains three glass reed switches wired in parallel. The use of three switches provides some redundancy in case one or more switches fail in the open position. The detector is wired to the controller with two wires: one at five volts and the other at 0V.</li>
+        <li>A magnet that is fastended to the gate.</li>
+    </ol>
+
+    <p>The magnet and detector unit are mounted such that the magnet does not influence the reed switches when the gate is closed, meaning that the detector circuit remains open. The following drawing illustrates the design:</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/gate-diagram_360x486.png" width="360" height="486" alt="Diagram of gate sensor case and magnet locations on gate"></p>
 
-    <p>There are two reasons that the reed switches are offset from the gate when closed:</p>
+    <p>Opening the gate moves the magnet past the detector unit causing one or more reed switches to close. When a switch closes the ground wire is pulled up to 5V. The control circuitry detects such changes and deems them to mean that the gate is open.</p>
+
+    <p>Note that this design can only detect that the gate has moved, not whether it has been opened or closed. The requirement to only detect an open gate makes this restriction is irrelavant. The advantage of the design is that the reed switches are normally left open, with no current passing through them, which may help with the longevity of the switches and reduces the current drain.</p>
+
+    <p>Another potential downside of the design is that multiple pulses may be generated when the magnet passes the three reed switches in turn. Addition pulses may also be triggered if the gate blows around in the wind and moves the magnet past the reed switches again. This problem has been addressed in software: the first pulse after a reset is used to indicate that the gate has opened, subsequent pulses are ignored until the alarm has been reset.</p>
+   
+    <h3>Construction</h3>
+
+    <h4>Gate movement detector</h4>
+
+    <p>The gate movement detector was repurposed from an <a href="./legacy-plan.html#movement-detector">earlier experimental design</a>. Construction is described and illustrated on the linked page.</p> 
+    
+    <p>Because the old design had four terminals (one for each reed switch and one ground) the switch terminals had to be connected together outside the box to put them in parallel. The resulting two wires were taken to a pair of screw terminals. Another redundant plastic box was adapted to hold the new connectors, and was again sealed with hot glue. The following photo shows the completed unit, before fitting in place and adding a cover over the connectors:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-v3b_480x202.png" width="480" height="202" alt="Version 3 of the gate sensor unit showing strengthening box"></p>
+    
+    <p>The completed unit was screwed to the same small block of wood that was installed on the gate post to mount the <a href="./legacy-plan.html">earlier version</a> of the unit. Wires from the control circuit were connected to the detector unit's screw terminals and then a cover was hot glued in place over them. Hot glue was then used in an attempt to protect the whole unit from the weather. I was rather heavy handed when applying the hot glue, but it works! The final assembly is shown in the following photo:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-on-gate-post_600x641.png" width="600" height="641" alt="Gate movement detector unit in situ on the gate post"></p>
+
+    <aside>
+        <p class="alert alert-danger"><img class="float-left mr-2" src="/assets/img/icons/error_24x24.png" width="24" height="24"><strong>Cockup alert!</strong> The first time I connected the reed switch terminals together I managed to break the wires very close to the detector unit when installing on the gate post. It took quite a bit of delicate soldering and much cursing to fix it to create the version I've written about here. I'm amazed that the resulting bodge has lasted 6 months at the time of writing.</p>
+    </aside>
+
+    <h4>Cabling</h4>
+
+    <p>An old reel of two core &quot;bell&quot; wire was used to connect the gate sensor to the control unit inside the house. The control box end of the cable was connected to a DC power connector fitted with screw terminals, while the sensor end of the cable had the ends stripped back, as can be seen below:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/bell-wire_600x452.png" width="600" height="452" alt="Coil of cable with DC plug attached"></p>
+
+    <p>The cable was fastened to the wall using cable clips nailed into external quality rawl plugs and was run into the house via a conveniently located (already broken) wall vent:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/cable-on-wall_600x322.png" width="600" height="322" alt="Cable attached to exterior wall"></p>
+
+    <h4>Magnet</h4>
+    
+    <p>An 8mm diameter neodymium magnet was fitted to the lid of an old plastic cocktail stick box. A 8mm hole was drilled in the side of the box lid and the magnet was push fitted. After mounting to the gate the magnet was securred with hot glue, as shown below:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/magnet-unit_600x375.png" width="600" height="375" alt="Magnet mounting, fitted to gate"></p>
+
+</section>
+
+<section id="control-unit">
+
+    <h2>Control / alarm unit</h2>
+
+    <p>The control unit resides in our sitting room. It is located close the the wall vent where the wires connecting to the gate movement detector enter the house.</p>
+
+    <h3>Design</h3>
+
+    <p>The combined unit comprises the following parts:</p>
 
     <ol>
-        <li>Since the reed switches are normally open, if they were mounted opposite the magnet when the gate is closed the switches would be closed and drawing power all the time that the gate is closed.</li>
-        <li>A pulse will be generated as the magnet passes the reed switches when the gate is opened. This pulse can be detected by a microcontroller which can in turn trigger the alarm. Additionally, the only way that the pulse can generated is when the gate is open, regardless of the direction the gate is moving, potentially blowing around in the wind.</li>
-    </ol>
-
-    <p class="alert alert-info">Note that there is no way for the gate sensor to detect the gate being closed. This is fail safe: someone will need to check that the gate has been closed and will reset the alarm manually.</p>
-
-    <h3>Alarm</h3>
-
-    <p>The alarm comprises two parts:</p>
-
-    <ol>
-        <li>A buzzer to provide the audible alarm.</li>
-        <li>A red LED to provide the visual alarm.</li>
-    </ol>
-
-    <p>Both the buzzer and the LED are triggered from a microcontroller via a MOSFET and a BJT respectively.</p>
-
-    <h3>Control Unit</h3>
-
-    <p>The control unit comprises the following:</p>
-
-    <ul>
         <li>
-            <p>LCD screen to display the current state of the alarm and to prompt for input.</p>
+            <p class="mb-2">A buzzer that sounds when the gate is open, unless the alarm is suspended. If the suspension ends while the gate is open the buzzer will sound. The buzzer can be disabled by removing a jumper inside the control unit.</p>
         </li>
         <li>
-            <p>A keypad that is used to control the alarm. The following commands are recognised:</p>
-            <table class="table table-responsive">
+            <p class="mb-2">A red LED that flashes when the gate is open.</p>
+        </li>
+        <li>
+            <p class="mb-2">A yellow LED that has two purposes. When the alarm is suspended the LED illuminates constantly. Otherwise the LED flashes briefly every few seconds to indicate that the unit is operational.</p>
+        </li>
+        <li>
+            <p class="mb-2">An LCD screen that displays the current state of the alarm or prompts for input.</p>
+        </li>
+        <li>
+            <p class="mb-2">A keypad with digits <code>0</code> to <code>9</code> and <code>*</code> and <code>#</code> keys that is used to control the alarm. The following commands are recognised:</p>
+            <table class="table table-responsive mb-0">
                 <thead>
                     <tr class="text-left">
                         <th>Entry</th>
@@ -107,35 +151,26 @@ title: "Sensor to detect if a gate is open"
                         <td>Cancels any active suspension of the alarm.</td>
                     </tr>
                     <tr>
-                        <td><code>#</code></td>
+                        <td><code>#</code> on its own</td>
                         <td>Suspends the alarm indefinitely.</td>
                     </tr>
                     <tr>
-                        <td><code>*</code></td>
+                        <td><code>*</code> on its own</td>
                         <td>Resets any active or suspended alarm to indicate that the gate has been closed.</td>
                     </tr>
                 </tbody>
             </table>
-            <p>If the gate is opened while the alarm is suspended then the alarm enters a pending state: it will not sound while the suspension continues, but will sound once the suspension ends. Reseting the alarm while pending cancels the pending state.</p>
         </li>
         <li>
-            <p>A toggle switch to disable the buzzer.</p>
+            <p class="mb-2">A test switch to simulate the gate being opened. This switch is connected in parallel with the gate movement detector's reed switches so that closing the test switch simulates one of the reed switches closing.</p>
         </li>
-        <li>
-            <p>A test switch to emulate the gate being opened.</p>
-        </li>
-        <li>
-            <p>A &quot;heartbeat&quot; LED that flashes every few seconds to indicate that the unit is operational.</p>
-        </li>
-    </ul>
+    </ol>
 
-    <h3>Circuit Design</h3>
+    <p>The electronic circuit that manages the above functions is described by the following diagram:</p>
 
-    <p>The complete circuit is described by the following diagram:</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/master-circuit-diagram_1245x644.png" width="1245" height="644" alt="Gate alarm master circuit diagram"></p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/master-circuit-diagram_1239x643.png" width="1239" height="643" alt="Gate alarm master circuit diagram"></p>
-
-    <p>The circuit is based around the Arduino Nano. The pinout is given in the following table:</p>
+    <p>The circuit is based around the Arduino Nano microcontroller. The Nano's pin connections are described in the following table:</p>
 
     <table class="table table-responsive">
         <thead>
@@ -151,7 +186,7 @@ title: "Sensor to detect if a gate is open"
                 <td>D2</td>
                 <td>Input</td>
                 <td>Gate sensor / test switch</td>
-                <td>Pin is taken low when the sensor switches or test switch close. There is a physical pull up resistor for the switches, so the Nano pin does not need to be configured to use its internal pullup resistor. There is no debouncing circuit: debouncing is done in software.</td>
+                <td>This pin is normally pulled high using a 20k&ohm; resistor. The pin is taken low when one of the gate movement detector reed switch or the test switch closes. Debouncing is done in software.</td>
             </tr>
             <tr>
                 <td>D3 to D9</td>
@@ -163,19 +198,19 @@ title: "Sensor to detect if a gate is open"
                 <td>D10</td>
                 <td>Output</td>
                 <td>Buzzer circuit</td>
-                <p>When the pin is taken high the buzzer circuit is activated to sound the buzzer by switching on a MOSFET. The buzzer isolation switch breaks the signal when it is open. or when the buzzer isolation switch is open.</p>
+                <td>When the pin is taken high the buzzer circuit is activated to sound the buzzer by switching on a MOSFET. The buzzer isolation jumper switch breaks the signal and silences the buzzer when it is open.</td>
             </tr>
             <tr>
                 <td>D11</td>
                 <td>Output</td>
                 <td>Alarm LED</td>
-                <td>When the pin is taken high the transistor that powers the red LED is switched on.</td>
+                <td>When the pin is taken high the BJT that powers the red LED is switched on.</td>
             </tr>
             <tr>
                 <td>D12</td>
                 <td>Output</td>
-                <td>Heartbeat LED</td>
-                <td>When the pin is taken high the transistor that powers the yellow LED is switched on.</td>
+                <td>Heartbeat / suspension LED</td>
+                <td>When the pin is taken high the BJT that powers the yellow LED is switched on.</td>
             </tr>
             <tr>
                 <td>A4</td>
@@ -193,13 +228,13 @@ title: "Sensor to detect if a gate is open"
                 <td>5V</td>
                 <td>-</td>
                 <td>5V input</td>
-                <td>The Nano is powered from the 5V power supplyvia this pin, not via it's own USB socket.</td>
+                <td>The Nano is powered from the 5V power supply via this pin. The 5V supply can be disconnected from the Nano by removing a jumper inside the control unit to enable the Nano can be powered safely via its USB socket when reprogramming.</td>
             </tr>
             <tr>
                 <td>GND</td>
                 <td>-</td>
                 <td>Ground connection</td>
-                <td>Common ground connection with the power supply and every other assembly's ground.</td>
+                <td>Common ground connection.</td>
             </tr>
         </tbody>
     </table>
@@ -208,158 +243,171 @@ title: "Sensor to detect if a gate is open"
 
     <ul>
         <li>A 680µF electrolytic capacitor connects 5V to ground to smooth out the power supply.</li>
-        <li>No microcontroller pins are used to power the LEDs or the buzzer. The former are powered from the 5V supply by BJTs and the later by a MOSFET.</li>
         <li>A 3.3V Zener diode is used to drop the voltage for the buzzer from 5V to 3.3V. The same diode is also used as a flyback diode for the buzzer.</li>
     </ul>
 
-</section>
+    <p>The microcontroller software was developed in Arduino flavoured C++ using various libraries. Development took place in VSCode using the PlatformIO extension. The software is open source. Details can be found in the <a href="https://github.com/cahamo/gate-alarm"><code>cahamo/gate-alarm</code></a> repository on GitHub.</p>
 
-<section id="progress">
+    <p>A case for the control unit was designed in Inkscape and saved as an SVG file. Paper templates of the case sides, top and bottom were printed from Inkscape. The templates were used create cardboard mockups of the case to check the layout of components. This process was repeated  until a suitable design was arrived at. The final design is illustrated in the following picture that shows a top view with an indication of the location of side mounted components. Black borders indicate cutouts, red borders indicate the footprint of some components on the top of the case. Blue writing describes the side-fitted components.</p>
 
-    <h2>Progress</h2>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-design-diagram_600x613.png" width="600" height="613" alt="Illustration of gate alarm control unit case design"></p>
 
-    <h3>Sensor Unit &amp; Magnet</h3>
+    <h3>Construction</h3>
 
-    <p class="alert alert-info">This unit was originally built as part of the <a href="./legacy-plan">earlier design</a> and adapted to suit the revised design.</p>
+    <p>A modular approach to contructing the electronics was taken wherever possible, with each module being connected to others by means of JST PH 2.0 and XH2.4 plugs and sockets, screw terminals and DuPont cables. Details of the construction of the various modules follows.</p>
 
-    <p>In the original build, the three reed switches were mounted inside an old 3 &times; AA battery box, modified to suit. The switches were soldered to perf board then mounted hard against one side of the case and held in place with hot glue. The switches were commoned at one end and the common wire and one additional wire per switch were brought out to four header pins outside the case. Each connection was duplicated inside the case to provide some redundancy in case a wire breaks. All the electrical parts were then covered in hot glue, which was also used to seal on the case lid. A block of wood on which to mount the case was screwed to the gate post and the case was drilled in three places to permit it to be screwed to the mounting block.</p>
+    <h4>Microcontroller </h4>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-v1-location_373x253.png" width="373" height="253" alt="Image showing the location of version 1 of the gate sensor unit"></p>
+    <p>The microcontroller is an Arduino Nano. This has been mounted on an expansion board that breaks the Nano's pins out to screw terminals. This enables the Nano to be removed easily for updating or replacement. Connections can also be reconfigured much more simply than if they were soldered.</p>
 
-    <p>The unit was later modified by commoning the three switch terminals together so that all three switches operate in parallel:</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/mcu-assembly_480x311.png" width="480" height="311" alt="Microcontroller assembly with Arduino Nano"></p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/reed-switches-circuit-diagram_154x93.png" width="154" height="93" alt="Version 2 of the gate sensor unit reed switch circuit diagram"></p>
+    <aside>
+        <p class="alert alert-success"><img class="float-left mr-2" src="/assets/img/icons/light-bulb_24x24.png" width="24" height="24">Any later version of the controller unit could use a bare ATMega286P microcontroller chip instead of the Nano.</p>
+    </aside>
 
-    <p>The modified terminals and wires were covered in red heat shrink tubing. The two output wires were then connected to 2 5A screw terminals as can be seen in the following image:.</p>
+    <h4>USB C power input</h4>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-v2_480x300.png" width="480" height="300" alt="Image showing version 2 of the gate sensor unit"></p>
+    <p>A panel mounted USB C socket had its 5V and GND pins soldered to leads terminated in a 2 pin JST PH 2.0 plug. The following photo shows the components before the leads were trimmed and soldered to the USB board:</p>
 
-    <p>A redundant kitchen cupboard door magnet was tested on the gate and found to work. However some stronger neodymium magnets have now been acquired and may be used instead.</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/usb-c-panel-connector+leads_480x332.png" width="480" height="332" alt="USB C panel socket and JST 2.0 plug and cable before trimming and soldering."></p>
 
-    <h3>Control Unit &amp; Alarm</h3>
-
-    <p>The control unit and alarm are both being housed in the same box, along with the microcontroller and circuit boards.</p>
-
-    <p>Power will be provided by a 5V USB wall wart and will enter the unit via a micro USB socket.</p>
-
-    <p>A case has been designed using Inkscape and paper templates have been printed from the design. A prototype case has been made from mounting board and all externally mounted controls have been test fitted. Here is the design for the case looking from the top, with side mounted components shown in grey:</p>
-
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/box-design_564x580.png" width="564" height="580" alt="Gate alarm &amp; control unit box design (top only)"></p>
-
-    <p class="alert alert-warning">Once the prototype has been tested it is planned to build the box from plywood.</p>
-
-    <p class="alert alert-warning">Ultimately it is hoped to replace the plywood box with a 3D printed copy.</p>
-
-    <p>Each of the externally mounted components illustrated above has been designed to be plugged in to the main circuit board, making it easier to disassemble the finished unit. The assemblies are:</p>
-
-    <h4>USB micro power input board</h4>
-
-    <p>A USB micro socket has been soldered to a piece of perfboard and the 5V and GND pins have been taken out via leads terminated in a 2 pin JST PH 2.0 plug.</p>
-
-    <p>The leads are connected to the main circuit board from where power is distributed to other components.</p>
-
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/power-supply-assembly_480x399.png" width="480" height="399" alt="Power supply assembly"></p>
+    <p>The PH 2.0 plug is connected to the main circuit board from where the power is distributed to other components.</p>
 
     <h4>Input from gate sensor / Test switch</h4>
 
-    <p>The momentary contact push button test switch has been wired in parallel with the input from the gate sensor so that pressing the switch has exactly the same effect as the reed switches being closed. Input from the gate sensor is by means of a 5.5&times;2.1mm DC socket. The GND and MCU pin connections from both are taken out via leads terminated in a 2 pin JST PH 2.0 plug.</p>
+    <p>A momentary contact push button has been used to act as the alarm test switch. This was wired in parallel with the input from the gate sensor so that pressing the switch has exactly the same effect as the reed switches being closed. Input from the gate sensor is by means of a 5.5&times;2.1mm DC socket. The GND and MCU pin connections from both are taken out via leads terminated in a 2 pin JST PH 2.0 plug.</p>
 
-    <p>The GND and MCU leads are connected to the main circuit board.</p>
+    <p>The GND and MCU leads are both connected to the main circuit board via the PH 2.0 plug.</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/gate-input-plus-test-switch-assembly_480x220.png" width="480" height="220" alt="Gate switch input / test switch assembly"></p>
 
     <h4>LCD</h4>
 
-    <p>The display is a 16&times;2 blue backlit display with a built in I²C interface.</p>
+    <p>The display is a 16&times;2 blue backlit LCD with a built in I²C interface.</p>
 
     <p>The display's VCC, ground and I²C SDA &amp; SCL connections are brought out to four DuPont connector pins. 2 pairs of leads terminated in 2 pin JST PH 2.0 plugs have been connected to a 4 way DuPont socket that attaches to the display's connector pins. One pair of leads is for power (the 5V VCC and ground) connection, while the 2nd pair of leads carries the I²C SDA and SCL signals.</p>
 
-    <p>The power leads are connected to the main circuit board while the I²C leads are connected to the microcontroller.</p>
-
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/lcd-assembly_600x502.png" width="600" height="502" alt="LCD assembly"></p>
+
+    <p>The power leads are connected to the main circuit board while the I²C leads are connected to the microcontroller via an extension cable with a PH 2.0 socket on one end and bare cable at the other.</p>
 
     <h4>Keypad</h4>
 
-    <p>A 4&times;3 button membrane keypad is used. The membrane has 7 connections that are brought out in a ribbon cable that is terminated in a 7 way DuPont socket.</p>
+    <p>A 4&times;3 button membrane keypad is used. The membrane has 7 connections that are brought out in a ribbon cable that is terminated in a 7 way female DuPont connector.</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/keypad-unit_480x208.png" width="480" height="208" alt="Keypad unit"></p>
 
-    <p class="alert alert-warning">The keypad is to connected directly to the microcontroller. The method for doing this is yet to be determined.</p>
+    <p>Seven DuPont male to male leads were cut, leaving a male connector at one end and bare cable at the other. The ends with the remaining male DuPont connector was plugged into the keypad's 7 way female connectors. The cut ends had wire exposed, twisted and connected to the appropriate pins on the microcontroller via its expansion board's screw connectors.</p>
 
     <h4>Buzzer</h4>
 
     <p>A proprietory 3.3V buzzer is being used. The buzzer has positive and ground wires that have been terminated in a 2 pin XH2.4 plug.</p>
 
-    <p>The leads are connected to the main circuit board.</p>
+    <p>The leads are connected to a matching socket the main circuit board.</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/buzzer-assembly_480x307.png" width="480" height="307" alt="Buzzer assembly"></p>
 
-    <h4>Buzzer isolation switch</h4>
-
-    <p>The buzzer isolation switch is a SPST on-off rocker switch. A pair of leads have been soldered to the switch. The leads terminate in a 2 pins JST PH 2.0 plug.</p>
-
-    <p>The leads are connected to the main circuit board.</p>
-
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/buzzer-isolation-switch-assembly_480x254.png" width="480" height="254" alt="Buzzer isolation switch assembly"></p>
-
     <h4>LED assembly</h4>
 
-    <p>The two LEDs have been mounted together on their own assembly. The assembly has been built on a single piece of perfboard that includes the LEDs, the transistors used to drive the LEDs and various resistors. Screw terminals have been provided for connecting 5V, ground and the inputs for the two LEDs. The screw terminal connections are shown on the following image:</p>
+    <p>The two LEDs have been mounted together on their own assembly. The assembly has been built on a single piece of perfboard that includes the LEDs, the transistors used to drive the LEDs and various resistors. Screw terminals have been provided for connecting 5V, ground and the inputs for the two LEDs. The assembly, with connecting wires, is shown along in the following photo, along with an key to the screw terminals:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly-connections_480x274.png" width="480" height="274" alt="LED assembly output screw terminal identification. Left to right: 5V, red LED, yellow LED, ground"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly_600x422.png" width="600" height="422" alt="LED assembly with screw terminal identification. Top to bottom: 5V, red LED, yellow LED, ground"></p>
 
-    <p>The 5V and ground terminals are connected to the main circuit board via a lead that terminates in a 2 pin JST PH 2.0 plug. The two LED terminals are connected to the relavant LED control pins of the microcontroller.</p>
+    <p>The 5V and ground terminals are connected to the main circuit board via a lead that terminates in a 2 pin JST PH 2.0 plug. The two LED terminals are connected to the relavant LED control pins of the microcontroller via its expansion board's screw connectors.</p>
 
-    <p>The circuit diagram for the LED assembly is:</p>
+    <h4>Jumper switch board</h4>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly-circuit-diagram_475x302.png" width="475" height="302" alt="LED assembly circuit diagram"></p>
+    <p>This board is built on a scrap piece fibre perf board. It contains jumpers that connect the buzzer to the main circuit board and connect the 5V supply from the main circuit board to the Nano MCU's 5V input pin. Each jumper is made from twin header pins connected to two pin screw terminals. The relevant cables are connected to the screw terminals. Jumper header pins are connected by means of yellow jumper caps.</p>
 
-    <p>And the assembly as built is:</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/jumper-board_400x400.png" width="400" height="400" alt="Jumper switch board. Top enables buzzer, bottom enables 5V supply to Nano MCU."></p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/led-assembly_600x633.png" width="600" height="633" alt="LED assembly"></p>
+    <p>The buzzer isolator jumper is included in case there is ever a need to silence the alarm without suspending it via the keypad.</p>
+
+    <p>The the jumper connected to the Nano's 5V input is provided to enable supply to be broken whenever the Nano's USB connector is being used to re-program the device. This enables the Nano to be reprogrammed in place.</p>
+
+    <p class="alert alert-warning"><strong>Warning!</strong> No USB connection should ever be made to the Nano MCU without first removing the relevant jumper cap.</p>
 
     <h4>Main circuit board</h4>
 
-    <p>The main circuit board has 2 pin JST PH 2.4 sockets connecting to the following:</p>
+    <p>The main circuit board has six 2 pin JST PH 2.4 sockets connecting to the following:</p>
 
     <ol>
-        <li>5V input from the USB micro power input board</li>
-        <li>5V supply to the LED assembly</li>
-        <li>5V supply to the LCD</li>
-        <li>5V supply to the microcontroller</li>
-        <li>Connection to the gate sensor / test switch</li>
-        <li>Connection to the buzzer isolation switch</li>
+        <li>5V input and ground from the USB C power input board</li>
+        <li>5V power and ground to the LED assembly</li>
+        <li>5V power and ground to the LCD</li>
+        <li>5V power and ground to the microcontroller via the 5V cutoff jumper</li>
+        <li>Gate sensor / test switch</li>
+        <li>Buzzer isolation jumper</li>
     </ol>
 
-    <p>There is also a 2 pin XH2.4 socket to connect to the buzzer and a 2 pin DuPont socket to connect the buzzer signal from the microcontroller and the gate alarm signal to the microcontroller.</p>
+    <p>There is also a 2 pin XH2.4 socket to connect 3.3V and ground to the buzzer and a 2 pin DuPont socket to connect the buzzer signal from the microcontroller and the gate alarm signal to the microcontroller.</p>
 
     <p>The board has circuitry for the following:</p>
 
     <ol>
         <li>The buzzer driver. This circuit uses a MOSFET to switch the buzzer on and off in response to a signal from the microcontroller. There is also a 3.3V Zener diode to drop the 5V supply to the 3.3V required by the buzzer. The buzzer isolation switch is wired to interupt the buzzer signal from the microcontroller. The connection to the microcontroller is made via one of the DuPont sockets.</li>
-        <li>The gate alarm. This simple circuit simply provides a pull up resistor for the gate alarm / test switches and connects the state of the switches to the microcontroller via one of the DuPont sockets.</li>
+        <li>The gate alarm. This simple circuit provides a pull up resistor for the gate alarm / test switches and connects the switches to the microcontroller via one of the DuPont sockets.</li>
     </ol>
 
     <p>The following image shows the front and back of the main circuit board as built:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board_640x721.jpg" width="640" height="721" alt="Front and rear of the main circuit board"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board_400x451.jpg" width="400" height="541" alt="Front and rear of the main circuit board"></p>
 
-    <p>The circuit board is to be mounted vertically in the case, attached to one hole in the LCD display via an angle bracket. The bracket is attached to, and insulated from, the circuit board by means of M2.5 nylon nuts, screws and spacers. The following image shows the circuit board with the bracket attached.</p>
+    <p>The circuit board is mounted vertically in the case, attached to one hole in the LCD display via an angle bracket. The bracket is attached to, and insulated from, the circuit board by means of M2.5 nylon nuts, screws and spacers. The following image shows the circuit board with the bracket attached.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board+bracket_640x1025.png" width="640" height="1025" alt="Front and rear of the main circuit board with bracket attached"></p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/main-circuit-board+bracket_400x641.png" width="400" height="641" alt="Front and rear of the main circuit board with bracket attached"></p>
 
     <p>The piece of black electrical tape is used to prevent the electrolytic capacitor from shorting out against the bracket.</p>
 
-    <h4>Microcontroller </h4>
+    <h4>Case</h4>
 
-    <p>The ultimate plan is to use a bare ATMega286P microcontroller chip to manage the system. However problems flashing code onto such chips mean that, at least in the interim, an Arduino Nano is to be used. This has been mounted on an expansion board that breaks the Nano's pins out to screw terminals. This should enable easy removal for flashing code and possible eventual replacement by the bare chip.</p>
+    <p>Paper templates for the top, bottom and all four sides of the case were printed directly from the design in Inkscape. The templates were glued to fibre board. The templates were flipped so that they could be adhered to what would become the insides of the case.</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/mcu-assembly_480x311.png" width="480" height="311" alt="Microcontroller assembly with Arduino Nano"></p>
+    <p>The fibre board was cut out using the templates as guides using a hand saw. Small holes were drilled while larger apertures had corners drilled out before cutting with a fret saw.</p>
 
-    <h3>Software</h3>
+    <p class="alert alert-danger"><img class="float-left mr-2" src="/assets/img/icons/error_24x24.png" width="24" height="24"><strong>Cockup alert!</strong>. The fibre board had a tendency to rip. That combined with my poor DIY skills resulted in a rather untidy box. I wouldn't use this material again. This is a pity because this box lives in our sitting room.</p>
 
-    <p>The control software was developed using an Arduino Uno and the control circuit was mocked up on breadboards for testing.</p>
+    <p>The following photos show both inside and outside of the various case parts after cutting out:</p>
 
-    <p class="alert alert-warning">Software is not yet finalised, but when v1 is completed it will be uploaded to the <a href="https://github.com/cahamo/gate-alarm"><code>cahamo/gate-alarm</code></a> GitHub repository.</p>
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-panels-exterior_600x463.png" width="600" height="463" alt="Exterior view of case parts after cutting out."></p>
 
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-panels-interior_600x480.png" width="600" height="480" alt="Interior view of case parts after cutting out, showing paper templates."></p>
+
+    <p>The LCD was installed in its aperature and secured by nuts and bolts. One of these bolts was also used to secure the main circuit board in place using its attached bracket. The keypad ribbon cable was pushed through a small slot in the top of the case and the keypad was then fastened to the top of the case using a PVA glue stick. The two LEDs on the LED assembly were pushed into their pre-drilled holes and held in place by friction. The buzzer was also pushed into its own hole and is also a friction fit. The following photo shows the top of the case after all these components were fitted.</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-assembly-top_600x621.png" width="600" height="621" alt="Top of case after all externally visible components were fitted."></p>
+
+    <p>The top and all sides were then glued together.</p> 
+
+    <p>The test switch and sockets were fitted in place through pre-drilled mounting holes. A further hole was later added to allow a USB cable to be passed through the case side for connection to the microcontroller. See following montage of photos for details:</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-assembled-sides_600x527.png" width="600" height="527" alt="Montage of case sides after switch and plugs were fitted."></p>
+
+    <p>The microcontroller board and the jumper board were held loosely in place by self adhesive pads then all cable connections were made.</p>
+
+    <p class="alert alert-info">The components held in by friction, glue stick and sticky pads were originally intended to be replaced by more permanent connections once the control unit had been thoroughly tested, but this was never done!</p>
+
+    <p>A pair of old cupboard door magnets were fitted approximately centrally at the lower edge of the left and right sides of the case. The door magnets' companion steel plates were then glued in a matching postion on the case bottom. A small lug was cut from fibre board and attached to one edge of the base to enable the case bottom to aid alignment when fitting to the top and sides. The case bottom was then fitted in place, being secured by the two magnets.</p>
+        
+    <p>The following two photos show the inside of the main case structure, with electronics and magnetic fasteners installed, and the inside of the case bottom with the lug and steel plates fitted, one of which is covered over.</p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-interior-with-electronics_600x608.png" width="600" height="608" alt="Interior of main case after fitting out, looking from below."></p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/case-lid-interior_600x628.png" width="600" height="628" alt="Interior of case base, looking from above."></p>
+        
+    <p>The control unit was connected to 5V and to the gate movement detector and tested. The following two photos show the finished unit. The first photo shows a top view, with the alarm in suspended state and the gate closed. The second photo shows the unit stood on end to show the power and detector connectors, in un-suspended state and reporting that the gate is open.</p>
+        
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/control-unit-suspended_600x600.png" width="600" height="600" alt="Working control unit with alarm suspended."></p>
+
+    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/control-unit-activated_600x708.png" width="600" height="708" alt="Working control unit with alarm activated."></p>
+
+    <p>Finally, here is a video of the control unit with the alarm sounding:</p>
+
+    <div class="text-center">
+        <div>
+            <iframe width="372" height="661" src="https://www.youtube.com/embed/8BW4UzD6I50" title="Gate Alarm - completed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+    
 </section>
