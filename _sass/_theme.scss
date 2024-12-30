@@ -164,7 +164,7 @@ pre {
     background-color: lighten($color-primary-lighter, 42%);
 }
 
-.caption {
+.caption, figcaption {
     font-style: italic;
     font-size: 90%;
     color: $color-grey-darker;
