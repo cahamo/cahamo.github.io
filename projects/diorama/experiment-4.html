@@ -6,7 +6,7 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 
 <h2>Introduction</h2>
 
-<p>Since the plan is to use one microcontroller to handle the infra-red command system and another to act as the central control unit, some method needs to be found to enable the microcontrollers to commuicate with each other.</p>
+<p>Since it was planned to use one microcontroller to handle the infra-red command system and another to act as the central control unit, some method needed to be found to enable the microcontrollers to communicate with each other.</p>
 
 <p>The first method considered was serial communication using software serial libraries. This experiment was used to investigate the viability of such a system. An Arduino Uno clone was chosen to stand in for the central control microprocessor while two different microcontrollers were tested as possible candidates for the infra-red command microcontroller:</p>
 
@@ -19,7 +19,7 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 
 <h2>Circuits</h2>
 
-<p>The circuits used for the different microcontrollers were slightly different and are described separately.</p>
+<p>The circuits used for ATtiny85 and Nano microcontrollers were slightly different and are described separately.</p>
 
 <h3>Circuit With ATtiny85</h3>
 
@@ -85,8 +85,6 @@ title: "Model diorama: inter microcontroller serial communication experiment"
     </tbody>
 </table>
 
-<p class="alert alert-info">For completeness, the Nano's pin 2 (nominated as RX) could be coupled to the Uno's pin 11 (nominated as TX), which would enable the Uno to transmit to the Nano. Since the communication was one-way these pins were left un-connected.</p>
-
 <p>The microcontrollers were powered separately, each via their own USB ports.</p>
 
 <h2>Code</h2>
@@ -113,15 +111,15 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 
 <ol>
     <li class="mb-3">Using the Nano to transmit data was mostly successful. The data sent from the Nano was received cirrectly by the Uno. However, an occasional spurious character was displayed on the terminal immediately after the programs started.</li>
-    <li class="mb-3">When using the ATtiny85 all data received by the Uno was garbled beyond recognition. On researching the problem it was found that many ATtinys have clocking problems when transmitting over serial. At attempt was made to callibrate the ATtiny to overcome the problem, but this failed. Further investiagtion was not carried out.</li>
+    <li class="mb-3">When using the ATtiny85 all data received by the Uno was garbled beyond recognition. On researching the problem it was found that many ATtinys have clocking problems when transmitting over serial. An attempt was made to callibrate the ATtiny to overcome the problem, but this failed. Further investiagtion was not carried out.</li>
 </ol>
 
 <h2>Conclusion</h2>
 
-<p>Although using the Nano to transmit was largely successful, the introduction of an occasional unexpected character in the received data means that any production system using serial to tranmit command data would need to include some significant error checking.</p>
+<p>Although using the Nano to transmit was largely successful, the introduction of an occasional unexpected character in the received data means that any production system using serial to transmit command data would need to include some significant error checking.</p>
 
-<p>However, the main problem is that the ATtiny85 proved unusable. This is unfortunate because the ATtiny is the preferred microcontroller to be used for the infra-red command subsytem.</p>
+<p>However, the main problem is that the ATtiny85 proved unusable. This is unfortunate because, at the time, the ATtiny was the preferred microcontroller to be used for the infra-red command subsytem.</p>
 
-<p class="lead">Consequenly it is not proposed to adopt serial as the means of communication between microcontrolers. Other options should be investigated.</p>
+<p class="lead">Consequently it is not proposed to use serial communication between microcontrolers. Other options should be investigated.</p>
 
 <p class="text-center"><b>Back to <a href="./controller">Central Control page</a> | <a href="./">Main project page</a></b></p>

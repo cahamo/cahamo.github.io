@@ -11,7 +11,7 @@ title: "Model diorama automation and lightning electronics project"
 
 <p>This is a project to design and build the electronics needed to control various lighting and mechanical features of a diorama that I am building.</p>
 
-<p>The original plan was to turn each feature on and off using simple mechanical switches, but I decided it would be more fun to use an infra-red handset to control everything. See the <a href="./legacy-plan">Plan A</a> page for a brief description of this original plan.</p>
+<p>The <a href="./legacy-plan">original plan</a> was to turn each feature on and off using simple mechanical switches, but I decided it would be more fun to use an infra-red handset to control everything.</p>
 
 <p>For details of the motivation for this project see my blog post &ldquo;<a href="https://cahamo.blogspot.com/2021/06/controlling-diorama-led-lighting.html">Total Overkill - Controlling Diorama Lighting With A Microcontroller</a>&rdquo;</p>
 
@@ -19,7 +19,7 @@ title: "Model diorama automation and lightning electronics project"
 
 <h2>Project Brief</h2>
 
-<p>There will be several buildings that are to be lit. Some buildings will also contain fireplaces etc where flames should be simulated. Some mechanical gimmicks are also planned that will be powered by electric motors - either low voltage DC motors or servo motors. The diorama itself should also be lit by means of concealed LEDs to simulate day and night conditions.</p>
+<p>There will be several buildings that are to be lit. Some buildings will also contain fireplaces etc where flames should be simulated. Some mechanical gimmicks are also planned that will be powered by low voltage electric motors. The diorama itself may also be lit by means of concealed LEDs to simulate day and night conditions.</p>
 
 <p>The brief is therefore to control the lights and motorised items by electronic means, using one or more microcontrollers. Support should be added to enable operation via a an infra-red remote control. In addition, a program to control a fixed sequence of events should also be provided.</p>
 
@@ -45,11 +45,11 @@ title: "Model diorama automation and lightning electronics project"
         <h3 class="mb-2">Mechanical features</h3>
         <p class="mb-2">Mechanical features must be able to be switched on or off individually. In addition there should be a master &ldquo;all off&rdquo; (panic) command. Each feature must be allowed to run to completion before being started again. Features being considered are:</p>
         <ol class="mb-2">
-            <li>A dog with a wagging tail (TBC).</li>
-            <li>A rabbit popping in and out of a burrow (TBC).</li>
-            <li>A dog chasing a squirrel up a tree (TBC).</li>
+            <li>A dog with a wagging tail.</li>
+            <li>A rabbit popping in and out of a burrow.</li>
+            <li>A dog chasing a squirrel or rabbit.</li>
         </ol>
-        <p class="mb-2">Some features have <em>on</em> and <em>off</em> states while others don&lsquo;t have such a state. For example the dog is either wagging or not wagging its tail and the rabbits are either in or out of their burrows. But the dog chasing a squirrel is a feature that must be started and left to run to completion: there is no point in turning it off part way.</p>
+        <p class="mb-2">Some features have <em>on</em> and <em>off</em> states while others don&lsquo;t have such a state. For example the dog is either wagging its tail or not and the rabbits are either in or out of their burrows. But the dog chasing a squirrel is a feature that must be started and left to run to completion: there is no point in turning it off part way.</p>
         <p class="mb-2"><span class="badge badge-danger">Not&nbsp;started</span> <small><em>No further information.</em></small></p>
     </div>
 
@@ -61,13 +61,13 @@ title: "Model diorama automation and lightning electronics project"
 
     <a href="./controller" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-2">Central control</h3>
-        <p class="mb-2">This sub-project is the &ldquo;brain&rdquo; of the diorama's control system. It controls the other electronic sub-projects, i.e. model lighting, mechanical features and ambient lighting, in response to commands received from the infra-red control sub-system. Finally it manages any automation of events by means of pre-programmed sequences.</p>
+        <p class="mb-2">This sub-project is the &ldquo;brain&rdquo; of the diorama's control system. It responds to commands from the infra-red control sub-system to control the model lighting, mechanical features and ambient lighting. It may also manage automated events by means of pre-programmed sequences.</p>
         <p class="mb-2"><span class="badge badge-warning">In&nbsp;progress</span></p>
     </a>
 
     <a href="./power-supply" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-2">Power supply</h3>
-        <p class="mb-2">Power is provided by a 9V DC supply, with 7.8V and 9V taps available to drive other sub-systems. The power supply module requires an external 9V transformer delivering power via a 2.1mm &times; 5.5mm socket. Both centre +ve and centre -ve plugs are supported.</p>
+        <p class="mb-2">Power is provided by a 9V DC supply, with 7.8V and 5V taps available to power other sub-systems. The power supply module requires an external 9V transformer delivering power via a 2.1mm &times; 5.5mm socket. Both centre +ve and centre -ve plugs are supported.</p>
         <p class="mb-2"><span class="badge badge-success">Completed</span></p>
     </a>
 
@@ -81,23 +81,23 @@ title: "Model diorama automation and lightning electronics project"
 <div class="list-group mb-3">
     <a href="./experiment-1" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#1: Infra-red remote controller</h3>
-        <p class="mb-1">Tests code and circuit needed to interpret the encoded infra-red signals sent by the remote control being used to operate the diorama.</p>
+        <p class="mb-1">Tests the code and circuit needed to interpret the encoded infra-red signals sent by the remote control.</p>
     </a>
     <a href="./experiment-2" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#2: Power supply</h3>
-        <p class="mb-1">Breadboard test circuit to prove the power supply design.</p>
+        <p class="mb-1">Test circuit used to prove the power supply design.</p>
     </a>
     <a href="./experiment-3" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#3: Optimum Microcontroller LED control</h3>
-        <p class="mb-1">Various breadboard tests to determine the most optimum way to drive the numerous LEDs used to light the diorama whilst using the minimum number of microcontroller pins.</p>
+        <p class="mb-1">Tests to determine the optimum way to drive the numerous LEDs used to light the diorama whilst using the minimum number of microcontroller pins.</p>
     </a>
     <a href="./experiment-4" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#4: Inter-Microcontroller Serial Communication</h3>
-        <p class="mb-1">Investigates the suitability of using serial communication to send data from one microcontroller to another.</p>
+        <p class="mb-1">Investigates the feasibility of using serial communication to send data from one microcontroller to another.</p>
     </a>
     <a href="./experiment-5" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#5: Inter-Microcontroller I&sup2;C Communication</h3>
-        <p class="mb-1">Investigates the suitability of using I&sup2;C to send data from one microcontroller to another.</p>
+        <p class="mb-1">Investigates the feasibility of using I&sup2;C to send data from one microcontroller to another.</p>
     </a>
     <a href="./experiment-6" class="list-group-item list-group-item-action flex-column align-items-start">
         <h3 class="mb-1">#6: Infra-red receiver feedback RGB LED colour balance</h3>

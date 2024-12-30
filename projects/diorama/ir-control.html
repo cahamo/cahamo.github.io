@@ -9,11 +9,11 @@ title: "Model diorama automation infra red control subsystem"
 <h2>Requirements</h2>
 
 <ol>
-    <li>An infra-red receiver should be placed on the front of the diorama as unobtrusively as possible.</li>
-    <li>A simple infra-red handset should be used, with as few key presses as possible being used to enter the commands.</li>
-    <li>The IR sub-system should interpret and encode the commands for interpretation by the diorama's main microcontroller.</li>
-    <li>There should be some visible feedback given to the user as commands are entered. The following states need to be reported:
-        <ol>
+    <li class="mb-2">An infra-red receiver should be placed on the front of the diorama as unobtrusively as possible.</li>
+    <li class="mb-2">A simple infra-red handset should be used, with as few key presses as possible being used to enter the commands.</li>
+    <li class="mb-2">The IR sub-system should interpret and encode the commands for transmission to diorama's main microcontroller.</li>
+    <li class="mb-2">There should be some visible feedback given to the user as commands are entered. The following states need to be reported:
+        <ol class="mt-2">
             <li>Waiting for a command</li>
             <li>Valid command entered</li>
             <li>Further input required</li>
@@ -43,37 +43,37 @@ title: "Model diorama automation infra red control subsystem"
         <tr>
             <td>Blue</td>
             <td>Steady</td>
-            <td>System initialising - not ready for commands</td>
+            <td>System initialising. Not ready for commands.</td>
         </tr>
         <tr>
-            <td>None</td>
+            <td>N/a</td>
             <td>Off</td>
-            <td>Awaiting next command</td>
+            <td>Awaiting the next command.</td>
         </tr>
         <tr>
             <td>Yellow</td>
             <td>Steady</td>
-            <td>Awaiting a further key press to complete current command</td>
+            <td>Awaiting a further key press to complete the current command.</td>
         </tr>
         <tr>
             <td>Yellow</td>
             <td>Four quick blinks</td>
-            <td>Timed out waiting for key press to complete current command (immediately returns to waiting state)</td>
+            <td>Timed out waiting for a key press to complete the current command.</td>
         </tr>
         <tr>
             <td>Green</td>
             <td>Single long blink</td>
-            <td>Command entered correctly (returns to waiting state after fixed number of flashes)</td>
+            <td>A command was entered correctly.</td>
         </tr>
         <tr>
             <td>Red</td>
             <td>Four quick blinks</td>
-            <td>Erroneous command (returns to waiting state after fixed number of flashes)</td>
+            <td>Erroneous command.</td>
         </tr>
         <tr>
             <td>Blue</td>
             <td>Single short blink</td>
-            <td>Input acknowledgement (The input is well formed, but may or may not be valid)</td>
+            <td>Input acknowledgement. The input is well formed, but may or may not be valid.</td>
         </tr>
     </tbody>
 </table>
@@ -82,36 +82,42 @@ title: "Model diorama automation infra red control subsystem"
 
 <h2>Progress</h2>
 
-<p>An infra red sensor and remote controller have been obtained. The handset uses the common NEC protocol.</p>
+<h3>Circuit</h3>
+
+<p>An infra red sensor and remote controller were obtained together. The handset uses the common NEC protocol.</p>
 
 <p>It has been decided to use an Arduino Nano R3 clone as the microcontroller.</p>
 
 <p class="alert alert-info">Note: it was originally hoped to use an ATtiny85 microcontroller, but problems getting a suitable IR receiver libray to work meant that this plan was abandoned. No such problems were found when using the Nano.</p>
 
-<p>The IRRemote library has been tested and will be used to interpret commands from the handset.</p>
-
-<p>After testing both <a href="./experiment-4">serial</a> and <a href="./experiment-5">I&sup2;C</a> communication between microcontrollers, it has been decided to use I&sup2;C.</p>
-
-<p>An <a href="./experiment-6">experiment</a> has been carried out to determine the values of resistors that need to be used with the red, green and blue elements of the LED to balance the colours it displays.</p>
-
-<p>A circuit for the subsystem has been drawn up. It is sub-divided into two modules, as the following circuit diagram shows:</p>
+<p>The circuit for the subsystem is sub-divided into two modules, as the following circuit diagram shows:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-subsystem-circuit-diagram_854x480.png" width="854" height="480" alt="IR control sub-system circuit design"></p>
 
-<p>A program to run on the microcontroller has been designed and tested. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, can be found in the <code>/src/ir-control</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
+<p>The values of the current limiting resistors were chosen to get the best colour balance from the RGB LED. The resistances were arrived at by <a href="./experiment-6">experiment</a>. The RGB LED is powered directly from the Nano's digital pins because the LED's power consumption is within the Nano's tolerances.</p>
 
-<p class="alert alert-warning">Note that <code>ir-control.cpp</code> has several dependencies that need to be resolved before compiling. Opening the <code>/src/ir-control</code> directory in <em>VSCode</em> (with <em>PlatformIO</em> installed) and compiling from there should take care of the dependencies.</p>
+<p>The decision to use I&sup2;C for communication with the central microcontroller was arrived at after testing both <a href="./experiment-4">serial</a> and <a href="./experiment-5">I&sup2;C</a> communications.</p>
 
-<p>A small plastic case, recovered from a defunct power supply, has been adapted to hold the <em>Sensor Module</em> component of the above circuit. The front of the diorama has been adapted to accomodate the case such that it can been removed for repair if necessary. The <em>Control Module</em> part of the circuit will be located elsewhere on the diorama.</</p>
+<h3>Software</h3>
 
-<p class="alert alert-info indent">It was originally hoped to house the entire circuit within the case, but the decision to use an Arduino Nano clone instead of an ATtiny85 makes this impossible since the Nano will not fit in the case.</p>
+<p>A program to run on the microcontroller has been designed and tested. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
 
-<p>The following is a photo of two parts of the IR control receiver module as built on perf board, almost ready for adding to the case. The upper component is the IR receiver itself and the lower component is the RGB feedback LED with attached resistors. The sensor board is angle to abut the LED board when mount in the case, with the LED board on top. The four wires on the left of the picture will be threaded through a hole in the back of the case and routed underneath the diorama baseboard.</p>
+<p>After testing the <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--circuit-boards-complete_800x533.jpg" width="800" height="533" alt="IR control receiver module circuit as built"></p>
+<p>The program was developed in VSCode using the PlatformIO extension. Compiling from within VSCode will resolve all library dependencies automatically.</p>
 
-<p>This second photo show the case with the components installed and held in place with hot glue. The runners on the case fit in a slot on the front of the diorama baseboard to enable the case to be slid into place.</p>
+<h3>Sensor Module Housing</h3>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--assembled_800x800.jpg" width="800" height="800" alt="IR control receiver module in case"></p>
+<p>A small plastic case, recovered from a defunct power supply, was adapted to house the <em>Sensor Module</em> component of the above circuit. The front of the diorama was modified to accomodate the case such that it can been removed for repair if necessary. The <em>Control Module</em> part of the circuit will be located underneath the diorama.</p>
+
+<p class="alert alert-info indent">It was originally hoped to house the entire circuit within this case, but the decision to use an Arduino Nano clone instead of an ATtiny85 makes this impossible since the Nano will not fit in the case.</p>
+
+<p>The following is a photo of two parts of the sensor module as built on perf board, almost ready for adding to the housing. The upper component is the IR receiver itself and the lower component is the RGB feedback LED with attached resistors. The four wires on the left of the picture were threaded through a hole in the back of the case and routed underneath the diorama baseboard.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--circuit-boards-complete_640x426.png" width="640" height="426" alt="IR control receiver module circuit as built"></p>
+
+<p>This second photo shows the housing with the components installed and held in place with hot glue. The runners on the case were made from coffee stirrers. They slide into a slot on the front of the diorama baseboard.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--assembled_480x480.png" width="480" height="480" alt="IR control receiver module in case"></p>
 
 <p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>

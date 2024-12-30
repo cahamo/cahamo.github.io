@@ -8,7 +8,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <h2>Introduction</h2>
 
-<p>In order to minimise the number of microcontrollers required to control the diorama&rsquo;s lighting and mechanical features the most optimum use of microcontroller pins needs to be found when controlling LEDs. To this end, various circuits were built on breadboards in an attempt to light various combinations of LEDs using as few microcontroller pins as possible.</p>
+<p>In order to minimise the number of microcontrollers required to control the diorama&rsquo;s lighting and mechanical features the least possible number of microcontroller pins needed to used to control the numerous LEDs used on the diorama. This experiment was conducted to find the best method to achieve this goal.</p>
 
 <p>Two different methods were tried:</p>
 
@@ -57,7 +57,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <h3>Code</h3>
 
-<p>The code used to exercise these cicuits are available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. They are:</p>
+<p>The code used to exercise these cicuits is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. There are two test programs:</p>
 
 <ol>
     <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-1/src/cd74hc4067-mux-led-test-1.cpp">cd74hc4067-mux-led-test-1.cpp</a></code>: A simple program that lights each of the 16 LEDs in turn. This program also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
@@ -67,7 +67,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <h3>Results</h3>
 
-<p>See the following videos to see the results of running the two versions of the circuit and their associated code.</p>
+<p>The following videos show the results of running the two versions of the circuit and their associated code.</p>
 
 <div class="text-center">
     <div>
@@ -83,7 +83,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
     <p class="caption">2nd circuit with <code>cd74hc4067-mux-led-test-2.cpp</code></p>
 </div>
 
-<p>The first test showed that the CD74HC4067 is useful for multiplexing LEDs when only one LED needs to be switched on at a time. However the second test, which is a more realistic scenario for the diorama, revealed that when several LEDs need to be lit simultaneously the circuit does not switch fast enough to eliminate flicker. The second video shows slow pulsing flickering when several LEDs are lit &ldquo;together&rdquo;, but in reality this flickering is fast and annoying.</p>
+<p>The first test showed that the CD74HC4067 is useful for multiplexing LEDs when only one LED needs to be switched on at a time. However the second test, which is a more realistic scenario for the diorama, revealed that when several LEDs need to be lit simultaneously the circuit does not switch fast enough to eliminate flicker. Although the second video shows slow pulsing flickering when several LEDs are lit &ldquo;together&rdquo;, the reality is that this flickering is fast and annoying.</p>
 
 <h2>75HC595 shift registers</h2>
 
@@ -95,7 +95,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-3/74hc595-x2-schematic.png" width="728" height="799" alt="Schematic for 75HC595 test circuit"></p>
 
-<p>The circuit test layout can be seen on the following breadboard diagram:</p>
+<p>The circuit as tested can be seen on the following breadboard diagram:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-3/74hc595-x2-breadboard.png" width="795" height="698" alt="Breadboard layout of 75HC595 test circuit"></p>
 
@@ -116,7 +116,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
     <p class="caption">75HC595 circuit with <code>74hc595-x2-led-test.cpp</code></p>
 </div>
 
-<p class="alert alert-warning">Note that the circuit seen in the video was built on one breadboard, not two as shown in the above diagram.</p>
+<p class="alert alert-info">The circuit seen in the video was built on one breadboard, not two as shown in the above diagram.</p>
 
 <p>The video reveals no LED flicker, and indeed this is the case in real life.</p>
 
@@ -128,6 +128,6 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <p>The pair of 75HC595 shift registers do give the required results and an adaptation of this circuit is a more promising candidate for use on the diorama. The only downside is that the relative brightness of the LEDs will not be able to be changed using pulse width modulation, because only one PWM signal can be sent to all the currently lit LEDs. It does seem possible that overall brightness of all the LEDs could be changed together using this method, although this has not been tested.</p>
 
-<p class="lead">The final conclusion is that tests will continue with 75HC595 shift registers and the CD74HC4067 multiplexer will be abandoned.</p>
+<p class="lead">Tests will continue with 75HC595 shift registers and the CD74HC4067 multiplexer will be abandoned.</p>
 
 <p class="text-center"><b><a href="./">Back to main project page</a></b></p>

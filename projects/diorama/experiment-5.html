@@ -6,9 +6,9 @@ title: "Model diorama: inter microcontroller I2C communication"
 
 <h2>Introduction</h2>
 
-<p>Following the disappointing results achieved in <a href="./experiment-4">Experiment #4</a> which invesitaged using serial communication between microcontrollers it was decided to look for alternatives. One such was to use an I&sup2;C bus, and this is what is being investigated here.</p>
+<p>Following the disappointing results achieved in <a href="./experiment-4">Experiment #4</a>, which tested using serial communication between microcontrollers, it was decided to look for alternatives. One such was to use an I&sup2;C bus, and this is what is being investigated here.</p>
 
-<p>As in <a href="./experiment-4">Experiment #4</a> an Arduino Uno was used to receive the data and  both an Arduino Nano and a ATtiny85 were used to as transmitters.</p>
+<p>As in <a href="./experiment-4">Experiment #4</a> an Arduino Uno was used to receive the data and  both an Arduino Nano and a ATtiny85 were used as transmitters.</p>
 
 <p>On the diorama the transmitting microcontroller will be the infra-red subsystem. It will need to initiate data transfer when a command is to be sent, so it was decided to make the transmitting microcontroller the I&sup2;C master and the receiver the I&sup2;C slave.</p>
 
@@ -16,7 +16,7 @@ title: "Model diorama: inter microcontroller I2C communication"
 
 <h2>Circuits</h2>
 
-<p>Each circuit is very similar and varies only in the pins used to manage the I&sup2;C bus. The Arduino Nano and Uno have I&sup2;C support built in and have dedicated pins to support it. While some versions of the microcontrolers have dedicated pins, some (like mine) use two of the analogue pins. A4 is used for the I&sup2;C SDA connection and A5 is used for SCL. The ATtiny does not support I&sup2;C natively, so a software implemtation was required. This implementation uses PB0 for SDA and PB2 for SCL.</p>
+<p>Each circuit is very similar and varies only in the pins used to manage the I&sup2;C bus. The Arduino Nano and Uno have I&sup2;C support built in and have dedicated pins to support it. These are analogue pins A4 for the I&sup2;C SDA connection and A5 for SCL. The ATtiny does not support I&sup2;C natively, so a software implemtation was required. This implementation uses PB0 for SDA and PB2 for SCL.</p>
 
 <p>Connections are:</p>
 
@@ -70,11 +70,11 @@ title: "Model diorama: inter microcontroller I2C communication"
 
 <p>The I&sup2;C slave code that runs on the Arduino Uno can be found in <a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-slave-read-uno/src/i2c-slave-read-uno.cpp"><code>i2c-slave-read-uno.cpp</code></a></p>
 
-<p>The code is based closely on that by Nicholas Zambetti. It uses the Arduino <code>Wire</code> library to implement the I&sup2;C slave code. An event is registered that is triggered evre time the slave receives data. That data is then written to the hardware serial port for display on a seril terminal. The I&sup2;C slave is registered with address 0x04.</p>
+<p>The code is based closely on that by Nicholas Zambetti. It uses the Arduino <code>Wire</code> library to implement the I&sup2;C slave code. An event is registered that is triggered every time the slave receives data. That data is then written to the hardware serial port for display on a serial terminal. The I&sup2;C slave is registered with address 0x04.</p>
 
 <h3>I&sup2;C Master</h3>
 
-<p>The Arduino Nano and the ATtiny that were tested as I&sup2;C masters each have their own code. They use different libraries to implement I&sup2;C, but they transmit the same data. The data is transmitted in a loop. A counter is incremented each time round the loop and the text &ldquo;<tt>x is </tt>&rdquo; followed by the counter value is transmitted over I&sup2;C. The loop repeats after a specified delay.</p>
+<p>The Nano and ATtiny each have different code. They use different libraries to implement I&sup2;C, but they transmit the same data. The data is transmitted in a loop. A counter is incremented each time round the loop and the text &ldquo;<tt>x is </tt>&rdquo; followed by the counter value is transmitted over I&sup2;C. The loop repeats after a specified delay.</p>
 
 <p>The code is:</p>
 
@@ -86,7 +86,7 @@ title: "Model diorama: inter microcontroller I2C communication"
 
 <h2>Results</h2>
 
-<p>The tests with both the Arduino Nano and the ATtiny85 concluded successfully, with no dropped dropped or corrupted bytes being detected over several iterations.</p>
+<p>The tests with both the Arduino Nano and the ATtiny85 concluded successfully, with no dropped or corrupted bytes being detected over several iterations.</p>
 
 <h2>Conclusion</h2>
 

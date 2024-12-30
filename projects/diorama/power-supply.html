@@ -4,36 +4,39 @@ title: "Model diorama automation project power supply"
 ---
 <h1>Diorama: Power Supply <span class="badge badge-success">Completed</span></h1>
 
+<p>Following some <a href="./experiment-2">experimentation</a>, the main power supply circuit board has been completed. The supply is soldered to a piece of copper perf board that has been mounted on the back of the facia where the power supply is plugged in.</p>
 
-<p>The main power supply circuit board has been completed, following some <a href="./experiment-2">experimentation</a>. The supply is soldered to a piece of copper perf board and will be mounted on the back of the facia where the power supply is plugged in.</p>
+<p>Power enters the diorama via a 2.1mm &times; 5.5mm power socket. A bridge rectifier is used to enable both centre positive and centre negative supplies to be used.</p>
 
-<p>Key features are that the power will enter the diorama via a 2.1mm &times; 5.5mm power socket. A bridge rectifier is used to enable both centre positive and centre negative supplies to be used.</p>
+<p>A red LED mounted above the power socket illuminates when power is connected.</p>
 
-<p>The power supply drives a red LED that is mounted above the power socket.</p>
+<p>A voltage regulator is used to provide a 5V supply for the microcontrollers, LEDs and motors. There are output pins making available 7.9V and 5V, along with associated ground pins.</p>
 
-<p>A voltage regulator is used to provide a 5V supply that will be used for the microcontroller and to power the LEDs. There are output pins making available 7.9V (voltage after the bridge rectifier) and 5V, along with associated ground pins.</p>
+<aside>
+    <p class="alert alert-info">7.9V is the maximum voltage available after the voltage drop caused by the bridge rectifier.</p>
+</aside>
 
 <p>Here is a composite photo of both sides of power supply circuit board:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply-composite.png" width="800" height="899" alt="Composite photo of bottom and top of power supply circuit board"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply/power-supply-composite_600x674.png" width="600" height="674" alt="Composite photo of bottom and top of power supply circuit board"></p>
 
-<p>The following photo is a composite photo showing both sides of the power input panel, with the power supply circuit mounted on the rear. Note the panel wiring and the power supply board are not yet connected in this photo:</p>
+<p>The following photo is a composite photo showing both sides of the power input panel, with the power supply circuit mounted on the rear. Note the panel wiring and the power supply board were not yet connected in this photo:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-facia-composite.png" width="800" height="900" alt="Composite photo of both sides of the power input panel"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply/power-facia-composite_600x675.png" width="600" height="675" alt="Composite photo of both sides of the power input panel"></p>
 
 <p>The pins shown in the rear photo are, from left to right:</p>
 
 <ol>
-    <li>A pair of polarity agnostic 9V input pins. The power supply socket above the circuit board will be wired to these pins in the finished version.</li>
-    <li>A pair of pins to connect the power indicator LED (7.8V and GND). The control panel LED will be wired to these. Note that the LED's current limiting resistor is wired directly to the LED. It is hidden under heat shrink.</li>
-    <li>A pair of 7.8V power pins for connection to other circuit boards that may require this voltage. Note that 7.8V is the maximum available rectified voltage. (9V is dropped by 1.2V by the bridge rectifier diodes.)</li>
+    <li>A pair of polarity agnostic 9V input pins. The power supply socket above the circuit board was later wired to these pins in the finished version.</li>
+    <li>A pair of pins to connect the power indicator LED (7.8V and GND). The control panel LED was later wired to these. Note that the LED's current limiting resistor was soldered directly to the LED. It is hidden under heat shrink.</li>
+    <li>A pair of 7.8V power pins for connection to other circuit boards that may require the maximum available voltage.</li>
     <li>A rank of five GND pins for connection to other circuit boards that may require them.</li>
     <li>A bank of three 5V pins for connection to other circuit boards that may require them.</li>
 </ol>
 
 <p>The schematic diagram of the power supply is shown below:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply_1060x400.png" width="1060" height="400" alt="Power supply schematic diagram"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/power-supply/power-supply-circuit_1060x400.png" width="1060" height="400" alt="Power supply schematic diagram"></p>
 
 
 <p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>

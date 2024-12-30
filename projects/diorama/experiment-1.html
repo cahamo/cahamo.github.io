@@ -8,7 +8,7 @@ title: "Model diorama: infrared remote controller experiment"
 
 <h2>Introduction</h2>
 
-<p>Since the diorama&rsquo;s electronics are to be operated by means of an infra-red remote, it makes sense to test that component first.</p>
+<p>Since the diorama&rsquo;s electronics were to be operated by means of an infra-red remote, it made sense to test that component first.</p>
 
 <The>A kit was purchased that included a remote control handset and an infra-red sensor. The handset was quite basic, but sufficient for the task in hand:</p>
 
@@ -32,11 +32,11 @@ title: "Model diorama: infrared remote controller experiment"
 
 <p>The code is available on GitHub in the <a href="https://github.com/cahamo/diorama"><code>cahamo/diorama</code></a> repository.</p>
 
-<p>Two different programs that were used:</p>
+<p>Two different programs were used in the experiment:</p>
 
 <ol>
 
-    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the received code to the serial monitor. This code was used to determine the handset type and to work out which codes are emitted by each button. </li>
+    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the received code to the serial monitor. This code was used to determine the handset type and to work out which code is emitted by each button. </li>
 
     <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/handset-test/src/handset-test.cpp"><code>handset-test.cpp</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.cpp</code> this script reports which button is being pressed on the remote control handset. It detects whether the key is being repeated and also reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
 </ol>
