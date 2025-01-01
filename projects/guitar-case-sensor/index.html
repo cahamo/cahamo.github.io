@@ -49,7 +49,7 @@ title: "Guitar case humidity sensor project"
 <ol start="1" type="i">
     <li>be externally powered</li>
     <li>be sealed as well as possible</li>
-    <li>be unobrusive</li>
+    <li>be unobtrusive</li>
     <li>have a unique identifier</li>
 </ol>
 
@@ -66,7 +66,7 @@ title: "Guitar case humidity sensor project"
 
 <p>Fitting the DIN socket within the accessory box also helps with <strong>requirement <em>ii</em></strong> because accessory boxes have snug fitting lids that must be closed when the case is closed.</p>
 
-<p><strong>Requirement <em>iv</em></strong> can be met by fitting each case with a unique value of resistor, that will be coupled to ground and to the measuring device via one of the lines from the DIN plug. Full details can be found on the <a href="./case-detector-design">Guitar Case Detector Design</a> page.</p>
+<p><strong>Requirement <em>iv</em></strong> can be met by fitting each case with a unique value of resistor that forms part of a voltage divider. The voltage across the resistor will then be unique to the case. Full details can be found on the <a href="./case-detector-design">Guitar Case Detector Design</a> page.</p>
 
 <p>The DHT22 / AM2302 temperature and humidity sensor will be used as the case sensor. This requires +3V&hellip;+5V, ground and sensor pin connections.</p>
 
@@ -76,13 +76,20 @@ title: "Guitar case humidity sensor project"
     <li>Power line (3V&hellip;5V)</li>
     <li>Ground</li>
     <li>Sensor line</li>
-    <li>Line to unique resistor</li>
+    <li>Line to identifying resistor</li>
 </ol>
 
 <p>Therefore a 4 pin DIN socket will be required.</p>
 
 <p class="alert alert-info">A 5 pin DIN socket will actually be used for two reasons: (1) it provides a spare line in case such should be needed in future and (2) I've got lots of them in stock, along with a 5 pin DIN connector cable! At least initially, two pins will be commoned to ground.</p>
 
+<h3>Reference humidity circuit</h3>
+
+<p>This circuit is required to satisfy specification #10 above.</p>
+
+<p>A duplicate of the guitar case circuit constructed so that its humidity sensor is exposed to the room air should suffice. One of the available unique resistor values (mentioned above) will be reserved to identify this circuit to the hand held unit.</p>
+
+<p>This circuit will also be connected to the hand held unit via a 5 pin DIN connection.</p>
 <h3>Hand-held device circuit</h3>
 
 <p>According to the specifications, the hand-held device has the following requirements. It must:</p>
@@ -100,22 +107,10 @@ title: "Guitar case humidity sensor project"
 
 <p>There will be an internal battery or batteries for powering both the device itself (<strong>requirement <em>v</em></strong>) and the guitar cases via a DIN socket and cable (<strong>requirement <em>vii</em></strong>).</p>
 
-<p class="alert alert-info">Currently it is planned to use two 3V CR2032 batteries in series, providing 6V DC.</p>
-
 <p>Electronics and battery should be built into a 10cm&times;6cm&times;2.5cm plastic case (because that's what I have in stock!). This satisfies <strong>requirement <em>vi</em></strong>.</p>
 
 <p>A 0.96&quot; OLED display will be fitted to the device, satisfying <strong>requirement <em>ix</em></strong>.</p>
 
 <p><strong>Requirement <em>x</em></strong> will be satisfied by using a SD card writer mounted in the case. The data can then be transferred to a computer using an SD card.</p>
 
-<p class="alert alert-info">At some later stage the SD card method could be replaced by using a WiFi or Bluetooth equiped unit.</p>
-
-<h3>Reference humidity circuit</h3>
-
-<p>This circuit is required to satisfy specification #10 above.</p>
-
-<p>A duplicate of the guitar case circuit constructed so that its humidity sensor is exposed to the room air should suffice.</p>
-
-<p>One of the available unique resistor values (mentioned above) will be reserved to identify this circuit to the hand held unit.</p>
-
-<p>This circuit will also be connected to the hand held unit via a 5 pin DIN connection.</p>
+<p class="alert alert-success"><img class="float-left mr-2" src="/assets/img/icons/light-bulb_24x24.png" width="24" height="24">At some later stage the SD card method could be replaced by using a WiFi or Bluetooth equiped unit.</p>

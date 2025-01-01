@@ -6,7 +6,7 @@ title: "Guitar case humidity detector project design"
 
 <p>A guitar case detector circuit comprises a voltage divider with a 1K&ohm; resistor in series with a 100k&ohm; resistor on the circuit board with the junction between the two resistors being fed to an analogue input on an Arduino Nano.</p>
 
-<p>Plugging in a guitar case puts another resistor in parallel with the 100k&ohm; resistor, hence changing the resistance on the ground side of the voltage divider, as hence changing the voltage at the analogue pin.</p>
+<p>Plugging in a guitar case puts another resistor in parallel with the 100k&ohm; resistor, changing the resistance on the ground side of the voltage divider, hence changing the voltage at the analogue pin.</p>
 
 <p>The circuit is arranged like this:</p>
 
@@ -19,24 +19,11 @@ title: "Guitar case humidity detector project design"
 
 <p>To help determine the resistors to use, an experiment was undertaken with all the values of resistors I have in stock. One resistor of each value was selected at random, connected into the above circuit, and tested with an Arduino Nano that read and output a range of values of the connected Nano analogue pin. The experiment was repeated with different selection of resistors, this time with an Arduino Uno.</p>
 
-<p class="alert alert-info">Note that the Nano experiment was conducted in 2021 using a sketch that output a list of all the read values and the range of values was detected by examining the list. The experiment using the Uno was conducted in August 2022 and used a sketch that read 200 values from the analogue pin and output the minimum and maximum values. The sketch was run multiple times and the results were combined. The latter sketch is <a href="https://github.com/cahamo/guitar-case-sensor/blob/main/research/case-resistor-values/src/main.cpp">available</a> from the project GitHub repository, but the former sketch was not saved.</p>
+<aside>
+    <p class="alert alert-info">Note that the Nano experiment was conducted in 2021 using a sketch that output a list of all the read values and the range of values was determined by manually examining the list. The experiment with the Uno was conducted in August 2022 and used a sketch that read 200 values from the analogue pin and output the minimum and maximum values. The sketch was run multiple times and the results were combined. The latter sketch is <a href="https://github.com/cahamo/guitar-case-sensor/blob/main/research/case-resistor-values/src/main.cpp">available</a> from the project GitHub repository, but the former sketch was not saved.</p>
+</aside>
 
-<div class="well">
-
-    <p><strong>Key</strong></p>
-
-    <dl>
-        <dt>Parallel resistance</dt>
-        <dd>The value of the resistor coupled in parallel with the 100k&ohm; resistor.</dd>
-
-        <dt>Combined resistance</dt>
-        <dd>The resistance of parallel combination of the 100k&ohm; resistor and parallel resistor, rounded to 2 significant digits.</dd>
-
-        <dt>Analogue input reading range</dt>
-        <dd>Shows the range of readings read from the Arduino Nano &amp; Uno. Values fall in the range 0..1023, which is the maximum sensitivity of the microcontrollers&rsquo; ADC.</dd>
-    </dl>
-
-</div>
+<p>The results are shown in the following table:</p>
 
 <table class="table table-responsive">
     <thead>
@@ -246,6 +233,23 @@ title: "Guitar case humidity detector project design"
     </tbody>
 </table>
 
+<div class="alert alert-info small">
+
+    <p class="mb-2"><strong>Key</strong></p>
+
+    <dl class="mb-0">
+        <dt class="mb-0">Parallel resistance</dt>
+        <dd class="mb-2">The value of the resistor coupled in parallel with the 100k&ohm; resistor.</dd>
+
+        <dt class="mb-0">Combined resistance</dt>
+        <dd class="mb-2">The resistance of the parallel combination of the 100k&ohm; resistor and parallel resistor, rounded to 2 significant digits.</dd>
+
+        <dt class="mb-0">Analogue input reading range</dt>
+        <dd class="mb-2">Shows the range of readings read from the Arduino Nano &amp; Uno. Values fall in the range 0..1023, which is the maximum sensitivity of the microcontrollers&rsquo; ADC.</dd>
+    </dl>
+
+</div>
+
 <p>It can be seen that:</p>
 
 <ul>
@@ -255,7 +259,7 @@ title: "Guitar case humidity detector project design"
 
 <p>When there is no parallel resistance the resistance is 100k&ohm;. This is taken to mean no guitar case is plugged in.</p>
 
-<p>If we try to support up to six different guitar cases, we need to choose a range of resistances that are sufficiently wide apart to remain distinct, allowing for the normal variation in resistances of the same nominal value, with a generous safety margin added.</p>
+<p>If we try to support up to six different guitar cases, we need to choose a range of resistances that are sufficiently wide apart for the analogue input readings to remain distinct, with a generous safety margin added.</p>
 
 <p>The values chosen are:</p>
 
