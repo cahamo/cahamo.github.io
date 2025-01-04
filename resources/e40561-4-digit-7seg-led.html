@@ -17,11 +17,11 @@ title: "How to use the E40561 4 digit 7 segment common anode LED display"
 
     <h2>Pin-out</h2>
 
-    <p>Information on the pinout of the E40561 is relatively hard to find, and a little inpenetrable when you do find it. This section summarises information that I have gleaned from several sources. It has been tested on two examples of the E40561-G-UR3-0-W display.</p>
+    <p>Information on the pinout of the E40561 is relatively hard to find, and a little inpenetrable when you do find it. This section summarises the information that I have gleaned from several sources. It has been tested on two examples of the E40561-G-UR3-0-W display.</p>
 
     <h3>Identifying the parts of the display</h3>
 
-    <p>The image below shows the 4 digits and the segments of each digit labelled <em>A..G</em> and <em>dp</em> (decimal point).</p>
+    <p>The image below shows the 4 digits and the segments of each digit. The segments are labelled <em>A..G</em> and <em>dp</em> (decimal point).</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-led-segments_633x275.png" width="633"
             height="275" alt="Labelling of LED segments"></p>
@@ -361,13 +361,13 @@ title: "How to use the E40561 4 digit 7 segment common anode LED display"
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/resources/e40561-common-segment-wiring.png" width="404"
         height="303" alt="E40561 Common segment wiring diagram"></p>
 
-    <p>We multiplex the display by supplying 5V to each digit&rsquo;s anode in sequence. For each digit we must connected the required segment cathodes to ground (0V).</p>
+    <p>We multiplex the display by supplying 5V to each digit&rsquo;s anode in sequence. For each digit we must connect the required segment cathodes to ground (0V).</p>
 
     <p>The microcontroller will be used to perform the above sequencing. We will use 4 digital output pins to switch on and off the digits in sequence. The pins should&rsquo;t be connected directly to the display because the current required may be more than microcontroller can provide. So, we connect each microcontroller pin to the base of a PNP transistor, via a resistor. The emitter of the transistor is connected to a suitably rated 5V supply and the collector is connected to the required pin on the display.</p>
 
     <p class="alert alert-info">Note that, because we are using PNP transistors, we must set the microcontroller pin to LOW to turn on the transistor, and hence the digit. Conversely setting the pin HIGH turns off the digit.</p>
 
-    <p>Now, we <em>could</em> connect each commoned set of cathode pins to one of 8 digital input pins on the microcontroller and turn the segments on and off by setting the state of the pins as required. But we will save more pins by using a shift register and connecting the segment pins to its output.</p>
+    <p>Now, we <em>could</em> connect each commoned set of cathode pins to one of 8 digital output pins on the microcontroller and turn the segments on and off by setting the state of the pins as required. But we will save more pins by using a shift register and connecting the segment pins to its output.</p>
 
     <p>The 8 commoned segments map nicely onto the 8 output pins of the commonly used 74HC595 shift register, so we will use that. The commoned segments will be connected to the 74HC595&rsquo;s pins as follows:</p>
 
