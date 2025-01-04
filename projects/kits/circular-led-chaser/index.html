@@ -12,13 +12,13 @@ title: "Circular LED chaser kit bash"
 
 <p>Instead of throwing the board away - I mean it cost me all of £1.22 - I decided to see if I could salvage something from the mess.</p>
 
-<p>After a lot of head scratching and poking around with wires and the multimeter I decided I wasn't going to be able to save the board as designed, but that I might be able to patch it up so that at least the CD4017 decade timer could cycle through the LEDs.</p>
+<p>After a lot of head scratching and poking around with wires and the multimeter I decided I wasn't going to be able to save the board as designed. But, there was a chance I could patch things up so that at least the CD4017 decade counter could cycle through the LEDs.</p>
 
 <p>So, I de-soldered all the components that were part of the sound section of the circuit and went about soldering wires to the back of the board until all the problematic tracks had been bypassed. As you can see in the following photo, there were a lot!</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/led-chaser--circular-board_800x400.png" width="800" height="400" alt="Rotating LED kit with sound components de-soldered and tracks patched"></p>
 
-<p>While doing the patching I soldered on a wire from the CLK pin of the CD4017 that could be used to trigger the counter and so test that the counter would light all LEDs in sequence. They did &hellip; progress!</p>
+<p>While doing the patching I soldered a wire to the CLK pin of the CD4017 that could be used to trigger the counter and so test that it would light all LEDs in sequence. It worked!</p>
 
 <p>Now that the CD4017 and the LEDs were working I hit upon the idea of using the kit as the basis for a circular LED chaser. For that I decided to use a 555 timer to trigger the CD4017. I breadboarded a circuit and messed arond with various resistor and capacitor values until I got the chaser running at a speed I liked. A trim pot was included to enable the trigger speed to be adjusted.</p>
 
@@ -64,7 +64,7 @@ title: "Circular LED chaser kit bash"
 
 <p>As can be seen in the back view of the globe above, a hole was drilled to provide access to the trim pot. Unfortuately I caught the trim pot with the drill and broke of the plastic fitting for the screwdriver. I couldn't mend that but luckily, the screwdriver can still be used to turn the trimpot.</p>
 
-<p>I first considered using batteries to power the circuit but decided instead to power it via a USB micro socket. This decision was made because I wanted to mount the globe on a stick, like a wand, and a USB socket could be mounted at the end of the wand. Therefore two power leads were routed out of the globe through a hole drilled behind the loop from which the globe was intended to be hung.</p>
+<p>I first considered using batteries to power the circuit but decided instead to power it via a USB micro socket. This decision was made because I wanted to mount the globe on a wand. A USB socket could be mounted at the end of the wand. Therefore two power leads were routed out of the globe through a hole drilled behind the loop from which the globe was intended to be hung.</p>
 
 <p>An offcut of tubular metal curtain pole was used as a wand. Attempts to glue the globe to the wand failed, resulting only in a small amount of damage to the bottom of the globe! In the end I went for a push fit which entailed adding layers of shrink wrap to the wires and adding some double sided foam tape to the inside of the tube.</p>
 
