@@ -8,7 +8,7 @@ title: "LCD Display Demo"
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/lcd-display/component_480x573.png" width="480" height="573" alt="Front and rear view of 4 row, 20 column LCD display"></p>
 
-<p class="alert alert-warning">The demo <strong>does note</strong> show how to use displays with I²C interfaces.</p>
+<p class="alert alert-warning">The demo <strong>does not</strong> show how to use displays with I²C interfaces.</p>
 
 <p>The LCD has the following pins, reading from left to right as viewed with the screen facing up:</p>
 
@@ -71,7 +71,7 @@ title: "LCD Display Demo"
         </tr>
         <tr>
             <td>A or LED+</td>
-            <td>Backlight LED anode. Most boards require that a voltage suitable for the LED is provided. Use a drop down resistor if connecting to 5V.</td>
+            <td>Backlight LED anode. Most boards require that a voltage suitable for the LED is provided. Use a current limiting resistor if connecting to 5V.</td>
         </tr>
         <tr>
             <td>K or LED-</td>
@@ -171,11 +171,11 @@ title: "LCD Display Demo"
 
 <p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>lcd-display--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/lcd-display--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
 
-<p class="alert alert-warning">
+<p class="alert alert-info">
     This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>src/main.cpp</code> into a new, blank Arduino API project and ensure that the <code>LiquidCrystal</code> library is installed.</p>
 </p>
 
-<p>Once the code is compiled and uploaded to the Uno you should see the text of the first two verses of <em>Jabberwocky</em> (poem by Lewis Carroll) begin to scroll up from the bottom of the display. After the poem is displayed then the screen is slowly filled with asterisks and finally the screen is flashed.</p>
+<p>Once the code is compiled and uploaded to the Uno you should see the text of the first two verses of <em>Jabberwocky</em> (a poem by Lewis Carroll) begin to scroll up from the bottom of the display. After the poem is displayed then the screen is slowly filled with asterisks and finally the screen is flashed.</p>
 
 <p class="alert alert-info">By default the code assumes the display is 4 rows by 20 columns, but it is easy to adjust the program to work with other display sizes. To do this simply change the values of the <code>ROWS</code> and <code>COLUMNS</code> defines. The code will then automatically adjust the length of the lines of text to fit the display width and the scrolling logic to fit the display height.</p>
 
