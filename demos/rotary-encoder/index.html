@@ -20,7 +20,7 @@ title: "Rotary Encoder Demo"
     <li><em>5V</em> &ndash; 5V input.</li>
 </ol>
 
-<p>When the rotary encoder's shaft is rotated the signal pins are set high and low in a sequence that indicates whether the shaft is being rotated clockwise (CW) or counter-clockwise (CCW). To detect the rotation wait for pin <em>S1</em> (or pin <em>S2</em>) to change state. If <em>S1</em> and <em>S2</em> have different states then the rotation is CW. If the state of <em>S1</em> and <em>S2</em> is the same then the rotation is CCW.</p>
+<p>When the rotary encoder's shaft is rotated the signal pins are set high and low in a sequence that indicates whether the shaft is being rotated clockwise (CW) or counter-clockwise (CCW). To detect the direction of rotation wait for either <em>S1</em> or <em>S2</em> to change state. If <em>S1</em> and <em>S2</em> have different states then the rotation is CW. If the state of <em>S1</em> and <em>S2</em> is the same then the rotation is CCW.</p>
 
 <p>The <em>KEY</em> pin is normally held high. When the encoder's built in switch is pressed the <em>KEY</em> pin is set low for as long as the switch is closed.</p>
 
@@ -77,7 +77,7 @@ title: "Rotary Encoder Demo"
 
 <p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>rotary-encoder--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/rotary-encoder--uno/src/main.cpp"><code>rotary-encoder--uno/src/main.cpp</code></a>. The source is a modified version of <code>rot-encode-demo.ino</code> taken from the <a href="https://dronebotworkshop.com/rotary-encoders-arduino/">DroneBot Workshop website</a>. The changes made were to (a) rename some variables to match the names of the pins of the EC11 encoder and (b) to detect when the encoder's switch is pressed.</p>
 
-<p class="alert alert-warning">
+<p class="alert alert-info">
     This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>rotary-encoder--uno/src/main.cpp</code> into a new, blank Arduino API project. No Arduino libraries are required.</p>
 </p>
 
