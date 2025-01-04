@@ -5,16 +5,12 @@ title: "Information about using DFPlayer Mini MP3 player card"
 <h1>DFPlayer Mini</h1>
 
 <p>Reliable information about this player is hard to come by. According to several people the official docs and data
-    sheet are not entirely accurate. There&rsquo;s also a lot of posts that  provide partial information. So I&rsquo;ve tried to gather
+    sheet are not entirely accurate. There are several posts that provide partial information. So I&rsquo;ve tried to gather
     together the best of the info I&rsquo;ve found online.</p>
 
 <p class="alert alert-warning">If you find any errors in the following please create an issue on this site&rsquo;s <a href="https://github.com/cahamo/cahamo.github.io/issues">GitHub page</a> <small>(GitHub account required)</small></p>
 
-<p>To date, the main info I&rsquo;ve found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly
-    on the <em>banggood</em> forums, but has now disappeared. It has now been re-posted on PasteBin as <a
-        href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>.</p>
-
-<p>I&rsquo;ve formatted and and lightly tweaked that a part of that post and <a href="#commands">re-published it below</a>.</p>
+<p>To date, the main info I&rsquo;ve found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly on the <em>banggood</em> forums, but has now disappeared. Fortunately the information had been re-posted on PasteBin as <a href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>. I&rsquo;ve formatted and and lightly tweaked a part of the PasteBin post and <a href="#commands">re-published it below</a>.</p>
 
 <p>Opinions also seem to vary about how best to wire up the DFPlayer Mini. Having tried a few suggestions, I&rsquo;ve <a href="#wiring">published a diagram</a> of the circuit that works best me at the bottom of the page.</p>
 
@@ -28,24 +24,23 @@ title: "Information about using DFPlayer Mini MP3 player card"
 
 <div class="alert alert-info">
 
-    <p class="lead"><strong>The main content of this section is entirely the work of <em>Ype Brada</em>.</strong></p>
-    <p>The information was all taken from the second post on the PasteBin page, i.e. the one from 04 April 2015.</p>
-    <p>Edits have been largely confined to those needed for readability &ndash; formatting into tables and lists &ndash;
-        along with some clarifications and spelling etc. corrections. All the content from here on in comes from the
-        comments in the source code that accompanied the code, followed by the source code itself.</p>
-    <p>Why post it here? Two reasons. Firstly, as mentioned the lack of formatting on Paste Bin makes the content hard
-        to read. Secondly, one post has already been taken down &ndash; I don&rsquo;t want to risk this valuable info
+    <p class="lead mb-2 mt-0"><strong>The main content of this section is entirely the work of <em>Ype Brada</em>.</strong></p>
+    <p class="mb-2 mt-0">The information was all taken from the second post on the PasteBin page, i.e. the one from 04 April 2015.</p>
+    <p class="mb-2 mt-0">Why re-post it here? Two reasons. Firstly, the lack of formatting on Paste Bin makes the content hard
+        to read. Secondly, one post has already been taken down &ndash; I don&rsquo;t want to risk this valuable information
         disappearing again.</p>
+    <p class="mb-0 mt-0">Edits have been largely confined to those needed for readability &ndash; formatting into tables and lists &ndash;
+        along with some clarifications and spelling etc. corrections.</p>
 
 </div>
 
 <h3>DF Player mini command discovery</h3>
 
 <p>[This] program is meant to discover all the possibilities of the command structure of the DFPlayer mini. No special
-    libraries are needed. Program is very easy to understand and can be the basis for your own mp3 player sketch.</p>
+    libraries are needed. [The] program is very easy to understand and can be the basis for your own mp3 player sketch.</p>
 
 <p>Note: Commands are not always correctly described in the manual. I tried to fix it, but there is still something to do.
-    The commands recoverd so far are listed below.</p>
+    The commands recovered so far are listed below.</p>
 
 <p>Use of sketch: Enter three ([comma] separated) decimal numbers in the Serial Monitor with no end of line character.</p>
 
@@ -58,7 +53,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
 <p>E.g.: <kbd>3,0,1</kbd> will play the first track on the TF card</p>
 
 <p><strong>Very important:</strong> Use serial 1K&ohm; resistors or a level shifter between module RX and TX and Arduino to
-    suppress noise</p>
+    suppress noise.</p>
 
 <ul>
     <li>Connect Sound module board RX to Arduino pin 11 (via 1K&ohm; resistor)</li>
@@ -180,7 +175,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Next file in current folder. Loops when last file played</td>
+            <td>Next file in current folder. Loops when last file played.</td>
         </tr>
         <tr>
             <td>0x02</td>
@@ -189,7 +184,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Previous file in current folder. Loops when last file played</td>
+            <td>Previous file in current folder. Loops when last file played.</td>
         </tr>
         <tr>
             <td>0x03</td>
@@ -198,7 +193,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Track number must be in range 1~2999 Playing order is order in which the numbers are stored. File name
+            <td>Track number must be in range 1~2999. Playing order is order in which the numbers are stored. File name
                 and folder name are arbitrary, but when named starting with an increasing number and in one folder,
                 files are played in that order and with correct track number. e.g. <tt>0001-Joe Jackson.mp3</tt>
                 &hellip; <tt>0348-Lets dance.mp3</tt></td>
@@ -210,7 +205,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Increase volume by 1</td>
+            <td>Increase volume by 1.</td>
         </tr>
         <tr>
             <td>0x05</td>
@@ -219,7 +214,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Decrease volume by 1</td>
+            <td>Decrease volume by 1.</td>
         </tr>
         <tr>
             <td>0x06</td>
@@ -228,7 +223,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>volume</td>
-            <td>Valid values for volume are 0-0x30. The default is 0x30</td>
+            <td>Valid values for volume are 0-0x30. The default is 0x30.</td>
         </tr>
         <tr>
             <td>0x07</td>
@@ -238,7 +233,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>X</td>
             <td>eq-code</td>
             <td>Valid values for eq-code are 0..5 where 0 &rArr; Normal, 1 &rArr; Pop, 2 &rArr; Rock, 3 &rArr; Jazz, 4
-                &rArr; Classic, 5 &rArr; Base</td>
+                &rArr; Classic, 5 &rArr; Base.</td>
         </tr>
         <tr>
             <td>0x08</td>
@@ -247,7 +242,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Repeat the specified track number</td>
+            <td>Repeat the specified track number.</td>
         </tr>
         <tr>
             <td>0x09</td>
@@ -257,7 +252,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>X</td>
             <td>source-id</td>
             <td>Unknown. Seems to be overridden by automatic detection. According to datasheet valid values for source-id
-                are 0..4 where 0 &rArr; U, 1 &rArr; TF, 2 &rArr; AUX, 3 &rArr; SLEEP, 4 &rArr; FLASH</td>
+                are 0..4 where 0 &rArr; U, 1 &rArr; TF, 2 &rArr; AUX, 3 &rArr; SLEEP, 4 &rArr; FLASH.</td>
         </tr>
         <tr>
             <td>0x0A</td>
@@ -266,7 +261,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Works, but no command found yet to end standby (inserting TF-card again will end standby mode)</td>
+            <td>Works, but no command found yet to end standby (inserting TF-card again will end standby mode).</td>
         </tr>
         <tr>
             <td>0x0B</td>
@@ -275,7 +270,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>?</td>
             <td>?</td>
             <td>?</td>
-            <td>No error code, but no function found</td>
+            <td>No error code, but no function found.</td>
         </tr>
         <tr>
             <td>0x0C</td>
@@ -284,8 +279,8 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Resets all (Track set to 0x01, Volume set to 0x30) Will return 0x3F initialization parameter (0x02 for
-                TF-card). &ldquo;Clap&rdquo; sound after executing command (no solution found)
+            <td>Resets all (Track set to 0x01, Volume set to 0x30). Will return 0x3F initialization parameter (0x02 for
+                TF-card). &ldquo;Clap&rdquo; sound after executing command (no solution found).</td>
         </tr>
         <tr>
             <td>0x0D</td>
@@ -294,7 +289,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Play current selected track</td>
+            <td>Play current selected track.</td>
         </tr>
         <tr>
             <td>0x0E</td>
@@ -303,7 +298,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Pause track</td>
+            <td>Pause track.</td>
         </tr>
         <tr>
             <td>0x0F</td>
@@ -312,7 +307,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>folder-number</td>
             <td>file-number</td>
-            <td>Important: Folders must be named 01~99, files must be named 001~255</td>
+            <td>Important: Folders must be named 01~99, files must be named 001~255.</td>
         </tr>
         <tr>
             <td>0x10</td>
@@ -340,7 +335,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>highByte(file-number)</td>
             <td>lowByte(file-number)</td>
             <td>Play mp3 file in folder named <tt>/mp3</tt> in your TF-card. File format exact 4-digit number
-                (0001~2999) e.g. <tt>0235.mp3</tt>
+                (0001~2999) e.g. <tt>0235.mp3</tt>.</td>
         </tr>
         <tr>
             <td>0x13</td>
@@ -349,7 +344,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>?</td>
             <td>?</td>
             <td>?</td>
-            <td>Returns error code 0x07</td>
+            <td>Returns error code 0x07.</td>
         </tr>
         <tr>
             <td>0x14</td>
@@ -358,7 +353,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>?</td>
             <td>?</td>
             <td>?</td>
-            <td>Returns error code 0x06</td>
+            <td>Returns error code 0x06.</td>
         </tr>
         <tr>
             <td>0x15</td>
@@ -367,7 +362,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>?</td>
             <td>?</td>
             <td>?</td>
-            <td>Returns no error code, but no function found</td>
+            <td>Returns no error code, but no function found.</td>
         </tr>
         <tr>
             <td>0x16</td>
@@ -376,7 +371,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Stop playing current track</td>
+            <td>Stop playing current track.</td>
         </tr>
         <tr>
             <td>0x17</td>
@@ -395,7 +390,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>X</td>
             <td>X</td>
-            <td>Random play all tracks, always starts at track 1</td>
+            <td>Random play all tracks, always starts at track 1.</td>
         </tr>
         <tr>
             <td>0x19</td>
@@ -462,7 +457,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td> Not validated. Returns track number when song is finished on U-Disk</td>
+            <td> Not validated. Returns track number when song is finished on U-Disk.</td>
         </tr>
         <tr>
             <td>0x3D</td>
@@ -471,7 +466,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Returns track number when song is finished on TF</td>
+            <td>Returns track number when song is finished on TF.</td>
         </tr>
         <tr>
             <td>0x3E</td>
@@ -480,7 +475,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Not validated. Returns track number when song is finished on Flash</td>
+            <td>Not validated. Returns track number when song is finished on Flash.</td>
         </tr>
         <tr>
             <td>0x3F</td>
@@ -499,7 +494,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>?</td>
             <td>0</td>
             <td>0~7</td>
-            <td>Error code (returned codes not yet analyzed)</td>
+            <td>Error code (returned codes not yet analyzed).</td>
         </tr>
         <tr>
             <td>0x41</td>
@@ -526,7 +521,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>0</td>
             <td>volume</td>
-            <td>volume is in the range 0..30</td>
+            <td>Volume is in the range 0..30.</td>
         </tr>
         <tr>
             <td>0x44</td>
@@ -536,7 +531,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>0</td>
             <td>eq-code</td>
             <td>Values for eq-code are 0..5 where 0 &rArr; Normal, 1 &rArr; Pop, 2 &rArr; Rock, 3 &rArr; Jazz, 4 &rArr;
-                Classic, 5 &rArr; Base</td>
+                Classic, 5 &rArr; Base.</td>
         </tr>
         <tr>
             <td>0x45</td>
@@ -545,7 +540,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>0</td>
             <td>0x00:CMD 0x08 not used<br>0x02: CMD 0x08 used</td>
-            <td>Not useful</td>
+            <td>Not useful.</td>
         </tr>
         <tr>
             <td>0x46</td>
@@ -554,7 +549,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>0</td>
             <td>version-number</td>
-            <td>Yerke&rsquo;s version was 5</td>
+            <td>Yerke&rsquo;s version was 5.</td>
         </tr>
         <tr>
             <td>0x47</td>
@@ -563,7 +558,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(number-of-files)</td>
             <td>lowByte(number-of-files)</td>
-            <td>Not validated</td>
+            <td>Not validated.</td>
         </tr>
         <tr>
             <td>0x48</td>
@@ -581,7 +576,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(number-of-files)</td>
             <td>lowByte(number-of-files)</td>
-            <td>Not validated</td>
+            <td>Not validated.</td>
         </tr>
         <tr>
             <td>0x4A</td>
@@ -599,7 +594,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Current track on all media</td>
+            <td>Current track on all media.</td>
         </tr>
         <tr>
             <td>0x4D</td>
@@ -608,7 +603,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Current track on all media</td>
+            <td>Current track on all media.</td>
         </tr>
         <tr>
             <td>0x4C</td>
@@ -617,7 +612,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>highByte(track-number)</td>
             <td>lowByte(track-number)</td>
-            <td>Current track on all media</td>
+            <td>Current track on all media.</td>
         </tr>
         <tr>
             <td>0x4E</td>
@@ -626,8 +621,8 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>0</td>
             <td>number-of-files</td>
-            <td>Change to first track in folder &quot;01&quot; Returns number of files in folder
-                &quot;01&quot;<br>(Cahamo&rsquo;s query: if we&rsquo;re querying only track &quot;01&quot; then what is the purpose
+            <td>Change to first track in folder &quot;01&quot;. Returns number of files in folder
+                &quot;01&quot;.<br>(Cahamo&rsquo;s query: if we&rsquo;re querying only track &quot;01&quot; then what is the purpose
                 of the lo parameter?)</td>
         </tr>
         <tr>
@@ -637,7 +632,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
             <td>*</td>
             <td>0</td>
             <td>number-of-folders</td>
-            <td>Total number of folders, including root directory</td>
+            <td>Total number of folders, including root directory.</td>
         </tr>
     </tbody>
 </table>
@@ -726,7 +721,7 @@ void execute_CMD(byte CMD, byte Par1, byte Par2)
 
 <p>Here&rsquo;s a possible circuit to drive the DFPlayer Mini from an Arduino Uno.</p>
 
-<p class="alert alert-info">I derived this circuit from one described in detail by <a href="https://markus-wobisch.blogspot.com/2016/09/arduino-sounds-dfplayer.html">Markus Wobisch</a>. My circuit assumes you can provide a regulated 5V to it, while while Markus&rsquo; circuit uses 6 &times; 1.2V rechargable AA batteries and voltage regulator, <strong>and</strong> provides an alternative for driving stereo speakers via a PAM8403 2&times;3W.</p>
+<p class="alert alert-info">I derived this circuit from one described in detail by <a href="https://markus-wobisch.blogspot.com/2016/09/arduino-sounds-dfplayer.html">Markus Wobisch</a>. My circuit assumes you can provide a regulated 5V to it, while while Markus&rsquo; circuit uses 6 &times; 1.2V rechargable AA batteries, a voltage regulator, <strong>and</strong> provides an alternative for driving stereo speakers via a PAM8403 2&times;3W class-D audio amplifier.</p>
 
 <p class="alert alert-danger">While I&rsquo;ve had success with this circuit, I&rsquo;m not claiming it&rsquo;s the best available. And there are absolutely no guarantees it won&rsquo;t damage your DFPlayer. <strong>Use at your own risk!</strong></p>
 
@@ -763,8 +758,8 @@ void execute_CMD(byte CMD, byte Par1, byte Par2)
 
 <h2>DFRobot's Example Source Code</h2>
 
-<p>A copy of the entire exmaple source for the DFPlayer Mini is available from my Google Drive account as <a href="https://drive.google.com/file/d/1njl4_JaMN3cFe-CbBXXUYm1cCtXdae4D/view?usp=sharing">DFRobotDFPlayerMini-1.0.3</a>. It is released under the GNU Lesser General Public License.</p>
+<p>A copy of the entire example source for the DFPlayer Mini is available from my Google Drive account as <a href="https://drive.google.com/file/d/1njl4_JaMN3cFe-CbBXXUYm1cCtXdae4D/view?usp=sharing">DFRobotDFPlayerMini-1.0.3</a>. It is released under the GNU Lesser General Public License.</p>
 
-<p>I can't recall where I found it and thought I'd make it available, like Ype Brada's notes, just to make sure it survives on the net.</p>
+<p>I can't recall where I found it. I thought I'd make it available, like Ype Brada's notes, just to make sure it survives on the net.</p>
 
 </section>
