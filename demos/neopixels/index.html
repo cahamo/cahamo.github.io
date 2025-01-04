@@ -27,7 +27,7 @@ title: "Neopixel Demos"
     <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-breadboard-uno-built_600x325.png" width="600" height="325" alt="Neopixel ring breadboard circuit as built with Uno"><br><em class="caption caption-small">Breadboard circuit as built</em></p>
 </div>
 
-<p class="alert alert-warning">To avoid overloading the Uno, the LED ring is powered using a breadboard power supply configured to supply 5V rather than from the Uno's 5V output. It is important that one of the Uno's GND pins is connected to the same ground as the power supply.</p>
+<p class="alert alert-warning">To avoid overloading the Uno, the LED ring is powered using a breadboard power supply configured to supply 5V rather than unsing the Uno's 5V output. It is important that one of the Uno's GND pins is connected to the same ground as the power supply.</p>
 
 <p>The source code that exercises the LED ring is a greatly modified version of code by <a href="https://tinyurl.com/3bc2fbb6">&quot;Elon&quot; on Medium</a>. The code can be found in the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>neopixels/neopixel-ring--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-ring--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
 
@@ -41,7 +41,7 @@ title: "Neopixel Demos"
 
 <h3>2. Neopixel rings with ESP32-C3 Super Mini</h3>
 
-<p>I was curious wether my newly acquired ESP32-C3 Super Mini would run the WLED Neopixel control software. The answer is yes it can, although the processor chip gets a bit hot to the touch!</p>
+<p>I was curious whether my newly acquired ESP32-C3 Super Mini would run the WLED Neopixel control software. The answer is yes it can, although the processor chip gets a bit hot to the touch.</p>
 
 <p>Because Neopixels operate at 5V and ESP32s require 3.3V, we need to use a logic level shifter to convert the 3.3V output from the ESP32's data pin to the 5V required by the Neopixels. The following circuit was designed to accomplish this:</p>
 
@@ -55,7 +55,7 @@ title: "Neopixel Demos"
     <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/ring-breadboard-esp32-built_480x545.png" width="480" height="545" alt="Neopixel ring breadboard as built with ESP32-C3 Super Mini"><br><em class="caption caption-small">Breadboard as built</em></p>
 </div>
 
-<p class="alert alert-warning">To avoid stressing the ESP32 the Neopixels were powered from my bench power supply set to 5V. (No breadboard power supply this time - it died!)</p>
+<p class="alert alert-warning">To avoid stressing the ESP32 the Neopixels were powered from my bench power supply set to 5V. (No breadboard power supply was used this time - it died!)</p>
 
 <p>The WLED software was configured using the WLED website to drive the 12 pixel ring. It was uploaded to the ESP32-C3 from the website. Several different sequences were tested via the website.</p>
 
@@ -71,7 +71,7 @@ title: "Neopixel Demos"
 
 <p class="alert alert-warning">As above, the neopixels are powered via an external power supply, <em>not</em> from the Uno. (This demo was built after the breadboard power supply died!)</p>
 
-<p>There are two software projects used to demonstrate the use of the Neopixel matrix:</p>
+<p>Two different software projects are used to demonstrate the Neopixel matrix:</p>
 
 <ol>
     <li>The first project runs a snake of different coloured pixels from top left to bottom right of the matrix. This project is in the <code>neopixels/neopixel-matrix-1--uno</code> directory of the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub: the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-matrix-1--uno/src/main.cpp"><code>src/main.cpp</code></a>. This project was running when the above photo was taken.</li>
