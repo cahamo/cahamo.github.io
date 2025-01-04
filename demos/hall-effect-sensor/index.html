@@ -10,11 +10,11 @@ title: "Hall Effect Sensor Demo"
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/hall-effect-sensor/components_480x320.jpg" width="480" height="320" alt="Hall effect sensor components"></p>
 
-<p>On the right of the above photo is a &quot;bare&quot; sensor. Left to right it's pins are: 5V, GND and the signal pin. The signal pin must pulled high to 5V via a suitable resistor. 10k&ohm; is recommended for pull up resistors when using an Uno, although the 5.1k&ohm; used in this demo is suitable and works just fine. The left hand component has a Hall effect sensor contained in a module. This module includes a pull up resistor for the signal pin. It also has a LED that illuminates when a magnetic field is detected. The pinout for the module, left to right is GND, 5V and the signal pin.</p>
-
-<p>Both types of sensor keep the signal pin pulled high in the absence of a magnetic field. When a field is detected then the signal pin is set low.</p>
+<p>On the right of the above photo is a &quot;bare&quot; sensor. Left to right it's pins are: 5V, GND and the signal pin. The signal pin must be pulled high to 5V via a suitable resistor. 10k&ohm; is recommended for pull up resistors when using an Uno, although the 5.1k&ohm; works just fine. The left hand component has a Hall effect sensor contained in a module. This module has a built in pull up resistor for the signal pin. It also has a LED that illuminates when a magnetic field is detected. The pinout for the module, left to right is GND, 5V and the signal pin.</p>
 
 <p class="alert alert-warning">Some versions of the Hall effect sensor module have the order of the pins reversed. Check the markings on the module to see which is the correct order.</p>
+
+<p>Both types of sensor keep the signal pin high in the absence of a magnetic field. When a field is detected then the signal pin is set low.</p>
 
 <p>The following diagram shows both types of sensor connected to an Arduino Uno. Two LEDs are used to indicate when their adjacent sensors detect a magnetic field. The LEDs have their cathodes connected to ground via 470&ohm; resistors. The bare sensor has its signal pin pulled up to 5V via a 5.1&ohm; resistor. No pull-up resistor is required for use with the sensor module.</p>
 
@@ -61,17 +61,17 @@ title: "Hall Effect Sensor Demo"
 
 <p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>hall-effect-sensor--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/hall-effect-sensor--uno/src/main.cpp"><code>hall-effect-sensor--uno/src/main.cpp</code></a>.</p>
 
-<p class="alert alert-warning">
+<p class="alert alert-info">
     This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>hall-effect-sensor--uno/src/main.cpp</code> into a new, blank Arduino API project. No Arduino libraries are required.</p>
 </p>
 
 <p>Once the code is compiled and uploaded to the Uno bring a suitably oriented<sup>&dagger;</sup> magnet close to each sensor in turn and observe that the associated LED will illuminate. The code also writes the state of each sensor to the Uno's serial port. In order to keep the serial output readable, each sensor is checked only 3 times per second. Therefore there may be a lag between the sensor module's built-in LED changing state and the time associated LED on the breadboard follows suit.</p>
 
-<p>The next image shows the demo circuit as built on a breadboard, with power supplied via the Uno's USB connector. The left hand image shows the circuit with no magnet present: no LEDs are illuminated. The right hand image shows a magnet close to both sensors. Notice that the LEDs are lit, showing that both sensors have detected the magnetic field<sup>&dagger;</sup>. The small LED on the sensor module is also lit.</p>
+<p class="alert alert-info">&dagger; Hall effect sensors usually only detect a magnet when its poles are oriented in a certain way relative to the sensor. When the magnet shown in the photo was turned around it was not detected.</p>
+
+<p>The next image shows the demo circuit as built on a breadboard, with power supplied via the Uno's USB connector. The left hand image shows the circuit with no magnet present: no LEDs are illuminated. The right hand image shows a magnet close to both sensors. Notice that the LEDs are lit, showing that both sensors have detected the magnetic field. The small LED on the sensor module is also lit.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/demos/hall-effect-sensor/breadboard-800x400.png" width="800" height="400" alt="Hall effect sensor demo breadboards with and without a magnet"></p>
-
-<p class="alert alert-warning">&dagger; Hall effect sensors usually only detect a magnet when its poles are oriented in a certain way relative to the sensor. When the magnet shown in the photo was turned around it was not detected.</p>
 
 <p>Finally, here is a video of the demo in action:</p>
 
