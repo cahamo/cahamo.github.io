@@ -24,7 +24,12 @@ title: "Rain detector sensor unit and circuit"
 
     <p>The rain detector comprises an off the shelf sensor pad containing two conductive tracks that are not connected to each other. Water falling on the plate bridges the tracks and lowers the resistance of the pad. A MH series interface module is connected to the sensor pad and produces both an analogue signal whose voltage depends on the resistance of the sensor pad and a digital signal that goes from high to low when the sensor pad resistance reaches a certain threshold value. A potentiometer is used to adjust the threshold. Both items were purchased as a single package along with a very short DuPont cable to connect them:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--detector+module_600x334.png" width="600" height="334" alt="Rain detector sensor pad and interface module"></p>
+    <figure id="fig-1">
+        <p><img class="img-fluid mx-auto d-block"
+            src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--detector+module_600x334.png" width="600"
+            height="334" alt="Rain detector sensor pad and interface module"></p>
+        <figcaption class="text-center">Figure 1: Sensor pad and inteface module</figcaption>
+    </figure>
 
     <p class="alert alert-warning">The output of the interface module will eventually be used to trigger an alarm. This has not yet been designed.</p>
 
@@ -38,7 +43,10 @@ title: "Rain detector sensor unit and circuit"
 
     <p>The following photo shows the housing after the heat-set inserts were added:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-heat-inserts_400x300.png" width="400" height="300" alt="Rain detector housing"></p>
+    <figure id="fig-2">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-heat-inserts_400x300.png" width="400" height="300" alt="Rain detector housing"></p>
+        <figcaption class="text-center">Figure 2: Detector housing</figcaption>
+    </figure>
 
     <aside>
         <p class="alert alert-info">The heat set inserts were pressed in place using a soldering iron with a specialised bit designed for this purpose.</p>
@@ -48,18 +56,46 @@ title: "Rain detector sensor unit and circuit"
 
     <p>The rain sensor pad was attached to the housing with nylon M3 crosshead bolts:</p>
 
-    <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-detector_400x300.png" width="400" height="300" alt="Rain detector housing"></p>
+    <figure id="fig-3">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--housing--with-detector_400x300.png" width="400" height="300" alt="Rain detector sensor pad fitted to the housing"></p>
+        <figcaption class="text-center">Figure 3: Sensor pad fitted to housing</figcaption>
+    </figure>
+
+    <p>After a rethink it was decided that it would be better to mount the detector at an angle to enable rain water to drain from the detector more effeciently. At first it was planned to fasten the housing to a triangular shaped piece of wood that would in turn be fastened to the level wooden base. Instead of this piece of wood an base for the housing was designed that had a 22.5&deg; angled top. The base has two pairs of lugs, one pair to be bolted to the existing lugs on the housing with the second pair being used to fasten the base to the wooded baseboard.</p>
+
+    <p>The base was designed in TinkerCAD and 3D printed using the same printer as above, but this time using Bambu Labs basic black PLA. The base was printed with thicker walls than the housing for extra strength. The change of PLA was only made because I'd run out of the orange PLA used for the housing.</p>
+
+    <figure id="fig-4">
+        <p><img class="img-fluid mx-auto d-block"
+            src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--base_600x248.png"
+            width="600" height="248" alt="Detector base unit as printed, with and without supports"></p>
+        <figcaption class="text-center">Figure 4: Detector base as printed, with and without supports</figcaption>
+    </figure>
+
+    <p>The base was then attached to the housing using M4 nuts, bolts and washers. The only suitable M4 bolts in stock were rather too long, so they were cut down using a slitting disk mounted on a multi-tool. The housing was then blackened using black permanent marker pens. The following photos show the assembly before and after blackening.</p>
+
+    <figure id="fig-5">
+        <p><img class="img-fluid mx-auto d-block"
+                src="/assets/img/projects/rain-sensors/detector/rain-sensors--detector--assembled_600x225.png" width="600"
+                height="225" alt="Detector base attached to housing."></p>
+        <figcaption class="text-center">Figure 5: Base and housing assembled.</figcaption>
+    </figure>
+
+    <aside>
+        <p class="alert alert-info">Reprinting the housing with an angled base was considered but rejected since it would mean the tricky process of adding new heat set inserts would have to be repeated.</p>
+    </aside>
 
     <p class="alert alert-warning">That's as far as things have progressed so far.</p>
+
 </section>
 
 <section id="stl">
 
-    <h2>STL file</h2>
+    <h2>STL files</h2>
 
-    <p>An STL file that can be sliced to produce the 3D printed components can be downloaded from the <a href="https://github.com/cahamo/rain-sensors"><code>cahamo/rain-sensors</code></a> repository on GitHub.</p>
+    <p>STL files that can be sliced to produce the 3D printed components can be downloaded from the <a href="https://github.com/cahamo/rain-sensors"><code>cahamo/rain-sensors</code></a> repository on GitHub.</p>
 
-    <p>The file is copyright &copy; 2024, <a href="https://gravatar.com/delphidabbler">Peter Johnson</a> and is made available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons - Attribution - Share Alike</a> license v4.0.</p>
+    <p>The files are copyright &copy; 2025, <a href="https://gravatar.com/delphidabbler">Peter Johnson</a> and are made available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons - Attribution - Share Alike</a> license v4.0.</p>
 
 </section>
 
