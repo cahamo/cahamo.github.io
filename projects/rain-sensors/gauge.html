@@ -5,19 +5,27 @@ title: "Rain measurement gauge sensor unit and circuit"
 
 <h1>Rain Sensors: Gauge <span class="badge badge-warning">In&nbsp;progress</span></h1>
 
-<section id="Purpose">
+<section id="intro">
 
-    <h2>Purpose</h2>
+    <h2>Introduction</h2>
 
     <p>The purpose of the project is to measure and record rainfall.</p>
 
     <p>The project requirements are:</p>
 
     <ol>
-        <li>To measure rainfall each day</li>
-        <li>To display rainfall to so far each day on a screen</li>
-        <li>To record each day's rainfall in a file on removable storage in a format suitable for importing into a spreadsheet</li>
+        <li>To measure the rainfall over a series of predefined periods</li>
+        <li>To display the current rainfall</li>
+        <li>To record each period's rainfall in a file on removable storage in a format suitable for importing into a spreadsheet</li>
     </ol>
+
+    <p class="alert alert-warning">This page is structured as if there was an orderly, linear process from design to construction. The truth is that process was iterative, through design, construction, testing, redesign &hellip; and so on. Every single 3D printed component was re-designed and re-printed at least once, with some being printed several times. Other components were destroyed during testing and had to be replaced. I've not gone into all the gruesome details here, because that would make this page much too long and difficult to read. However, some design changes are referred to in the text where the learning point is important.</p>
+
+    <aside>
+        <p class="alert alert-info">This project is based on the <a
+                href="https://www.explainingcomputers.com/pi_pico_rain_gauge.html">Raspberry Pi Pico Rain Gauge</a> project
+            by Christopher Barnett.</p>
+    </aside>
 
 </section>
 
@@ -25,51 +33,47 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h2>Design</h2>
 
-    <aside>
-        <p class="alert alert-info">This project is closely based on the <a href="https://www.explainingcomputers.com/pi_pico_rain_gauge.html">Raspberry Pi Pico Rain Gauge</a> project by Christopher Barnett.</p>
-    </aside>
-
     <h3>Design Overview</h3>
 
     <p>This project comprises a 3D printed rain gauge coupled to a microcontroller, storage and display.</p>
 
-    <p>The gauge collects rain and funnels it down into a pivoted bucket assembly with an attached magnet as illustrated below:</p>
+    <p>The gauge collects rain and funnels it down into a pivoted bucket componet, comprising two buckets with an attached magnet as shown in <em>figure 1</em>:</p>
 
     <figure id="fig-1">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--bucket-model-render_400x263.png" width="400" height="263" alt="Rain gauge bucket illustration"></p>
-        <figcaption class="text-center">Figure 1</figcaption>
+        <figcaption class="text-center">Figure 1: Illustration of the rain gauge bucket</figcaption>
     </figure>
 
-    <p>The assembly is pivoted about its centre point. The mechanism starts off angled so that one bucket is higher than the other. Rain coming in from above fills the raised bucket. When sufficient rain has gathered in the bucket it pivots and empties its contents, bringing the other bucket up under the water flow. The process then repeats.</p>
+    <p>The two buckets are pivoted about their common centre point. The mechanism starts off angled so that one bucket is higher than the other. Rain coming in from above fills the raised bucket. When sufficient rain has gathered in the bucket it pivots and empties its contents, bringing the other bucket up under the water flow. The process then repeats.</p>
 
-    <p>Each time the assembly pivots the magnet moves past a reed switch causing a pulse to be emitted that can be be processed by a microcontroller.</p>
+    <p>Each time the buckets pivot the magnet moves past a reed switch causing a pulse to be emitted that can be be processed by a microcontroller.</p>
 
     <h3>Rain Gauge Assembly</h3>
 
-    <p>The rain gauge assembly is designed to capture and funnel rain water onto the bucket assembly shown in <em>figure 1</em>. Renderings of the CAD designs of the components of the assembly are shown in <em>figure 2</em> below:</p>
+    <p>The rain gauge assembly is designed to capture and funnel rain water onto the buckets shown in <em>figure 1</em>. Renderings of the CAD designs of the components of the assembly are shown in <em>figure 2</em>:</p>
 
-    <figure id="fig-1">
-        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--all-components-render_600x518.png" width="600" height="512" alt="Renders of all rain gauge assembly component CAD designs."></p>
-        <figcaption class="text-center">Figure 2</figcaption>
+    <figure id="fig-2">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--all-components-render_600x505.png" width="600" height="505" alt="Renders of all rain gauge assembly component CAD designs."></p>
+        <figcaption class="text-center">Figure 2: Renders of CAD designs of all components</figcaption>
     </figure>
 
     <p>The following list describes the numbered items in <em>figure 2</em>:</p>
 
     <ol>
         <li>Funnel <sup>&dagger;</sup></li>
-        <li>Bucket assembly / magnet holder <sup>&Dagger;</sup></li>
-        <li>Bucket assembly pivot unit / reed switch holder <sup>&dagger;</sup></li>
-        <li>Two caps to hold the pivot axle in place <sup>&sect;</sup></li>
-        <li>A box that contains and protects the pivoting bucket assembly <sup>&Dagger;</sup></li>
-        <li>Bracket that holds the pivot unit inside the main box <sup>&sect;</sup></li>
-        <li>Mounting brackets that attach to the main unit to fasten it to a wooden baseboard <sup>&Dagger;</sup></li>
+        <li>Case in which the funnel is mounted that contains and protects the buckets <sup>&dagger;</sup></li>
+        <li>&quot;Plug&quot; that fits inside the hole at the botton of the funnel that reduces the aperature through which water can flow. <sup>&Dagger;</sup></li>
+        <li>Buckets &amp; magnet holder <sup>&dagger;</sup></li>
+        <li>Cap to cover the exposed side of the magnet in the magnet holder. <sup>&sect;</sup></li>
+        <li>Bucket pivot unit &amp; reed switch holder <sup>&dagger;</sup></li>
+        <li>Bracket that holds the pivot unit inside the main case <sup>&Dagger;</sup></li>
+        <li>Mounting brackets to be used to fasten the rain gauge bucket assembly to a wooden baseboard <sup>&dagger;</sup></li>
     </ol>
 
     <div class="alert alert-info small">
         <p class="mb-1"><strong>Notes:</strong></p>
-        <p class="mb-1 ml-3"><sup>&dagger;</sup> Original design by Christopher Barnett</p>
-        <p class="mb-1 ml-3"><sup>&Dagger;</sup> Original design by Christopher Barnett, modified by cahamo</p>
-        <p class="mb-1 ml-3"><sup>&sect;</sup> Original design by cahamo</p>
+        <p class="mb-1 ml-3"><sup>&dagger;</sup> Original design by Christopher Barnett, modified by cahamo. Some are adaptations of Christopher's original STL files while others were recreated from scratch.</p>
+        <p class="mb-1 ml-3"><sup>&Dagger;</sup> Original design by cahamo</p>
     </div>
 
     <h4>STL files</h4>
@@ -82,7 +86,7 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <p>The pulses emitted from the gauge are counted by a microcontroller which calculates the amount rain that must have fallen to trigger each pulse. The total rainfall is displayed on a screen and recorded in memory. Periodically the data is stored on an SD card.</p>
 
-    <p>The microcontroller program must be calibrated before use. The amount of rain captured by the funnel and the volume of water needed to tip the pivoted buckets is required to do this. The catchment area of the funnel can be measured. The amount of water that is required to tip the bucket assembly must be arrived at by experiment.</p>
+    <p>The microcontroller program must be calibrated before use. The amount of rain captured by the funnel and the volume of water needed to tip the pivoted buckets is required to do this. The catchment area of the funnel can be measured. The amount of water that is required for a bucket to tip and empty must be arrived at by experiment.</p>
 
 </section>
 
@@ -90,35 +94,98 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h2>Construction</h2>
 
-    <p>The rain gauge components described above were 3D printed on a Bambu Labs A1 3D printer using Amazon Basics orange PLA. The following montage shows all the printed parts. The parts are not to scale relative to each other:</p>
+    <h3>Rain Gauge</h3>
+
+    <p>The rain gauge components described above were 3D printed on a Bambu Labs A1 3D printer using Bambu Basic black PLA. The models were sliced using the Bambu slicer using the default 0.20 mm strong print profile. The following montage shows all the printed parts. The parts are not to scale relative to each other:</p>
     
     <figure id="fig-3">
-        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--printed-parts_800x530.png" width="800" height="530" alt="All the rain gauge 3D printed parts"></p>
-        <figcaption class="text-center">Figure 3</figcaption>
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--printed-parts_800x593.png" width="800" height="593" alt="All the rain gauge 3D printed parts"></p>
+        <figcaption class="text-center">Figure 3: All 3D printed components</figcaption>
     </figure>
 
-    <p>Additional components are also required. They are:</p>
+    <p>A 10mm &#x2300; &times; 3mm deep neodymium magnet was glued into the magnet holder attached to the buckets. The magnet cap was then glued over the exposed part of the magnet. Superglue was used in both cases.</p>
+
+    <figure id="fig-4">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-magnet_480x318.png" width="480" height="318" alt="Magnet fitted to the magnet holder"></p>
+        <figcaption class="text-center">Figure 4: Magnet fitted to the magnet holder</figcaption>
+    </figure>
+
+    <p>A normally open, plastic bodied reed switch, 2.7mm square section &times; 14mm long, was soldered to two 20cm lengths of 7/0.2mm stranded wire. The reed switch was then mounted into the provided channel in the bucket pivot unit, securred by superglue. Heat shrink was added to protect sections of the wire. The pivot unit was then bolted to its base with 2 &times; M3 nuts and 10mm hex head bolts.</p>
+        
+    <figure id="fig-5">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-bracket_640x256.png" width="640" height="256" alt="Bucket pivot with magnet attached mounted to its bracket"></p>
+        <figcaption class="text-center">Figure 5: Bucket pivot unit, with reed switch, attached to the mounting bracket</figcaption>
+    </figure>
+
+    <p>A 5cm long piece of round 3mm &#x2300; mild steel bar was cut to use as an axle that allows the buckets to move within the pivot unit. The axle holes in the pivot unit had to be drilled out to 3.2mm in order for the axle to fit. A M3 washer was threaded over the axle on either side of the buckets to limit side to side movement. The &quot;pimples&quot; surrounding the holes on the side of the buckets component were filed down until the bucket rotated freely on the axle with minimal side to side movement. The axle is a snug friction fit in the pivot unit meaning that the axle remained stationary while the bucket pivoted on it. At this stage the wires from the reed switch were glued in place with superglue to avoid them fouling the axle.</p>
+
+    <figure id="fig-6">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-completed_640x339.png" width="640" height="339" alt="Bucket sub-assembly completed"></p>
+        <figcaption class="text-center">Figure 6: Completed bucket sub-assembly</figcaption>
+    </figure>
+
+    <aside>
+        <p class="alert alert-warning"><strong>Strange behaviour.</strong> In earlier iterations of the design of the bucket pivot mount some strange behaviour was noted if the wire connected to the top of the reed switch was bent at 90&deg; to the switch. When the magnet is located on the same side as the wire then the reed switch was held open all the time. This didn't occur when the magnet tilted in the opposite direction. I don't know what caused this, but my hypothesis is that the magnet induced a magnetic field in the wire that held the reed switch closed. Routing the wire vertically down in front of the reed switch fixed this problem.</p>
+    </aside>
+
+    <p>Once the interaction of the magnet and reed switched was proved to be working as expected the reed switch was covered in hot melt glue to protect it from the elements.</p>
+
+    <figure id="fig-7">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--reed-switch_400x218.png" width="400" height="218" alt="Reed switch covered in hot melt glue"></p>
+        <figcaption class="text-center">Figure 7: Reed switch protected by hot melt glue</figcaption>
+    </figure>
+
+    <p>The funnel plug, that gradually narrows the drain hole, was fitted into the hole at the bottom of the funnel. The plug had to be filed to fit snugly, so that its top was flush with the top of the hole in the funnel, with the plug's bottom sitting proud of the funnel base so that it fits throught the hole at top of the case. Superglue was run around the joint between the funnel and plug then further filing ensured that the boundary of the funnel plug with the funnel hole was as smooth as possible. The funnel was now bolted its containing using 4 &times; M5 nuts and 12mm hex head
+    bolts.</p>
+
+    <figure id="fig-8">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--funnel+box_720x597.png" width="720" height="597" alt="Funnel mounted on top of the case"></p>
+        <figcaption class="text-center">Figure 8: Funnel fitted on top of the case, showing the adapted drain hole.</figcaption>
+    </figure>
+
+    <p><em>The small images in </em>figure 8<em>, clockwise from top centre are: the holes in the funnel aligned over the case top, as printed; the plug after filing to fit in the bottom of the funnel; the plug protruding from the funnel base; the plug protruding into the top of the case &amp; the plug after gluing in place and filing flush with the funnel hole.</em></p>
+
+    <aside>
+        <p class="alert alert-warning"><strong>Bodge alert!</strong> The reason the plug was used was to guide water flow
+            over the buckets more effectively. It had been found that the hole in the funnel was too wide and was allowing
+            water to miss the measuring buckets. This was a bodge to avoid the cost in both time and money of re-printing
+            both the funnel and case (again).</p>
+    </aside>
+
+    <p>It was now time to assemble the complete gauge. The funnel / casing assembly, gauge assembly and mounting brackets all had their mounting bolt holes drilled out to 3.2mm &#x2300; and were then bolted together using 4 &times; M3 nuts, washers and 16mm hex head bolts. The wires from the reed switch were led out to one side.</p>
+
+    <figure id="fig-9">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--complete_600x477.png" width="600" height="477" alt="Completed rain gauge assembly"></p>
+        <figcaption class="text-center">Figure 9: Completed rain gauge assembly, including underside view.</figcaption>
+    </figure>
+
+    <h3>Control unit</h3>
+
+    <h3>Bill of materials</h3>
+
+    <p>The following components are required:</p>
 
     <ol start="1">
-        <li>Neodymium magnet: 10mm dia &times; 3mm deep</li>
-        <li>5cm of 2mm dia circular mild steel rod (stainless steel would be better)</li>
+        <li>3D printed parts specified in <a href="#fig-2"><em>figure 2</em></a></li>
+        <li>Neodymium magnet: 10mm &#x2300; &times; 3mm deep</li>
+        <li>5cm of 3mm &#x2300; circular mild steel rod</li>
         <li>Reed switch: normally open, plastic body, 2.7 square section &times; 14mm long</li>
         <li>Nuts:
             <ul>
-                <li>2 &times; M3</li>
-                <li>2 &times; M5</li>
+                <li>6 &times; M3</li>
+                <li>4 &times; M5</li>
             </ul>
         </li>
         <li>Bolts:
             <ul>
                 <li>2 &times; M3 10mm hex head (any other head type is suitable)</li>
-                <li>2 &times; M5 12mm hex head (any other head type is suitable)</li>
+                <li>4 &times; M3 16mm hex head (any other head type is suitable)</li>
+                <li>4 &times; M5 12mm hex head (any other head type is suitable)</li>
             </ul>
         </li>
         <li>Washers:
             <ul>
-                <li>2 &times; M2</li>
-                <li>1 &times; M3</li>
+                <li>6 &times; M3</li>
             </ul>
         </li>
     </ol>
@@ -127,27 +194,7 @@ title: "Rain measurement gauge sensor unit and circuit"
         <p class="alert alert-danger">The above list of components is incomplete and will be extended as progress is made.</p>
     </aside>
 
-    <p>Some components of the rain gauge have been assembled to date:</p>
-
-    <ul>
-        <li>A pair of M2 washers have been superglued into the recesses around the axle holes in the bucket assembly <sup>[2]</sup> to help space the assembly from the pivot unit <sup>[3]</sup>.</li>
-        <li>A 5cm long piece of 2mm dia steel rod has been cut to use as the bucket pivot axle. The ends of the rod were filed smooth.</li>
-        <li>The neodymium magnet has been inserted into the magnet holder on the bucket assembly <sup>[2]</sup> and secured with superglue.</li>
-        <li>The bucket assembly pivot unit <sup>[3]</sup> has been bolted to the pivot unit bracket <sup>[6]</sup> using two pairs of M3 nuts and 10mm hex head M3 bolts. The 3D printed holes were a little oversize for the bolts.</li>
-        <li>The rain funnel <sup>[1]</sup> was bolted to the main box <sup>[5]</sup> using two pairs of M5 nuts and and 12mm hex head M5 bolts. Because of tight clearances under the funnel the bolts were inserted from inside the main box and nuts were added on top, under the funnel.</li>
-    </ul>
-
-    <p class="alert alert-info small"><strong>Key:</strong> Superscript numbers in brackets refer to the number of the 3D printed part as shown in <em>figure 2</em>.</p>
-
-    <p class="alert alert-warning">That is as far as things had progressed as at 2024-12-29.</p>
-
-    <!--
-
-    PROGRESS NOTES
-    --------------
-    
-    Used one M3 washer as spacer for bucket pivot.
-    -->
+    <p class="alert alert-warning">That is as far as things had progressed as at 2025-02-15.</p>
 
 </section>
 
