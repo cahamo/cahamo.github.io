@@ -161,6 +161,8 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h3>Control unit</h3>
 
+    <p class="alert alert-danger">To follow</p>
+
     <h3>Bill of materials</h3>
 
     <p>The following components are required:</p>
@@ -194,7 +196,108 @@ title: "Rain measurement gauge sensor unit and circuit"
         <p class="alert alert-danger">The above list of components is incomplete and will be extended as progress is made.</p>
     </aside>
 
-    <p class="alert alert-warning">That is as far as things had progressed as at 2025-02-15.</p>
+</section>
+
+<section id="calibration">
+
+    <h2>Calibration</h2>
+
+    <p>The gauge needs to be calibrated before being used. We need to know how much water is required to tilt a bucket. To do this we simply pour a measured amount of water through the gauge and count the number of times the bucket tilts. The amount of water required to tilt the bucket is the volume of water put through the gauge divided by the number of tilts counted. It is advisable to run the test several times and to use the average of all the results.</p>
+
+    <h3>Circuit</h3>
+
+    <p>An Arduino Nano clone was used to count the number of times the gauge's reed switch closes while pouring water. The count was displayed on a 2&times;40 character I&sup2;C LCD display. To enable several tests to be undertaken sequentially a momentary push button was used to clear the counter. <em>Figure 10</em> below shows the circuit:</p>
+
+    <figure id="fig-10">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/calibration--circuit_700x280.png" width="700" height="280" alt="Calibration circuit diagram"></p>
+        <figcaption class="text-center">Figure 10: Calibration circuit diagram</figcaption>
+    </figure>
+
+    <p>One of the wires from the rain gauge reed switch is coupled to Nano pin D6 while he other connection to the reed switches is connected to ground. Similarly, one terminal of the push switch is connected to Nano pin D2 and the other terminal is also connected to ground. Both pins D2 and D6 are configured as input pins that are pulled up to 5V internally. The I&sup2;C display is connected to 5V, ground and to Nano pins A4 and A5, which double as the Nano's SDA and SCL I&sup2;C control pins respectively. Nano is powered by connecting 5V to its 5V pin and ground to a GND pin.</p>
+
+    <p>The circuit was built on a breadboard as shown in <em>figure 11</em> below. The leads from the rain gauge were connected to the circuit via crocodile clips. 5V power was supplied by a breadboard power supply, connected to a 9V wall wart via a barrel jack.</p>
+
+    <figure id="fig-11">
+        <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/calibration--breadboard_640x486.png" width="640" height="486" alt="Calibration circuit as built"></p>
+        <figcaption class="text-center">Figure 11: Calibration circuit as built</figcaption>
+    </figure>
+
+    <h3>Software</h3>
+
+    <p>The microcontroller program was written in C++ using VSCode and and PlatformIO extension. The code was targetted at the Arduino platform. The source code is available from the <a href="https://github.com/cahamo/rain-sensors/tree/develop/code/gauge-calibration"><code>code/gauge-calibration</code></a> directory of the <a href="https://github.com/cahamo/rain-sensors/"><strong>cahamo/rain-sensors</strong></a> project on GitHub.</p>
+
+    <h3>Results</h3>
+
+    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated. The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test while the right hand column shows the average number of millilitres of water required to tilt a bucket in that test, rounded to 2 decimal places:</p>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr class="text-left">
+                <th scope="col">Number of tilts</th>
+                <th scope="col">Volume per tilt (ml)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>140</td>
+                <td>5.71</td>
+            </tr>
+            <tr>
+                <td>131</td>
+                <td>6.11</td>
+            </tr>
+            <tr>
+                <td>137</td>
+                <td>5.84</td>
+            </tr>
+            <tr>
+                <td>130</td>
+                <td>6.15</td>
+            </tr>
+            <tr>
+                <td>139</td>
+                <td>5.76</td>
+            </tr>
+            <tr>
+                <td>140</td>
+                <td>5.71</td>
+            </tr>
+            <tr>
+                <td>135</td>
+                <td>5.93</td>
+            </tr>
+            <tr>
+                <td>137</td>
+                <td>5.84</td>
+            </tr>
+            <tr>
+                <td>142</td>
+                <td>5.63</td>
+            </tr>
+            <tr>
+                <td>137</td>
+                <td>5.84</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>The results were averaged using more than one averaging algorithm before arriving at an estimated bucket capacity of <strong>5.85 ml</strong>.</p>
+       
+    <aside>
+        <div class="alert alert-warning">
+            <p class="mt-0 mb-2">There was significant variation in the test results, the standard deviation being &approx; 3.9 tilts per 800ml of water. There are several possible contributary factors to this inaccuracy:</p>
+            <ol class="mt-0 mb-2">
+                <li>The use of a kitchen measuring jug makes it impossible to measure exactly 800ml of water to use in each test.</li>
+                <li>The tilting mechanism is rather crude, meaning that the amount of water required for each tilt may vary.</li>
+                <li>The speed at which water was poured was not consistent: pouring too fast may cause the bucket to tilt prematurely because of the momentum of the water.</li>
+                <li>It was not possible to make allowances for the water remaining in a bucket at the end of the test: it could have been empty or almost about to tilt.</li>
+                <li>Some water adhered to the funnel and buckets due to a combination of surface tension and friction.</li>
+            </ol>
+            <p class="my-0"><strong>It is obvious that this gauge is not going to be accurate.</strong> Furthermore it is likely that performance will be worse in very light rain due to point 5 above, or to evaporation during the time it takes to fill and tilt the bucket.</p>
+        </div>
+    </aside>
+
+    <hr><p class="alert alert-warning">That is as far as things had progressed as at 2025-02-17.</p>
 
 </section>
 
