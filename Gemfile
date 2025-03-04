@@ -24,6 +24,7 @@ gem "nokogiri", "~> 1.18.3"
 gem "rexml", "~> 3.3.9"
 gem "commonmarker", ">= 0.23.10"
 gem "activesupport", "~> 7.0.7.1"
+gem "uri", ">= 0.13.2"
 
 # Fix for when using Ruby 3 - webrick no longer installed w/ Ruby 3
 gem "webrick", "~> 1.8"
