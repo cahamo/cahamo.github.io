@@ -6,29 +6,29 @@ title: "3D Flashing LED Xmas Tree Kit"
 
 <p>This is yet another AliExprress kit, purchased in October 2023. The exact kit has now disappeared from the store which is probably for the best, for reasons should become clear.</p>
 
-<p>Here is a montage of two of the pictures used to advertise the kit I bought:</p>
+<p>Here is a montage of two of the pictures used to advertise the kit that I bought:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/3d-xmas-tree-kit--advert-montage_640x322.png" width="640" height="322" alt="3D LED Xmas tree kit: montage of two advertising pictures"></p>
 
-<p>The right hand picture shows the completed kit. The left hand picture shows the components you are <em>supposed</em> to get in the kit. Six transistors as shown. I got five. What is more I didn't have a suitable replacement in stock. That held progress up until I acquired some of the required S9014 transistors. Luckily, all other components were present. There were also supposed to be some spare components, but there weren't. So I had to be very careful not to damage any of the existing components.</p>
+<p>The right hand picture shows the completed kit. The left hand picture shows the components you are <em>supposed</em> to get in the kit. Six transistors are shown. I got five. What is more I didn't have a suitable replacement in stock. That held progress up until I acquired some of the required S9014 transistors. Luckily, all other components were present. There were also supposed to be some spare components, but there weren't. So I had to be very careful not to damage any of the existing components.</p>
 
 <p>The next problem was that there were two different values of resistors supplied: 100&ohm; and 4.7k&ohm;, from memory. Although the resistors were labelled R1, R2 etc on the circuit board there was no indication as to which value resistor went where. Neither were there any instructions. I guessed that the 100&ohm; resistors would be used with the LEDs and the 4.7k&ohm; resistors would be connected to base of the transistors.This guess was reinforced by the fact that there were the same number of 4.7k&ohm; resistors as there were (supposed to be) transistors.</p>
 
-<p>But which resistors were connected to LEDs and which to the transistor bases? A happy hour was spent staring at traces and checking connections with a multimeter. I finally worked out which values of resistors went where. The locations of the 4.7k&ohm; resistors were marked on the circuit board.</p>
+<p>But which resistors were connected to LEDs and which to the transistor bases? A happy hour was spent staring at traces and checking connections with a multimeter. I finally worked out which values of resistors went where. The locations of the 4.7k&ohm; resistors were then marked on the circuit board for later reference.</p>
 
-<p>It was during this tracing that I found that the anode of one of LEDs didn't seem to be connected to anything. It just keeps getting better and better doesn't it! Because LEDs were connected in regular patterns it didn't take too long to work out which resistor should have been connected to the LED, so that was noted down.</p>
+<p>It was during this tracing that I found that the anode of one of LEDs didn't seem to be connected to anything. It just keeps getting better and better doesn't it? Because LEDs were connected in regular patterns it didn't take too long to work out which resistor should have been connected to the LED, so that was noted down.</p>
 
-<p>Next I did a test fit of the major components. The two circuit boards that make up the tree are slotted together before soldering into the base. There is only one way to fit the tree circuit boards together so that the polarity of the connection to the base is correct. This is well labelled on all the circuit boards. The power switch and USB connector were test fitted to the base.</p>
+<p>Next I did a test fit of the major components. The two circuit boards that make up the tree are slotted together before soldering into the base. There is only one way to fit the tree circuit boards together so that the polarity of the connection to the base is correct. This is well labelled on all the circuit boards.</p>
 
 <p>Finally it was time to begin construction.</p>
 
 <p>First the switch and USB connector were soldered to the base. In addition to these there were two holes in the circuit board where an alternative power source could be connected. It was decided to solder two right angle header pins in these holes. Power was connected using USB and checks were made that the switch was working and the connections to the tree were live. This test was repeated by connecting 5V and ground to the header pins.</p>
 
-<p>All components were then connected to the two circuit boards that make up the tree. This was done before the circuit boards were assembled on the base. Both boards were connected to 5V and ground to test the circuits. One board worked perfectly. As expected, one LED did not light on the second board. A temporary connection from the resistor I'd noted down earlier to the LED resulted in everything working properly. I permanent connection was then made by soldering in a short length of jumper wire.</p>
+<p>All components were then soldered to the two circuit boards that make up the tree. This was done before the circuit boards were assembled on the base. Both boards were connected to 5V and ground to test the circuits. One board worked perfectly. As expected, one LED did not light on the second board. A temporary connection from the resistor I'd noted down earlier to the LED resulted in everything working properly. A permanent connection was then made by soldering in a short length of jumper wire.</p>
 
-<p>Then I noticed my error. I'd soldered the top LED in place before it dawned on me that the LED bridged the slot in one circuit board which prevented the other board slotting in place! So the top LED was unsoldered.</p>
+<p>Then I noticed my error. I'd soldered the LED at the top of the tree in place before it dawned on me that this LED bridged the slot in one circuit board which prevented the other board slotting in place! So the top LED was unsoldered.</p>
 
-<p>Having fixed my error the two tree circuit boards were slotted together in the correct orientation and offered up to the base. The tree circuit boards attach to the base by means of lugs that fit into four slots in the base. Unfortunately the slots were a little over-size, so the tree circuit boards didn't fit well and certainly didn't touch the electrical connector pads on the base. This was solved by tinning the connector pads on the tree board with quite a thick layer of solder. Solder was then applied to the connector pads on the base and was built up in layers until the tree was held rigidly in place and the electrical connections were made.</p>
+<p>Having fixed my error the two tree circuit boards were slotted together in the correct orientation and offered up to the base. The tree circuit boards attach to the base by means of lugs that fit into four slots in the base. These slots also act as the electrical connection between the base and the tree. Unfortunately the slots were a little over-size, so the tree circuit boards didn't fit well and certainly didn't touch the electrical connector pads on the base. This was solved by tinning the connector pads on the tree board with quite a thick layer of solder. Solder was then applied to the connector pads on the base and was built up in layers until the tree was held rigidly in place and the electrical connections were made.</p>
 
 <p>It was now time to (re)fit the top LED. I didn't think that the original green LED was bright enough to use on top of the tree. I considered replacing it with one of the 3mm yellow or red LEDs I had in stock, but finally decided to use a 3mm fast-flash RGB LED that I also had available.</p>
 
@@ -36,7 +36,9 @@ title: "3D Flashing LED Xmas Tree Kit"
 
 <p>And now we come to the final problem. The lugs connecting the tree to the base, along with the power switch connectors, extended below the base circuit board. This meant that the tree wobbled when stood on a hard surface.</p>
 
-<p>The fix for this was to design four feet in TinkerCAD and to 3D print them in black PLA. I could have designed the feet to be screwed to the base via the available mounting holes, but by now it was almost Christmas (2024) so I just glued the feet in place     with super glue.</p>
+<p>The fix for this was to design four feet in TinkerCAD and to 3D print them in black PLA. I could have designed the feet to be screwed to the base via the available mounting holes, but by now it was almost Christmas (2024) so I just glued the feet in place with super glue.</p>
+
+<p class="alert alert-info">You can <a href="/downloads/3d-led-xmas-tree--base.zip">download the STL file</a> for one of the feet if you need it - just print four copies.</p>
 
 <p>The following image is a montage of photos of the finished tree:</p>
 
@@ -49,3 +51,5 @@ title: "3D Flashing LED Xmas Tree Kit"
 </p>
 
 <p class="alert alert-warning">I was going to end up by warning everyone not to buy this rather poor kit, but since it is no longer on AliExpress there's no need to. But do read reviews of any similar kit carefully and check that there are some instructions included on the product page, because you probably won't get any written instructions with the kit. Finally, do yourself a favour and buy a kit that comes with feet or a nice case that won't scratch your furniture.</p>
+
+<p class="alert alert-info"><strong>Postscript:</strong> To my surprise, my wife likes this little tree, so it formed part of our Christmas decorations in 2024, and will probably be used again.</p>
