@@ -4,22 +4,22 @@ title: "555 Chip Tester Project"
 ---
 <h1>555 Chip Tester</h1>
 
-<p>The motivation for this project came from the fortuitous coincidence of two events. Firstly I'd wasted some time tracking down a bug in a 555 timer circuit only to find the 555 itself was dead. Soon afterwards I came across a circuit on the <a href="https://www.elprocus.com/555-timer-pin-description-applications/">ElProCus</a> website that was designed to test a 555. So I tweaked the <em>ElProCus</em> circuit to better meet my needs. Here's the resulting completed unit:</p>
+<p>The motivation for this project came from the fortuitous coincidence of two events. Firstly I'd wasted some time tracking down a bug in a 555 timer circuit only to find the 555 itself was dead. Soon afterwards I came across a circuit on the <a href="https://www.elprocus.com/555-timer-pin-description-applications/">ElProCus</a> website that was designed to test a 555. I tweaked that circuit to better meet my needs. Here's the resulting completed unit:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--completed_480x500.png" width="480" height="500" alt="Composite photo of 2 shots of the completed 555 tester"></p>
 
-<p>The original circuit by <em>ElProCus</em> had no switch, you simply applied the required voltage and, if the 555 was OK the LED flashed. Simple. But I didn't like the idea of having no switch to protect the 555 while connecting power, so decided to add a momemtary contact switch that has to be held down to conduct the test. Then it struck me that a failed LED could imply that a 555 had failed the test. So I added another push button to test the LED. My version of the circuit has two means of providing power: spade connectors permit crocodile clips to be used and DuPont female connectors allow power to be supplied from breadboards. Here's the adapted circuit:</p>
+<p>The original circuit by <em>ElProCus</em> had no switch. You simply applied the required voltage and, if the 555 was OK, the LED flashed. Simple. But I didn't like the idea of having no switch to protect the 555 while connecting power, so decided to add a momentary contact switch that has to be held down to conduct the test. Then it struck me that a failed LED could imply that a 555 had failed the test. So I added another push button to test the LED. My version of the circuit has two means of providing power: spade connectors permit crocodile clips to be used and DuPont female connectors allow power to be supplied from breadboards. Here's the adapted circuit:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--circuit-design_594x516.png" width="594" height="516" alt="555 tester circuit design"></p>
 
 <p>A few of points to note:</p>
 
 <ol>
-    <li class="mb-2">The original circuit was designed for 9V, but experimenting with lower voltages found that the circuit operated reliably down to just over 4V.</li>
-    <li class="mb-2">I added a 10nF capacitor between pin 5 of the 555 timer and ground. This was missing on the original circuit.</li>
-    <li class="mb-2">I replaced the recommended 500k&ohm; resistor with a 470k&ohm;, because that's the nearest value I had in stock.</li>
-    <li class="mb-2">I determined the value of the current limiting resistors for the LED by experiment. The pink 3mm LED I used was very bright and needed to be toned down!</li>
-    <li class="mb-2">I used two different current limiting resistors for the LED, 1 from the 555 timer output pin and the other from the LED test switch. At first I just used the one resistor but found that the LED pulsed when the LED test switch was pressed. Doubling up the resistors fixed this.</li>
+    <li class="mb-2">The original circuit was designed for 9V, but experimenting with lower voltages showed that the circuit operated reliably down to just over 4V.</li>
+    <li class="mb-2">A 10nF capacitor was added between pin 5 of the 555 timer and ground. This was missing on the original circuit.</li>
+    <li class="mb-2">The recommended 500k&ohm; resistor was replaced with a 470k&ohm;, because that's the nearest value I had in stock.</li>
+    <li class="mb-2">I used two different current limiting resistors for the LED, one from the 555 timer output pin and the other from the LED test switch. At first I just used the one resistor but found that the LED pulsed when the test switch was pressed. Doubling up the resistors fixed this.</li>
+    <li class="mb-2">The value of the current limiting resistors for the LED was determined by experiment. The pink 3mm LED I used was very bright and needed to be toned down!</li>
 </ol>
 
 <p>Here's the circuit as built:</p>
@@ -28,11 +28,13 @@ title: "555 Chip Tester Project"
 
 <p>The only point to note is that I used two 100nF capacitors in parallel instead of a 200nF cap, simply because I didn't have one of those.</p>
 
-<p>I considered following <em>ElProCus&rsquo;</em> example and keeping the circuit board bare, but eventually decided to mount it in an old cardboard jewelry box that I had in my scrap box. Holes were cut in the box lid where required. They were then filed to shape - yep I filed cardboard! A frame of 2mm greyboard was glued to the underside of the perfboard to raise it up to the required height within the box.</p>
+<p>I considered following <em>ElProCus&rsquo;</em> example and keeping the circuit board bare, but eventually decided to mount it in an old cardboard jewelry box that I had in my scrap box. Holes were cut in the box lid where required. They were then filed to shape - yep I filed cardboard!</p>
 
-<p>It was difficult to measure the exact location of the controls directly because the lid is a different size to the base, but I resolved that by putting a dab of acrylic paint on the switch tops and then fitted and removed the lid. I then drilled the holes for the switches where the paint stuck to the lid. Everything else was measured from those holes. The box was touched up with black acrylic paint. Labels were printed on ink jet paper and glued to the box lid. Finally, holes were drilled through the side of the lid and box and tiny screws were used to keep the lid in place.</p>
+<p class="alert alert-info">It was difficult to measure the exact position of the required holes in the box lid because the lid is a different size to the base. That problem was resolved by putting a dab of acrylic paint on the switch tops and then fitting and removing the lid. The holes for the switches were then drilled where the paint stuck to the lid. Everything else was measured from those holes.</p>
+    
+<p>A frame of 2mm greyboard was glued to the underside of the perfboard to raise it up to the required height within the box. The perfboard was located within the box using small pieces of soft packing foam. The box was touched up with black acrylic paint. Labels were printed on ink jet paper and glued to the lid. Finally, holes were drilled through the side of the lid and box and tiny screws were used to keep the lid in place.</p>
 
-<p>Here's a montage of photos illustrating the process:</p>
+<p>Here's a montage of photos illustrating how the circuit board was fitted into the box:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/555-tester/555-tester--box-mounting_480x661.png" width="480" height="661" alt="Composite photo of 54 shots of the the process of creating a case for the 555 timer"></p>
 
