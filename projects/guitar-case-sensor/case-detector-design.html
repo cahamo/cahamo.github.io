@@ -17,7 +17,7 @@ title: "Guitar case humidity detector project design"
 
 <p>By using a different value resistor in each guitar case we can detect which guitar case is plugged in.</p>
 
-<p>To help determine the resistors to use, an experiment was undertaken with all the values of resistors I have in stock. One resistor of each value was selected at random, connected into the above circuit, and tested with an Arduino Nano that read and output a range of values of the connected Nano analogue pin. The experiment was repeated with different selection of resistors, this time with an Arduino Uno.</p>
+<p>To help determine the resistors to use, an experiment was undertaken with all the values of resistors I have in stock. One resistor of each value was connected into the above circuit, and tested with an Arduino Nano that read and output a series of values of the connected Nano analogue pin. The experiment was repeated with different selection of resistors, this time using an Arduino Uno instead of the Nano.</p>
 
 <aside>
     <p class="alert alert-info">Note that the Nano experiment was conducted in 2021 using a sketch that output a list of all the read values and the range of values was determined by manually examining the list. The experiment with the Uno was conducted in August 2022 and used a sketch that read 200 values from the analogue pin and output the minimum and maximum values. The sketch was run multiple times and the results were combined. The latter sketch is <a href="https://github.com/cahamo/guitar-case-sensor/blob/main/research/case-resistor-values/src/main.cpp">available</a> from the project GitHub repository, but the former sketch was not saved.</p>
