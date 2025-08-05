@@ -8,7 +8,7 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 
 <p>Since it was planned to use one microcontroller to handle the infra-red command system and another to act as the central control unit, some method needed to be found to enable the microcontrollers to communicate with each other.</p>
 
-<p>The first method considered was serial communication using software serial libraries. This experiment was used to investigate the viability of such a system. An Arduino Uno clone was chosen to stand in for the central control microprocessor while two different microcontrollers were tested as possible candidates for the infra-red command microcontroller:</p>
+<p>The first method considered was serial communication using software serial libraries. This experiment was used to investigate the viability of such a system. An Arduino Uno clone was chosen to stand in for the central control microcontroller while two different microcontrollers were tested as possible candidates for the infra-red command microcontroller:</p>
 
 <ol>
     <li>An ATtiny85</li>
@@ -89,13 +89,13 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 
 <h2>Code</h2>
 
-<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/serial-tests</code> directory. The code was developed in C++ using PlatformIO. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
+<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/serial-tests</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
 
 <h3>Serial receiver</h3>
 
 <p>The code that stands in for the central controller can be found in <code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/copy-softserial-to-serial-uno/src/copy-softserial-to-serial-uno.cpp">copy-softserial-to-serial-uno.cpp</a></code>.</p>
 
-<p>This is the code to be run on Arduino Uno. It simply copies serial data received on pin 10 to its hardware serial port, for viewing on a serial terminal. The Arduino <code>Serial</code> library is used to send data to the terminal while the <code>SoftwareSerial</code> is used to receive data from the sending microcontroller.</p>
+<p>This is the code to be run on Arduino Uno. It simply copies serial data received on pin 10 to its hardware serial port, for viewing on a serial terminal. The Arduino <code>Serial</code> library is used to send data to the terminal while the <code>SoftwareSerial</code> library is used to receive data from the sending microcontroller.</p>
 
 <h3>Serial transmitters</h3>
 
@@ -110,8 +110,8 @@ title: "Model diorama: inter microcontroller serial communication experiment"
 <h2>Results</h2>
 
 <ol>
-    <li class="mb-3">Using the Nano to transmit data was mostly successful. The data sent from the Nano was received cirrectly by the Uno. However, an occasional spurious character was displayed on the terminal immediately after the programs started.</li>
-    <li class="mb-3">When using the ATtiny85 all data received by the Uno was garbled beyond recognition. On researching the problem it was found that many ATtinys have clocking problems when transmitting over serial. An attempt was made to callibrate the ATtiny to overcome the problem, but this failed. Further investiagtion was not carried out.</li>
+    <li class="mb-3">Using the Nano to transmit data was mostly successful. The data sent from the Nano was received correctly by the Uno. However, an occasional spurious character was displayed on the terminal immediately after the programs started.</li>
+    <li class="mb-3">When using the ATtiny85 all data received by the Uno was garbled beyond recognition. On researching the problem it was found that many ATtinys have clocking problems when transmitting over serial. An attempt was made to callibrate the ATtiny to overcome the problem, but this failed. Further investigation was not carried out.</li>
 </ol>
 
 <h2>Conclusion</h2>

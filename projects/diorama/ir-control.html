@@ -11,7 +11,7 @@ title: "Model diorama automation infra red control subsystem"
 <ol>
     <li class="mb-2">An infra-red receiver should be placed on the front of the diorama as unobtrusively as possible.</li>
     <li class="mb-2">A simple infra-red handset should be used, with as few key presses as possible being used to enter the commands.</li>
-    <li class="mb-2">The IR sub-system should interpret and encode the commands for transmission to diorama's main microcontroller.</li>
+    <li class="mb-2">The IR sub-system should interpret and encode the commands for onward transmission to the diorama's main microcontroller.</li>
     <li class="mb-2">There should be some visible feedback given to the user as commands are entered. The following states need to be reported:
         <ol class="mt-2">
             <li>Waiting for a command</li>
@@ -84,7 +84,7 @@ title: "Model diorama automation infra red control subsystem"
 
 <h3>Circuit</h3>
 
-<p>An infra red sensor and remote controller were obtained together. The handset uses the common NEC protocol.</p>
+<p>An infra red sensor and remote controller were obtained, packaged together. The handset uses the common NEC protocol.</p>
 
 <p>It has been decided to use an Arduino Nano R3 clone as the microcontroller.</p>
 
@@ -94,7 +94,7 @@ title: "Model diorama automation infra red control subsystem"
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-subsystem-circuit-diagram_854x480.png" width="854" height="480" alt="IR control sub-system circuit design"></p>
 
-<p>The values of the current limiting resistors were chosen to get the best colour balance from the RGB LED. The resistances were arrived at by <a href="./experiment-6">experiment</a>. The RGB LED is powered directly from the Nano's digital pins because the LED's power consumption is within the Nano's tolerances.</p>
+<p>The values of the current limiting resistors for the RGB LED were chosen to get the best colour balance from the LED. The resistances were arrived at by <a href="./experiment-6">experiment</a>. The RGB LED is powered directly from the Nano's digital pins because the LED's power consumption is within the Nano's tolerances.</p>
 
 <p>The decision to use I&sup2;C for communication with the central microcontroller was arrived at after testing both <a href="./experiment-4">serial</a> and <a href="./experiment-5">I&sup2;C</a> communications.</p>
 
@@ -102,13 +102,13 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>A program to run on the microcontroller has been designed and tested. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
 
-<p>After testing the <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
+<p>The <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
 
 <p>The program was developed in VSCode using the PlatformIO extension. Compiling from within VSCode will resolve all library dependencies automatically.</p>
 
 <h3>Sensor Module Housing</h3>
 
-<p>A small plastic case, recovered from a defunct power supply, was adapted to house the <em>Sensor Module</em> component of the above circuit. The front of the diorama was modified to accomodate the case such that it can been removed for repair if necessary. The <em>Control Module</em> part of the circuit will be located underneath the diorama.</p>
+<p>A small plastic case, recovered from a defunct power supply, was adapted to house the <em>Sensor Module</em> component of the above circuit. The front of the diorama was modified to accomodate the case such that it can been removed for repair if necessary. The <em>Control Module</em> part of the circuit will be located underneath or behind the backscene of the diorama.</p>
 
 <p class="alert alert-info indent">It was originally hoped to house the entire circuit within this case, but the decision to use an Arduino Nano clone instead of an ATtiny85 makes this impossible since the Nano will not fit in the case.</p>
 

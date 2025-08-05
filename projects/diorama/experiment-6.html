@@ -6,9 +6,9 @@ title: "Model diorama: RGB LED colour balance experiment"
 
 <h2>Introduction</h2>
 
-<p>It has been decided to use an RGB LED in the infra red receiver unit to provide feedback to the user when entering commands via the infra-red controller.</p>
+<p>It has been decided to use a common cathode RGB LED in the infra red receiver unit to provide feedback to the user when entering commands via the infra-red controller.</p>
 
-<p>When the red, green and blue cathodes of the RGB LED are each connected to the same value of current limiting resistor they have differening brightness levels. This means that any colours that require a mix of LED elements don&rsquo;t appear as expected. So it has been decided to use different value resistors for each of the elements. This experiment was to find what resistances gave the most balanced brightness level for each LED element.</p>
+<p>For any given voltage, the red, green and blue elements of an RGB LED will have different brightness levels when connected to current limiting resistors of the same value. This means that any colours that require a mix of LED elements don&rsquo;t appear as expected. So it has been decided to use different value resistors for each of the elements. This experiment was to find what resistances gave the most balanced brightness level for each LED element.</p>
 
 <h2>Method</h2>
 
@@ -22,7 +22,7 @@ title: "Model diorama: RGB LED colour balance experiment"
     <li>white</li>
 </ul>
 
-<p>Resistors of different values were attached to each of the LED&rsquo;s red, green and blue pins until:</p>
+<p>Resistors of different values were attached to each of the LED&rsquo;s red, green and blue anodes until:</p>
 
 <ol>
     <li class="mb-2">The red, green and blue LED segments were equally bright when run at full intensity.</li>
@@ -48,7 +48,7 @@ title: "Model diorama: RGB LED colour balance experiment"
 
 <h2>Code</h2>
 
-<p>The code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research\ir-control-tests\rgb-led-colour-balance</code> directory. The code was developed in C++ using PlatformIO.</p>
+<p>The code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research\ir-control-tests\rgb-led-colour-balance</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
 
 <p>There is just one program, <code><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/rgb-led-colour-balance/src/rgb-led-colour-balance.cpp">rgb-led-colour-balance.cpp</a></code> that cycles through each of the colours listed above and sends the required PWM signals to the RGB LED&rsquo;s red, green and blue anodes.</p>
 

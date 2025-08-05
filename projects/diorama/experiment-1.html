@@ -18,7 +18,7 @@ title: "Model diorama: infrared remote controller experiment"
 
 <h2>Circuit</h2>
 
-<p>A test circuit was built on a breadboard using the infra-red sensor and a LED that was set to flash whenever a signal was received from the remote. This LED very nearly duplicates duplicates the sensor's built in LED, but has been included because it is unlikely the built in LED will be visible when the sensor is incorporated into the diorama. Furthermore, the final circuit design will most likely only flash the LED when a valid signal is received: it will filter out spurious signals.</p>
+<p>A test circuit was built on a breadboard using the infra-red sensor and a LED that was set to flash whenever a signal was received from the remote.</p>
 
 <p>The breadboard circuit schematic is shown below:</p>
 
@@ -30,7 +30,7 @@ title: "Model diorama: infrared remote controller experiment"
 
 <h2>Code</h2>
 
-<p>The code is available on GitHub in the <a href="https://github.com/cahamo/diorama"><code>cahamo/diorama</code></a> repository.</p>
+<p>The source code is available on GitHub in the <a href="https://github.com/cahamo/diorama"><code>cahamo/diorama</code></a> repository. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
 
 <p>Two different programs were used in the experiment:</p>
 
@@ -45,7 +45,7 @@ title: "Model diorama: infrared remote controller experiment"
 
 <p>The circuit was built as described above.</p>
 
-<p><code>ir-sensor-analyser.cpp</code> code was compiled and uploaded to the Uno. The handset's buttons were pressed in order from left to right, top to bottom and the serial output that was generated was captured to a text file using <a href="https://freeware.the-meiers.org/">CoolTerm</a>. The information gathered was used in the creation of <code>handset-test.cpp</code>.</p>
+<p><code>ir-sensor-analyser.cpp</code> code was compiled and uploaded to the Uno. The handset's buttons were pressed in order from left to right, top to bottom and the serial output was captured to a text file using <a href="https://freeware.the-meiers.org/">CoolTerm</a>. The information gathered was used in the creation of <code>handset-test.cpp</code>.</p>
 
 <p>Next <code>handset-test.cpp</code> was compiled and uploaded to the Uno. Once again the handset's buttons were pressed in the same order as before and the serial output was captured to a second text file.</p>
 
@@ -60,7 +60,7 @@ Protocol=NEC Address=0x0 Command=0x45 Repeat gap=39600us
 
 <p>Examination of the text file shows that some buttons repeated while others did not. The above extract demonstrates the output generated when a button was first pressed and when it repeats.</p>
 
-<p>Because the order in which the buttons were pressed was known it became a simple matter to analyse the text file to find the codes of each button: each time the value of the <code>Command</code> entry changes we have a new key being pressed. A copy of the text file named <code>ir-remote-annotated-readings.txt</code> was annotated to make this clearer. Here are extracts from that file for number 1 and OK keys:</p>
+<p>Because the order in which the buttons were pressed was known it became a simple matter to analyse the text file to find the codes of each button: each time the value of the <code>Command</code> entry changes we have a new key being pressed. A copy of the text file named <code>ir-remote-annotated-readings.txt</code> was annotated to make this clearer. Here are extracts from that file for the number 1 and OK keys:</p>
 
 <pre>&vellip;
 # Number key 1
