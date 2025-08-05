@@ -57,14 +57,11 @@ title: "Electronic tongue drum: grounded vs ungrounded touch sensor pin experime
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-7/circuit-photo-9G_800x450.jpg"
         width="800" height="450" alt="Photo of actual circuit with grounded sensor #9G attached"></p>
 
-<p class="alert alert-info">Note that the grey DuPont cable, connected to ground that is present in the second photo
-    is not present in the first photo.</p>
-
 <h2>Code</h2>
 
 <p>Once again the Arduino sketch <a
         href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a>
-    is used. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over
+    is used. This code takes repeated sensor readings using the <em>CapacitiveSensor</em> library and reports the results over
     the Arduino&rsquo;s serial port, while indicating when the user should touch the sensor by means of tones emitted
     though a
     speaker or buzzer.</p>

@@ -6,7 +6,7 @@ title: "Electronic tongue drum: touch sensor pin capacitor experiment"
 
 <p>The <a href="https://playground.arduino.cc/Main/CapacitiveSensor/">Capacitive Sensing Library article</a> on the <a href="https://playground.arduino.cc/">Arduino Playground</a> suggests placing a capacitor of around 100pF between the sensor pin and &ldquo;ground&rdquo; to improve stability and repeatablity. This experiment tests various capacitor values, connected as recommended in the article.</p>
 
-<p class="alert alert-info">I've placed &ldquo;ground&rdquo; in quotes because I'm, unsure whether this means the capacitor should be connected to the circuit's 0V ground or to the physical earth. In my test circuits I've taken the former approach. Connecting to earth isn't straightforward using the breadboard rig I have been using.</p>
+<p class="alert alert-info">I've placed &ldquo;ground&rdquo; in quotes because I'm unsure whether this means the capacitor should be connected to the circuit's 0V ground or to the physical earth. In my test circuits I've taken the former approach. Connecting to physical earth isn't straightforward using the breadboard rig I have been using.</p>
 
 <h2>Methodology</h2>
 
@@ -14,11 +14,11 @@ title: "Electronic tongue drum: touch sensor pin capacitor experiment"
 
 <p>For each capacitor, and the control circuit, the right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The resulting sensor readings were written to an Arduino Uno&rsquo;s serial port and captured to text files using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
 
-<p>The experiment was performed using the CapacitiveSensor library at both 25 and 50 samples per reading.</p>
+<p>The experiment was performed using the <em>CapacitiveSensor</em> library at both 25 and 50 samples per reading.</p>
 
 <h2>Circuit</h2>
 
-<p>The control circuit was the same as that used with the grounded sensor in <a href="./experiment-7">experiment #7</a>. The circuit was adapted to test capacitors by connecting the required capacitor between the Uno&rsquo;s sensor pin (pin 3) and ground. Each capacitor being tested was swapped into the circuit as required. All capacitors were ceramic.</p>
+<p>The control circuit was similar to that used with the grounded sensor in <a href="./experiment-7">experiment #7</a> except that it was adapted to enable a capacitor to be connected between the Uno&rsquo;s sensor pin (pin 3) and ground. Each capacitor being tested was swapped into the circuit as required. All capacitors were ceramic.</p>
 
 <p>The following circuit diagram gives a representation of how the capacitors were connected. It also represents how the circuit with no capacitor was configured:</p>
 
@@ -35,7 +35,7 @@ title: "Electronic tongue drum: touch sensor pin capacitor experiment"
 
 <h2>Code</h2>
 
-<p>Again the <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a> Arduino sketch was used. The code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Arduino&rsquo;s serial port. The sketch also indicates when the user should touch the sensor, by means of tones emitted though a speaker or buzzer.</p>
+<p>Again the <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a> Arduino sketch was used. The code takes repeated sensor readings using the <em>CapacitiveSensor</em> library and reports the results over the Arduino&rsquo;s serial port. The sketch also indicates when the user should touch the sensor, by means of tones emitted though a buzzer.</p>
 
 <p>This sketch requires that the <code>SAMPLES</code> define is set to the number of samples per reading required. The default value is 25.</p>
 
@@ -59,7 +59,7 @@ title: "Electronic tongue drum: touch sensor pin capacitor experiment"
 
 <h3>Comparison of capacitors to each other</h3>
 
-<p>The following image carousel shows two graphs, one for each sample rate, that show the performance of each capacitor and for the control circuit. The y-axis shows the sensor readings while the x-axis is the number of readings taken:</p>
+<p>The following image carousel displays two graphs, one for each sample rate, that show the performance of each capacitor and for the control circuit. The y-axis shows the sensor readings while the x-axis is the number of readings taken:</p>
 
 <div id="carouselIndicatorsA1" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -117,7 +117,7 @@ title: "Electronic tongue drum: touch sensor pin capacitor experiment"
 
 <h3>Comparison of samples per reading for each capacitor</h3>
 
-<p>The following image carousel shows five graphs, one graph for each of the four capacitor values and one for the control circuit. The graphs compare the readings at the two different sample rates. The y-axis shows the sensor readings while the x-axis is the number of readings taken:</p>
+<p>The following image carousel shows five graphs, one for each of the four capacitor values and one for the control circuit. The graphs compare the readings at the two different sample rates. The y-axis shows the sensor readings while the x-axis is the number of readings taken:</p>
 
 <div id="carouselIndicatorsB" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">

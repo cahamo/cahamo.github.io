@@ -6,7 +6,7 @@ title: "Electronic tongue drum: comparison of touch sensor coverings experiment"
 ---
 <h1>Experiment #4: Comparison of different sensor coverings</h1>
 
-<p>The finished project will have a covering over the touch sensors used for the tongue drum tongues (keys). Having established the best of two different tin foil types in the <a href="./experiment-3">previous experiment</a> it is now necessary to investigate the effect on sensor readings of covering the sensor in different materials.</p>
+<p>The finished project will have a covering over the touch sensors used for the instrument's tongues (keys). Having established the best of two different tin foil types in the <a href="./experiment-3">previous experiment</a> it is now necessary to investigate the effect on sensor readings of covering the sensor in different materials.</p>
 
 <h2>Sensors</h2>
 
@@ -86,7 +86,7 @@ title: "Electronic tongue drum: comparison of touch sensor coverings experiment"
 
 <h2>Methodology</h2>
 
-<p>An Arduino Uno was once again used to test capacitance. 36 sets of tests were run in total: each of the nine sensors was tested at rates of 25, 50, 75 and 100 samples per reading.</p>
+<p>An Arduino Uno was once again used to test performance. 36 sets of tests were run in total: each of the nine sensors was tested at rates of 25, 50, 75 and 100 samples per reading.</p>
 
 <p>In each test the right hand index finger was tapped on the sensor in a pattern of three long taps followed by three short taps. The resulting sensor readings were written to the Uno's serial port and captured to text files using <a href="https://freeware.the-meiers.org/">CoolTerm</a>.</p>
 
@@ -100,7 +100,7 @@ title: "Electronic tongue drum: comparison of touch sensor coverings experiment"
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit-diagram_856x240.png" width="856" height="240" alt="Generic circuit schematic"></p>
 
-<p>Once again a 1k&ohm; resistor was placed between the sensor and the Uno's pin 3 to reduce the likelihood of static damage when the bare foil &ldquo;control&rdquo; sensor is used. The buzzer attached to PWM pin D11 and to ground is used to guide the finger taps. The components were laid out similarly to the following schematic diagram, except that a passive buzzer was used that was mounted directly on the breadboard.</p>
+<p>Once again a 1k&ohm; resistor was placed between the sensor and the Uno's pin 3 to reduce the likelihood of static damage when the bare foil &ldquo;control&rdquo; sensor is used. The buzzer attached to PWM pin D11 and to ground is used to output the guidance beeps. The components were laid out as shown in the following schematic diagram, except that a passive buzzer was used that was mounted directly on the breadboard.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/tongue-drum/exp-4/circuit-schematic_716x422.png" width="716" height="422" alt="Generic circuit layout diagram, created using TinkerCAD"></p>
 
@@ -110,7 +110,7 @@ title: "Electronic tongue drum: comparison of touch sensor coverings experiment"
 
 <h2>Code</h2>
 
-<p>The code used is an Adruino IDE project named <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a>. This code takes repeated sensor readings using the CapacitiveSensor library and reports the results over the Uno's serial port while indicating when the user should touch the sensor by means of tones emitted though a speaker or buzzer.</p>
+<p>The code used is an Arduino IDE project named <a href="https://github.com/cahamo/electro-tongue-drum/tree/main/src/research/GuidedSensorTouchDataLogger"><code>GuidedSensorTouchDataLogger</code></a>. This code takes repeated sensor readings using the <em>CapacitiveSensor</em> library and reports the results over the Uno's serial port. The tones emitted though the buzzer indicate when the sensors should be touched.</p>
 
 <h2>Results</h2>
 

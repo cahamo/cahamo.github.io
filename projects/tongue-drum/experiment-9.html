@@ -2,9 +2,9 @@
 layout: default
 title: "Electronic tongue drum: ESP32 touch sensor pin experiment"
 ---
-<h1>Experiment #9: Testing the EXP32&rsquo;s built in touch sensor pins</h1>
+<h1>Experiment #9: Testing the ESP32&rsquo;s built in touch sensor pins</h1>
 
-<p>Ever since it came to my notice that the ESP32 microcontroller has eight or nine built in touch pins (depending on the board), it struck me that I should check these pins out before committing to using the CapacitiveSensor library for the electro tongue drum.</p>
+<p>Ever since it came to my notice that the ESP32 microcontroller has eight or nine built in touch pins (depending on the board), it struck me that I should check these pins out before committing to using the <em>CapacitiveSensor</em> library for the electro tongue drum.</p>
 
 <p>This experiment tests a single touch sensor connected to a single ESP32 touch sensor pin.</p>
 
@@ -31,7 +31,7 @@ title: "Electronic tongue drum: ESP32 touch sensor pin experiment"
 
 <h2>Results</h2>
 
-<p class="alert alert-info">It should be noted that the results obtained from the EPS32 touch pin are the inverse of those obtained with the CapacitiveSensor library. With the ESP32, a high value is returned when the sensor is not touched and the value <em>drops</em> when it is touched.</p>
+<p class="alert alert-info">It should be noted that the results obtained from the EPS32 touch pin are the inverse of those obtained with the <em>CapacitiveSensor</em> library. With the ESP32, a high value is returned when the sensor is not touched and the value <em>drops</em> when it is touched.</p>
 
 <p>The results of <em>not</em> touching the sensor, both with and without grounding, are shown in the following carousel. As can be seen, in both cases, the sensor reading was level.</p>
 
@@ -87,7 +87,7 @@ title: "Electronic tongue drum: ESP32 touch sensor pin experiment"
     </div>
 </div>
 
-<p>Finally, the graphs for tapping the sensor are shown below. Again the results for the grounded and ungrounded circuits are shown in a carousel:</p>
+<p>Finally, the graphs for tapping the sensor are shown below. Again the results for the grounded and ungrounded circuits are displayed in a carousel:</p>
 
 <div id="carouselIndicatorsC" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -122,6 +122,6 @@ title: "Electronic tongue drum: ESP32 touch sensor pin experiment"
 
 <p>Some of the spikes in values detected when interference is present and the sensor is not touched are large enough to mean that false positive readings could easily be registered. As a consequence some means of &ldquo;debouncing&rdquo; in software would be required in order to ignore such anomalies.</p>
 
-<p>Using the ESP32 instead of an Arduino and the CapacitiveSensor library would greatly simplify code and wiring.</p>
+<p>Using the ESP32 instead of an Arduino and the <em>CapacitiveSensor</em> library would greatly simplify code and wiring.</p>
 
-<p class="lead">While the simplicity the ESP32 would bring to circuit and code design is attractive, the potential for interference to cause false tongue hits to be registered means that the CapacitiveSensor library will continue to be used, regardless of the chosen microcontroller.</p>
+<p class="lead">While the simplicity the ESP32 would bring to circuit and code design is attractive, the potential for interference to cause false tongue hits to be registered means that the <em>CapacitiveSensor</em> library will continue to be used, regardless of the chosen microcontroller.</p>
