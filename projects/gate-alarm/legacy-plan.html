@@ -10,18 +10,18 @@ title: "Gate alarm original plan"
 
     <h2>Gate movement detector</h2>
 
-    <p>My initial plan was to fit single reed switch to the gate post and to mount a magnet on the gate immediately opposite to the switch. The magnet would hold the switch closed when the gate was closed and the circuit would be broken when the gate was opened. This would then activate the alarm.</p>
+    <p>My initial plan was to fit a single, normally open, reed switch to the gate post and to mount a magnet on the gate immediately opposite to the switch. The magnet would hold the switch closed when the gate was closed and the circuit would be broken when the gate was opened. This would then activate the alarm.</p>
 
     <p>I rejected this plan for two reasons:</p>
 
     <ol>
-        <li class="mb-2">The detector circuit would normally be conducting electricity. I would prefer it if the circuit would normally be off.</li>
+        <li class="mb-2">The detector circuit would normally be conducting electricity. I would prefer it if the circuit would normally be open.</li>
         <li class="mb-0">I would be relying on a single reed switch which would be a single point of failure.</li>
     </ol>
 
-    <p>After a rethink I decided to leave the magnet on the gate but to mount three reed switches side by side, offset from the gate post so that the switches remain open when the gate is closed. When the gate was opened the magnet would switch on each of the reed switches in sequence as it passed them. The switches would turn off again after the magnet passed. A microcontroller would detect these switches closing and deduce the direction the gate was travelling. When the gate was closed the switches would open and close in the reverse order and again the microcontroller could deduce the direction of travel. Such a circuit would still work if only two switches activated, so there's some redundancy in the system. The three switches would be mounted inside a plastic case and a magnet strong enough to close the switches through the case would be used.</p>
+    <p>After a rethink I decided to leave the magnet on the gate but to mount <em>three</em> normally open reed switches side by side, offset from the gate post so that the switches remain open when the gate is closed. When the gate was opened the magnet would switch on each of the reed switches in sequence as it passed them. The switches would turn off again after the magnet passed. A microcontroller would detect these switches closing and deduce the direction the gate was travelling. When the gate was closed the switches would open and close in the reverse order and again the microcontroller could deduce the direction of travel. Such an arrangement would still work if only two switches activated, so there's some redundancy in the system. The three switches would be mounted inside a plastic case and a magnet strong enough to close the switches through the case would be used.</p>
 
-    <p>The following shows various stages in the contruction of the reed switch unit and its mounting bracket:</p>
+    <p>The following montage shows various stages in the contruction of the reed switch unit and its mounting bracket. Notice that a modified AA battery box was used for the case.</p>
 
     <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/gate-alarm/sensor-case-construction_640x536.png" width="640" height="536" alt="Montage of photos showing construction of gate sensor unit"></p>
 
@@ -30,7 +30,7 @@ title: "Gate alarm original plan"
     <p>After some thought I decided to reject the detection of gate movement, for two reasons:</p>
 
     <ol>
-        <li class="mb-2">Detecting the direction of gate movement would easily be confused if the gate was open and the wind was blowing it around. Such movement could trigger only one of the reed switches, potentially confusing the detection software.</li>
+        <li class="mb-2">Detecting the direction of gate movement would easily be confused if the gate was open and the wind was blowing it back and forth past the reed switches.</li>
         <li class="mb-0">Assume the microcontroller was to be put to sleep to be woken up when the gate moved. To do this would require one or more of the reed switches to signal the microcontroller to wake up. It is probable that in the time taken for the microcontroller to resume it would miss signals from the other reed switches and fail to detect the direction of travel.</li>
     </ol>
 
@@ -46,7 +46,7 @@ title: "Gate alarm original plan"
 
     <p>555 timer IC2 generates the square wave that is sent to the speaker via capacitor C5. According calculations, IC2 generates a pulse of approximately 687Hz with a duty cycle &asymp;52.4%, which is as close as I could get to 50%. This means the speaker should generate a sound pitched somewhere between E5 and F5.</p>
 
-    <p>Timer IC1 generates a slow pulse that turns IC3 on and off. The theoretical period of oscillation is about 1.9 seconds, with a duty cycle of 63%, so that the alarm should sound for approximately 1.2 seconds in every cycle. In practise, of course, the actual period and duty cycle differs from the theoretical values.</p>
+    <p>Timer IC1 generates a slow pulse that turns IC2 on and off. The theoretical period of oscillation is about 1.9 seconds, with a duty cycle of 63%, so that the alarm should sound for approximately 1.2 seconds in every cycle. In practise, of course, the actual period and duty cycle differs from the theoretical values.</p>
 
     <p>The following video shows the circuit in action after being mocked up on a breadboard.</p>
 
@@ -56,6 +56,6 @@ title: "Gate alarm original plan"
         </div>
     </div>
 
-    <p>The problem was that this circuit produced a sound that was too quiet. In the end it was decided to use a commercial buzzer instead.</p>
+    <p>The problem was that this circuit produced a sound that was too quiet. Consequently it was decided to use a commercial buzzer instead.</p>
 
 </section>
