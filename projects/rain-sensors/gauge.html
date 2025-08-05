@@ -19,7 +19,7 @@ title: "Rain measurement gauge sensor unit and circuit"
         <li>To record each period's rainfall in a file on removable storage in a format suitable for importing into a spreadsheet</li>
     </ol>
 
-    <p class="alert alert-warning">This page is structured as if there was an orderly, linear process from design to construction. The truth is that process was iterative, through design, construction, testing, redesign &hellip; and so on. Every single 3D printed component was re-designed and re-printed at least once, with some being printed several times. Other components were destroyed during testing and had to be replaced. I've not gone into all the gruesome details here, because that would make this page much too long and difficult to read. However, some design changes are referred to in the text where the learning point is important.</p>
+    <p class="alert alert-warning">This page is structured as if there was an orderly, linear process from design to construction. The truth is that process was iterative, through design, construction, testing, redesign and so on. Every single 3D printed component was re-designed and re-printed at least once. I've not gone into all the gruesome details here, because that would make this page much too long and difficult to read. However, some design changes are referred to in the text where the learning point is important.</p>
 
     <aside>
         <p class="alert alert-info">This project is based on the <a
@@ -37,7 +37,7 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <p>This project comprises a 3D printed rain gauge coupled to a microcontroller, storage and display.</p>
 
-    <p>The gauge collects rain and funnels it down into a pivoted bucket componet, comprising two buckets with an attached magnet as shown in <em>figure 1</em>:</p>
+    <p>The gauge collects rain and funnels it down into a pivoted bucket component, comprising two buckets with an attached magnet as shown in <em>figure 1</em>:</p>
 
     <figure id="fig-1">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--bucket-model-render_400x263.png" width="400" height="263" alt="Rain gauge bucket illustration"></p>
@@ -61,13 +61,13 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <ol>
         <li>Funnel <sup>&dagger;</sup></li>
-        <li>Case in which the funnel is mounted that contains and protects the buckets <sup>&dagger;</sup></li>
-        <li>&quot;Plug&quot; that fits inside the hole at the botton of the funnel that reduces the aperature through which water can flow. <sup>&Dagger;</sup></li>
-        <li>Buckets &amp; magnet holder <sup>&dagger;</sup></li>
-        <li>Cap to cover the exposed side of the magnet in the magnet holder. <sup>&sect;</sup></li>
-        <li>Bucket pivot unit &amp; reed switch holder <sup>&dagger;</sup></li>
-        <li>Bracket that holds the pivot unit inside the main case <sup>&Dagger;</sup></li>
-        <li>Mounting brackets to be used to fasten the rain gauge bucket assembly to a wooden baseboard <sup>&dagger;</sup></li>
+        <li>Case that contains and protects the buckets. The funnel is mounted on top of the case.&nbsp;<sup>&dagger;</sup></li>
+        <li>&quot;Plug&quot; that fits inside the hole at the botton of the funnel that reduces the aperature through which water can flow.&nbsp;<sup>&Dagger;</sup></li>
+        <li>Buckets &amp; magnet holder&nbsp;<sup>&dagger;</sup></li>
+        <li>Cap to cover the exposed side of the magnet in the magnet holder.&nbsp;<sup>&Dagger;</sup></li>
+        <li>Bucket pivot unit &amp; reed switch holder&nbsp;<sup>&dagger;</sup></li>
+        <li>Bracket that holds the pivot unit inside the main case&nbsp;<sup>&Dagger;</sup></li>
+        <li>Mounting brackets to be used to fasten the rain gauge bucket assembly to a wooden baseboard&nbsp;<sup>&dagger;</sup></li>
     </ol>
 
     <div class="alert alert-info small">
@@ -96,7 +96,7 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h3>Rain Gauge</h3>
 
-    <p>The rain gauge components described above were 3D printed on a Bambu Labs A1 3D printer using Bambu Basic black PLA. The models were sliced using the Bambu slicer using the default 0.20 mm strong print profile. The following montage shows all the printed parts. The parts are not to scale relative to each other:</p>
+    <p>The rain gauge components described above were 3D printed on a Bambu Labs A1 3D printer using Bambu Basic black PLA. The models were sliced using the Bambu slicer using the default 0.20mm strong print profile and 0.4mm &#x2300; nozzle. The following montage shows all the printed parts. The parts are not to scale relative to each other:</p>
     
     <figure id="fig-3">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--printed-parts_800x593.png" width="800" height="593" alt="All the rain gauge 3D printed parts"></p>
@@ -110,14 +110,14 @@ title: "Rain measurement gauge sensor unit and circuit"
         <figcaption class="text-center">Figure 4: Magnet fitted to the magnet holder</figcaption>
     </figure>
 
-    <p>A normally open, plastic bodied reed switch, 2.7mm square section &times; 14mm long, was soldered to two 20cm lengths of 7/0.2mm stranded wire. The reed switch was then mounted into the provided channel in the bucket pivot unit, securred by superglue. Heat shrink was added to protect sections of the wire. The pivot unit was then bolted to its base with 2 &times; M3 nuts and 10mm hex head bolts.</p>
+    <p>A normally open, plastic bodied reed switch, 2.7mm square section &times; 14mm long, was soldered to two 20cm lengths of 7/0.2mm stranded wire. The reed switch was then mounted into the provided channel in the bucket pivot unit, securred by superglue. Heat shrink was added to protect sections of the wire. The pivot unit was bolted to its base with 2 &times; M3 nuts and 10mm hex head bolts.</p>
         
     <figure id="fig-5">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-bracket_640x256.png" width="640" height="256" alt="Bucket pivot with magnet attached mounted to its bracket"></p>
         <figcaption class="text-center">Figure 5: Bucket pivot unit, with reed switch, attached to the mounting bracket</figcaption>
     </figure>
 
-    <p>A 5cm long piece of round 3mm &#x2300; mild steel bar was cut to use as an axle that allows the buckets to move within the pivot unit. The axle holes in the pivot unit had to be drilled out to 3.2mm in order for the axle to fit. A M3 washer was threaded over the axle on either side of the buckets to limit side to side movement. The &quot;pimples&quot; surrounding the holes on the side of the buckets component were filed down until the bucket rotated freely on the axle with minimal side to side movement. The axle is a snug friction fit in the pivot unit meaning that the axle remained stationary while the bucket pivoted on it. At this stage the wires from the reed switch were glued in place with superglue to avoid them fouling the axle.</p>
+    <p>A 5cm long piece of round 3mm &#x2300; mild steel bar was cut to use as an axle that allows the buckets to move within the pivot unit. The axle holes in the pivot unit had to be drilled out to 3.2mm in order for the axle to fit. A M3 washer was threaded over the axle on either side of the buckets to limit side to side movement. The &quot;pimples&quot; surrounding the holes on the side of the buckets component were filed down until the bucket rotated freely on the axle with minimal side to side movement. The axle is a snug friction fit in the pivot unit meaning that the axle remains stationary while the bucket pivots on it. At this stage the wires from the reed switch were glued in place with superglue to avoid them fouling the axle.</p>
 
     <figure id="fig-6">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-completed_640x339.png" width="640" height="339" alt="Bucket sub-assembly completed"></p>
@@ -125,18 +125,17 @@ title: "Rain measurement gauge sensor unit and circuit"
     </figure>
 
     <aside>
-        <p class="alert alert-warning"><strong>Strange behaviour.</strong> In earlier iterations of the design of the bucket pivot mount some strange behaviour was noted if the wire connected to the top of the reed switch was bent at 90&deg; to the switch. When the magnet is located on the same side as the wire then the reed switch was held open all the time. This didn't occur when the magnet tilted in the opposite direction. I don't know what caused this, but my hypothesis is that the magnet induced a magnetic field in the wire that held the reed switch closed. Routing the wire vertically down in front of the reed switch fixed this problem.</p>
+        <p class="alert alert-warning"><strong>Strange behaviour.</strong> In earlier iterations of the design of the bucket pivot mount some strange behaviour was noted if the wire connected to the top of the reed switch was bent at 90&deg; to the switch. When the magnet was located on the same side as the wire then the reed switch was held open all the time. This didn't occur with the magnet tilted in the opposite direction. I don't know what caused this, but my hypothesis is that the magnet induced a magnetic field in the wire that held the reed switch closed. Routing the wire vertically down in front of the reed switch fixed this problem.</p>
     </aside>
 
-    <p>Once the interaction of the magnet and reed switched was proved to be working as expected the reed switch was covered in hot melt glue to protect it from the elements.</p>
+    <p>Once the interaction of the magnet and reed switch was proved to be working as expected the reed switch was covered in hot melt glue to protect it from the elements.</p>
 
     <figure id="fig-7">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--reed-switch_400x218.png" width="400" height="218" alt="Reed switch covered in hot melt glue"></p>
         <figcaption class="text-center">Figure 7: Reed switch protected by hot melt glue</figcaption>
     </figure>
 
-    <p>The funnel plug, that gradually narrows the drain hole, was fitted into the hole at the bottom of the funnel. The plug had to be filed to fit snugly, so that its top was flush with the top of the hole in the funnel, with the plug's bottom sitting proud of the funnel base so that it fits throught the hole at top of the case. Superglue was run around the joint between the funnel and plug then further filing ensured that the boundary of the funnel plug with the funnel hole was as smooth as possible. The funnel was now bolted its containing using 4 &times; M5 nuts and 12mm hex head
-    bolts.</p>
+    <p>The funnel plug, that gradually narrows the drain hole, was fitted into the hole at the bottom of the funnel. The plug had to be filed to fit snugly, so that its top was flush with the top of the hole in the funnel. The plug's bottom sits proud of the funnel base and fits through the hole at top of the case. Superglue was run around the joint between the funnel and plug then further filing ensured that the boundary of the funnel plug with the funnel hole was as smooth as possible. The funnel was now bolted to the top of the case using 4 &times; M5 nuts and 12mm hex head bolts.</p>
 
     <figure id="fig-8">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--funnel+box_720x597.png" width="720" height="597" alt="Funnel mounted on top of the case"></p>
@@ -146,13 +145,10 @@ title: "Rain measurement gauge sensor unit and circuit"
     <p><em>The small images in </em>figure 8<em>, clockwise from top centre are: the holes in the funnel aligned over the case top, as printed; the plug after filing to fit in the bottom of the funnel; the plug protruding from the funnel base; the plug protruding into the top of the case &amp; the plug after gluing in place and filing flush with the funnel hole.</em></p>
 
     <aside>
-        <p class="alert alert-warning"><strong>Bodge alert!</strong> The reason the plug was used was to guide water flow
-            over the buckets more effectively. It had been found that the hole in the funnel was too wide and was allowing
-            water to miss the measuring buckets. This was a bodge to avoid the cost in both time and money of re-printing
-            both the funnel and case (again).</p>
+        <p class="alert alert-danger"><img class="float-left mr-2" src="/assets/img/icons/error_24x24.png" width="24" height="24"><strong>Bodge alert!</strong> It had been found that the hole in the funnel was too wide and was allowing water to miss the measuring buckets. This plug was designed and printed as a bodge to guide water flow over the buckets more effectively. Doing this avoided the cost in both time and money of redesigning and reprinting the funnel and the case (yet again).</p>
     </aside>
 
-    <p>It was now time to assemble the complete gauge. The funnel / casing assembly, gauge assembly and mounting brackets all had their mounting bolt holes drilled out to 3.2mm &#x2300; and were then bolted together using 4 &times; M3 nuts, washers and 16mm hex head bolts. The wires from the reed switch were led out to one side.</p>
+    <p>It was now time to assemble the whole gauge. The funnel / casing assembly, gauge assembly and mounting brackets all had their mounting bolt holes drilled out to 3.2mm &#x2300; and were then bolted together using 4 &times; M3 nuts, washers and 16mm hex head bolts. The wires from the reed switch were led out to one side.</p>
 
     <figure id="fig-9">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--complete_600x477.png" width="600" height="477" alt="Completed rain gauge assembly"></p>
@@ -190,6 +186,8 @@ title: "Rain measurement gauge sensor unit and circuit"
                 <li>6 &times; M3</li>
             </ul>
         </li>
+        <li>Cyanoacrylate glue (superglue)</li>
+        <li>Holt melt glue</li>
     </ol>
 
     <aside>
@@ -202,7 +200,7 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h2>Calibration</h2>
 
-    <p>The gauge needs to be calibrated before being used. We need to know how much water is required to tilt a bucket. To do this we simply pour a measured amount of water through the gauge and count the number of times the bucket tilts. The amount of water required to tilt the bucket is the volume of water put through the gauge divided by the number of tilts counted. It is advisable to run the test several times and to use the average of all the results.</p>
+    <p>The gauge needs to be calibrated before being used. We need to know how much water is required to tilt a bucket. To do this we pour a measured amount of water through the gauge and count the number of times the bucket tilts. The amount of water required to tilt the bucket is the volume of water put through the gauge divided by the number of tilts counted. It is advisable to run the test several times and to use the average of all the results.</p>
 
     <h3>Circuit</h3>
 
@@ -213,7 +211,7 @@ title: "Rain measurement gauge sensor unit and circuit"
         <figcaption class="text-center">Figure 10: Calibration circuit diagram</figcaption>
     </figure>
 
-    <p>One of the wires from the rain gauge reed switch is coupled to Nano pin D6 while he other connection to the reed switches is connected to ground. Similarly, one terminal of the push switch is connected to Nano pin D2 and the other terminal is also connected to ground. Both pins D2 and D6 are configured as input pins that are pulled up to 5V internally. The I&sup2;C display is connected to 5V, ground and to Nano pins A4 and A5, which double as the Nano's SDA and SCL I&sup2;C control pins respectively. Nano is powered by connecting 5V to its 5V pin and ground to a GND pin.</p>
+    <p>One of the wires from the rain gauge reed switch is coupled to Nano pin D6 while he other connection to the reed switch is connected to ground. Similarly, one terminal of the push switch is connected to Nano pin D2 and the other terminal is also connected to ground. Both pins D2 and D6 are configured as input pins that are pulled up to 5V internally. The I&sup2;C display is connected to 5V, ground and to Nano pins A4 and A5, which double as the Nano's SDA and SCL I&sup2;C control pins respectively. The Nano is powered by connecting 5V to its 5V pin and ground to a GND pin.</p>
 
     <p>The circuit was built on a breadboard as shown in <em>figure 11</em> below. The leads from the rain gauge were connected to the circuit via crocodile clips. 5V power was supplied by a breadboard power supply, connected to a 9V wall wart via a barrel jack.</p>
 
@@ -224,11 +222,11 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h3>Software</h3>
 
-    <p>The microcontroller program was written in C++ using VSCode and and PlatformIO extension. The code was targetted at the Arduino platform. The source code is available from the <a href="https://github.com/cahamo/rain-sensors/tree/develop/code/gauge-calibration"><code>code/gauge-calibration</code></a> directory of the <a href="https://github.com/cahamo/rain-sensors/"><strong>cahamo/rain-sensors</strong></a> project on GitHub.</p>
+    <p>The microcontroller program was written in C++ using VSCode and the PlatformIO extension. The code was targetted at the Arduino platform. The source code is available from the <a href="https://github.com/cahamo/rain-sensors/tree/develop/code/gauge-calibration"><code>code/gauge-calibration</code></a> directory of the <a href="https://github.com/cahamo/rain-sensors/"><strong>cahamo/rain-sensors</strong></a> project on GitHub.</p>
 
     <h3>Results</h3>
 
-    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated. The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test while the right hand column shows the average number of millilitres of water required to tilt a bucket in that test, rounded to 2 decimal places:</p>
+    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml of water. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated. The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test while the right hand column shows the average number of millilitres of water required to tilt a bucket in that test, rounded to 2 decimal places:</p>
 
     <table class="table table-responsive">
         <thead>
