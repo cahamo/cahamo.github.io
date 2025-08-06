@@ -4,13 +4,11 @@ title: "Information about using DFPlayer Mini MP3 player card"
 ---
 <h1>DFPlayer Mini</h1>
 
-<p>Reliable information about this player is hard to come by. According to several people the official docs and data
-    sheet are not entirely accurate. There are several posts that provide partial information. So I&rsquo;ve tried to gather
-    together the best of the info I&rsquo;ve found online.</p>
+<p>Reliable information about this player is hard to come by. According to some sources the official docs and data sheet are not entirely accurate. There are several posts that provide partial information. So I&rsquo;ve tried to gather together the best of the info I&rsquo;ve found online.</p>
 
 <p class="alert alert-warning">If you find any errors in the following please create an issue on this site&rsquo;s <a href="https://github.com/cahamo/cahamo.github.io/issues">GitHub page</a> <small>(GitHub account required)</small></p>
 
-<p>To date, the main info I&rsquo;ve found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly on the <em>banggood</em> forums, but has now disappeared. Fortunately the information had been re-posted on PasteBin as <a href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>. I&rsquo;ve formatted and and lightly tweaked a part of the PasteBin post and <a href="#commands">re-published it below</a>.</p>
+<p>To date, the main info I&rsquo;ve found has been in a post by <em>Ype Brada (aka Yerke?)</em> on 6 April 2015 that was formerly on the <em>banggood</em> forums, but has now disappeared. Fortunately the information had been re-posted on PasteBin as <a href="https://pastebin.com/cwqBkPXW">Yerke Post about DF Player mini commands</a>. I&rsquo;ve formatted and slightly tweaked a part of the PasteBin post and <a href="#commands">re-published it below</a>.</p>
 
 <p>Opinions also seem to vary about how best to wire up the DFPlayer Mini. Having tried a few suggestions, I&rsquo;ve <a href="#wiring">published a diagram</a> of the circuit that works best me at the bottom of the page.</p>
 
@@ -20,7 +18,7 @@ title: "Information about using DFPlayer Mini MP3 player card"
 
 <section id="commands">
 
-<h2>DF Player Mini Commands (after Ype Brada)</h2>
+<h2>DF Player Mini Commands</h2>
 
 <div class="alert alert-info">
 
@@ -52,13 +50,13 @@ title: "Information about using DFPlayer Mini MP3 player card"
 
 <p>E.g.: <kbd>3,0,1</kbd> will play the first track on the TF card</p>
 
-<p><strong>Very important:</strong> Use serial 1K&ohm; resistors or a level shifter between module RX and TX and Arduino to
+<p><strong>Very important:</strong> Use serial 1K&ohm; resistors or a level shifter between [the] module RX and TX and [the] Arduino to
     suppress noise.</p>
 
 <ul>
     <li>Connect Sound module board RX to Arduino pin 11 (via 1K&ohm; resistor)</li>
     <li>Connect Sound module board TX to Arduino pin 10 (via 1K&ohm; resistor)</li>
-    <li>Connect Sound module board Vcc to Arduino Vin when powered via USB (preferably 3.0) else use seperate 5V power
+    <li>Connect Sound module board Vcc to Arduino Vin when powered via USB (preferably 3.0) else use separate 5V power
         supply</li>
     <li>Connect Sound module board GND to Arduino GND</li>
 </ul>
@@ -145,8 +143,15 @@ title: "Information about using DFPlayer Mini MP3 player card"
 <p>Key to following tables:</p>
 
 <ul>
-    <li><em>Status</em> column: * &rArr; Confirmed command; ? &rArr; Unknown, not clear or not validated</li>
-    <li><em>Parameters</em> columns: X &rArr; Value not used (set to zero?)</li>
+    <li>
+        <p class="mb-2"><em>Status</em> column:</p>
+        <p class="mb-0">* &rArr; Confirmed command.</p>
+        <p>? &rArr; Unknown, not clear or not validated.</p>
+    </li>
+    <li>
+        <p class="mb-2"><em>Parameters</em> columns:</p>
+        <p>X &rArr; Value not used (set to zero?).</p>
+    </li>
 </ul>
 
 <h5>Commands without returned parameters</h5>
