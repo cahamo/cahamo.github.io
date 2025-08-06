@@ -92,7 +92,7 @@ title: "LCD Display Demo"
 
 <p class="alert alert-info">The breadboard design shows a 2 row, 16 column display while the circuit as built uses a 4 row, 20 row display.</p>
 
-<p>In this example power from the LCD is supplied from the Uno to the breadboard 5V and ground rails. Connections are as follows:</p>
+<p>In this example, power for the LCD is supplied from the Uno to the breadboard 5V and ground rails. Connections are as follows:</p>
 
 <table class="table table-responsive">
     <thead>
@@ -172,12 +172,12 @@ title: "LCD Display Demo"
 <p>The demo source code is available from the <a href="https://github.com/cahamo/demo-projects"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>lcd-display--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/lcd-display--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
 
 <p class="alert alert-info">
-    This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>src/main.cpp</code> into a new, blank Arduino API project and ensure that the <code>LiquidCrystal</code> library is installed.</p>
+    This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE simply by copying the code from <code>src/main.cpp</code> into a new, blank Arduino API project and ensuring that the <code>LiquidCrystal</code> library is installed.</p>
 </p>
 
 <p>Once the code is compiled and uploaded to the Uno you should see the text of the first two verses of <em>Jabberwocky</em> (a poem by Lewis Carroll) begin to scroll up from the bottom of the display. After the poem is displayed then the screen is slowly filled with asterisks and finally the screen is flashed.</p>
 
-<p class="alert alert-info">By default the code assumes the display is 4 rows by 20 columns, but it is easy to adjust the program to work with other display sizes. To do this simply change the values of the <code>ROWS</code> and <code>COLUMNS</code> defines. The code will then automatically adjust the length of the lines of text to fit the display width and the scrolling logic to fit the display height.</p>
+<p class="alert alert-info">By default the code assumes the display is 4 rows by 20 columns, but it is easy to adjust the program to work with other display sizes. To do this simply change the values of the <code>ROWS</code> and <code>COLUMNS</code> defines and re-compile and upload the code. The line length and scrolling behaviour will adjust to the revised screen size automatically.</p>
 
 <p>You can see the demo running in the following video.</p>
 
