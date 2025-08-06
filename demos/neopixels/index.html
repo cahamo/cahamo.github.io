@@ -12,7 +12,7 @@ title: "Neopixel Demos"
 
 <ol>
     <li>Using an Arduino Uno with the <code>Adafruit_NeoPixel</code> library.</li>
-    <li>Using an ESP32-C3 Super Mini using the WLED software.</li>
+    <li>Using an ESP32-C3 Super Mini with WLED software.</li>
 </ol>
 
 <h3>1. Neopixel rings with Arduino Uno</h3>
@@ -30,6 +30,12 @@ title: "Neopixel Demos"
 <p class="alert alert-warning">To avoid overloading the Uno, the LED ring is powered using a breadboard power supply configured to supply 5V rather than unsing the Uno's 5V output. It is important that one of the Uno's GND pins is connected to the same ground as the power supply.</p>
 
 <p>The source code that exercises the LED ring is a greatly modified version of code by <a href="https://tinyurl.com/3bc2fbb6">&quot;Elon&quot; on Medium</a>. The code can be found in the <a href="https://github.com/cahamo/demo-projects/tree/main"><code>cahamo/demo-projects</code></a> repository on GitHub. The relevant code will be found in the <code>neopixels/neopixel-ring--uno</code> directory. All the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-ring--uno/src/main.cpp"><code>src/main.cpp</code></a>.</p>
+
+<p class="alert alert-info">
+    This demo is a PlatformIO project for use with Visual Studio Code. It can be modified for use with the Arduino IDE
+    simply by copying the code from <code>src/main.cpp</code> into a new, blank Arduino API project and ensure that the
+    <code>Adafruit NeoPixel</code>, <code>Adafruit NeoMatrix</code> and <code>Adafruit GFX Library</code> libraries are all installed.</p>
+</p>
 
 <p>The demo can be seen running in the following video:</p>
 
@@ -63,7 +69,7 @@ title: "Neopixel Demos"
 
 <p>My matrices are 8&times;8 pixels, so that's what is demonstrated here. However the principle is the same for any size matrix. There are two demos. Both of them target an Arduino Uno and use the <code>Adafruit_NeoPixel</code> and <code>Adafruit_NeoMatrix</code> libraries.</p>
 
-<p>Both demos use the same circuit, which is in turn the same as that used for the Uno with the Neopixel ring as described in the section <em>Neopixel rings with Arduino Uno</em> above. Just replace the neopixel ring with the matrix: the connections are just the same. The following image shows the circuit as built:</p>
+<p>Both demos use the same circuit as that used for the Uno with the Neopixel ring as described in the section <em>Neopixel rings with Arduino Uno</em> above. Just replace the neopixel ring with the matrix: the connections are just the same. The following image shows the circuit as built:</p>
 
 <div class="text-center d-block">
     <p><img class="img-fluid mx-auto" src="/assets/img/demos/neopixels/matrix-breadboard-uno-built_600x443.png" width="600" height="443" alt="Neopixel matrix breadboard circuit as built with Uno"><br><em class="caption caption-small">Breadboard circuit as built</em></p>
@@ -78,6 +84,12 @@ title: "Neopixel Demos"
 
     <li>The second project scrolls text across the matrix in a horizontal orientation. This project is in the above repository's <code>neopixels/neopixel-matrix-2--uno</code> directory: the C++ code is in <a href="https://github.com/cahamo/demo-projects/blob/main/neopixels/neopixel-matrix-2--uno/src/main.cpp"><code>src/main.cpp</code></a>.</li>
 </ol>
+
+<p class="alert alert-info">
+    Both demos are PlatformIO projects for use with Visual Studio Code. They can be modified for use with the Arduino IDE
+    simply by copying the code from the relevant <code>src/main.cpp</code> file into a new, blank Arduino API project and ensure that the
+    <code>Adafruit NeoPixel</code>, <code>Adafruit NeoMatrix</code> and <code>Adafruit GFX Library</code> libraries are all installed.
+</p>
 
 <p>Both projects are modified versions of examples supplied with the <code>Adafruit_NeoMatrix</code> library.</p>
 
