@@ -6,7 +6,9 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>The infra-red control sub-system enables all the diorama&lsquo;s features to be controlled using an infra-red handset.</p>
 
-<h2>Requirements</h2>
+<p>The sub-system does not implement those features, it simply interprets the input from an infra-red handset and passes valid commands on the diorama's main microcontroller to perform the required actions.</p>
+
+<h2 id="requirements">Requirements</h2>
 
 <ol>
     <li class="mb-2">An infra-red receiver should be placed on the front of the diorama as unobtrusively as possible.</li>
@@ -22,11 +24,171 @@ title: "Model diorama automation infra red control subsystem"
     </li>
 </ol>
 
-<h2>Design</h2>
+<h2 id="design">Design</h2>
 
-<p>The infra-red control sub-system will have its own microcontroller that will communicate with the central control microcontroller.</p>
+<p>The infra-red control sub-system has its own microcontroller that communicates with the diorama's main microcontroller. The sub-system receives inputs from an infra-red handset, interprets those inputs as commands and forwards valid commands to the main microcontroller over I²C.</p>
 
-<p>Visual feedback to the user will be by means of and RGB LED that displays as follows:</p>
+<p class="alert alert-info">The decision to use I²C for communication with the main microcontroller was arrived at after testing both <a href="./experiment-4">serial</a> and <a href="./experiment-5">I²C</a> communications.</p>
+
+<p>Commands from the handset comprise one or two keypresses. Valid commands have three parts: a command ID, a sub-command ID and some data, the meaning of which is command dependent. Commands are encoded into a pair of bytes before being transmitted to the main microcontroller. The first byte stores the command ID in its high nybble and the sub-command in its low nybble. The second byte contains the data.</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr class="text-left">
+            <th scope="col" rowspan="2">Command</th>
+            <th scope="col" colspan="2">Key(s)</th>
+            <th scope="col" colspan="2">Command codes</th>
+        </tr>
+        <tr class="text-left">
+            <th scope="col">1st key</th>
+            <th scope="col">2nd key</th>
+            <th scope="col">Command ID</th>
+            <th scope="col">Sub-command ID</th>
+            <th scope="col">Data byte</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Toggle given light in given section on &amp; off</td>
+            <td><code class="badge badge-dark">1</code>&nbsp;&hellip;&nbsp;<code class="badge badge-dark">9</code><br>(Section code)</td>
+            <td><code class="badge badge-dark">1</code>&nbsp;&hellip;&nbsp;<code class="badge badge-dark">9</code><br>(Normal light code) or<br><code class="badge badge-dark">#</code><br>(Flicker light code)</td>
+            <td><code>1</code></td>
+            <td><code>1</code></td>
+            <td><em>High nybble:</em> <code>0</code>..<code>8</code> (Normal light ID) or <code>0xF</code> (Flicker light ID)<br><em>Low nybble:</em>
+                <code>0</code>..<code>8</code> (Section ID)</td>
+        </tr>
+        <tr>
+            <td>Toggle all lights in given section on &amp; off</td>
+            <td><code class="badge badge-dark">1</code>&nbsp;&hellip;&nbsp;<code class="badge badge-dark">9</code><br>(Section code)</td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code>1</code></td>
+            <td><code>2</code></td>
+            <td><code>0</code>..<code>8</code> (Section ID)</td>
+        </tr>
+        <tr>
+            <td>Toggle all normal lights on &amp; off</td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code class="badge badge-dark">*</code></td>
+            <td><code>1</code></td>
+            <td><code>3</code></td>
+            <td><code>1</code></td>
+        </tr>
+        <tr>
+            <td>Toggle all flicker lights on &amp; off</td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code class="badge badge-dark">#</code></td>
+            <td><code>1</code></td>
+            <td><code>3</code></td>
+            <td><code>2</code></td>
+        </tr>
+        <tr>
+            <td>Toggle all lights on &amp; off</td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code class="badge badge-dark">OK</code> or <code class="badge badge-dark">0</code></td>
+            <td><code>1</code></td>
+            <td><code>3</code></td>
+            <td><code>3</code></td>
+        </tr>
+        <tr>
+            <td>Toggle the state of a given dual state feature or activate a given single state feature</td>
+            <td><code class="badge badge-dark">*</code></td>
+            <td><code class="badge badge-dark">1</code>&nbsp;&hellip;&nbsp;<code class="badge badge-dark">9</code><br>(Feature code)</td>
+            <td><code>2</code></td>
+            <td><code>1</code></td>
+            <td><code>0</code>..<code>8</code> (Feature ID)</td>
+        </tr>
+        <tr>
+            <td>Reset all dual state features</td>
+            <td><code class="badge badge-dark">*</code></td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code>2</code></td>
+            <td><code>2</code></td>
+            <td>N/a</td>
+        </tr>
+        <tr>
+            <td>Switch ambient lighting on to full brightness</td>
+            <td><code class="badge badge-dark">RIGHT-ARROW</code></td>
+            <td></td>
+            <td><code>3</code></td>
+            <td><code>1</code></td>
+            <td><code>0xFF</code></td>
+        </tr>
+        <tr>
+            <td>Switch ambient lighting off</td>
+            <td><code class="badge badge-dark">LEFT-ARROW</code></td>
+            <td></td>
+            <td><code>3</code></td>
+            <td><code>1</code></td>
+            <td><code>0</code></td>
+        </tr>
+        <tr>
+            <td>Brighten ambient lighting a little</td>
+            <td><code class="badge badge-dark">UP-ARROW</code></td>
+            <td></td>
+            <td><code>3</code></td>
+            <td><code>2</code></td>
+            <td><code>1</code></td>
+        </tr>
+        <tr>
+            <td>Dim ambient lighting a little</td>
+            <td><code class="badge badge-dark">DOWN-ARROW</code></td>
+            <td></td>
+            <td><code>3</code></td>
+            <td><code>2</code></td>
+            <td><code>0xFF</code></td>
+        </tr>
+        <tr>
+            <td>Run a given program</td>
+            <td><code class="badge badge-dark">#</code></td>
+            <td><code class="badge badge-dark">1</code>&nbsp;&hellip;&nbsp;<code class="badge badge-dark">9</code><br>(Program code)</td>
+            <td><code>4</code></td>
+            <td><code>1</code></td>
+            <td><code>0</code>..<code>8</code> (Program ID)</td>
+        </tr>
+        <tr>
+            <td>Stop current program</td>
+            <td><code class="badge badge-dark">#</code></td>
+            <td><code class="badge badge-dark">0</code></td>
+            <td><code>4</code></td>
+            <td><code>2</code></td>
+            <td>N/a</td>
+        </tr>
+        <tr>
+            <td>Master reset</td>
+            <td><code class="badge badge-dark">OK</code></td>
+            <td></td>
+            <td><code>5</code></td>
+            <td>N/a</td>
+            <td>N/a</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>Notes:</strong></p>
+
+<ol>
+    <li class="mb-2">Section, normal light, feature and program codes that use handset keys <code class="badge badge-dark">1</code> to <code class="badge badge-dark">9</code> map onto an ID that is one less than the numeral on the handset key, e.g key <code class="badge badge-dark">4</code> represents ID <code>3</code>.</li>
+
+    <li class="mb-2">Even though there are 9 available codes for the the various sections, normal lights, features and programs, the highest permitted code may be &lt; 9, depending on the number of sections, lights, features and programs that are available. For example, there may be 6 model light sections and each section may enforce it's own limit on the number of normal lights it supports.</li>
+    
+    <li class="mb-2">The data byte of the command to turn all lights off is calculated by ORing together the parameters of the commands to turn off normal lights and to turn off flicker lights. I.e. <code>0b01 | 0b10 = 0b11 = (1 | 2) = 3</code>.</li>
+
+    <li class="mb-2">The data byte of the command to dim ambient lighting was chosen to be <code>0xFF</code> because that value is <code>-1</code> if the byte is signed, which implies a reduction in value.</li>
+    
+    <li class="mb-2">Where &quot;N/a&quot; appears for a sub-command ID or data byte it means that the value is not used. It is ignored and can be anything. Zero is usually used, but garbage values are equally acceptable. For example the &quot;Master reset&quot; command, which has neither a sub-command nor a data byte, could be encoded as, for example, <code>0x50 0x00</code> or <code>0x5F 0xFF</code>.</li>
+</ol>
+
+<p>Notice that commands fall into one of the following groups, numbered by command ID:</p>
+
+<ol>
+    <li>Model Lighting Commands &ndash; 1st key press is a digit</li>
+    <li>Feature Commands &ndash; 1st key press is <code class="badge badge-dark">*</code></li>
+    <li>Ambient Lighting Commands &ndash; activated by the arrow keys</li>
+    <li>Program Commands &ndash; 1st key press is <code class="badge badge-dark">#</code></li>
+    <li>Reset Command &ndash; uses the <code class="badge badge-dark">OK</code> key</li>
+</ol>
+
+<p>Visual feedback to the user will be by means of an RGB LED that displays as follows:</p>
 
 <table class="table table-responsive">
     <thead>
@@ -34,7 +196,7 @@ title: "Model diorama automation infra red control subsystem"
             <th scope="col" colspan="2">LED</th>
             <th scope="col" rowspan="2" class="align-middle">Meaning</th>
         </tr>
-        <tr class="text-left">
+        <tr class="text-center">
             <th scope="col">Colour</th>
             <th scope="col">State</th>
         </tr>
@@ -80,44 +242,86 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>A regulated 5V supply and ground connection will be required from the diorama&rsquo;s power supply.</p>
 
-<h2>Progress</h2>
+<h2 id="progress">Progress</h2>
 
-<h3>Circuit</h3>
+<h3 id="progress--circuit">Circuit</h3>
 
-<p>An infra red sensor and remote controller were obtained, packaged together. The handset uses the common NEC protocol.</p>
-
-<p>It has been decided to use an Arduino Nano R3 clone as the microcontroller.</p>
-
-<p class="alert alert-info">Note: it was originally hoped to use an ATtiny85 microcontroller, but problems getting a suitable IR receiver libray to work meant that this plan was abandoned. No such problems were found when using the Nano.</p>
-
-<p>The circuit for the subsystem is sub-divided into two modules, as the following circuit diagram shows:</p>
+<p>The following circuit was designed:</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-subsystem-circuit-diagram_854x480.png" width="854" height="480" alt="IR control sub-system circuit design"></p>
 
-<p>The values of the current limiting resistors for the RGB LED were chosen to get the best colour balance from the LED. The resistances were arrived at by <a href="./experiment-6">experiment</a>. The RGB LED is powered directly from the Nano's digital pins because the LED's power consumption is within the Nano's tolerances.</p>
+<p>The circuit is sub-divided into two modules &ndash; the <em>Sensor Module</em> and the <em>Control Module</em>. Each is discussed in its own section below.</p>
 
-<p>The decision to use I&sup2;C for communication with the central microcontroller was arrived at after testing both <a href="./experiment-4">serial</a> and <a href="./experiment-5">I&sup2;C</a> communications.</p>
+<h4 id="progress--circuit--sensor-module">Sensor Module</h4>
 
-<h3>Software</h3>
+<p>This module contains the infra-red sensor and the RGB feedback LED.</p>
 
-<p>A program to run on the microcontroller has been designed and tested. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
+<p>The values of the current limiting resistors for the RGB LED were chosen to get the best colour balance from the LED. The resistances were arrived at by <a href="./experiment-6">experiment</a>. The LED is powered directly from the Nano's digital pins because the LED's power consumption is within the Nano's tolerances.</p>
 
-<p>The <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
+<p>An infra red sensor and remote controller were obtained, packaged together. The handset uses the common NEC protocol.</p>
 
-<p>The program was developed in VSCode using the PlatformIO extension. Compiling from within VSCode will resolve all library dependencies automatically.</p>
+<p>A small plastic case, recovered from a defunct power supply, was adapted to house the module. The front of the diorama was modified to accomodate the housing such that it can been removed for repair if necessary.</p>
 
-<h3>Sensor Module Housing</h3>
-
-<p>A small plastic case, recovered from a defunct power supply, was adapted to house the <em>Sensor Module</em> component of the above circuit. The front of the diorama was modified to accomodate the case such that it can been removed for repair if necessary. The <em>Control Module</em> part of the circuit will be located underneath or behind the backscene of the diorama.</p>
-
-<p class="alert alert-info indent">It was originally hoped to house the entire circuit within this case, but the decision to use an Arduino Nano clone instead of an ATtiny85 makes this impossible since the Nano will not fit in the case.</p>
-
-<p>The following is a photo of two parts of the sensor module as built on perf board, almost ready for adding to the housing. The upper component is the IR receiver itself and the lower component is the RGB feedback LED with attached resistors. The four wires on the left of the picture were threaded through a hole in the back of the case and routed underneath the diorama baseboard.</p>
+<p>The following is a photo of two parts of the sensor module as built on perfboard, almost ready for adding to the housing. The upper component is the IR receiver itself and the lower component is the RGB feedback LED, with attached resistors. The six wires on the left of the picture were threaded through a hole in the back of the case. The black wire attached to the IR receiver board, which is a ground connection, was later soldered to the LED board.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--circuit-boards-complete_640x426.png" width="640" height="426" alt="IR control receiver module circuit as built"></p>
 
 <p>This second photo shows the housing with the components installed and held in place with hot glue. The runners on the case were made from coffee stirrers. They slide into a slot on the front of the diorama baseboard.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--assembled_480x480.png" width="480" height="480" alt="IR control receiver module in case"></p>
+
+<p>The wires emerging from the back of the housing were connected to choc blocks mounted under the diorama baseboard:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--connections_640x360.png" width="640" height="360" alt="IR control receiver module connections under the diorama baseboard"></p>
+
+<h4 id="progress--circuit--control-module">Control Module</h4>
+
+<p>This module contains the microcontroller and some supporting circuitry for I²C.</p>
+
+<p>An Arduino Nano R3 clone is being used as the microcontroller.</p>
+
+<p class="alert alert-info">Note: it was originally hoped to use an ATtiny85 microcontroller, but problems getting a suitable IR receiver library to work meant that this plan was abandoned. No such problems were found when using the Nano.</p>
+
+<p>The module was constructed on a piece of perfboard. Both sides of the board, as built, can be seen in the following photo montage:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-module--as-built_800x500.png" width="800" height="500" alt="IR control module as built on perfboard"></p>
+
+<p>A pair of 90&deg; header pins were used to receive 5V and GND from the diorama power supply. Three blue two pin screw connectors were used for connections to the sensor module, one connector to supply 5V and ground and the other two for connections to the RGB LED and the infra-red sensor. Wires from these connectors will be run to the choc block under the baseboard described in the previous section. An additional two pin screw connector was provided for the I²C connection to the main microcontroller.</p>
+
+<h3 id="progress--software">Software</h3>
+
+<p>A program to run on the microcontroller has been designed and implemented. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control/src</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
+
+<p>The <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
+
+<p>The program interprets the commands from the remote handset and maps valid input into the 2 byte data packets that are sent out over I²C to the main microcontroller. The required user feedback is provided by manipulating the RGB LED.</p>
+
+<p>The interpretation of the handset commands, the conversion to data packets and the operation of the RGB LED are all as described in the <a href="#design">Design section</a> above. The software also has knowledge of the number of sections, lights per section, features and programs that are available and rejects any otherwise valid inputs that fall outside those parameters.</p>
+    
+<p class="alert alert-info">The program was developed in VSCode using the PlatformIO extension. Compiling from within VSCode will resolve all library dependencies automatically.</p>
+
+<h2 id="testing">Testing</h2>
+
+<h3 id="testing--sensor-module">Sensor Module</h3>
+
+<p>The sensor module was tested by being connected to an Arduino Nano clone that was running an early version of the <a href="#progress--software">Nano's software</a>:</p> 
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-sensor-module--under-test_640x360.png" width="640" height="360" alt="IR sensor module being tested"></p>
+
+<p>This version of the software had I²C output disabled, but could be used to test the input from the infra-red sensor and could control the RGB LED. The software was modified until the non-I²C part was working satisfactorily. A version of the software used for testing the sensor module can be viewed in <code>ir-control.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/e62f361efc235585795f01cc0e4611ff25224b3a">commit e62f361</a> of the software.</p>
+
+<h3 id="testing--control-module">Control Module</h3>
+
+<p>The control module part of the circuit was tested on a breadboard prior to being constructed. The already completed sensor module was connected to the breadboard via a choc block. An Arduino Uno clone was connected to the Nano via I²C. The following photo shows the lash-up.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-module--under-test_640x928.png" width="640" height="928" alt="IR control receiver module being tested on a breadboard"></p>
+
+<p>The Uno was running a test program that interpreted the data being sent from the Nano over I²C and outputting a description of the received data to its serial port. The test program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/research/ir-control-tests/mock-i2c-command-receiver/src</code> directory. The source file is <code>mock-i2c-command-receiver.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/7e801f6343bdfb705c5776f009bb805f696d8f08">commit 7e801f6</a>.</p>
+
+<p>Once the circuit had been validated it was constructed as <a href="#progress--circuit--control-module">described above</a>.</p>
+
+<p>The completed control unit circuit board was then connected to the sensor unit and the I²C output was connected once again to the Uno, now running an updated version of <a href="https://github.com/cahamo/diorama/commit/fc5e070b29834f0394f274f37ce735e2b5684c0f"><code>mock-i2c-command-receiver.cpp</code></a>. This lash up (see photo below) was used to further develop the Nano software, until the controller was working according to specifications. The result was the <a href="#progress--software">software described above</a>.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-subsytem--software-test-rig_640x480.png" width="640" height="480" alt="IR subsystem software test rig"></p>
 
 <p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>
