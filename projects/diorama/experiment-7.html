@@ -1,0 +1,52 @@
+---
+layout: default
+title: "Model diorama: Basic servo test"
+---
+<h1>Experiment #7: Basic servo test</h1>
+
+<p>At least some of the diorama's electo-mechanical &quot;features&quot; will be operated by servo motors. Several SG90 9G servo motors have been obtained.</p>
+
+<p>This experiment was aimed at learning the basics of how such motors are operated using the Arduino <em>Servo</em> library and to check performance of a servo motor against expectations.</p>
+
+<p>A simple circuit was created that used an Arduino Uno clone to control a single servo. Connections were as follows:</p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr class="text-left">
+            <th scope="col">Uno Pin</th>
+            <th scope="col">Servo Connection</th>
+            <th scope="col">Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5V</td>
+            <td>VCC</td>
+            <td>5V Power supply</td>
+        </tr>
+        <tr>
+            <td>GND</td>
+            <td>GND</td>
+            <td>Ground connection</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>SIG</td>
+            <td>PWM control signal</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The Uno was programmed put the servo through its paces. It first moves the servo to pre-determined angles and then sweeps the servo's arm from its minimum to maximum angles and back again. After a pause the whole process is repeated.</p>
+
+<p>The program is modified from &quot;Sweep&quot; by <a href="https://barraganstudio.com">Damian Barragan</a>, as modified by Scott Fitzgerald. This version is released into the public domain, under the <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0 (public domain)</a> license.</p>
+
+<p>The source code is available from the <a href="https://github.com/cahamo/diorama"><code>cahamo/diorama</code></a> repository on GitHub. The relevant code will be found in the <code>research/feature-tests/basic-servo-test/src</code> directory. All the C++ code is in <a href="https://github.com/cahamo/diorama/blob/main/research/feature-tests/basic-servo-test/src/basic-servo-test.cpp"><code>basic-servo-test.cpp</code></a>.</p>
+
+<p class="alert alert-info">
+    This program was developed using VSCode using the PlatformIO extension. It can be modified for use with the Arduino IDE simply by copying the code into a new, blank project. The required <em>Servo</em> library is installed in the Arduino IDE by default.</p>
+</p>
+
+<p>The program was run and the behaviour of the servo was observed and found to match the expected performance.</p>
+
+<p class="text-center"><b>Back to <a href="./">Main project page</a></b></p>
