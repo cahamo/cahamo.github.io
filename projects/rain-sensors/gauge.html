@@ -97,7 +97,7 @@ title: "Rain measurement gauge sensor unit and circuit"
     <h3>Rain Gauge</h3>
 
     <p>The rain gauge components described above were 3D printed on a Bambu Labs A1 3D printer using Bambu Basic black PLA. The models were sliced using the Bambu slicer using the default 0.20mm strong print profile and 0.4mm &#x2300; nozzle. The following montage shows all the printed parts. The parts are not to scale relative to each other:</p>
-    
+
     <figure id="fig-3">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--printed-parts_800x593.png" width="800" height="593" alt="All the rain gauge 3D printed parts"></p>
         <figcaption class="text-center">Figure 3: All 3D printed components</figcaption>
@@ -111,7 +111,7 @@ title: "Rain measurement gauge sensor unit and circuit"
     </figure>
 
     <p>A normally open, plastic bodied reed switch, 2.7mm square section &times; 14mm long, was soldered to two 20cm lengths of 7/0.2mm stranded wire. The reed switch was then mounted into the provided channel in the bucket pivot unit, securred by superglue. Heat shrink was added to protect sections of the wire. The pivot unit was bolted to its base with 2 &times; M3 nuts and 10mm hex head bolts.</p>
-        
+
     <figure id="fig-5">
         <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/rain-sensors/gauge/rain-sensors--gauge--assembly--bucket-bracket_640x256.png" width="640" height="256" alt="Bucket pivot with magnet attached mounted to its bracket"></p>
         <figcaption class="text-center">Figure 5: Bucket pivot unit, with reed switch, attached to the mounting bracket</figcaption>
@@ -226,61 +226,74 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h3>Results</h3>
 
-    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml of water. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated. The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test while the right hand column shows the average number of millilitres of water required to tilt a bucket in that test, rounded to 2 decimal places:</p>
+    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml of water. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated.</p>
+
+    <p>The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test, the middle column shows the average number of millilitres of water required to tilt a bucket in that test and the right column shows the calculated number of tilts per litre of water. The figures in the middle and right columns are rounded to 2 decimal places.</p>
 
     <table class="table table-responsive">
         <thead>
             <tr class="text-left">
                 <th scope="col">Number of tilts</th>
                 <th scope="col">Volume per tilt (ml)</th>
+                <th scope="col">Tilts per 1 litre</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>140</td>
                 <td>5.71</td>
+                <td>175.13</td>
             </tr>
             <tr>
                 <td>131</td>
                 <td>6.11</td>
+                <td>163.67</td>
             </tr>
             <tr>
                 <td>137</td>
                 <td>5.84</td>
+                <td>171.23</td>
             </tr>
             <tr>
                 <td>130</td>
                 <td>6.15</td>
+                <td>162.60</td>
             </tr>
             <tr>
                 <td>139</td>
                 <td>5.76</td>
+                <td>173.61</td>
             </tr>
             <tr>
                 <td>140</td>
                 <td>5.71</td>
+                <td>175.13</td>
             </tr>
             <tr>
                 <td>135</td>
                 <td>5.93</td>
+                <td>168.63</td>
             </tr>
             <tr>
                 <td>137</td>
                 <td>5.84</td>
+                <td>171.23</td>
             </tr>
             <tr>
                 <td>142</td>
                 <td>5.63</td>
+                <td>177.62</td>
             </tr>
             <tr>
                 <td>137</td>
                 <td>5.84</td>
+                <td>171.23</td>
             </tr>
         </tbody>
     </table>
 
-    <p>The results were averaged using more than one averaging algorithm before arriving at an estimated bucket capacity of <strong>5.85 ml</strong>.</p>
-       
+    <p>The results were averaged using more than one averaging algorithm before arriving at an estimated bucket capacity of <strong>5.85 ml</strong> and an average of <strong>171.01</strong> tilts per litre.</p>
+
     <aside>
         <div class="alert alert-warning">
             <p class="mt-0 mb-2">There was significant variation in the test results, the standard deviation being &approx; 3.9 tilts per 800ml of water. There are several possible contributary factors to this inaccuracy:</p>
