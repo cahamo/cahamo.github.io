@@ -226,77 +226,66 @@ title: "Rain measurement gauge sensor unit and circuit"
 
     <h3>Results</h3>
 
-    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml of water. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated.</p>
+    <p>10 successful calibration tests performed. For each test a kitchen measuring jug was filled with approximately 800ml = 0.8l of water. This water was poured into the gauge as slowly as possible. After the jug was emptied the number of bucket tilts was read from the LCD and recorded. The count was then reset using the push switch and the experiment was repeated.</p>
 
-    <p>The results of the tests are shown in the following table. The left column contains the number of tilts recorded per 800ml of water for each test, the middle column shows the average number of millilitres of water required to tilt a bucket in that test and the right column shows the calculated number of tilts per litre of water. The figures in the middle and right columns are rounded to 2 decimal places.</p>
+    <p>The numbers of tilts recorded for each test run were:</p>
 
     <table class="table table-responsive">
         <thead>
             <tr class="text-left">
-                <th scope="col">Number of tilts</th>
-                <th scope="col">Volume per tilt (ml)</th>
-                <th scope="col">Tilts per 1 litre</th>
+                <th scope="col">Test #</th>
+                <th scope="col">Number of tilts per 0.8l water</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td>1</td>
                 <td>140</td>
-                <td>5.71</td>
-                <td>175.13</td>
             </tr>
             <tr>
+                <td>2</td>
                 <td>131</td>
-                <td>6.11</td>
-                <td>163.67</td>
             </tr>
             <tr>
+                <td>3</td>
                 <td>137</td>
-                <td>5.84</td>
-                <td>171.23</td>
             </tr>
             <tr>
+                <td>4</td>
                 <td>130</td>
-                <td>6.15</td>
-                <td>162.60</td>
             </tr>
             <tr>
+                <td>5</td>
                 <td>139</td>
-                <td>5.76</td>
-                <td>173.61</td>
             </tr>
             <tr>
+                <td>6</td>
                 <td>140</td>
-                <td>5.71</td>
-                <td>175.13</td>
             </tr>
             <tr>
+                <td>7</td>
                 <td>135</td>
-                <td>5.93</td>
-                <td>168.63</td>
             </tr>
             <tr>
+                <td>8</td>
                 <td>137</td>
-                <td>5.84</td>
-                <td>171.23</td>
             </tr>
             <tr>
+                <td>9</td>
                 <td>142</td>
-                <td>5.63</td>
-                <td>177.62</td>
             </tr>
             <tr>
+                <td>10</td>
                 <td>137</td>
-                <td>5.84</td>
-                <td>171.23</td>
             </tr>
         </tbody>
     </table>
 
-    <p>The results were averaged using more than one averaging algorithm before arriving at an estimated bucket capacity of <strong>5.85 ml</strong> and an average of <strong>171.01</strong> tilts per litre.</p>
+    <p>The average number of tilts per 0.8 litres of water was <strong>136.8</strong>, with a standard deviation of &approx; 3.9.</p>
 
     <aside>
         <div class="alert alert-warning">
-            <p class="mt-0 mb-2">There was significant variation in the test results, the standard deviation being &approx; 3.9 tilts per 800ml of water. There are several possible contributary factors to this inaccuracy:</p>
+            <p class="mt-0 mb-2">I can be seen that there was significant variation in the test results. There are several possible contributary factors to this inaccuracy:</p>
             <ol class="mt-0 mb-2">
                 <li>The use of a kitchen measuring jug makes it impossible to measure exactly 800ml of water to use in each test.</li>
                 <li>The tilting mechanism is rather crude, meaning that the amount of water required for each tilt may vary.</li>
@@ -304,11 +293,48 @@ title: "Rain measurement gauge sensor unit and circuit"
                 <li>It was not possible to make allowances for the water remaining in a bucket at the end of the test: it could have been empty or almost about to tilt.</li>
                 <li>Some water adhered to the funnel and buckets due to a combination of surface tension and friction.</li>
             </ol>
-            <p class="my-0"><strong>It is obvious that this gauge is not going to be accurate.</strong> Furthermore it is likely that performance will be worse in very light rain due to point 5 above, or to evaporation during the time it takes to fill and tilt the bucket.</p>
+            <p class="my-0"><strong>It is obvious that this gauge is not going to be accurate.</strong> Furthermore it is likely that performance will be worse in very light rain due to point 5 above and to evaporation during the time it takes to fill and tilt the bucket.</p>
         </div>
     </aside>
 
-    <hr><p class="alert alert-warning">That is as far as things had progressed as at 2025-02-17.</p>
+    <h3>Calculations</h3>
+
+    <p>Say we have a funnel with capture area of <em>A</em> mm². The volume of water, <em>V<sub>n</sub></em>, captured by the funnel for <em>n</em> mm of rain is:</p>
+
+    <p class="ml-4"><em>V<sub>n</sub></em> = 10<sup>-6</sup> &times; <em>n</em> &times; <em>A</em> litres</p>
+
+    <p class="alert alert-info">Note that 1 litre = 1,000,000 mm³ = 10<sup>6</sup> mm³.</p>
+
+    <p>So, for one millimetre of rain, the volume of water captured, <em>V<sub>1</sub></em>, is:</p>
+
+    <p class="ml-4"><em>V<sub>1</sub></em> = 10<sup>-6</sup> &times; <em>A</em> litres</p>
+
+    <p>If our rain gauge has a bucket that requires <em>v<sub>t</sub></em> litres of water to make it tilt, then the amount of rainfall that causes the bucket to tilt, <em>r<sub>t</sub></em>, is:</p>
+
+    <p class="ml-4"><em>r<sub>t</sub></em> = <em>v<sub>t</sub></em> &divide; <em>V<sub>1</sub></em> millimeters</p>
+
+
+    <p>Now my gauge has a funnel with a 100 mm square capture area, so</p>
+
+    <p class="ml-4"><em>A</em> = 100 mm &times 100 mm = 10,000 mm² = 10<sup>4</sup> mm².</p>
+
+    <p>and</p>
+
+    <p class="ml-4"><em>V<sub>1</sub></em> = 10<sup>-6</sup> l/mm² &times; 10<sup>4</sup> mm² = 10<sup>-2</sup> litres = 0.01 litres.</p>
+
+    <p>We know that the bucket tilts an average of 136.8 times per 0.8 litres of water, so <em>v<sub>t</sub></em> is:</p>
+
+    <p class="ml-4"><em>v<sub>t</sub></em> = 0.8 &divide; 136.8.</p>
+
+    <p>Finally, we can calculate <em>r<sub>t</sub></em>:</p>
+
+    <p class="ml-4"><em>r<sub>t</sub></em> = <em>v<sub>t</sub></em> &divide; <em>V<sub>1</sub></em> = (0.8 &divide; 136.8) &divide; 0.01 = 0.5848 mm</p>
+
+    <p>to 4 decimal places.</p>
+
+    <p>So now we know that every tilt of the bucket represents 0.5848 mm of rainfall. This value will be plugged into the microcontroller program that responds to bucket tilt signal from the rain gauge.</p>
+
+    <hr><p class="alert alert-warning">That is as far as things had progressed as at 2025-08-27.</p>
 
 </section>
 
