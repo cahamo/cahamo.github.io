@@ -2,6 +2,7 @@
 layout: default
 redirect_from:
   - /diorama/experiment-1
+  - /projects/diorama/experiment-1
 title: "Model diorama: infrared remote controller experiment"
 ---
 <h1>Experiment #1: Infra-red remote controller</h1>
@@ -12,7 +13,7 @@ title: "Model diorama: infrared remote controller experiment"
 
 <The>A kit was purchased that included a remote control handset and an infra-red sensor. The handset was quite basic, but sufficient for the task in hand:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/ir-remote-handset_160x327.jpg" width="160" height="327" alt="Remote control handset"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/exp-1/ir-remote-handset_160x327.jpg" width="160" height="327" alt="Remote control handset"></p>
 
 <p>The test was performed using an <em>Elegoo Uno R3</em> using the <a href="https://github.com/Arduino-IRremote/Arduino-IRremote"><em>Arduino-IRremote</em></a> library.</p>
 
@@ -22,23 +23,23 @@ title: "Model diorama: infrared remote controller experiment"
 
 <p>The breadboard circuit schematic is shown below:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/irsensor-library-test-circuit_1072x388.png" width="1072" height="388" alt="Test circuit breadboard schematic."></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/exp-1/irsensor-library-test-circuit_1072x388.png" width="1072" height="388" alt="Test circuit breadboard schematic."></p>
 
 <p>And here's a photo of the cicuit as built:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/exp-1/irsensor-library-test-circuit-photo_900x461.jpg" width="900" height="461" alt="Photo of test circuit."></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/exp-1/irsensor-library-test-circuit-photo_900x461.jpg" width="900" height="461" alt="Photo of test circuit."></p>
 
 <h2>Code</h2>
 
-<p>The source code is available on GitHub in the <a href="https://github.com/cahamo/diorama"><code>cahamo/diorama</code></a> repository. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
+<p>The source code is available on GitHub in the <a href="https://github.com/cahamo/diorama-1"><code>cahamo/diorama-1</code></a> repository. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
 
 <p>Two different programs were used in the experiment:</p>
 
 <ol>
 
-    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the received code to the serial monitor. This code was used to determine the handset type and to work out which code is emitted by each button. </li>
+    <li class="my-2"><a href="https://github.com/cahamo/diorama-1/blob/main/research/ir-control-tests/ir-sensor-analyser/src/ir-sensor-analyser.cpp"><code>ir-sensor-analyser.cpp</code></a> &ndash; Sends full details of the received code to the serial monitor. This code was used to determine the handset type and to work out which code is emitted by each button. </li>
 
-    <li class="my-2"><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/handset-test/src/handset-test.cpp"><code>handset-test.cpp</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.cpp</code> this script reports which button is being pressed on the remote control handset. It detects whether the key is being repeated and also reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
+    <li class="my-2"><a href="https://github.com/cahamo/diorama-1/blob/main/research/ir-control-tests/handset-test/src/handset-test.cpp"><code>handset-test.cpp</code></a> &ndash; Using information gleaned from <code>ir-sensor-analyser.cpp</code> this script reports which button is being pressed on the remote control handset. It detects whether the key is being repeated and also reports any spurious readings as &ldquo;Unknown&rdquo;. Reports are sent to the serial monitor.</li>
 </ol>
 
 <h2>Methodology</h2>
@@ -100,7 +101,7 @@ Protocol=NEC Address=0x0 Command=0x1C Repeat gap=39600us
 // OK key
 #define REMOTE_KEY_OK     0x1C</code></pre>
 
-<p><code>handset-test.cpp</code> includes this header file. It can be found in the <code>cahamo/diorama</code> repository as <code><a href="https://github.com/cahamo/diorama/blob/main/research/ir-control-tests/handset-test/src/handset-test.h">handset-test.h</a></code>.</p>
+<p><code>handset-test.cpp</code> includes this header file. It can be found in the <code>cahamo/diorama-1</code> repository as <code><a href="https://github.com/cahamo/diorama-1/blob/main/research/ir-control-tests/handset-test/src/handset-test.h">handset-test.h</a></code>.</p>
 
 <p>The test file <code>handset-test.txt</code>, produced by running <code>handset-test</code>, confirmed that the key mapping was correct. Here's a copy of the significant part of the file:</p>
 

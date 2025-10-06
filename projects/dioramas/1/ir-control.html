@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "Model diorama automation infra red control subsystem"
+redirect_from:
+- /projects/diorama/ir-control
 ---
 <h1>Diorama: Infra-red Control <span class="badge badge-warning">In&nbsp;progress</span></h1>
 
@@ -248,7 +250,7 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>The following circuit was designed:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-subsystem-circuit-diagram_854x480.png" width="854" height="480" alt="IR control sub-system circuit design"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-control-subsystem-circuit-diagram_854x480.png" width="854" height="480" alt="IR control sub-system circuit design"></p>
 
 <p>The circuit is sub-divided into two modules &ndash; the <em>Sensor Module</em> and the <em>Control Module</em>. Each is discussed in its own section below.</p>
 
@@ -264,15 +266,15 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>The following is a photo of two parts of the sensor module as built on perfboard, almost ready for adding to the housing. The upper component is the IR receiver itself and the lower component is the RGB feedback LED, with attached resistors. The six wires on the left of the picture were threaded through a hole in the back of the case. The black wire attached to the IR receiver board, which is a ground connection, was later soldered to the LED board.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--circuit-boards-complete_640x426.png" width="640" height="426" alt="IR control receiver module circuit as built"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-receiver--circuit-boards-complete_640x426.png" width="640" height="426" alt="IR control receiver module circuit as built"></p>
 
 <p>This second photo shows the housing with the components installed and held in place with hot glue. The runners on the case were made from coffee stirrers. They slide into a slot on the front of the diorama baseboard.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--assembled_480x480.png" width="480" height="480" alt="IR control receiver module in case"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-receiver--assembled_480x480.png" width="480" height="480" alt="IR control receiver module in case"></p>
 
 <p>The wires emerging from the back of the housing were connected to choc blocks mounted under the diorama baseboard:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-receiver--connections_640x360.png" width="640" height="360" alt="IR control receiver module connections under the diorama baseboard"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-receiver--connections_640x360.png" width="640" height="360" alt="IR control receiver module connections under the diorama baseboard"></p>
 
 <h4 id="progress--circuit--control-module">Control Module</h4>
 
@@ -284,13 +286,13 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>The module was constructed on a piece of perfboard. Both sides of the board, as built, can be seen in the following photo montage:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-module--as-built_800x500.png" width="800" height="500" alt="IR control module as built on perfboard"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-control-module--as-built_800x500.png" width="800" height="500" alt="IR control module as built on perfboard"></p>
 
 <p>A pair of 90&deg; header pins were used to receive 5V and GND from the diorama power supply. Three blue two pin screw connectors were used for connections to the sensor module, one connector to supply 5V and ground and the other two for connections to the RGB LED and the infra-red sensor. Wires from these connectors will be run to the choc block under the baseboard described in the previous section. An additional two pin screw connector was provided for the I²C connection to the main microcontroller.</p>
 
 <h3 id="progress--software">Software</h3>
 
-<p>A program to run on the microcontroller has been designed and implemented. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control/src</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
+<p>A program to run on the microcontroller has been designed and implemented. This program is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub. It can be found in the <code>/src/ir-control/src</code> directory. The main file is <a href="https://github.com/cahamo/diorama-1/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
 
 <p>The <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
 
@@ -306,22 +308,22 @@ title: "Model diorama automation infra red control subsystem"
 
 <p>The sensor module was tested by being connected to an Arduino Nano clone that was running an early version of the <a href="#progress--software">Nano's software</a>:</p> 
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-sensor-module--under-test_640x360.png" width="640" height="360" alt="IR sensor module being tested"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-sensor-module--under-test_640x360.png" width="640" height="360" alt="IR sensor module being tested"></p>
 
-<p>This version of the software had I²C output disabled, but could be used to test the input from the infra-red sensor and could control the RGB LED. The software was modified until the non-I²C part was working satisfactorily. A version of the software used for testing the sensor module can be viewed in <code>ir-control.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/e62f361efc235585795f01cc0e4611ff25224b3a">commit e62f361</a> of the software.</p>
+<p>This version of the software had I²C output disabled, but could be used to test the input from the infra-red sensor and could control the RGB LED. The software was modified until the non-I²C part was working satisfactorily. A version of the software used for testing the sensor module can be viewed in <code>ir-control.cpp</code> as it was at <a href="https://github.com/cahamo/diorama-1/commit/e62f361efc235585795f01cc0e4611ff25224b3a">commit e62f361</a> of the software.</p>
 
 <h3 id="testing--control-module">Control Module</h3>
 
 <p>The control module part of the circuit was tested on a breadboard prior to being constructed. The already completed sensor module was connected to the breadboard via a choc block. An Arduino Uno clone was connected to the Nano via I²C. The following photo shows the lash-up.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-control-module--under-test_640x928.png" width="640" height="928" alt="IR control receiver module being tested on a breadboard"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-control-module--under-test_640x928.png" width="640" height="928" alt="IR control receiver module being tested on a breadboard"></p>
 
-<p>The Uno was running a test program that interpreted the data being sent from the Nano over I²C and outputting a description of the received data to its serial port. The test program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/research/ir-control-tests/mock-i2c-command-receiver/src</code> directory. The source file is <code>mock-i2c-command-receiver.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/7e801f6343bdfb705c5776f009bb805f696d8f08">commit 7e801f6</a>.</p>
+<p>The Uno was running a test program that interpreted the data being sent from the Nano over I²C and outputting a description of the received data to its serial port. The test program is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub. It can be found in the <code>/research/ir-control-tests/mock-i2c-command-receiver/src</code> directory. The source file is <code>mock-i2c-command-receiver.cpp</code> as it was at <a href="https://github.com/cahamo/diorama-1/commit/7e801f6343bdfb705c5776f009bb805f696d8f08">commit 7e801f6</a>.</p>
 
 <p>Once the circuit had been validated it was constructed as <a href="#progress--circuit--control-module">described above</a>.</p>
 
-<p>The completed control unit circuit board was then connected to the sensor unit and the I²C output was connected once again to the Uno, now running an updated version of <a href="https://github.com/cahamo/diorama/commit/fc5e070b29834f0394f274f37ce735e2b5684c0f"><code>mock-i2c-command-receiver.cpp</code></a>. This lash up (see photo below) was used to further develop the Nano software, until the controller was working according to specifications. The result was the <a href="#progress--software">software described above</a>.</p>
+<p>The completed control unit circuit board was then connected to the sensor unit and the I²C output was connected once again to the Uno, now running an updated version of <a href="https://github.com/cahamo/diorama-1/commit/fc5e070b29834f0394f274f37ce735e2b5684c0f"><code>mock-i2c-command-receiver.cpp</code></a>. This lash up (see photo below) was used to further develop the Nano software, until the controller was working according to specifications. The result was the <a href="#progress--software">software described above</a>.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/diorama/ir-control/ir-subsytem--software-test-rig_640x480.png" width="640" height="480" alt="IR subsystem software test rig"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-subsytem--software-test-rig_640x480.png" width="640" height="480" alt="IR subsystem software test rig"></p>
 
 <p class="text-center"><b><a href="./">Back to diorama home page</a></b></p>
