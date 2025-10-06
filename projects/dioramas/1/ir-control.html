@@ -292,7 +292,7 @@ redirect_from:
 
 <h3 id="progress--software">Software</h3>
 
-<p>A program to run on the microcontroller has been designed and implemented. This program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/src/ir-control/src</code> directory. The main file is <a href="https://github.com/cahamo/diorama/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
+<p>A program to run on the microcontroller has been designed and implemented. This program is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub. It can be found in the <code>/src/ir-control/src</code> directory. The main file is <a href="https://github.com/cahamo/diorama-1/blob/main/src/ir-control/src/ir-control.cpp"><code>ir-control.cpp</code></a>.</p>
 
 <p>The <em>IRRemote</em> library was chosen to interpret commands from the handset.</p>
 
@@ -310,7 +310,7 @@ redirect_from:
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-sensor-module--under-test_640x360.png" width="640" height="360" alt="IR sensor module being tested"></p>
 
-<p>This version of the software had I²C output disabled, but could be used to test the input from the infra-red sensor and could control the RGB LED. The software was modified until the non-I²C part was working satisfactorily. A version of the software used for testing the sensor module can be viewed in <code>ir-control.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/e62f361efc235585795f01cc0e4611ff25224b3a">commit e62f361</a> of the software.</p>
+<p>This version of the software had I²C output disabled, but could be used to test the input from the infra-red sensor and could control the RGB LED. The software was modified until the non-I²C part was working satisfactorily. A version of the software used for testing the sensor module can be viewed in <code>ir-control.cpp</code> as it was at <a href="https://github.com/cahamo/diorama-1/commit/e62f361efc235585795f01cc0e4611ff25224b3a">commit e62f361</a> of the software.</p>
 
 <h3 id="testing--control-module">Control Module</h3>
 
@@ -318,11 +318,11 @@ redirect_from:
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-control-module--under-test_640x928.png" width="640" height="928" alt="IR control receiver module being tested on a breadboard"></p>
 
-<p>The Uno was running a test program that interpreted the data being sent from the Nano over I²C and outputting a description of the received data to its serial port. The test program is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. It can be found in the <code>/research/ir-control-tests/mock-i2c-command-receiver/src</code> directory. The source file is <code>mock-i2c-command-receiver.cpp</code> as it was at <a href="https://github.com/cahamo/diorama/commit/7e801f6343bdfb705c5776f009bb805f696d8f08">commit 7e801f6</a>.</p>
+<p>The Uno was running a test program that interpreted the data being sent from the Nano over I²C and outputting a description of the received data to its serial port. The test program is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub. It can be found in the <code>/research/ir-control-tests/mock-i2c-command-receiver/src</code> directory. The source file is <code>mock-i2c-command-receiver.cpp</code> as it was at <a href="https://github.com/cahamo/diorama-1/commit/7e801f6343bdfb705c5776f009bb805f696d8f08">commit 7e801f6</a>.</p>
 
 <p>Once the circuit had been validated it was constructed as <a href="#progress--circuit--control-module">described above</a>.</p>
 
-<p>The completed control unit circuit board was then connected to the sensor unit and the I²C output was connected once again to the Uno, now running an updated version of <a href="https://github.com/cahamo/diorama/commit/fc5e070b29834f0394f274f37ce735e2b5684c0f"><code>mock-i2c-command-receiver.cpp</code></a>. This lash up (see photo below) was used to further develop the Nano software, until the controller was working according to specifications. The result was the <a href="#progress--software">software described above</a>.</p>
+<p>The completed control unit circuit board was then connected to the sensor unit and the I²C output was connected once again to the Uno, now running an updated version of <a href="https://github.com/cahamo/diorama-1/commit/fc5e070b29834f0394f274f37ce735e2b5684c0f"><code>mock-i2c-command-receiver.cpp</code></a>. This lash up (see photo below) was used to further develop the Nano software, until the controller was working according to specifications. The result was the <a href="#progress--software">software described above</a>.</p>
 
 <p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/1/ir-control/ir-subsytem--software-test-rig_640x480.png" width="640" height="480" alt="IR subsystem software test rig"></p>
 

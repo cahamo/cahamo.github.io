@@ -66,11 +66,11 @@ redirect_from:
 
 <h2>Code</h2>
 
-<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/i2c-tests</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
+<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub, in the <code>research/i2c-tests</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
 
 <h3>I&sup2;C Slave</h3>
 
-<p>The I&sup2;C slave code that runs on the Arduino Uno can be found in <a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-slave-read-uno/src/i2c-slave-read-uno.cpp"><code>i2c-slave-read-uno.cpp</code></a></p>
+<p>The I&sup2;C slave code that runs on the Arduino Uno can be found in <a href="https://github.com/cahamo/diorama-1/blob/main/research/i2c-tests/i2c-slave-read-uno/src/i2c-slave-read-uno.cpp"><code>i2c-slave-read-uno.cpp</code></a></p>
 
 <p>The code is based closely on that by Nicholas Zambetti. It uses the Arduino <code>Wire</code> library to implement the I&sup2;C slave code. An event is registered that is triggered every time the slave receives data. That data is then written to the hardware serial port for display on a serial terminal. The I&sup2;C slave is registered with address 0x04.</p>
 
@@ -81,9 +81,9 @@ redirect_from:
 <p>The code is:</p>
 
 <ul>
-    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-master-write-nano/src/i2c-master-write-nano.cpp">i2c-master-write-nano.cpp</a></code> for the Arduino Nano. It uses the Arduino <code>Wire</code> library for I&sup2;C.</li>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/i2c-tests/i2c-master-write-nano/src/i2c-master-write-nano.cpp">i2c-master-write-nano.cpp</a></code> for the Arduino Nano. It uses the Arduino <code>Wire</code> library for I&sup2;C.</li>
 
-    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/i2c-tests/i2c-master-write-attiny85/src/i2c-master-write-attiny85.cpp">i2c-master-write-attiny85.cpp</a></code> for the ATtiny85. It uses the Adafruit version of the <code>TinyWireM</code> library for I&sup2;C. This library works only for an I&sup2;C master device.</li>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/i2c-tests/i2c-master-write-attiny85/src/i2c-master-write-attiny85.cpp">i2c-master-write-attiny85.cpp</a></code> for the ATtiny85. It uses the Adafruit version of the <code>TinyWireM</code> library for I&sup2;C. This library works only for an I&sup2;C master device.</li>
 </ul>
 
 <h2>Results</h2>

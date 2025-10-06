@@ -91,11 +91,11 @@ redirect_from:
 
 <h2>Code</h2>
 
-<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub, in the <code>research/serial-tests</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
+<p>All the code used in this experiment is available from the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub, in the <code>research/serial-tests</code> directory. The code was developed in C++ using VSCode with the PlatformIO extension installed. There are three separate programs, each in its own sub-directory. The programs are as follows.</p>
 
 <h3>Serial receiver</h3>
 
-<p>The code that stands in for the central controller can be found in <code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/copy-softserial-to-serial-uno/src/copy-softserial-to-serial-uno.cpp">copy-softserial-to-serial-uno.cpp</a></code>.</p>
+<p>The code that stands in for the central controller can be found in <code><a href="https://github.com/cahamo/diorama-1/blob/main/research/serial-tests/copy-softserial-to-serial-uno/src/copy-softserial-to-serial-uno.cpp">copy-softserial-to-serial-uno.cpp</a></code>.</p>
 
 <p>This is the code to be run on Arduino Uno. It simply copies serial data received on pin 10 to its hardware serial port, for viewing on a serial terminal. The Arduino <code>Serial</code> library is used to send data to the terminal while the <code>SoftwareSerial</code> library is used to receive data from the sending microcontroller.</p>
 
@@ -104,9 +104,9 @@ redirect_from:
 <p>The Arduino Nano and the ATtiny that were tested as transmitters each have their own code. They use different software serial libraries to achieve similar outcomes. The code is:</p>
 
 <ul>
-    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/nano-serial-test/src/nano-serial-test.cpp">nano-serial-test.cpp</a></code> for the Arduino Nano. It uses the <code>SoftwareSerial</code> library.</li>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/serial-tests/nano-serial-test/src/nano-serial-test.cpp">nano-serial-test.cpp</a></code> for the Arduino Nano. It uses the <code>SoftwareSerial</code> library.</li>
 
-    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/serial-tests/attiny-serial-test/src/attiny-serial-test.cpp">attiny-serial-test.cpp</a></code> for the ATtiny85. It uses the <code>ATtinySerialOut</code> library.</li>
+    <li class="mb-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/serial-tests/attiny-serial-test/src/attiny-serial-test.cpp">attiny-serial-test.cpp</a></code> for the ATtiny85. It uses the <code>ATtinySerialOut</code> library.</li>
 </ul>
 
 <h2>Results</h2>

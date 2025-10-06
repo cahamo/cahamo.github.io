@@ -59,14 +59,14 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <h3>Code</h3>
 
-<p>The source code used to exercise these cicuits is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
+<p>The source code used to exercise these cicuits is available in the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub. The code was developed in C++ using VSCode with the PlatformIO extension installed.</p>
 
 <p>There are two test programs:</p>
 
 <ol>
-    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-1/src/cd74hc4067-mux-led-test-1.cpp">cd74hc4067-mux-led-test-1.cpp</a></code>: A simple program that lights each of the 16 LEDs in turn. This program also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-1/src/cd74hc4067-mux-led-test-1.cpp">cd74hc4067-mux-led-test-1.cpp</a></code>: A simple program that lights each of the 16 LEDs in turn. This program also uses the CD74HC4067&rsquo;s EN pin to turn all LEDs off.</li>
 
-    <li class="my-2"><code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-2/src/cd74hc4067-mux-led-test-2.cpp">cd74hc4067-mux-led-test-2.cpp</a></code>: A more complex program that lights various sequences of LEDs quickly in succession to attempt to display patterns where more than one LED is lit at once.</li>
+    <li class="my-2"><code><a href="https://github.com/cahamo/diorama-1/blob/main/research/led-mux-tests/cd74hc4067-mux-led-test-2/src/cd74hc4067-mux-led-test-2.cpp">cd74hc4067-mux-led-test-2.cpp</a></code>: A more complex program that lights various sequences of LEDs quickly in succession to attempt to display patterns where more than one LED is lit at once.</li>
 </ol>
 
 <h3>Results</h3>
@@ -107,7 +107,7 @@ title: "Model diorama: optimum microcontroller LED control experiment"
 
 <p>The code runs through a sequence of patterns where one or more of 16 LEDs are illuminated at the same time. This is done by loading 16 bits of data into the two shift registers, where each bit determines whether an associated LED is switched on or off.</p>
 
-<p>The code is available in the <code><a href="https://github.com/cahamo/diorama">cahamo/diorama</a></code> project on GitHub as <code><a href="https://github.com/cahamo/diorama/blob/main/research/led-mux-tests/74hc595-x2-led-test/src/74hc595-x2-led-test.cpp">74hc595-x2-led-test.cpp</a></code>.</p>
+<p>The code is available in the <code><a href="https://github.com/cahamo/diorama-1">cahamo/diorama-1</a></code> project on GitHub as <code><a href="https://github.com/cahamo/diorama-1/blob/main/research/led-mux-tests/74hc595-x2-led-test/src/74hc595-x2-led-test.cpp">74hc595-x2-led-test.cpp</a></code>.</p>
 
 <h3>Results</h3>
 
