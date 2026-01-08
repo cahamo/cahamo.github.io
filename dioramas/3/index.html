@@ -9,11 +9,11 @@ title: "Model garage diorama lightning electronics project"
 
 <p>This page describes the electronics used on a small diorama that represents a country garage and petrol station. It is set in the late 1960s. The completed diorama can be seen in the following composite image:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/front+rear_640x855.jpg" width="640" height="855" alt="Front and rear views of the completed diorama"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/front+rear_640x855.jpg" width="640" height="855" alt="Front and rear views of the completed diorama"></p>
 
 <p>The shop and the garage workshop are lit with LEDs. Close up shots of the shop and workshop with the lights switched on are shown below:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/shop+workshop-lit_480x771.jpg" width="480" height="771" alt="Close ups of the shop and workshop when lit"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/shop+workshop-lit_480x771.jpg" width="480" height="771" alt="Close ups of the shop and workshop when lit"></p>
 
 <p>The lighting and arc welder simulation can be seen in the following video.</p>
 
@@ -31,21 +31,21 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The original plan was for the lighting LEDs in the shop and workshop to be switched using NPN transistors as low side switches:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/planned-lighting-circuit_480x349.png" width="480" height="349" alt="Low side NPN lighting LED switches"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/planned-lighting-circuit_480x349.png" width="480" height="349" alt="Low side NPN lighting LED switches"></p>
 
 <p>Similarly the arc welder LED would also be switched using an NPN transistor:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/planned-welding-led-circuit_336x249.png" width="336" height="249" alt="Low side NPN arc welder LED switch"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/planned-welding-led-circuit_336x249.png" width="336" height="249" alt="Low side NPN arc welder LED switch"></p>
 
 <p>Now, this design requires that the LED cathodes to be connected to the relevant transistors. Unfortunately, I commoned the lighting LED cathodes. That connection was burried under the scenery, so the error couldn't be corrected. I didn't notice this error until after I'd created a circuit board containing all the LEDs' current limiting resistors. That board only had one zero volt (GND) input, so now the arc welding LED's cathode would also be commoned with the others. Given that nothing could be done about the lighting LEDs, it was decided not to change the circuit board with the current limiting resistors.</p>
 
 <p>This decision meant that low side NPN transistor switches couldn't be used. Therefore the design was changed to use high side PNP transistors, switching the LED anodes. Each LED switch would be similar to the following:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--high-side-pnp-led_374x244.png" width="374" height="244" alt="Example high side PNP LED switch"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--high-side-pnp-led_374x244.png" width="374" height="244" alt="Example high side PNP LED switch"></p>
 
 <p>By the time I'd realised that I needed to use PNP transistors I had already modified the TP223 touch switches to toggle high when activated. This caused another problem. PNP transistors switch on when no current flows through the base. The problem was therefore that LEDs were switched on before the touch switch was pressed and off after it was pressed! So, I needed to invert the output of each touch switch before connecting it the the PNP transistor bases. It is possible to configure the TP223 to start high and toggle low, which would have avoided the need for the inverters, but that's not what I did! Adding the inverter results in the following circuit (inverter shaded grey):</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--eg-switch-as-built_480x261.png" width="480" height="261" alt="Example LED switch circuit with touch switch, inverter and PNP transistor"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--eg-switch-as-built_480x261.png" width="480" height="261" alt="Example LED switch circuit with touch switch, inverter and PNP transistor"></p>
 
 <p>Having explained some of the complexities caused by incorrect assumptions when wiring the LEDs, I'm hoping that explains the complexity of the final circuit design, which is described in the next section.</p>
 
@@ -65,7 +65,7 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The following circuit was used:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--power-supply_419x237.png" width="419" height="237" alt="Power supply circuit diagram"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--power-supply_419x237.png" width="419" height="237" alt="Power supply circuit diagram"></p>
 
 <p>The power on LED, D2, is coupled across the 9V supply, with a 68k&ohm; current limiting resistor. Such a high value resistor was used because I wanted the LED to be dim enough so that its light would not bleed out from under the baseboard when viewing the diorama in the dark with its lights on.</p>
 
@@ -79,7 +79,7 @@ title: "Model garage diorama lightning electronics project"
 
 <p>Given the problems indentified earlier, the signal from the TP223 touch switch has to be inverted before passing on to a PNP transistor base in order to switch the LEDs on and off. The following cicuit diagram shows the circuit used to switch and drive one LED, so that two copies of this circuit are required. The circuit is very similar to the example circuit presented in the previous section, except that a trim pot is also included to enable the brightness of the LEDs to be adjusted. The final design is as follows:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--lighting_480x202.png" width="480" height="202" alt="LED lighting circuit diagram"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--lighting_480x202.png" width="480" height="202" alt="LED lighting circuit diagram"></p>
 
 <p>The touch switch is a TP223 module. This module has been modified to latch on and off with each touch, starting low, going high on the first touch then toggling back low on the second touch and so on. This is achieved by shorting out the solder pads labelled B on the circuit board. (See <a href="https://www.instructables.com/Interfacing-TTP223-Capacitive-Touch-Sensor-With-Ar/">this instructables article</a> for more information). This was the choice that came back to bite me (see above)!</p>
 
@@ -95,7 +95,7 @@ title: "Model garage diorama lightning electronics project"
     
 <p>The following circuit was developed to both switch the Attiny85 on and off and use a signal from the Attiny85 to flash an LED.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--welder-flasher_640x361.png" width="640" height="361" alt="Arc welder simulation circuit diagram"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--welder-flasher_640x361.png" width="640" height="361" alt="Arc welder simulation circuit diagram"></p>
 
 <p>The first part of the circuit from the touch switch through to transistor Q2 is reponsible for toggling power to the Attiny85 on and off. Notice that Q2 is a PNP transistor, so the inverter based around Q1 inverts the signal from the touch switch so that Q2 turns on when the touch switch is latched on. Once again, the invertor could have been avoided if I'd configured the TP223 switch differently. But I didn't so it couldn't!</p>
 
@@ -117,7 +117,7 @@ title: "Model garage diorama lightning electronics project"
 
 <p>Putting all the above modules together we get the complete circuit as pictured below:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/circuit-diagram--complete_960x716.png" width="960" height="716" alt="Complete circuit diagram"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--complete_960x716.png" width="960" height="716" alt="Complete circuit diagram"></p>
 
 <h2>Circuit construction</h2>
 
@@ -150,11 +150,11 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The following image shows two views of the switch unit:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module--switch-unit_600x678.png" width="600" height="678" alt="Switch unit as built"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--switch-unit_600x678.png" width="600" height="678" alt="Switch unit as built"></p>
 
 <p>The logical layout of the unit is shown in the following circuit diagram:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module-layout--switches_480x289.png" width="480" height="289" alt="Switch unit logical layout"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module-layout--switches_480x289.png" width="480" height="289" alt="Switch unit logical layout"></p>
 
 <h3>Power regulator unit</h3>
 
@@ -164,13 +164,13 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The functionality provided by the unit is shown in the following diagram:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module-layout--power-unit_480x203.png" width="480" height="203" alt="Power regulator module logical layout"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module-layout--power-unit_480x203.png" width="480" height="203" alt="Power regulator module logical layout"></p>
 
 <p>Two plastic brackets with integral screw holes were designed and 3D printed to be used to mount the circuit board under the diorama. They were glued to the perfboard.</p>
 
 <p>The following photo shows the top side of the final assembly:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module--power-regulator_600x280.png" width="600" height="280" alt="Power regulator module as built"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--power-regulator_600x280.png" width="600" height="280" alt="Power regulator module as built"></p>
 
 <h3>Main circuit board</h3>
 
@@ -191,7 +191,7 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The following photo shows the top side of the completed circuit board:</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module--main-circuit_600x687.png" width="600" height="687" alt="Main circuit board as built"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--main-circuit_600x687.png" width="600" height="687" alt="Main circuit board as built"></p>
 
 <h3>LED brightness adjustment board</h3>
 
@@ -214,7 +214,7 @@ title: "Model garage diorama lightning electronics project"
 
 <p>Once again, two plastic mounting brackets were 3D printed and glued to the perfboard.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/module--led-brightness-board_600x437.png" width="600" height="437" alt="LED brightness adjustment board as built"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--led-brightness-board_600x437.png" width="600" height="437" alt="LED brightness adjustment board as built"></p>
 
 <h3>Final assembly</h3>
 
@@ -222,4 +222,4 @@ title: "Model garage diorama lightning electronics project"
 
 <p>The final result can be viewed in the following photo.</p>
 
-<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/dioramas/3/modules--assembled_800x600.png" width="800" height="600" alt="All modules assembled"></p>
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/modules--assembled_800x600.png" width="800" height="600" alt="All modules assembled"></p>
