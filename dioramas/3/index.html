@@ -1,0 +1,225 @@
+---
+layout: default
+redirect_from:
+title: "1960s Garage Scene diorama lightning electronics project"
+---
+<h1><em>1960s Garage Scene</em> Diorama <span class="badge badge-success">Completed</span></h1>
+
+<h2>Introduction</h2>
+
+<p>This page describes the electronics used on a small diorama that represents a country garage and petrol station. It is set in the late 1960s. The completed diorama can be seen in the following composite image:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/front+rear_640x855.jpg" width="640" height="855" alt="Front and rear views of the completed diorama"></p>
+
+<p>The shop and the garage workshop are lit with LEDs. Close up shots of the shop and workshop with the lights switched on are shown below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/shop+workshop-lit_480x771.jpg" width="480" height="771" alt="Close ups of the shop and workshop when lit"></p>
+
+<p>The lighting and arc welder simulation can be seen in the following video.</p>
+
+<p class="text-center">
+    <iframe width="1123" height="631" src="https://www.youtube.com/embed/IspI1E5A8_Y" title="Garage Diorama showing lighting and arc welder" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</p>
+
+<p>There is also a simulation of an arc welder at the rear of a car in the garage workshop.</p>
+
+<p>Each light and the arc welder simulation can be switched on and off separately using touch switches that are located under the left hand side of the diorama. There is a master, mechanical, on / off switch located next to the touch switches. Power comes from a 9V PP3 battery that is mounted underneath the diorama.</p>
+
+<p>The design and build process was iterative. The first attempt went horribly wrong, and is described in the next section. Because some of the errors in could not be reversed, the final design was more complex than it could have been.</p>
+
+<h2>Initial design and mistakes</h2>
+
+<p>The original plan was for the lighting LEDs in the shop and workshop to be switched using NPN transistors as low side switches:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/planned-lighting-circuit_480x349.png" width="480" height="349" alt="Low side NPN lighting LED switches"></p>
+
+<p>Similarly the arc welder LED would also be switched using an NPN transistor:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/planned-welding-led-circuit_336x249.png" width="336" height="249" alt="Low side NPN arc welder LED switch"></p>
+
+<p>Now, this design requires that the LED cathodes to be connected to the relevant transistors. Unfortunately, I commoned the lighting LED cathodes. That connection was burried under the scenery, so the error couldn't be corrected. I didn't notice this error until after I'd created a circuit board containing all the LEDs' current limiting resistors. That board only had one zero volt (GND) input, so now the arc welding LED's cathode would also be commoned with the others. Given that nothing could be done about the lighting LEDs, it was decided not to change the circuit board with the current limiting resistors.</p>
+
+<p>This decision meant that low side NPN transistor switches couldn't be used. Therefore the design was changed to use high side PNP transistors, switching the LED anodes. Each LED switch would be similar to the following:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--high-side-pnp-led_374x244.png" width="374" height="244" alt="Example high side PNP LED switch"></p>
+
+<p>By the time I'd realised that I needed to use PNP transistors I had already modified the TP223 touch switches to toggle high when activated. This caused another problem. PNP transistors switch on when no current flows through the base. The problem was therefore that LEDs were switched on before the touch switch was pressed and off after it was pressed! So, I needed to invert the output of each touch switch before connecting it the the PNP transistor bases. It is possible to configure the TP223 to start high and toggle low, which would have avoided the need for the inverters, but that's not what I did! Adding the inverter results in the following circuit (inverter shaded grey):</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--eg-switch-as-built_480x261.png" width="480" height="261" alt="Example LED switch circuit with touch switch, inverter and PNP transistor"></p>
+
+<p>Having explained some of the complexities caused by incorrect assumptions when wiring the LEDs, I'm hoping that explains the complexity of the final circuit design, which is described in the next section.</p>
+
+<h2>Final circuit design</h2>
+
+<p>The overall design is broken down into three parts:</p>
+
+<ol>
+    <li>The power supply</li>
+    <li>The shop and garage lighting</li>
+    <li>The arc welder simulation</li>
+</ol>
+
+<h3>Power supply</h3>
+
+<p>In order to make the diorama self contained it was decided to operate it using a battery. Because I had several 9V PP3 batteries in stock it made sense to use those. Since much of the componentry requires 5V, a voltage regulator was used to convert the 9V supply into 5V. A mechanical on/off switch was used to switch on the power and a LED was used as a power on indicator.</p>
+
+<p>The following circuit was used:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--power-supply_419x237.png" width="419" height="237" alt="Power supply circuit diagram"></p>
+
+<p>The power on LED, D2, is coupled across the 9V supply, with a 68k&ohm; current limiting resistor. Such a high value resistor was used because I wanted the LED to be dim enough so that its light would not bleed out from under the baseboard when viewing the diorama in the dark with its lights on.</p>
+
+<p>Diode D1 was used to protect the circuit in case the battery was connected with polarity reversed. This is unlikely since the battery is connected by a standard PP3 clip that can't be connected the wrong way round, but there's nothing wrong with belt and braces!</p>
+
+<p>The capacitors are within the range of values specified by the L7805CV voltage regulator's data sheet.</p>
+
+<h3>Lighting circuit</h3>
+
+<p>As noted above, the garage shop and workshop were each lit with a single LED. Cold white 3mm LEDs were used, with a forward voltage of 2.8V. Each LED could be switched on and off using touch switches.</p>
+
+<p>Given the problems indentified earlier, the signal from the TP223 touch switch has to be inverted before passing on to a PNP transistor base in order to switch the LEDs on and off. The following cicuit diagram shows the circuit used to switch and drive one LED, so that two copies of this circuit are required. The circuit is very similar to the example circuit presented in the previous section, except that a trim pot is also included to enable the brightness of the LEDs to be adjusted. The final design is as follows:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--lighting_480x202.png" width="480" height="202" alt="LED lighting circuit diagram"></p>
+
+<p>The touch switch is a TP223 module. This module has been modified to latch on and off with each touch, starting low, going high on the first touch then toggling back low on the second touch and so on. This is achieved by shorting out the solder pads labelled B on the circuit board. (See <a href="https://www.instructables.com/Interfacing-TTP223-Capacitive-Touch-Sensor-With-Ar/">this instructables article</a> for more information). This was the choice that came back to bite me (see above)!</p>
+
+<p>The output of the touch switch signal pin is first inverted using the inverter comprising R1, R2 and NPN tranistor Q1. The inverted signal is connected to the base of LED switching PNP transistor Q3, via R3. The LED's current is limited by resistor R4 and is dimmed as necessary by variable resistor R5.</p>
+
+<h3>Arc welder simulation</h3>
+
+<p>The arc welder simulation was created by flashing a LED in a pseudo random fashion that is reminiscent of a real arc welder. The LED was hidden under the rear of a jacked up model car. Once again a cold white 3mm LEDs with a forward voltage of 2.8V was used. The simulation was toggled on and off using a touch switch.</p>
+
+<p>My first attempt at a simulation circuit was based on a <a href="https://www.talkingelectronics.com/projects/ArcWelder/ArcWelder.html"></a> design I found online that used Schmitt triggers wired as oscilators. The design used a higher voltage version of Schmitt triggers than I had in stock. My attempts to recreate the circuit using 5V triggers failed miserably.</p>
+
+<p>Instead I decided to use a microcontroller to generate the required arc welder flashes. The software was developed and tested on an Arduino Nano, but since the C program was so simple I switched to an Attiny85 microcontroller. The microcontroller starts the sequence when power is applied and stops when power is disconnected. There are pauses of random length between each sequence of flashes. The program can be found in the <code><a href="https://github.com/cahamo/diorama-3/tree/master">cahamo/diorama-3</a></code> repository on GitHub. The main source code is in <code><a href="https://github.com/cahamo/diorama-3/blob/master/src/main.cpp">src/main.cpp</a></code>.</p>
+    
+<p>The following circuit was developed to both switch the Attiny85 on and off and use a signal from the Attiny85 to flash an LED.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--welder-flasher_640x361.png" width="640" height="361" alt="Arc welder simulation circuit diagram"></p>
+
+<p>The first part of the circuit from the touch switch through to transistor Q2 is reponsible for toggling power to the Attiny85 on and off. Notice that Q2 is a PNP transistor, so the inverter based around Q1 inverts the signal from the touch switch so that Q2 turns on when the touch switch is latched on. Once again, the invertor could have been avoided if I'd configured the TP223 switch differently. But I didn't so it couldn't!</p>
+
+<p>Transistor Q2 then provides 5V power to the physical pin 8 of the Attiny85, which is the VCC pin. Power is stabilsed by coupling capacitor C1 across the Attiny85's VCC and GND pins.</p>
+
+<aside>
+    <p class="alert alert-info">It is <em>necessary</em> for Q2 to be a PNP transistor because it is essential that the 5V supply to the Attiny85 is switched. This requires a high side switch. An (unsuitable) alternative would be to use an NPN transistor to make and break the ground connection. From what I've read it's bad practice to disconnect ground while leaving 5V still attached.</p>
+</aside>
+
+<p>When switched on the microcontroller program toggles digital output D0 (physical pin 5) high to turn on the LED and low to turn it off. This output is passed through an inverter comprising resistors R4 &amp; R5 and NPN transistor Q3 and from there to PNP transistor Q4 which switches LED D1 on and off. Remember that the decision to use a PNP transistor was forced on me, as explained in the previous section.  As with the lighting LEDs, the brightness of the LED is adjustable via a combination of 5k&ohm; trim pot R8 and 220&ohm; current limiting resistor R7.</p>
+
+<aside>
+    <p class="alert alert-info">The use of the inverter connected to the microcontroller output pin could have been avoided by setting the pin low to switch on the LED and high to switch it off. But I decided not to do that because I thought the code was more readable with &quot;high&quot; used to represent &quot;on&quot;. If I'd not already used a whole bunch of inverters then I might not have made that choice.</p>
+</aside>
+
+<h3>
+    Complete cicuit
+</h3>
+
+<p>Putting all the above modules together we get the complete circuit as pictured below:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/circuit-diagram--complete_960x716.png" width="960" height="716" alt="Complete circuit diagram"></p>
+
+<h2>Circuit construction</h2>
+
+<p>The circuit was split amongst several modules, each of which is explained below.</p>
+
+<h3>Battery</h3>
+
+<p>A retaining bracket for the required PP3 9V battery was 3D printed in black Bambu basic PLA.</p>
+
+<p>The battery was to be connected to the circuit by means of a PP3 battery clip with attached positive and negative wires.</p>
+
+<p>The battery positive was connected to the switch unit while the battery negative was connected to ground on the power regulator unit. Both boards are described below.</p>
+
+<h3>Switch unit</h3>
+
+<p>A unit was designed to contain the three touch switches, the mechanical on / off switch and the power on LED. Scew mounts were also included in the desgin. This unit was 3D printed on a Bambu Labs A1 printer using black Bambu basic PLA.</p>
+
+<p>Following testing the LEDs built into the TP223 boards that illuminates when the switch is on was found to be so bright that it spoiled the view of the lit model in the dark. Therefore the on board LEDs were cut away using side cutters.</p>
+
+<p>The power switch was snapped in place. The touch switches each had three short wires soldered to their terminals and has their faces covered in electrical tape; red for the light switches and blue for the arc welder emulation. The wires from the touch switches were fed through the provided holes in the switch units and the switches themselves were glued in place. The power LED was glued into the provided hole.</p>
+
+<p>Wiring was soldered up at the rear of the switch unit as follows:</p>
+
+<ul>
+    <li>The wires leading to the VCC terminals of each touch switch were commoned.</li>
+    <li>The wires leading to the GND terminals of each touch switch, and the cathode of the power LED were commoned.</li>
+    <li>The positive wire from a PP3 battery connector was soldered to outer terminal of the on / off switch.</li>
+    <li>The inner terminal of the on / off switch was soldered via a current limiting resistor to the power LED's anode.</li>
+</ul>
+
+<p>The following image shows two views of the switch unit:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--switch-unit_600x678.png" width="600" height="678" alt="Switch unit as built"></p>
+
+<p>The logical layout of the unit is shown in the following circuit diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module-layout--switches_480x289.png" width="480" height="289" alt="Switch unit logical layout"></p>
+
+<h3>Power regulator unit</h3>
+
+<p>The power regulator circuit was soldered up on a piece of perfboard. Provision was made to solder in the 9V supply and associated ground by means of pads on one end of the circuit board.</p>
+
+<p>A block of four screw terminals were soldered to the board. Two terminals provided 5V output and the other two terminals providing ground connections.</p>
+
+<p>The functionality provided by the unit is shown in the following diagram:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module-layout--power-unit_480x203.png" width="480" height="203" alt="Power regulator module logical layout"></p>
+
+<p>Two plastic brackets with integral screw holes were designed and 3D printed to be used to mount the circuit board under the diorama. They were glued to the perfboard.</p>
+
+<p>The following photo shows the top side of the final assembly:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--power-regulator_600x280.png" width="600" height="280" alt="Power regulator module as built"></p>
+
+<h3>Main circuit board</h3>
+
+<p>The circuits for the shop and workshop LEDs and the arc welder simulation were all constructed on a single piece of perfboard. The Attiny85 was mounted in a socket that was soldered to the perfboard. The 200&ohm; current limiting resistors for all three LEDs were mounted on this perfboard, but the trim pots were not.</p>
+
+<p>A block of six screw terminals were provided to accept input to the circuit board. They were:</p>
+
+<ul>
+    <li>Signal inputs from the three touch switches that are high when the switches are toggled on.</li>
+    <li>5V supply from the power regulator unit.</li>
+    <li>Ground connection from the power regulator unit.</li>
+    <li>One connector was unused.</li>
+</ul>
+
+<p>A further block of four screw terminals that carry power for the LEDs via the LED board. There was one screw terminal for each of the three LED anodes and one common wire connected to all the LED cathodes.</p>
+
+<p>Two plastic mounting brackets, similar to those above were 3D printed and glued to the perfboard.</p>
+
+<p>The following photo shows the top side of the completed circuit board:</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--main-circuit_600x687.png" width="600" height="687" alt="Main circuit board as built"></p>
+
+<h3>LED brightness adjustment board</h3>
+
+<p>The final module was used to hold the trim pots used to adjust the brightness of the shop, workshop and arc welder simulation LEDs. The module comprises and piece of perfboard to which the trim pots and some screw terminals are soldered.</p>
+
+<p>A set of four screw terminals are provided to receive inputs for the LEDs from the main circuit board. There is one terminal for each of the three LEDs' anodes and one for the commoned cathodes.</p>
+
+<p>A further set of six screw terminals are provided to connect directly to the LED leads, as follows:</p>
+
+<ul>
+    <li>One connector for each LED anode.</li>
+    <li>One connector for the commoned cathodes of the shop and workshop light LEDs.</li>
+    <li>One connector for the cathode of the arc welder simulation LED.</li>
+    <li>One connecter was unused.</li>
+</ul>
+    
+<aside>
+    <p class="alert alert-info">This board was originally designed to house fixed current limiting resistors and exposed some header pins onto which resistors of various values could be connected to test different values of current limiting resistors. It was later repurposed to hold the trim pots and the header pins were snipped off.</p>
+</aside>
+
+<p>Once again, two plastic mounting brackets were 3D printed and glued to the perfboard.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/module--led-brightness-board_600x437.png" width="600" height="437" alt="LED brightness adjustment board as built"></p>
+
+<h3>Final assembly</h3>
+
+<p>The completed modules were then screwed to the underside of the baseboard and all the necessary connections were made. Some connections were soldered while other were made using screw terminals.</p>
+
+<p>The final result can be viewed in the following photo.</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/dioramas/3/modules--assembled_800x600.png" width="800" height="600" alt="All modules assembled"></p>
