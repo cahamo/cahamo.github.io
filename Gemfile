@@ -23,7 +23,7 @@ gem "addressable", ">= 2.8.0"
 gem "nokogiri", "~> 1.19.1"
 gem "rexml", "~> 3.4.2"
 gem "commonmarker", ">= 0.23.10"
-gem "activesupport", "~> 7.0.7.1"
+gem "activesupport", "~> 7.2.3.1"
 gem "uri", ">= 1.0.4"
 gem "faraday", ">= 2.14.1"
 
