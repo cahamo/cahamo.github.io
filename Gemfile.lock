@@ -291,6 +291,7 @@ DEPENDENCIES
   fiddle (~> 1.1.8)
   github-pages (~> 232)
   jekyll-redirect-from
+  json (>= 2.19.2)
   nokogiri (~> 1.19.1)
   rexml (~> 3.4.2)
   tzinfo (~> 2.0.6)
