@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "github-pages", "~> 231", group: :jekyll_plugins
+gem "github-pages", "~> 232", group: :jekyll_plugins
 
 gem "jekyll-redirect-from"
 
@@ -16,7 +16,7 @@ install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
 end
 
 # Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
+gem "wdm", "~> 0.2.0", :install_if => Gem.win_platform?
 
 # Vulnerability issues
 gem "addressable", ">= 2.8.0"
@@ -29,3 +29,9 @@ gem "faraday", ">= 2.14.1"
 
 # Fix for when using Ruby 3 - webrick no longer installed w/ Ruby 3
 gem "webrick", "~> 1.8"
+# Fix for Ruby >= 3.4 - csv no longer part of default gems
+gem "csv", "~> 3.3.5"
+# Fix for warning in Ruby 3.4 - fiddle won't be a default gem from Ruby 4.0.0
+gem "fiddle", "~> 1.1.8"
+# Fix Jekyll warning to use faraday-retry with faraday >= v2.0
+gem "faraday-retry", "~> 2.4"
