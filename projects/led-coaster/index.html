@@ -1,0 +1,259 @@
+---
+layout: default
+title: "LED Coaster Project"
+---
+<h1>
+    LED Coaster
+</h1>
+
+<h2>
+    Introduction
+</h2>
+
+<p>
+    This is a project to create a drinks coaster shaped diffused RGB LED panel that displays moving light patterns. The displayed pattern and colour(s) can be modified using a smartphone.
+</p>
+
+<h2>
+    Background
+</h2>
+
+<p>
+    This project was inspired by the <a href="/projects/kits/other/fireworks-leds/">Fireworks LEDs kit</a> that we have on display in our dining room. I thought it would be nice to have another dynamic piece of lighting to accompany it, but this time with hidden circuitry. Given that we have placed a glass paperweight directly on top of the Fireworks kit's LEDs, I decided to create the new piece with a lid in case we also sit an object on top of it.
+</p>
+
+<p>
+    I wanted the new piece to be more subtle that the Fireworks display, hence the decision to diffuse the light.
+</p>
+
+<p>
+    At first I was going to make a relatively thin &quot;coaster&quot;, containing just an 8&times;8 RGD LED panel, driven by external circuitry. This left the problem of where to hide the electronics, so I finally decided to incorporate the electronics within the &quot;coaster's&quot; body and to power it via an external USB supply. This decision resulted in the &quot;coaster&quot; being much thicker than a real drinks coaster.
+</p>
+
+<p class="alert alert-danger">
+    Be warned that this &quot;coaster&quot; isn't a <em>real</em> drinks coaster. The electronics are not waterproof. <em>If you build it <strong>do not use for drinks</strong></em>.
+</p>
+
+<h2>
+    Electronics
+</h2>
+
+<p>
+    The electronics were determined by the following criteria:
+</p>
+
+<ol>
+    <li class="mb-2">
+        <p class="mb-2">
+            I wanted to use WLED to control the LED panel, for two reasons:
+        </p>
+        <ul class="mb-2">
+            <li>
+                This saves me from having to program the light sequences myself.
+            </li>
+            <li>
+                WLED supports remote control by smartphone.
+            </li>
+        </ul>
+        <p class="mb-2">
+            The choice of WLED necessitated using either an ESP32 or ESP8266 microcontroller. I chose to use the ESP32-C3 super mini because of its small form factor.
+        </p>
+    </li>
+    <li class="mb-2">
+        Since the ESP32 is a 3.3V device and the LED panels I had in stock were 5V, some kind of level shifting would be required between the ESP32 and the panel.
+    </li>
+    <li>
+        The ESP32 could not safely power the LED panel, so the latter would require its own power supply. 
+    </li>
+</ol>
+
+<p>
+    Since all the components had to fit under the LED panel I chose to use an ESP32-C3 super mini microcontroller because its small size.
+</p>
+
+<p>
+    The circuit is as follows:
+</p>
+
+<p>
+    <img class="img-fluid mx-auto d-block" src="/assets/img/projects/led-coaster/circuit_588x307.png" width="588" height="307" alt="LED &quot;coaster&quot; circuit diagram">
+</p>
+
+<p>
+    Both the ESP32 and the LED matrix are powered from an external 5V supply (USB in this case). The 5V supply is also connected to the HV voltage reference pin of the logic level shifter. The ESP32s 3.3V output is connected to the logic level shifter's LV voltage reference pin. The grounds of the ESP32, logic level shifter and LED matrix are all connected together and to the ground of the USB supply. (Note that the two GND pins of the logic level shifter are connected internally, so it is only necessary to connect one of them to ground.) 
+</p>
+
+<p>
+    The LED matrix control signal comes from ESP32's GPIO2 via the logical level shifter. On the 5V side of the shifter a 100&ohm; resistor is connected before the matrix signal input.
+</p>
+
+<p>
+    A 470&micro;F electrolytic capacitor is connected across the ESP32's 5V and GND pins to stabilise the power supply.
+</p>
+
+<h2>
+    Software
+</h2>
+
+<p>
+    WLED was installed on the ESP32 by plugging the microcontroller into a USB port on my laptop and using the WLED installer at <a href="https://install.wled.me/">https://install.wled.me/</a> to write the WLED software to the ESP32. WLED version 16.0.0 was used, which was the latest stable version at the time.
+</p>
+
+<p>
+    The WLED installer was then used to connect the ESP32 to my local WiFi network and the IP and MAC addresses were noted. A web browser was connected to the IP address and the resulting web page was used to display various patterns and colour schemes on the LED matrix. The ESP32 was then unplugged from the laptop.
+</p>
+<p>
+    A test circuit was created on a breadboard to connect the ESP32 to the LED matrix according to the above circuit diagram. My bench power supply provided the required 5V. The circuit was similar to that described in 
+</p>
+
+<p>
+    Having settled on the <em>Soap</em> pattern and <em>Hult 64</em> colour scheme as the default display, a new preset was created to save this arrangement. The preset was configured to run automatically after power is connected to the ESP32 or after a reset.
+</p>
+
+<p>
+    Next I entered the ESP32's IP address in my smartphone's browser and experimented using that to change the the pattern and colour scheme.
+</p>
+
+<p>
+    The test circuit was then torn down.
+</p>
+
+<div class="alert alert-info">
+    <p class="mb-2">
+        I did encounter some problems in getting the preset to load after the ESP32 was booted; it kept lighting all LEDs in orange. Some Googling later I solved the problem by:
+    </p> 
+    <ol class="mb-0">
+        <li>
+            navigating to <code>http://&lt;esp32-ip-address&gt;/edit</code>;
+        </li>
+        <li>
+            editing <code>presets.json</code> to contain just <code>{"0":{}}</code>;
+        </li>
+        <li>
+            recreating my preset.
+        </li>
+        <li>
+            reseting the ESP32.
+        </li>
+    </ol>
+</div>
+
+<h2>
+    Enclosure Design
+</h2>
+
+<p>
+    The &quot;coaster's&quot; enclosure is in two parts: the diffuser (or lid) and the frame (or base).
+</p>
+
+<p>
+    Both parts were designed in TinkerCAD. The CAD designs were saved as STL files. These files can be downloaded from the <a href="https://github.com/cahamo/led-coaster"><code>cahamo/led-coaster</code></a> repository on GitHub. See the <code>cad</code> directory.
+</p>
+
+<p>
+    All files are made available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons - Attribution - Share Alike</a> license v4.0 and are copyright &copy; 2026, <a href="https://gravatar.com/delphidabbler">Peter Johnson</a>.
+</p>
+
+<p>
+    The frame has two ledges. The upper ledge provides support for the diffuser. The lower ledge is there to support the LED matrix. One corner of the edge has an indentation to make room for the LED matrix's connecting wires. There is also a complex cutout centralised on one side (the back) that accommodates a panel mount USB socket, along with space to get tools in to screw a nut over mounting bolts.
+</p>
+
+<p>
+    There were two factors that determined the size of the parts of the case:
+</p>
+
+<ol>
+    <li class="mb-2">
+        The overall height of the frame was determined by the thickness of the LED matrix and the height of the largest electronic component that has to fit below the matrix, in this case the electrolytic capacitor.
+    </li>
+    <li>
+        The height of the diffuser was chosen by experimentation so that the individual LEDs were not distinguishable from each other. This ensured that the display is perceived as a wash of light.
+    </li>
+</ol>
+
+<h2>
+    Construction
+</h2>
+
+<p>
+    Both parts of the enclosure were 3D printed on a Bambu Labs A1 printer. Black PLA was used for the frame while the diffuser was printed in white PLA. Bambu Labs basic PLA was used in both cases.
+</p>
+
+<p class="alert alert-warning">
+    Because PLA was used it is important that any object that is placed on the &quot;coaster&quot; is not hot!
+</p>
+
+<p>
+    A USB type C socket, designed for panel mounting, was inserted into the hole on the back of the &quot;coaster's&quot; frame. M2 nuts and bolts were used to secure it in place.
+</p>
+
+<p>
+    The LED matrix was then glued onto its ledge in the frame using UHU glue.
+</p>
+
+<p>
+    The circuit was then soldered up. Components were wired directly to others, using soldered wires. Here's a breakdown of how the circuit was constructed:
+</p>
+
+<ol>
+    <li class="mb-2">
+        Wires that had previously been attached when testing the LED matrix were shortened.
+    </li>
+    <li class="mb-2">
+        The 470&micro;F capacitor was soldered across the ESP32's 5V and GND pins and was bent to be flush with the underside of the LED matrix.
+    </li>
+    <li class="mb-2">
+        Header pins were soldered to the logic level shifter to make it easier to solder to the component. The pins were trimmed back in order to fit within the frame.
+    </li>
+    <li class="mb-2">
+        Busbars for 5V and ground were created on a small offcut of perfoard.
+    </li>
+    <li class="mb-2">
+        5V and GND connections of the USB input, ESP32, logic level shifter (HV pin) and LED matrix were all wired to the appropriate bus bars.
+    </li>
+    <li class="mb-2">
+        The ESP32's 3.3V pin was wired to the logic level level shifter's LV pin.
+    </li>
+    <li>
+        The EPS32's GPIO2 pin was connected to the logical level shifter's LV1 pin. The corresponding HV1 pin was soldered to the 100&ohm; resistor that was in turn soldered to the wire already attached to the LED matrix signal pin. The resistor was insulated with shrink wrap.
+    </li>
+</ol>
+
+<p>
+    Once the circuit was tested all components were stuck to the back of the LED matrix using 20mm Kapton&trade; tape. I avoided sticking tape over the ESP32's CPU because it gets pretty hot.
+</p>
+
+<p class="alert alert-info">
+    Being honest, it took two attempts to solder up the circuit before I got it to work.
+</p>
+
+<p>
+    The diffuser was left loose rather than gluing it to the frame.
+</p>
+
+<p>
+    The following photos show the parts of the &quot;coaster&quot; after construction, from left to right, top to bottom: the underside of the frame showing the taped components, the top of the frame with LED matrix, and the underside of the diffuser.
+</p>
+
+<p>
+    <img class="img-fluid mx-auto d-block" src="/assets/img/projects/led-coaster/constructed--parts_800x642.png" width="800" height="642" alt="Parts of the constructed &quot;coaster&quot;">
+</p>
+
+<p>
+    The completed &quot;coaster&quot;, with diffuser in place, appears in the following photo:
+</p>
+
+<p>
+    <img class="img-fluid mx-auto d-block" src="/assets/img/projects/led-coaster/constructed--complete_480x384.png" width="480" height="384" alt="The constructed &quot;coaster&quot;, with diffuser fitted">
+</p>
+
+<p>
+    And finally, heres a short video of the &quot;coaster&quot; running the <em>Soap</em> pattern with the <em>Hult 64</em> colour scheme:
+</p>
+
+<div class="text-center">
+    <div>
+        <iframe width="699" height="699" src="https://www.youtube.com/embed/CHKdvn0iakQ" title="8*8 LED matrix coaster" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="caption">Finished &quot;coaster&quot; working.</p>
+</div>
