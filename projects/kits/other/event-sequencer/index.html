@@ -1,0 +1,84 @@
+---
+layout: default
+title: "MERG Event Sequencer Kit"
+---
+<h1>
+    MERG Event Sequencer Kit
+</h1>
+
+<p>
+    <img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/merg--event-sequencer--label_360x475.png" width="360" height="475" alt="MERG Event Sequencer Kit artwork">
+</p>
+
+<p>
+    This kit was obtained from the members only <em>Kit Locker</em> on the <a href="https://www.merg.org.uk/">Model Electronic Railway Group</a> website.
+</p>
+
+<p>
+    What does this kit do? I'll let MERG explain it, because it does it better than I can:
+</p>
+
+<blockquote class="well">
+    <em>&quot;The sequencer module has one trigger input and five available outputs. Each output can be set for a delay between 1 second and 10 seconds before it switches on or off. Connecting the trigger input to 0V starts the output sequence. &hellip; The outputs, with suitable interfaces, could control LEDS, servo controllers &hellip; relays, motors, etc.&quot;</em>
+</blockquote>
+
+<p>
+    Breaks were made in the stripboard using a 3.5mm drill, according to the instructions, which were clear:
+</p>
+
+<div class="text-center d-block">
+    <p>
+        <img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/merg--event-sequencer--veroboard-holes_480x176.png" width="480" height="176" alt="MERG Event Sequencer Kit veroboard track breaks"><em class="caption caption-small">This image is &copy; Davy Dick, November 2018.</em>
+    </p>
+</div>
+    
+<p>
+    The supplied components and track bridging wires were then soldered in place. As recommended by the instructions the PIC microcontroller was not fitted in its socket at this stage. The board was then hooked up to 12V DC from my bench power supply and voltage checks that were suggested in the instructions were performed. Pin 2 of the microcontroller socket was not reading the expected 5V so the tracks were checked for continuity and part of the veroboard was found to have lifted, breaking a connection. A piece of wire was soldered over over the break which fixed the problem.
+</p>
+
+<p>
+    Numerous external connections to the board are required. Instead of soldering wires directly to the board I decided to attach header pins so that the wires can be plugged and unplugged. Orienting the board with components upwards and PIC on the right hand end, the pins were fitted as follows:
+</p>
+
+<ol>
+    <li>
+        Top left: power supply pin, 12V.
+    </li>
+    <li>
+        Bottom left: power supply pin, 0V.
+    </li>
+    <li>
+        Bottom right: trigger pin.
+    </li>
+    <li>
+        Group of five pins, centre right. From top to bottom, Event outputs A to E.
+    </li>
+</ol>
+
+<p>
+    The PIC micro-controller was then inserted in the socket. The PIC comes pre-programmed to either run the sequence or to configure the length of the delays between each event.
+</p>
+    
+<p>
+    Each event delay has to be set before the unit can be tested. The instructions show how to do this; it is quite an involved process. There are jumpers that relate to each of the five event output pins of the PIC. To set an event delay a jumper cap is used to connect the related jumpers header pins. A trim pot is then used to set the delay and the jumper header is then removed. This is repeated for each event.
+</p>
+
+<p>
+    Finally the event output pins were connected to 5 LEDs (and associated current limiting resistors) to then to ground. The event sequence was triggered by connecting the PIC's trigger pin to 0V and the sequence in which the LEDs were lit and extinguished was examined. Everything worked!
+</p>
+
+<p>
+    Both sides of the assembled circuit board can be seen in the following photos:
+</p>
+
+<p><img class="img-fluid mx-auto d-block" src="/assets/img/projects/kits/merg--event-sequencer--built_648x502.png" width="648" height="502" alt="MERG Event Sequencer completed, both sides of the circuit board."></p>
+
+<p>
+    In summary, this kit went together relatively easily and, more importantly, it worked. When driven from 12V the voltage regulator gets rather hot. I found it better to run the board from about 9V.
+</p>
+
+<p>
+    Will I use the kit? Well, I have a project that needs to run at least one timed sequence of events, for which this board may come in handy. If I use it I will probably remove the voltage regulator and run the board directly at 5V, because the project in question already has a regulated 5V supply available. However, setting the event timing is not easy and it may be easier just to program an MCU like an Arduino Nano to generate the events and set the event timing in code. If I had a PIC programmer I might repurpose the PIC to do the same. But I don't, so I won't!
+</p>
+
+<p class="text-center"><b><a href="../">Back to list of other kits</a></b></p>
