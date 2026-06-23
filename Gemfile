@@ -25,7 +25,7 @@ gem "rexml", "~> 3.4.2"
 gem "commonmarker", ">= 0.23.10"
 gem "activesupport", "~> 7.2.3.1"
 gem "uri", ">= 1.0.4"
-gem "faraday", ">= 2.14.2"
+gem "faraday", ">= 2.14.3"
 gem "json", ">= 2.19.2"
 
 # Fix for when using Ruby 3 - webrick no longer installed w/ Ruby 3
